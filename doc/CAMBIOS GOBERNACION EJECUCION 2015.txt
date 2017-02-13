@@ -1,0 +1,7 @@
+CAMBIOS GOBERNACION
+
+OP-2015-482 TIENE MAL LA CATEGORIA PROGRAMATICA
+UPDATE `orden_pago` SET `idcategoria_programatica` = '161' WHERE `orden_pago`.`idorden_pago` =616 LIMIT 1 ;
+
+OS-2015-15 TIENE MAL LA CATEGORIA PROGRAMATICA
+UPDATE `orden_compra_servicio` SET `idcategoria_programatica` = '161' WHERE `orden_compra_servicio`.`idorden_compra_servicio` =650 LIMIT 1 ;

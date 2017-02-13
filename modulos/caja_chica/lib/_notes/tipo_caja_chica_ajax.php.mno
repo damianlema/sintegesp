@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_Tipo_caja_chica" value="name:id_accion;datatype:int,name:nombre_accion;datatype:string,name:id_modulo;datatype:int,name:url;datatype:blob,name:mostrar;datatype:int,name:accion_padre;datatype:int,name:posicion;datatype:int" />
+</info>

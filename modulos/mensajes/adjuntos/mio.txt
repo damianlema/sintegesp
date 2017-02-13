@@ -1,0 +1,1536 @@
+﻿
+
+9X0C-004C-AXCP-797C-7ET6-C723-****-****
+
+Windows 7 6.1
+IA32
+Nero Version: 10.2.12.100
+Internal Version: 10,2,12,100
+
+Recorder:             <PIONEER DVD-RW DVRTD10RS>Version: 1.00 - HA 1 TA 0 - 10.2.12.100
+ Adapter driver:      <Serial ATA>              HA 1
+ Drive buffer  :      1536kB
+ Bus Type      :      via Inquiry data
+ Connected to MMC as unknown drive with class-nr : 1
+ Drive is autodetected - recorder class: Std. MMC recorder
+CD-ROM:               <PIONEER  DVD-RW DVRTD10RS>Version: 1.00 - HA 1 TA 0 - 10.2.12.100
+ Adapter driver:      <Serial ATA>              HA 1
+
+=== Scsi-Device-Map ===
+
+=== CDRom-Device-Map ===
+PIONEER DVD-RW DVRTD10RS   D:   CdRom0
+=======================
+
+AutoRun : 1
+Excluded drive IDs: 
+WriteBufferSize: 83886080 (0) Byte
+BUFE           : 0
+Physical memory     : 2047MB (2097151kB)
+Free physical memory: 1284MB (1315696kB)
+Memory in use       : 54 %
+Uncached PFiles: 0x0
+Global Bus Type: default (0)
+Check supported media : Disabled (0) 
+
+25.11.2011
+===== Disc-Copy over image - 1st step : Copy to image  ...
+
+21:22:52	#1 Text 0 File SCSIPTICommands.cpp, Line 464
+	LockMCN - completed sucessfully for IOCTL_STORAGE_MCN_CONTROL
+	
+21:22:52	#2 Text 0 File SCSIPTICommands.cpp, Line 251
+	SPTILockVolume - completed successfully for FSCTL_LOCK_VOLUME
+	
+21:22:52	#3 PHASE 48 File dlgbrnst.cpp, Line 1827
+	Analyzing disc
+	
+21:22:52	#4 CDCOPY -1 File CDCopy.cpp, Line 1643
+	The CD is copyrighted
+	
+21:23:00	#5 Text 0 File CDCopy.cpp, Line 1857
+	          _Index0_ _______Index1_______ PostPause   ___LastBlockOfTrack_
+	Track  1:        0        0 (  0:02.00)      1379       1378 (  0:20.28)
+	Track  2:     1379     1379 (  0:20.29)      1909       1908 (  0:27.33)
+	Track  3:     1909     1909 (  0:27.34)      2442       2441 (  0:34.41)
+	Track  4:     2442     2442 (  0:34.42)      2988       2987 (  0:41.62)
+	Track  5:     2988     2988 (  0:41.63)      3521       3520 (  0:48.70)
+	Track  6:     3521     3521 (  0:48.71)     10072      10071 (  2:16.21)
+	Track  7:    10072    10072 (  2:16.22)     18107      18106 (  4:03.31)
+	Track  8:    18107    18107 (  4:03.32)     19171      19170 (  4:17.45)
+	Track  9:    19171    19171 (  4:17.46)     26678      26677 (  5:57.52)
+	Track 10:    26678    26678 (  5:57.53)     27740      27739 (  6:11.64)
+	Track 11:    27740    27740 (  6:11.65)     33810      33809 (  7:32.59)
+	Track 12:    33810    33810 (  7:32.60)     40708      40707 (  9:04.57)
+	Track 13:    40708    40708 (  9:04.58)     41304      41303 (  9:12.53)
+	Track 14:    41304    41304 (  9:12.54)     49634      49633 ( 11:03.58)
+	Track 15:    49634    49634 ( 11:03.59)     50177      50176 ( 11:11.01)
+	Track 16:    50177    50177 ( 11:11.02)     50714      50713 ( 11:18.13)
+	Track 17:    50714    50714 ( 11:18.14)     56223      56222 ( 12:31.47)
+	Track 18:    56223    56223 ( 12:31.48)     57352      57351 ( 12:46.51)
+	Track 19:    57352    57352 ( 12:46.52)     63951      63950 ( 14:14.50)
+	Track 20:    63951    63951 ( 14:14.51)     72635      72634 ( 16:10.34)
+	Track 21:    72635    72635 ( 16:10.35)     79343      79342 ( 17:39.67)
+	Track 22:    79343    79343 ( 17:39.68)     89503      89502 ( 19:55.27)
+	Track 23:    89503    89503 ( 19:55.28)     99863      99862 ( 22:13.37)
+	Track 24:    99863    99863 ( 22:13.38)    106406     106405 ( 23:40.55)
+	Track 25:   106406   106406 ( 23:40.56)    107497     107496 ( 23:55.21)
+	Track 26:   107497   107497 ( 23:55.22)    132628     132627 ( 29:30.27)
+	Track 27:   132628   132628 ( 29:30.28)    140328     140327 ( 31:13.02)
+	Track 28:   140328   140328 ( 31:13.03)    150419     150418 ( 33:27.43)
+	Track 29:   150419   150419 ( 33:27.44)    151215     151214 ( 33:38.14)
+	Track 30:   151215   151215 ( 33:38.15)    153465     153464 ( 34:08.14)
+	Track 31:   153465   153465 ( 34:08.15)    154300     154299 ( 34:19.24)
+	Track 32:   154300   154300 ( 34:19.25)    160922     160921 ( 35:47.46)
+	Track 33:   160922   160922 ( 35:47.47)    164669     164668 ( 36:37.43)
+	Track 34:   164669   164669 ( 36:37.44)    173699     173698 ( 38:37.73)
+	Track 35:   173699   173699 ( 38:37.74)    181417     181416 ( 40:20.66)
+	Track 36:   181417   181417 ( 40:20.67)    190318     190317 ( 42:19.42)
+	Track 37:   190318   190318 ( 42:19.43)    199666     199665 ( 44:24.15)
+	Track 38:   199666   199666 ( 44:24.16)    207455     207454 ( 46:08.04)
+	Track 39:   207455   207455 ( 46:08.05)    208488     208487 ( 46:21.62)
+	Track 40:   208488   208488 ( 46:21.63)    220166     220165 ( 48:57.40)
+	
+21:23:00	#6 Text 0 File CDCopy.cpp, Line 773
+	Copy options:	copy on-the-fly:  ON
+		read ISRC/MCN: OFF
+		use jitter correction: OFF
+		data options
+			ignore read error:  ON   write defekt blocks OFF
+			read raw data: OFF   read r-w subchannel data: OFF
+		audio options
+			ignore read error:  ON
+			read indexes: OFF    read r-w subchannel data: OFF
+	source disc does not look like CD Extra
+	01.      0 -   1379 =   1379, audio (TRM_AUDIO_NOPRE, block size 2352)
+	02.   1379 -   1909 =    530, audio (TRM_AUDIO_NOPRE, block size 2352)
+	03.   1909 -   2442 =    533, audio (TRM_AUDIO_NOPRE, block size 2352)
+	04.   2442 -   2988 =    546, audio (TRM_AUDIO_NOPRE, block size 2352)
+	05.   2988 -   3521 =    533, audio (TRM_AUDIO_NOPRE, block size 2352)
+	06.   3521 -  10072 =   6551, audio (TRM_AUDIO_NOPRE, block size 2352)
+	07.  10072 -  18107 =   8035, audio (TRM_AUDIO_NOPRE, block size 2352)
+	08.  18107 -  19171 =   1064, audio (TRM_AUDIO_NOPRE, block size 2352)
+	09.  19171 -  26678 =   7507, audio (TRM_AUDIO_NOPRE, block size 2352)
+	10.  26678 -  27740 =   1062, audio (TRM_AUDIO_NOPRE, block size 2352)
+	11.  27740 -  33810 =   6070, audio (TRM_AUDIO_NOPRE, block size 2352)
+	12.  33810 -  40708 =   6898, audio (TRM_AUDIO_NOPRE, block size 2352)
+	13.  40708 -  41304 =    596, audio (TRM_AUDIO_NOPRE, block size 2352)
+	14.  41304 -  49634 =   8330, audio (TRM_AUDIO_NOPRE, block size 2352)
+	15.  49634 -  50177 =    543, audio (TRM_AUDIO_NOPRE, block size 2352)
+	16.  50177 -  50714 =    537, audio (TRM_AUDIO_NOPRE, block size 2352)
+	17.  50714 -  56223 =   5509, audio (TRM_AUDIO_NOPRE, block size 2352)
+	18.  56223 -  57352 =   1129, audio (TRM_AUDIO_NOPRE, block size 2352)
+	19.  57352 -  63951 =   6599, audio (TRM_AUDIO_NOPRE, block size 2352)
+	20.  63951 -  72635 =   8684, audio (TRM_AUDIO_NOPRE, block size 2352)
+	21.  72635 -  79343 =   6708, audio (TRM_AUDIO_NOPRE, block size 2352)
+	22.  79343 -  89503 =  10160, audio (TRM_AUDIO_NOPRE, block size 2352)
+	23.  89503 -  99863 =  10360, audio (TRM_AUDIO_NOPRE, block size 2352)
+	24.  99863 - 106406 =   6543, audio (TRM_AUDIO_NOPRE, block size 2352)
+	25. 106406 - 107497 =   1091, audio (TRM_AUDIO_NOPRE, block size 2352)
+	26. 107497 - 132628 =  25131, audio (TRM_AUDIO_NOPRE, block size 2352)
+	27. 132628 - 140328 =   7700, audio (TRM_AUDIO_NOPRE, block size 2352)
+	28. 140328 - 150419 =  10091, audio (TRM_AUDIO_NOPRE, block size 2352)
+	29. 150419 - 151215 =    796, audio (TRM_AUDIO_NOPRE, block size 2352)
+	30. 151215 - 153465 =   2250, audio (TRM_AUDIO_NOPRE, block size 2352)
+	31. 153465 - 154300 =    835, audio (TRM_AUDIO_NOPRE, block size 2352)
+	32. 154300 - 160922 =   6622, audio (TRM_AUDIO_NOPRE, block size 2352)
+	33. 160922 - 164669 =   3747, audio (TRM_AUDIO_NOPRE, block size 2352)
+	34. 164669 - 173699 =   9030, audio (TRM_AUDIO_NOPRE, block size 2352)
+	35. 173699 - 181417 =   7718, audio (TRM_AUDIO_NOPRE, block size 2352)
+	36. 181417 - 190318 =   8901, audio (TRM_AUDIO_NOPRE, block size 2352)
+	37. 190318 - 199666 =   9348, audio (TRM_AUDIO_NOPRE, block size 2352)
+	38. 199666 - 207455 =   7789, audio (TRM_AUDIO_NOPRE, block size 2352)
+	.......................................
+	
+21:23:55	#7 Text 0 File Burncd.cpp, Line 3521
+	Turn on Disc-At-Once, using CD-R/RW media
+	
+21:23:55	#8 Text 0 File DlgWaitCD.cpp, Line 314
+	[ Image Recorder     ] Last possible write address on media:   445499
+	Last address to be written:             220165
+	
+21:23:55	#9 Text 0 File DlgWaitCD.cpp, Line 326
+	[ Image Recorder     ] Write in overburning mode: NO (enabled: CD)
+	
+21:23:55	#10 Text 0 File DlgWaitCD.cpp, Line 499
+	[ Image Recorder     ] >>> Protocol of DlgWaitCD activities: <<<
+	=========================================
+	
+21:23:55	#11 Text 0 File ThreadedTransferInterface.cpp, Line 861
+	Setup items (after recorder preparation)
+	 0: TRM_AUDIO_NOPRE (1 - Audio)
+	    2 indices, index0 (150) not provided
+	    original disc pos #0 + 1379 (1379) = #1379/0:18.29
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 1379 blocks [Image Recorder]
+	 1: TRM_AUDIO_NOPRE (2 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #1379 + 530 (530) = #1909/0:25.34
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 530 blocks [Image Recorder]
+	 2: TRM_AUDIO_NOPRE (3 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #1909 + 533 (533) = #2442/0:32.42
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 533 blocks [Image Recorder]
+	 3: TRM_AUDIO_NOPRE (4 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #2442 + 546 (546) = #2988/0:39.63
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 546 blocks [Image Recorder]
+	 4: TRM_AUDIO_NOPRE (5 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #2988 + 533 (533) = #3521/0:46.71
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 533 blocks [Image Recorder]
+	 5: TRM_AUDIO_NOPRE (6 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #3521 + 6551 (6551) = #10072/2:14.22
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6551 blocks [Image Recorder]
+	 6: TRM_AUDIO_NOPRE (7 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #10072 + 8035 (8035) = #18107/4:1.32
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 8035 blocks [Image Recorder]
+	 7: TRM_AUDIO_NOPRE (8 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #18107 + 1064 (1064) = #19171/4:15.46
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 1064 blocks [Image Recorder]
+	 8: TRM_AUDIO_NOPRE (9 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #19171 + 7507 (7507) = #26678/5:55.53
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 7507 blocks [Image Recorder]
+	 9: TRM_AUDIO_NOPRE (10 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #26678 + 1062 (1062) = #27740/6:9.65
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 1062 blocks [Image Recorder]
+	10: TRM_AUDIO_NOPRE (11 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #27740 + 6070 (6070) = #33810/7:30.60
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6070 blocks [Image Recorder]
+	11: TRM_AUDIO_NOPRE (12 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #33810 + 6898 (6898) = #40708/9:2.58
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6898 blocks [Image Recorder]
+	12: TRM_AUDIO_NOPRE (13 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #40708 + 596 (596) = #41304/9:10.54
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 596 blocks [Image Recorder]
+	13: TRM_AUDIO_NOPRE (14 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #41304 + 8330 (8330) = #49634/11:1.59
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 8330 blocks [Image Recorder]
+	14: TRM_AUDIO_NOPRE (15 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #49634 + 543 (543) = #50177/11:9.2
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 543 blocks [Image Recorder]
+	15: TRM_AUDIO_NOPRE (16 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #50177 + 537 (537) = #50714/11:16.14
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 537 blocks [Image Recorder]
+	16: TRM_AUDIO_NOPRE (17 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #50714 + 5509 (5509) = #56223/12:29.48
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 5509 blocks [Image Recorder]
+	17: TRM_AUDIO_NOPRE (18 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #56223 + 1129 (1129) = #57352/12:44.52
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 1129 blocks [Image Recorder]
+	18: TRM_AUDIO_NOPRE (19 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #57352 + 6599 (6599) = #63951/14:12.51
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6599 blocks [Image Recorder]
+	19: TRM_AUDIO_NOPRE (20 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #63951 + 8684 (8684) = #72635/16:8.35
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 8684 blocks [Image Recorder]
+	20: TRM_AUDIO_NOPRE (21 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #72635 + 6708 (6708) = #79343/17:37.68
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6708 blocks [Image Recorder]
+	21: TRM_AUDIO_NOPRE (22 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #79343 + 10160 (10160) = #89503/19:53.28
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 10160 blocks [Image Recorder]
+	22: TRM_AUDIO_NOPRE (23 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #89503 + 10360 (10360) = #99863/22:11.38
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 10360 blocks [Image Recorder]
+	23: TRM_AUDIO_NOPRE (24 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #99863 + 6543 (6543) = #106406/23:38.56
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6543 blocks [Image Recorder]
+	24: TRM_AUDIO_NOPRE (25 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #106406 + 1091 (1091) = #107497/23:53.22
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 1091 blocks [Image Recorder]
+	25: TRM_AUDIO_NOPRE (26 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #107497 + 25131 (25131) = #132628/29:28.28
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 25131 blocks [Image Recorder]
+	26: TRM_AUDIO_NOPRE (27 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #132628 + 7700 (7700) = #140328/31:11.3
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 7700 blocks [Image Recorder]
+	27: TRM_AUDIO_NOPRE (28 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #140328 + 10091 (10091) = #150419/33:25.44
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 10091 blocks [Image Recorder]
+	28: TRM_AUDIO_NOPRE (29 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #150419 + 796 (796) = #151215/33:36.15
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 796 blocks [Image Recorder]
+	29: TRM_AUDIO_NOPRE (30 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #151215 + 2250 (2250) = #153465/34:6.15
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 2250 blocks [Image Recorder]
+	30: TRM_AUDIO_NOPRE (31 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #153465 + 835 (835) = #154300/34:17.25
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 835 blocks [Image Recorder]
+	31: TRM_AUDIO_NOPRE (32 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #154300 + 6622 (6622) = #160922/35:45.47
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6622 blocks [Image Recorder]
+	32: TRM_AUDIO_NOPRE (33 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #160922 + 3747 (3747) = #164669/36:35.44
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 3747 blocks [Image Recorder]
+	33: TRM_AUDIO_NOPRE (34 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #164669 + 9030 (9030) = #173699/38:35.74
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 9030 blocks [Image Recorder]
+	34: TRM_AUDIO_NOPRE (35 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #173699 + 7718 (7718) = #181417/40:18.67
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 7718 blocks [Image Recorder]
+	35: TRM_AUDIO_NOPRE (36 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #181417 + 8901 (8901) = #190318/42:17.43
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 8901 blocks [Image Recorder]
+	36: TRM_AUDIO_NOPRE (37 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #190318 + 9348 (9348) = #199666/44:22.16
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 9348 blocks [Image Recorder]
+	37: TRM_AUDIO_NOPRE (38 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #199666 + 7789 (7789) = #207455/46:6.5
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 7789 blocks [Image Recorder]
+	38: TRM_AUDIO_NOPRE (39 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #207455 + 1033 (1033) = #208488/46:19.63
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 1033 blocks [Image Recorder]
+	39: TRM_AUDIO_NOPRE (40 - Audio)
+	    2 indices, index0 (0) provided
+	    original disc pos #208488 + 11678 (11678) = #220166/48:55.41
+	    relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 11678 blocks [Image Recorder]
+	--------------------------------------------------------------
+	
+21:23:55	#12 Text 0 File ThreadedTransferInterface.cpp, Line 1077
+	Prepare [Image Recorder] for write in CUE-sheet-DAO
+	DAO infos:
+	==========
+	 MCN: ""
+	 TOCType: 0x00; Session Closed, disc fixated
+	 Tracks 1 to 40:                                  Idx 0         Idx 1      Next Trk
+	   1: TRM_AUDIO_NOPRE, 2352/0x00, FilePos             0        352800       3596208, ISRC ""
+	   2: TRM_AUDIO_NOPRE, 2352/0x00, FilePos       3596208       3596208       4842768, ISRC ""
+	   3: TRM_AUDIO_NOPRE, 2352/0x00, FilePos       4842768       4842768       6096384, ISRC ""
+	   4: TRM_AUDIO_NOPRE, 2352/0x00, FilePos       6096384       6096384       7380576, ISRC ""
+	   5: TRM_AUDIO_NOPRE, 2352/0x00, FilePos       7380576       7380576       8634192, ISRC ""
+	   6: TRM_AUDIO_NOPRE, 2352/0x00, FilePos       8634192       8634192      24042144, ISRC ""
+	   7: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      24042144      24042144      42940464, ISRC ""
+	   8: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      42940464      42940464      45442992, ISRC ""
+	   9: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      45442992      45442992      63099456, ISRC ""
+	  10: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      63099456      63099456      65597280, ISRC ""
+	  11: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      65597280      65597280      79873920, ISRC ""
+	  12: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      79873920      79873920      96098016, ISRC ""
+	  13: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      96098016      96098016      97499808, ISRC ""
+	  14: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      97499808      97499808     117091968, ISRC ""
+	  15: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     117091968     117091968     118369104, ISRC ""
+	  16: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     118369104     118369104     119632128, ISRC ""
+	  17: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     119632128     119632128     132589296, ISRC ""
+	  18: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     132589296     132589296     135244704, ISRC ""
+	  19: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     135244704     135244704     150765552, ISRC ""
+	  20: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     150765552     150765552     171190320, ISRC ""
+	  21: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     171190320     171190320     186967536, ISRC ""
+	  22: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     186967536     186967536     210863856, ISRC ""
+	  23: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     210863856     210863856     235230576, ISRC ""
+	  24: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     235230576     235230576     250619712, ISRC ""
+	  25: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     250619712     250619712     253185744, ISRC ""
+	  26: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     253185744     253185744     312293856, ISRC ""
+	  27: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     312293856     312293856     330404256, ISRC ""
+	  28: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     330404256     330404256     354138288, ISRC ""
+	  29: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     354138288     354138288     356010480, ISRC ""
+	  30: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     356010480     356010480     361302480, ISRC ""
+	  31: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     361302480     361302480     363266400, ISRC ""
+	  32: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     363266400     363266400     378841344, ISRC ""
+	  33: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     378841344     378841344     387654288, ISRC ""
+	  34: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     387654288     387654288     408892848, ISRC ""
+	  35: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     408892848     408892848     427045584, ISRC ""
+	  36: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     427045584     427045584     447980736, ISRC ""
+	  37: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     447980736     447980736     469967232, ISRC ""
+	  38: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     469967232     469967232     488286960, ISRC ""
+	  39: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     488286960     488286960     490716576, ISRC ""
+	  40: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     490716576     490716576     518183232, ISRC ""
+	DAO layout:
+	===========
+	 ___Start_|____Track_|_Idx_|_CtrlAdr_|_____Size_|______NWA_|_RecDep__________
+	     -150 |  lead-in |   0 |    0x01 |        0 |        0 | 0x00
+	     -150 |        1 |   0 |    0x01 |        0 |        0 | 0x00
+	        0 |        1 |   1 |    0x01 |     1379 |     1379 | 0x00
+	     1379 |        2 |   0 |    0x01 |        0 |        0 | 0x00
+	     1379 |        2 |   1 |    0x01 |      530 |     1909 | 0x00
+	     1909 |        3 |   0 |    0x01 |        0 |        0 | 0x00
+	     1909 |        3 |   1 |    0x01 |      533 |     2442 | 0x00
+	     2442 |        4 |   0 |    0x01 |        0 |        0 | 0x00
+	     2442 |        4 |   1 |    0x01 |      546 |     2988 | 0x00
+	     2988 |        5 |   0 |    0x01 |        0 |        0 | 0x00
+	     2988 |        5 |   1 |    0x01 |      533 |     3521 | 0x00
+	     3521 |        6 |   0 |    0x01 |        0 |        0 | 0x00
+	     3521 |        6 |   1 |    0x01 |     6551 |    10072 | 0x00
+	    10072 |        7 |   0 |    0x01 |        0 |        0 | 0x00
+	    10072 |        7 |   1 |    0x01 |     8035 |    18107 | 0x00
+	    18107 |        8 |   0 |    0x01 |        0 |        0 | 0x00
+	    18107 |        8 |   1 |    0x01 |     1064 |    19171 | 0x00
+	    19171 |        9 |   0 |    0x01 |        0 |        0 | 0x00
+	    19171 |        9 |   1 |    0x01 |     7507 |    26678 | 0x00
+	    26678 |       10 |   0 |    0x01 |        0 |        0 | 0x00
+	    26678 |       10 |   1 |    0x01 |     1062 |    27740 | 0x00
+	    27740 |       11 |   0 |    0x01 |        0 |        0 | 0x00
+	    27740 |       11 |   1 |    0x01 |     6070 |    33810 | 0x00
+	    33810 |       12 |   0 |    0x01 |        0 |        0 | 0x00
+	    33810 |       12 |   1 |    0x01 |     6898 |    40708 | 0x00
+	    40708 |       13 |   0 |    0x01 |        0 |        0 | 0x00
+	    40708 |       13 |   1 |    0x01 |      596 |    41304 | 0x00
+	    41304 |       14 |   0 |    0x01 |        0 |        0 | 0x00
+	    41304 |       14 |   1 |    0x01 |     8330 |    49634 | 0x00
+	    49634 |       15 |   0 |    0x01 |        0 |        0 | 0x00
+	    49634 |       15 |   1 |    0x01 |      543 |    50177 | 0x00
+	    50177 |       16 |   0 |    0x01 |        0 |        0 | 0x00
+	    50177 |       16 |   1 |    0x01 |      537 |    50714 | 0x00
+	    50714 |       17 |   0 |    0x01 |        0 |        0 | 0x00
+	    50714 |       17 |   1 |    0x01 |     5509 |    56223 | 0x00
+	    56223 |       18 |   0 |    0x01 |        0 |        0 | 0x00
+	    56223 |       18 |   1 |    0x01 |     1129 |    57352 | 0x00
+	    57352 |       19 |   0 |    0x01 |        0 |        0 | 0x00
+	    57352 |       19 |   1 |    0x01 |     6599 |    63951 | 0x00
+	    63951 |       20 |   0 |    0x01 |        0 |        0 | 0x00
+	    63951 |       20 |   1 |    0x01 |     8684 |    72635 | 0x00
+	    72635 |       21 |   0 |    0x01 |        0 |        0 | 0x00
+	    72635 |       21 |   1 |    0x01 |     6708 |    79343 | 0x00
+	    79343 |       22 |   0 |    0x01 |        0 |        0 | 0x00
+	    79343 |       22 |   1 |    0x01 |    10160 |    89503 | 0x00
+	    89503 |       23 |   0 |    0x01 |        0 |        0 | 0x00
+	    89503 |       23 |   1 |    0x01 |    10360 |    99863 | 0x00
+	    99863 |       24 |   0 |    0x01 |        0 |        0 | 0x00
+	    99863 |       24 |   1 |    0x01 |     6543 |   106406 | 0x00
+	   106406 |       25 |   0 |    0x01 |        0 |        0 | 0x00
+	   106406 |       25 |   1 |    0x01 |     1091 |   107497 | 0x00
+	   107497 |       26 |   0 |    0x01 |        0 |        0 | 0x00
+	   107497 |       26 |   1 |    0x01 |    25131 |   132628 | 0x00
+	   132628 |       27 |   0 |    0x01 |        0 |        0 | 0x00
+	   132628 |       27 |   1 |    0x01 |     7700 |   140328 | 0x00
+	   140328 |       28 |   0 |    0x01 |        0 |        0 | 0x00
+	   140328 |       28 |   1 |    0x01 |    10091 |   150419 | 0x00
+	   150419 |       29 |   0 |    0x01 |        0 |        0 | 0x00
+	   150419 |       29 |   1 |    0x01 |      796 |   151215 | 0x00
+	   151215 |       30 |   0 |    0x01 |        0 |        0 | 0x00
+	   151215 |       30 |   1 |    0x01 |     2250 |   153465 | 0x00
+	   153465 |       31 |   0 |    0x01 |        0 |        0 | 0x00
+	   153465 |       31 |   1 |    0x01 |      835 |   154300 | 0x00
+	   154300 |       32 |   0 |    0x01 |        0 |        0 | 0x00
+	   154300 |       32 |   1 |    0x01 |     6622 |   160922 | 0x00
+	   160922 |       33 |   0 |    0x01 |        0 |        0 | 0x00
+	   160922 |       33 |   1 |    0x01 |     3747 |   164669 | 0x00
+	   164669 |       34 |   0 |    0x01 |        0 |        0 | 0x00
+	   164669 |       34 |   1 |    0x01 |     9030 |   173699 | 0x00
+	   173699 |       35 |   0 |    0x01 |        0 |        0 | 0x00
+	   173699 |       35 |   1 |    0x01 |     7718 |   181417 | 0x00
+	   181417 |       36 |   0 |    0x01 |        0 |        0 | 0x00
+	   181417 |       36 |   1 |    0x01 |     8901 |   190318 | 0x00
+	   190318 |       37 |   0 |    0x01 |        0 |        0 | 0x00
+	   190318 |       37 |   1 |    0x01 |     9348 |   199666 | 0x00
+	   199666 |       38 |   0 |    0x01 |        0 |        0 | 0x00
+	   199666 |       38 |   1 |    0x01 |     7789 |   207455 | 0x00
+	   207455 |       39 |   0 |    0x01 |        0 |        0 | 0x00
+	   207455 |       39 |   1 |    0x01 |     1033 |   208488 | 0x00
+	   208488 |       40 |   0 |    0x01 |        0 |        0 | 0x00
+	   208488 |       40 |   1 |    0x01 |    11678 |   220166 | 0x00
+	   220166 | lead-out |   1 |    0x01 |        0 |        0 | 0x00
+	MediaType: CD-R/RW
+	
+21:23:55	#13 Text 0 File Burncd.cpp, Line 4234
+	Caching options: cache CDRom or Network-No, small files-No (<64KB)
+	
+21:23:55	#14 PHASE 120 File dlgbrnst.cpp, Line 1827
+	Creating the image for burning
+	
+21:23:55	#15 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 0 (relocatable, no disc pos, no patch infos, orig at #0): write at #0
+	
+21:23:55	#16 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 1 (relocatable, no disc pos, no patch infos, orig at #1379): write at #1379
+	
+21:23:55	#17 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 2 (relocatable, no disc pos, no patch infos, orig at #1909): write at #1909
+	
+21:23:55	#18 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 3 (relocatable, no disc pos, no patch infos, orig at #2442): write at #2442
+	
+21:23:55	#19 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 4 (relocatable, no disc pos, no patch infos, orig at #2988): write at #2988
+	
+21:23:55	#20 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 5 (relocatable, no disc pos, no patch infos, orig at #3521): write at #3521
+	
+21:23:55	#21 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 6 (relocatable, no disc pos, no patch infos, orig at #10072): write at #10072
+	
+21:23:55	#22 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 7 (relocatable, no disc pos, no patch infos, orig at #18107): write at #18107
+	
+21:23:55	#23 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 8 (relocatable, no disc pos, no patch infos, orig at #19171): write at #19171
+	
+21:23:55	#24 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 9 (relocatable, no disc pos, no patch infos, orig at #26678): write at #26678
+	
+21:23:55	#25 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 10 (relocatable, no disc pos, no patch infos, orig at #27740): write at #27740
+	
+21:23:55	#26 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 11 (relocatable, no disc pos, no patch infos, orig at #33810): write at #33810
+	
+21:23:55	#27 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 12 (relocatable, no disc pos, no patch infos, orig at #40708): write at #40708
+	
+21:23:55	#28 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 13 (relocatable, no disc pos, no patch infos, orig at #41304): write at #41304
+	
+21:23:55	#29 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 14 (relocatable, no disc pos, no patch infos, orig at #49634): write at #49634
+	
+21:23:55	#30 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 15 (relocatable, no disc pos, no patch infos, orig at #50177): write at #50177
+	
+21:23:55	#31 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 16 (relocatable, no disc pos, no patch infos, orig at #50714): write at #50714
+	
+21:23:55	#32 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 17 (relocatable, no disc pos, no patch infos, orig at #56223): write at #56223
+	
+21:23:55	#33 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 18 (relocatable, no disc pos, no patch infos, orig at #57352): write at #57352
+	
+21:23:55	#34 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 19 (relocatable, no disc pos, no patch infos, orig at #63951): write at #63951
+	
+21:23:55	#35 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 20 (relocatable, no disc pos, no patch infos, orig at #72635): write at #72635
+	
+21:23:55	#36 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 21 (relocatable, no disc pos, no patch infos, orig at #79343): write at #79343
+	
+21:23:55	#37 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 22 (relocatable, no disc pos, no patch infos, orig at #89503): write at #89503
+	
+21:23:55	#38 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 23 (relocatable, no disc pos, no patch infos, orig at #99863): write at #99863
+	
+21:23:55	#39 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 24 (relocatable, no disc pos, no patch infos, orig at #106406): write at #106406
+	
+21:23:55	#40 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 25 (relocatable, no disc pos, no patch infos, orig at #107497): write at #107497
+	
+21:23:55	#41 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 26 (relocatable, no disc pos, no patch infos, orig at #132628): write at #132628
+	
+21:23:55	#42 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 27 (relocatable, no disc pos, no patch infos, orig at #140328): write at #140328
+	
+21:23:55	#43 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 28 (relocatable, no disc pos, no patch infos, orig at #150419): write at #150419
+	
+21:23:55	#44 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 29 (relocatable, no disc pos, no patch infos, orig at #151215): write at #151215
+	
+21:23:55	#45 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 30 (relocatable, no disc pos, no patch infos, orig at #153465): write at #153465
+	
+21:23:55	#46 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 31 (relocatable, no disc pos, no patch infos, orig at #154300): write at #154300
+	
+21:23:55	#47 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 32 (relocatable, no disc pos, no patch infos, orig at #160922): write at #160922
+	
+21:23:55	#48 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 33 (relocatable, no disc pos, no patch infos, orig at #164669): write at #164669
+	
+21:23:55	#49 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 34 (relocatable, no disc pos, no patch infos, orig at #173699): write at #173699
+	
+21:23:55	#50 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 35 (relocatable, no disc pos, no patch infos, orig at #181417): write at #181417
+	
+21:23:55	#51 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 36 (relocatable, no disc pos, no patch infos, orig at #190318): write at #190318
+	
+21:23:55	#52 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 37 (relocatable, no disc pos, no patch infos, orig at #199666): write at #199666
+	
+21:23:55	#53 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 38 (relocatable, no disc pos, no patch infos, orig at #207455): write at #207455
+	
+21:23:55	#54 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 39 (relocatable, no disc pos, no patch infos, orig at #208488): write at #208488
+	
+21:23:55	#55 Text 0 File ThreadedTransfer.cpp, Line 273
+	Pipe memory size 590400
+	
+21:27:12	#56 Text 0 File WriterStatus.cpp, Line 244
+	<Image Recorder> start writing Lead-Out at LBA 220166 (35C06h), length 0 blocks
+	
+21:27:12	#57 PHASE 121 File dlgbrnst.cpp, Line 1827
+	Creating Image completed successfully
+	
+21:27:12	#58 Text 0 File SCSIPTICommands.cpp, Line 301
+	SPTIDismountVolume - completed successfully for FSCTL_DISMOUNT_VOLUME
+	
+21:27:16	#59 Text 0 File SCSIPTICommands.cpp, Line 464
+	UnLockMCN - completed sucessfully for IOCTL_STORAGE_MCN_CONTROL
+	
+21:27:16	#60 Text 0 File Cdrdrv.cpp, Line 11882
+	DriveLocker: UnLockVolume completed
+	
+
+
+===== Disc-Copy over image - 2nd step : Burn the image ...
+
+21:27:17	#1 Text 0 File SCSIPTICommands.cpp, Line 464
+	LockMCN - completed sucessfully for IOCTL_STORAGE_MCN_CONTROL
+	
+21:27:17	#2 Text 0 File Burncd.cpp, Line 3191
+	PIONEER DVD-RW DVRTD10RS
+	Protección contra insuf. datos activado
+	
+21:27:17	#3 IMAGEGEN -10 File ImageGen.cpp, Line 398
+	Image was written as DAO.
+	DAOI:
+	 MediaCatalogNumber = ''
+	 TocType = 0x00
+	 Finalized =  1
+	 First/Last Track =  1 / 40
+	  1: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 0, Index1FilePos = 352800, NextTrackFilePos = 3596208
+	  2: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 3596208, Index1FilePos = 3596208, NextTrackFilePos = 4842768
+	  3: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 4842768, Index1FilePos = 4842768, NextTrackFilePos = 6096384
+	  4: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 6096384, Index1FilePos = 6096384, NextTrackFilePos = 7380576
+	  5: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 7380576, Index1FilePos = 7380576, NextTrackFilePos = 8634192
+	  6: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 8634192, Index1FilePos = 8634192, NextTrackFilePos = 24042144
+	  7: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 24042144, Index1FilePos = 24042144, NextTrackFilePos = 42940464
+	  8: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 42940464, Index1FilePos = 42940464, NextTrackFilePos = 45442992
+	  9: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 45442992, Index1FilePos = 45442992, NextTrackFilePos = 63099456
+	 10: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 63099456, Index1FilePos = 63099456, NextTrackFilePos = 65597280
+	 11: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 65597280, Index1FilePos = 65597280, NextTrackFilePos = 79873920
+	 12: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 79873920, Index1FilePos = 79873920, NextTrackFilePos = 96098016
+	 13: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 96098016, Index1FilePos = 96098016, NextTrackFilePos = 97499808
+	 14: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 97499808, Index1FilePos = 97499808, NextTrackFilePos = 117091968
+	 15: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 117091968, Index1FilePos = 117091968, NextTrackFilePos = 118369104
+	 16: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 118369104, Index1FilePos = 118369104, NextTrackFilePos = 119632128
+	 17: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 119632128, Index1FilePos = 119632128, NextTrackFilePos = 132589296
+	 18: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 132589296, Index1FilePos = 132589296, NextTrackFilePos = 135244704
+	 19: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 135244704, Index1FilePos = 135244704, NextTrackFilePos = 150765552
+	 20: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 150765552, Index1FilePos = 150765552, NextTrackFilePos = 171190320
+	 21: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 171190320, Index1FilePos = 171190320, NextTrackFilePos = 186967536
+	 22: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 186967536, Index1FilePos = 186967536, NextTrackFilePos = 210863856
+	 23: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 210863856, Index1FilePos = 210863856, NextTrackFilePos = 235230576
+	 24: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 235230576, Index1FilePos = 235230576, NextTrackFilePos = 250619712
+	 25: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 250619712, Index1FilePos = 250619712, NextTrackFilePos = 253185744
+	 26: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 253185744, Index1FilePos = 253185744, NextTrackFilePos = 312293856
+	 27: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 312293856, Index1FilePos = 312293856, NextTrackFilePos = 330404256
+	 28: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 330404256, Index1FilePos = 330404256, NextTrackFilePos = 354138288
+	 29: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 354138288, Index1FilePos = 354138288, NextTrackFilePos = 356010480
+	 30: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 356010480, Index1FilePos = 356010480, NextTrackFilePos = 361302480
+	 31: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 361302480, Index1FilePos = 361302480, NextTrackFilePos = 363266400
+	 32: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 363266400, Index1FilePos = 363266400, NextTrackFilePos = 378841344
+	 33: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 378841344, Index1FilePos = 378841344, NextTrackFilePos = 387654288
+	 34: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 387654288, Index1FilePos = 387654288, NextTrackFilePos = 408892848
+	 35: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 408892848, Index1FilePos = 408892848, NextTrackFilePos = 427045584
+	 36: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 427045584, Index1FilePos = 427045584, NextTrackFilePos = 447980736
+	 37: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 447980736, Index1FilePos = 447980736, NextTrackFilePos = 469967232
+	 38: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 469967232, Index1FilePos = 469967232, NextTrackFilePos = 488286960
+	 39: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 488286960, Index1FilePos = 488286960, NextTrackFilePos = 490716576
+	 40: ISRC = ''
+	     Blocksize = 2352
+	     TrackMode = 'TRM_AUDIO_NOPRE'
+	     TrackConfig = 0x00
+	     First/Last Index =  0 /  1
+	     Index0FilePos = 490716576, Index1FilePos = 490716576, NextTrackFilePos = 518183232
+	CUES:
+	   0: Ctrl=0x01 Trk=  0 (0x00) Index=00 Start=954437:08.46 (     -150) RecDep=0x00
+	   1: Ctrl=0x00 Trk=  0 (0x00) Index=11 Start=3801:08.52 ( 17105152) RecDep=0xAC [open track]
+	   2: Ctrl=0x01 Trk= 10 (0x10) Index=00 Start=05:55.53 (    26678) RecDep=0x00
+	   3: Ctrl=0x00 Trk=  0 (0x00) Index=101 Start=4034:06.22 ( 18153472) RecDep=0x58
+	   4: Ctrl=0x01 Trk= 19 (0x19) Index=01 Start=12:44.52 (    57352) RecDep=0x00
+	   5: Ctrl=0x00 Trk=  1 (0x01) Index=86 Start=4252:36.68 ( 19136768) RecDep=0x17 [open track] [in open ses] [empty/reserved]
+	   6: Ctrl=0x01 Trk= 29 (0x29) Index=00 Start=33:25.44 (   150419) RecDep=0x00
+	   7: Ctrl=0x00 Trk=  2 (0x02) Index=74 Start=4485:34.38 ( 20185088) RecDep=0x9A [in open ses]
+	MTYP: Mediumtype =  CD (old format) (0x1)
+	Image file name: <C:\Users\Edsgar\Documents\TempImage.nrg>
+	
+21:27:17	#4 SPTI -1196 File SCSIPassThrough.cpp, Line 224
+	CdRom0: SCSIStatus(x02) WinError(0) NeroError(-1196)
+	CDB Data:   0x51 00 00 00 00 00 00 00 20 00 00 00 
+	Sense Key:  0x02 (KEY_NOT_READY)
+	Sense Code: 0x3A
+	Sense Qual: 0x02
+	Sense Area: 0x70 00 02 00 00 00 00 0A 00 00 00 00 3A 02 
+	Buffer x040db000: Len x20
+	
+21:27:17	#5 SPTI -1196 File SCSIPassThrough.cpp, Line 224
+	CdRom0: SCSIStatus(x02) WinError(0) NeroError(-1196)
+	CDB Data:   0x52 01 00 00 00 FF 00 00 20 00 00 00 
+	Sense Key:  0x02 (KEY_NOT_READY)
+	Sense Code: 0x3A
+	Sense Qual: 0x02
+	Sense Area: 0x70 00 02 00 00 00 00 0A 00 00 00 00 3A 02 
+	Buffer x040db000: Len x20
+	
+21:27:17	#6 SPTI -1196 File SCSIPassThrough.cpp, Line 224
+	CdRom0: SCSIStatus(x02) WinError(0) NeroError(-1196)
+	CDB Data:   0x52 01 00 00 00 FF 00 00 20 00 00 00 
+	Sense Key:  0x02 (KEY_NOT_READY)
+	Sense Code: 0x3A
+	Sense Qual: 0x02
+	Sense Area: 0x70 00 02 00 00 00 00 0A 00 00 00 00 3A 02 
+	Buffer x040db000: Len x20
+	
+21:27:17	#7 Text 0 File Burncd.cpp, Line 3521
+	Turn on Disc-At-Once, using CD-R/RW media
+	
+21:27:17	#8 SPTI -1196 File SCSIPassThrough.cpp, Line 224
+	CdRom0: SCSIStatus(x02) WinError(0) NeroError(-1196)
+	CDB Data:   0x51 00 00 00 00 00 00 00 20 00 00 00 
+	Sense Key:  0x02 (KEY_NOT_READY)
+	Sense Code: 0x3A
+	Sense Qual: 0x02
+	Sense Area: 0x70 00 02 00 00 00 00 0A 00 00 00 00 3A 02 
+	Buffer x040db000: Len x20
+	
+21:27:17	#9 SPTI -1196 File SCSIPassThrough.cpp, Line 224
+	CdRom0: SCSIStatus(x02) WinError(0) NeroError(-1196)
+	CDB Data:   0x52 01 00 00 00 FF 00 00 20 00 00 00 
+	Sense Key:  0x02 (KEY_NOT_READY)
+	Sense Code: 0x3A
+	Sense Qual: 0x02
+	Sense Area: 0x70 00 02 00 00 00 00 0A 00 00 00 00 3A 02 
+	Buffer x040db000: Len x20
+	
+21:27:17	#10 SPTI -1196 File SCSIPassThrough.cpp, Line 224
+	CdRom0: SCSIStatus(x02) WinError(0) NeroError(-1196)
+	CDB Data:   0x52 01 00 00 00 FF 00 00 20 00 00 00 
+	Sense Key:  0x02 (KEY_NOT_READY)
+	Sense Code: 0x3A
+	Sense Qual: 0x02
+	Sense Area: 0x70 00 02 00 00 00 00 0A 00 00 00 00 3A 02 
+	Buffer x040db000: Len x20
+	
+21:28:05	#11 Text 0 File DlgWaitCD.cpp, Line 314
+	[D: DVD-RW DVRTD10RS] Last possible write address on media:   359846
+	Last address to be written:             220165
+	
+21:28:05	#12 Text 0 File DlgWaitCD.cpp, Line 326
+	[D: DVD-RW DVRTD10RS] Write in overburning mode: NO (enabled: CD)
+	
+21:28:05	#13 Text 0 File DlgWaitCD.cpp, Line 2917
+	Recorder: PIONEER DVD-RW DVRTD10RS;
+	   CDR code: 00 97 27 18; OSJ entry from: Plasmon Data systems Ltd.
+	   ATIP Data:
+	     Special    Info [hex] 1: D0 00 A0, 2: 61 1B 12 (LI 97:27.18), 3: 4F 3B 4A (LO 79:59.74)
+	     Additional Info [hex] 1: 00 00 80 (invalid), 2: 00 80 00 (invalid), 3: 00 80 80 (invalid)
+	
+21:28:05	#14 Text 0 File DlgWaitCD.cpp, Line 499
+	[D: DVD-RW DVRTD10RS] >>> Protocol of DlgWaitCD activities: <<<
+	=========================================
+	Insert empty disc to write to.
+		(Medium in drive: Desconocido. Medium required by compilation: CD-R/RW.)
+	
+21:28:05	#15 Text 0 File ThreadedTransferInterface.cpp, Line 861
+	Setup items (after recorder preparation)
+	 0: TRM_AUDIO_NOPRE (1 - Audio)
+	    2 indices, index0 (150) provided
+	    original disc pos #0 + 1379 (1379) = #1379/0:18.29
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 1379 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	 1: TRM_AUDIO_NOPRE (2 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #1379 + 530 (530) = #1909/0:25.34
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 530 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	 2: TRM_AUDIO_NOPRE (3 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #1909 + 533 (533) = #2442/0:32.42
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 533 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	 3: TRM_AUDIO_NOPRE (4 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #2442 + 546 (546) = #2988/0:39.63
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 546 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	 4: TRM_AUDIO_NOPRE (5 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #2988 + 533 (533) = #3521/0:46.71
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 533 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	 5: TRM_AUDIO_NOPRE (6 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #3521 + 6551 (6551) = #10072/2:14.22
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6551 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	 6: TRM_AUDIO_NOPRE (7 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #10072 + 8035 (8035) = #18107/4:1.32
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 8035 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	 7: TRM_AUDIO_NOPRE (8 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #18107 + 1064 (1064) = #19171/4:15.46
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 1064 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	 8: TRM_AUDIO_NOPRE (9 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #19171 + 7507 (7507) = #26678/5:55.53
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 7507 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	 9: TRM_AUDIO_NOPRE (10 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #26678 + 1062 (1062) = #27740/6:9.65
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 1062 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	10: TRM_AUDIO_NOPRE (11 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #27740 + 6070 (6070) = #33810/7:30.60
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6070 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	11: TRM_AUDIO_NOPRE (12 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #33810 + 6898 (6898) = #40708/9:2.58
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6898 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	12: TRM_AUDIO_NOPRE (13 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #40708 + 596 (596) = #41304/9:10.54
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 596 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	13: TRM_AUDIO_NOPRE (14 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #41304 + 8330 (8330) = #49634/11:1.59
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 8330 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	14: TRM_AUDIO_NOPRE (15 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #49634 + 543 (543) = #50177/11:9.2
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 543 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	15: TRM_AUDIO_NOPRE (16 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #50177 + 537 (537) = #50714/11:16.14
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 537 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	16: TRM_AUDIO_NOPRE (17 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #50714 + 5509 (5509) = #56223/12:29.48
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 5509 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	17: TRM_AUDIO_NOPRE (18 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #56223 + 1129 (1129) = #57352/12:44.52
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 1129 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	18: TRM_AUDIO_NOPRE (19 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #57352 + 6599 (6599) = #63951/14:12.51
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6599 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	19: TRM_AUDIO_NOPRE (20 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #63951 + 8684 (8684) = #72635/16:8.35
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 8684 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	20: TRM_AUDIO_NOPRE (21 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #72635 + 6708 (6708) = #79343/17:37.68
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6708 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	21: TRM_AUDIO_NOPRE (22 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #79343 + 10160 (10160) = #89503/19:53.28
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 10160 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	22: TRM_AUDIO_NOPRE (23 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #89503 + 10360 (10360) = #99863/22:11.38
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 10360 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	23: TRM_AUDIO_NOPRE (24 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #99863 + 6543 (6543) = #106406/23:38.56
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6543 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	24: TRM_AUDIO_NOPRE (25 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #106406 + 1091 (1091) = #107497/23:53.22
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 1091 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	25: TRM_AUDIO_NOPRE (26 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #107497 + 25131 (25131) = #132628/29:28.28
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 25131 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	26: TRM_AUDIO_NOPRE (27 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #132628 + 7700 (7700) = #140328/31:11.3
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 7700 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	27: TRM_AUDIO_NOPRE (28 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #140328 + 10091 (10091) = #150419/33:25.44
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 10091 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	28: TRM_AUDIO_NOPRE (29 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #150419 + 796 (796) = #151215/33:36.15
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 796 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	29: TRM_AUDIO_NOPRE (30 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #151215 + 2250 (2250) = #153465/34:6.15
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 2250 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	30: TRM_AUDIO_NOPRE (31 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #153465 + 835 (835) = #154300/34:17.25
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 835 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	31: TRM_AUDIO_NOPRE (32 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #154300 + 6622 (6622) = #160922/35:45.47
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 6622 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	32: TRM_AUDIO_NOPRE (33 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #160922 + 3747 (3747) = #164669/36:35.44
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 3747 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	33: TRM_AUDIO_NOPRE (34 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #164669 + 9030 (9030) = #173699/38:35.74
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 9030 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	34: TRM_AUDIO_NOPRE (35 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #173699 + 7718 (7718) = #181417/40:18.67
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 7718 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	35: TRM_AUDIO_NOPRE (36 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #181417 + 8901 (8901) = #190318/42:17.43
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 8901 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	36: TRM_AUDIO_NOPRE (37 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #190318 + 9348 (9348) = #199666/44:22.16
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 9348 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	37: TRM_AUDIO_NOPRE (38 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #199666 + 7789 (7789) = #207455/46:6.5
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 7789 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	38: TRM_AUDIO_NOPRE (39 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #207455 + 1033 (1033) = #208488/46:19.63
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 1033 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	39: TRM_AUDIO_NOPRE (40 - Audio)
+	    2 indices, index0 (0) not provided
+	    original disc pos #208488 + 11678 (11678) = #220166/48:55.41
+	    not relocatable, disc pos for caching/writing not required/not required
+	    -> TRM_AUDIO_NOPRE, 2352, config 0, wanted index0 0 blocks, length 11678 blocks [D: PIONEER DVD-RW DVRTD10RS]
+	--------------------------------------------------------------
+	
+21:28:05	#16 Text 0 File ThreadedTransferInterface.cpp, Line 1077
+	Prepare [D: PIONEER DVD-RW DVRTD10RS] for write in CUE-sheet-DAO
+	DAO infos:
+	==========
+	 MCN: ""
+	 TOCType: 0x00; Session Closed, disc fixated
+	 Tracks 1 to 40:                                  Idx 0         Idx 1      Next Trk
+	   1: TRM_AUDIO_NOPRE, 2352/0x00, FilePos             0        352800       3596208, ISRC ""
+	   2: TRM_AUDIO_NOPRE, 2352/0x00, FilePos       3596208       3596208       4842768, ISRC ""
+	   3: TRM_AUDIO_NOPRE, 2352/0x00, FilePos       4842768       4842768       6096384, ISRC ""
+	   4: TRM_AUDIO_NOPRE, 2352/0x00, FilePos       6096384       6096384       7380576, ISRC ""
+	   5: TRM_AUDIO_NOPRE, 2352/0x00, FilePos       7380576       7380576       8634192, ISRC ""
+	   6: TRM_AUDIO_NOPRE, 2352/0x00, FilePos       8634192       8634192      24042144, ISRC ""
+	   7: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      24042144      24042144      42940464, ISRC ""
+	   8: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      42940464      42940464      45442992, ISRC ""
+	   9: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      45442992      45442992      63099456, ISRC ""
+	  10: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      63099456      63099456      65597280, ISRC ""
+	  11: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      65597280      65597280      79873920, ISRC ""
+	  12: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      79873920      79873920      96098016, ISRC ""
+	  13: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      96098016      96098016      97499808, ISRC ""
+	  14: TRM_AUDIO_NOPRE, 2352/0x00, FilePos      97499808      97499808     117091968, ISRC ""
+	  15: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     117091968     117091968     118369104, ISRC ""
+	  16: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     118369104     118369104     119632128, ISRC ""
+	  17: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     119632128     119632128     132589296, ISRC ""
+	  18: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     132589296     132589296     135244704, ISRC ""
+	  19: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     135244704     135244704     150765552, ISRC ""
+	  20: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     150765552     150765552     171190320, ISRC ""
+	  21: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     171190320     171190320     186967536, ISRC ""
+	  22: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     186967536     186967536     210863856, ISRC ""
+	  23: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     210863856     210863856     235230576, ISRC ""
+	  24: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     235230576     235230576     250619712, ISRC ""
+	  25: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     250619712     250619712     253185744, ISRC ""
+	  26: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     253185744     253185744     312293856, ISRC ""
+	  27: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     312293856     312293856     330404256, ISRC ""
+	  28: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     330404256     330404256     354138288, ISRC ""
+	  29: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     354138288     354138288     356010480, ISRC ""
+	  30: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     356010480     356010480     361302480, ISRC ""
+	  31: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     361302480     361302480     363266400, ISRC ""
+	  32: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     363266400     363266400     378841344, ISRC ""
+	  33: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     378841344     378841344     387654288, ISRC ""
+	  34: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     387654288     387654288     408892848, ISRC ""
+	  35: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     408892848     408892848     427045584, ISRC ""
+	  36: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     427045584     427045584     447980736, ISRC ""
+	  37: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     447980736     447980736     469967232, ISRC ""
+	  38: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     469967232     469967232     488286960, ISRC ""
+	  39: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     488286960     488286960     490716576, ISRC ""
+	  40: TRM_AUDIO_NOPRE, 2352/0x00, FilePos     490716576     490716576     518183232, ISRC ""
+	DAO layout:
+	===========
+	 ___Start_|____Track_|_Idx_|_CtrlAdr_|_____Size_|______NWA_|_RecDep__________
+	     -150 |  lead-in |   0 |    0x01 |        0 |        0 | 0x00
+	     -150 |        1 |   0 |    0x01 |        0 |        0 | 0x00
+	        0 |        1 |   1 |    0x01 |     1379 |        0 | 0x00
+	     1379 |        2 |   0 |    0x01 |        0 |        0 | 0x00
+	     1379 |        2 |   1 |    0x01 |      530 |     1379 | 0x00
+	     1909 |        3 |   0 |    0x01 |        0 |        0 | 0x00
+	     1909 |        3 |   1 |    0x01 |      533 |     1909 | 0x00
+	     2442 |        4 |   0 |    0x01 |        0 |        0 | 0x00
+	     2442 |        4 |   1 |    0x01 |      546 |     2442 | 0x00
+	     2988 |        5 |   0 |    0x01 |        0 |        0 | 0x00
+	     2988 |        5 |   1 |    0x01 |      533 |     2988 | 0x00
+	     3521 |        6 |   0 |    0x01 |        0 |        0 | 0x00
+	     3521 |        6 |   1 |    0x01 |     6551 |     3521 | 0x00
+	    10072 |        7 |   0 |    0x01 |        0 |        0 | 0x00
+	    10072 |        7 |   1 |    0x01 |     8035 |    10072 | 0x00
+	    18107 |        8 |   0 |    0x01 |        0 |        0 | 0x00
+	    18107 |        8 |   1 |    0x01 |     1064 |    18107 | 0x00
+	    19171 |        9 |   0 |    0x01 |        0 |        0 | 0x00
+	    19171 |        9 |   1 |    0x01 |     7507 |    19171 | 0x00
+	    26678 |       10 |   0 |    0x01 |        0 |        0 | 0x00
+	    26678 |       10 |   1 |    0x01 |     1062 |    26678 | 0x00
+	    27740 |       11 |   0 |    0x01 |        0 |        0 | 0x00
+	    27740 |       11 |   1 |    0x01 |     6070 |    27740 | 0x00
+	    33810 |       12 |   0 |    0x01 |        0 |        0 | 0x00
+	    33810 |       12 |   1 |    0x01 |     6898 |    33810 | 0x00
+	    40708 |       13 |   0 |    0x01 |        0 |        0 | 0x00
+	    40708 |       13 |   1 |    0x01 |      596 |    40708 | 0x00
+	    41304 |       14 |   0 |    0x01 |        0 |        0 | 0x00
+	    41304 |       14 |   1 |    0x01 |     8330 |    41304 | 0x00
+	    49634 |       15 |   0 |    0x01 |        0 |        0 | 0x00
+	    49634 |       15 |   1 |    0x01 |      543 |    49634 | 0x00
+	    50177 |       16 |   0 |    0x01 |        0 |        0 | 0x00
+	    50177 |       16 |   1 |    0x01 |      537 |    50177 | 0x00
+	    50714 |       17 |   0 |    0x01 |        0 |        0 | 0x00
+	    50714 |       17 |   1 |    0x01 |     5509 |    50714 | 0x00
+	    56223 |       18 |   0 |    0x01 |        0 |        0 | 0x00
+	    56223 |       18 |   1 |    0x01 |     1129 |    56223 | 0x00
+	    57352 |       19 |   0 |    0x01 |        0 |        0 | 0x00
+	    57352 |       19 |   1 |    0x01 |     6599 |    57352 | 0x00
+	    63951 |       20 |   0 |    0x01 |        0 |        0 | 0x00
+	    63951 |       20 |   1 |    0x01 |     8684 |    63951 | 0x00
+	    72635 |       21 |   0 |    0x01 |        0 |        0 | 0x00
+	    72635 |       21 |   1 |    0x01 |     6708 |    72635 | 0x00
+	    79343 |       22 |   0 |    0x01 |        0 |        0 | 0x00
+	    79343 |       22 |   1 |    0x01 |    10160 |    79343 | 0x00
+	    89503 |       23 |   0 |    0x01 |        0 |        0 | 0x00
+	    89503 |       23 |   1 |    0x01 |    10360 |    89503 | 0x00
+	    99863 |       24 |   0 |    0x01 |        0 |        0 | 0x00
+	    99863 |       24 |   1 |    0x01 |     6543 |    99863 | 0x00
+	   106406 |       25 |   0 |    0x01 |        0 |        0 | 0x00
+	   106406 |       25 |   1 |    0x01 |     1091 |   106406 | 0x00
+	   107497 |       26 |   0 |    0x01 |        0 |        0 | 0x00
+	   107497 |       26 |   1 |    0x01 |    25131 |   107497 | 0x00
+	   132628 |       27 |   0 |    0x01 |        0 |        0 | 0x00
+	   132628 |       27 |   1 |    0x01 |     7700 |   132628 | 0x00
+	   140328 |       28 |   0 |    0x01 |        0 |        0 | 0x00
+	   140328 |       28 |   1 |    0x01 |    10091 |   140328 | 0x00
+	   150419 |       29 |   0 |    0x01 |        0 |        0 | 0x00
+	   150419 |       29 |   1 |    0x01 |      796 |   150419 | 0x00
+	   151215 |       30 |   0 |    0x01 |        0 |        0 | 0x00
+	   151215 |       30 |   1 |    0x01 |     2250 |   151215 | 0x00
+	   153465 |       31 |   0 |    0x01 |        0 |        0 | 0x00
+	   153465 |       31 |   1 |    0x01 |      835 |   153465 | 0x00
+	   154300 |       32 |   0 |    0x01 |        0 |        0 | 0x00
+	   154300 |       32 |   1 |    0x01 |     6622 |   154300 | 0x00
+	   160922 |       33 |   0 |    0x01 |        0 |        0 | 0x00
+	   160922 |       33 |   1 |    0x01 |     3747 |   160922 | 0x00
+	   164669 |       34 |   0 |    0x01 |        0 |        0 | 0x00
+	   164669 |       34 |   1 |    0x01 |     9030 |   164669 | 0x00
+	   173699 |       35 |   0 |    0x01 |        0 |        0 | 0x00
+	   173699 |       35 |   1 |    0x01 |     7718 |   173699 | 0x00
+	   181417 |       36 |   0 |    0x01 |        0 |        0 | 0x00
+	   181417 |       36 |   1 |    0x01 |     8901 |   181417 | 0x00
+	   190318 |       37 |   0 |    0x01 |        0 |        0 | 0x00
+	   190318 |       37 |   1 |    0x01 |     9348 |   190318 | 0x00
+	   199666 |       38 |   0 |    0x01 |        0 |        0 | 0x00
+	   199666 |       38 |   1 |    0x01 |     7789 |   199666 | 0x00
+	   207455 |       39 |   0 |    0x01 |        0 |        0 | 0x00
+	   207455 |       39 |   1 |    0x01 |     1033 |   207455 | 0x00
+	   208488 |       40 |   0 |    0x01 |        0 |        0 | 0x00
+	   208488 |       40 |   1 |    0x01 |    11678 |   208488 | 0x00
+	   220166 | lead-out |   1 |    0x01 |        0 |        0 | 0x00
+	MediaType: CD-R
+	
+21:28:05	#17 Text 0 File SCSIPTICommands.cpp, Line 251
+	SPTILockVolume - completed successfully for FSCTL_LOCK_VOLUME
+	
+21:28:05	#18 Text 0 File Burncd.cpp, Line 4234
+	Caching options: cache CDRom or Network-No, small files-No (<64KB)
+	
+21:28:05	#19 PHASE 36 File dlgbrnst.cpp, Line 1827
+	Burn process started at 24x (3.600 KB/s)
+	
+21:28:05	#20 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 0 (not relocatable, no disc pos, no patch infos, orig at #0): write at #0
+	
+21:28:05	#21 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 1 (not relocatable, no disc pos, no patch infos, orig at #1379): write at #1379
+	
+21:28:05	#22 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 2 (not relocatable, no disc pos, no patch infos, orig at #1909): write at #1909
+	
+21:28:05	#23 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 3 (not relocatable, no disc pos, no patch infos, orig at #2442): write at #2442
+	
+21:28:05	#24 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 4 (not relocatable, no disc pos, no patch infos, orig at #2988): write at #2988
+	
+21:28:05	#25 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 5 (not relocatable, no disc pos, no patch infos, orig at #3521): write at #3521
+	
+21:28:05	#26 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 6 (not relocatable, no disc pos, no patch infos, orig at #10072): write at #10072
+	
+21:28:05	#27 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 7 (not relocatable, no disc pos, no patch infos, orig at #18107): write at #18107
+	
+21:28:05	#28 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 8 (not relocatable, no disc pos, no patch infos, orig at #19171): write at #19171
+	
+21:28:05	#29 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 9 (not relocatable, no disc pos, no patch infos, orig at #26678): write at #26678
+	
+21:28:05	#30 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 10 (not relocatable, no disc pos, no patch infos, orig at #27740): write at #27740
+	
+21:28:05	#31 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 11 (not relocatable, no disc pos, no patch infos, orig at #33810): write at #33810
+	
+21:28:05	#32 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 12 (not relocatable, no disc pos, no patch infos, orig at #40708): write at #40708
+	
+21:28:05	#33 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 13 (not relocatable, no disc pos, no patch infos, orig at #41304): write at #41304
+	
+21:28:05	#34 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 14 (not relocatable, no disc pos, no patch infos, orig at #49634): write at #49634
+	
+21:28:05	#35 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 15 (not relocatable, no disc pos, no patch infos, orig at #50177): write at #50177
+	
+21:28:05	#36 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 16 (not relocatable, no disc pos, no patch infos, orig at #50714): write at #50714
+	
+21:28:05	#37 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 17 (not relocatable, no disc pos, no patch infos, orig at #56223): write at #56223
+	
+21:28:05	#38 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 18 (not relocatable, no disc pos, no patch infos, orig at #57352): write at #57352
+	
+21:28:05	#39 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 19 (not relocatable, no disc pos, no patch infos, orig at #63951): write at #63951
+	
+21:28:05	#40 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 20 (not relocatable, no disc pos, no patch infos, orig at #72635): write at #72635
+	
+21:28:05	#41 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 21 (not relocatable, no disc pos, no patch infos, orig at #79343): write at #79343
+	
+21:28:05	#42 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 22 (not relocatable, no disc pos, no patch infos, orig at #89503): write at #89503
+	
+21:28:05	#43 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 23 (not relocatable, no disc pos, no patch infos, orig at #99863): write at #99863
+	
+21:28:05	#44 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 24 (not relocatable, no disc pos, no patch infos, orig at #106406): write at #106406
+	
+21:28:05	#45 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 25 (not relocatable, no disc pos, no patch infos, orig at #107497): write at #107497
+	
+21:28:05	#46 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 26 (not relocatable, no disc pos, no patch infos, orig at #132628): write at #132628
+	
+21:28:05	#47 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 27 (not relocatable, no disc pos, no patch infos, orig at #140328): write at #140328
+	
+21:28:05	#48 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 28 (not relocatable, no disc pos, no patch infos, orig at #150419): write at #150419
+	
+21:28:05	#49 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 29 (not relocatable, no disc pos, no patch infos, orig at #151215): write at #151215
+	
+21:28:05	#50 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 30 (not relocatable, no disc pos, no patch infos, orig at #153465): write at #153465
+	
+21:28:05	#51 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 31 (not relocatable, no disc pos, no patch infos, orig at #154300): write at #154300
+	
+21:28:05	#52 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 32 (not relocatable, no disc pos, no patch infos, orig at #160922): write at #160922
+	
+21:28:05	#53 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 33 (not relocatable, no disc pos, no patch infos, orig at #164669): write at #164669
+	
+21:28:05	#54 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 34 (not relocatable, no disc pos, no patch infos, orig at #173699): write at #173699
+	
+21:28:05	#55 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 35 (not relocatable, no disc pos, no patch infos, orig at #181417): write at #181417
+	
+21:28:05	#56 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 36 (not relocatable, no disc pos, no patch infos, orig at #190318): write at #190318
+	
+21:28:05	#57 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 37 (not relocatable, no disc pos, no patch infos, orig at #199666): write at #199666
+	
+21:28:05	#58 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 38 (not relocatable, no disc pos, no patch infos, orig at #207455): write at #207455
+	
+21:28:05	#59 Text 0 File ThreadedTransferInterface.cpp, Line 2850
+	Verifying disc position of item 39 (not relocatable, no disc pos, no patch infos, orig at #208488): write at #208488
+	
+21:28:05	#60 Text 0 File MMC.cpp, Line 17600
+	StartDAO : CD-Text - On
+	
+21:28:05	#61 Text 0 File MMC.cpp, Line 21601
+	Set BUFE: Buffer underrun protection -> ON 
+	
+21:28:05	#62 Text 0 File MMC.cpp, Line 17830
+	CueData, Len=344
+	01 00 00 41 00 00 00 00 
+	01 01 00 00 00 00 00 00 
+	01 01 01 00 00 00 02 00 
+	01 02 01 00 00 00 14 1d 
+	01 03 01 00 00 00 1b 22 
+	01 04 01 00 00 00 22 2a 
+	01 05 01 00 00 00 29 3f 
+	01 06 01 00 00 00 30 47 
+	01 07 01 00 00 02 10 16 
+	01 08 01 00 00 04 03 20 
+	01 09 01 00 00 04 11 2e 
+	01 0a 01 00 00 05 39 35 
+	01 0b 01 00 00 06 0b 41 
+	01 0c 01 00 00 07 20 3c 
+	01 0d 01 00 00 09 04 3a 
+	01 0e 01 00 00 09 0c 36 
+	01 0f 01 00 00 0b 03 3b 
+	01 10 01 00 00 0b 0b 02 
+	01 11 01 00 00 0b 12 0e 
+	01 12 01 00 00 0c 1f 30 
+	01 13 01 00 00 0c 2e 34 
+	01 14 01 00 00 0e 0e 33 
+	01 15 01 00 00 10 0a 23 
+	01 16 01 00 00 11 27 44 
+	01 17 01 00 00 13 37 1c 
+	01 18 01 00 00 16 0d 26 
+	01 19 01 00 00 17 28 38 
+	01 1a 01 00 00 17 37 16 
+	01 1b 01 00 00 1d 1e 1c 
+	01 1c 01 00 00 1f 0d 03 
+	01 1d 01 00 00 21 1b 2c 
+	01 1e 01 00 00 21 26 0f 
+	01 1f 01 00 00 22 08 0f 
+	01 20 01 00 00 22 13 19 
+	01 21 01 00 00 23 2f 2f 
+	01 22 01 00 00 24 25 2c 
+	01 23 01 00 00 26 25 4a 
+	01 24 01 00 00 28 14 43 
+	01 25 01 00 00 2a 13 2b 
+	01 26 01 00 00 2c 18 10 
+	01 27 01 00 00 2e 08 05 
+	01 28 01 00 00 2e 15 3f 
+	01 aa 01 01 00 30 39 29 
+	
+21:28:05	#63 Text 0 File ThreadedTransfer.cpp, Line 273
+	Pipe memory size 83836800
+	
+21:32:29	#64 Text 0 File WriterStatus.cpp, Line 244
+	<D: PIONEER DVD-RW DVRTD10RS> start writing Lead-Out at LBA 220166 (35C06h), length 0 blocks
+	
+21:32:39	#65 SPTI -1169 File SCSIPassThrough.cpp, Line 224
+	CdRom0: SCSIStatus(x02) WinError(0) NeroError(-1169)
+	CDB Data:   0x51 00 00 00 00 00 00 00 20 00 00 00 
+	Sense Key:  0x02 (KEY_NOT_READY)
+	Sense Code: 0x04
+	Sense Qual: 0x08
+	Sense Area: 0x70 00 02 00 00 00 00 0A 00 00 00 00 04 08 
+	Buffer x0b2e0380: Len x20
+	
+21:32:57	#66 Text 0 File DVDPlusDualLayer.cpp, Line 1460
+	SetDriveCaps: Set LAST LBA of layer 1 to 0
+	
+21:32:57	#67 PHASE 37 File dlgbrnst.cpp, Line 1827
+	Burn process completed successfully at 24x (3.600 KB/s)
+	
+21:32:57	#68 Text 0 File SCSIPTICommands.cpp, Line 301
+	SPTIDismountVolume - completed successfully for FSCTL_DISMOUNT_VOLUME
+	
+21:32:57	#69 Text 0 File Cdrdrv.cpp, Line 11882
+	DriveLocker: UnLockVolume completed
+	
+21:32:57	#70 Text 0 File SCSIPTICommands.cpp, Line 464
+	UnLockMCN - completed sucessfully for IOCTL_STORAGE_MCN_CONTROL
+	

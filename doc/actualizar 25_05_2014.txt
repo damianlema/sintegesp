@@ -1,0 +1,16 @@
+
+25/05/2014
+
+doc/CAMBIOS BD 2014.txt
+js/treeMenu/reportes/bienes.js
+lib/fpdf.php
+lib/mc_table8.php
+lib/reportes/bienes/filtros.php
+lib/reportes/bienes/head.php
+lib/reportes/bienes/reportes.php
+lib/reportes/tributos/reportes.php
+modulos/utilidades/configura.php
+doc/actualizar 25_05_2014.txt
+lib/reportes/bienes/encabezados todos los titutos.txt
+lib/reportes/bienes/procesos todos los titulos.txt
+modulos/bienes/configuracion.php

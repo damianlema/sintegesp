@@ -1,0 +1,74 @@
+ALTER TABLE `relacion_retenciones` ADD `numero_retencion_referencia` VARCHAR( 12 ) NOT NULL AFTER `generar_comprobante` ;
+ALTER TABLE `relacion_retenciones_externas` ADD `numero_retencion_referencia` VARCHAR( 12 ) NOT NULL AFTER `monto_contrato`;
+
+
+update relacion_retenciones set `numero_retencion_referencia` = '900000000000'+numero_retencion;
+update relacion_retenciones_externas set `numero_retencion_referencia` = '900000000000'+numero_retencion;
+
+ALTER TABLE `relacion_retenciones` CHANGE `porcentaje_aplicado` `porcentaje_aplicado` DECIMAL( 6, 3 ) NOT NULL DEFAULT '0.000' COMMENT 'porcentaje de retencion aplicado (si aplica)';  
+
+ALTER TABLE `configuracion` ADD `entidad_propietaria` VARCHAR( 250 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `idconfiguracion` ;
+
+ALTER TABLE `configuracion_bienes` ADD `iddependencia` INT( 10 ) NOT NULL AFTER `idconfiguracion_bienes` ;
+
+ALTER TABLE `configuracion_bienes` ADD `cabecera_linea1` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `nro_movimiento` ;
+ALTER TABLE `configuracion_bienes` ADD `cabecera_linea2` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `cabecera_linea1` ;
+ALTER TABLE `configuracion_bienes` ADD `cabecera_linea3` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `cabecera_linea2` ;
+ALTER TABLE `configuracion_bienes` ADD `cabecera_linea4` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `cabecera_linea3` ;
+
+UPDATE `accion` SET `url` = 'modulos/bienes/configuracion.php' WHERE `accion`.`id_accion` =377 LIMIT 1 ;
+
+ALTER TABLE `configuracion_bienes` ADD `primero_bienes` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `iddependencia` ,
+ADD `ci_primero_bienes` VARCHAR( 12 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `primero_bienes` ,
+ADD `cargo_primero_bienes` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `ci_primero_bienes` ;
+
+ALTER TABLE `configuracion_bienes` ADD `segundo_bienes` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `cargo_primero_bienes` ,
+ADD `ci_segundo_bienes` VARCHAR( 12 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `segundo_bienes` ,
+ADD `cargo_segundo_bienes` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `ci_segundo_bienes` ;
+
+
+ALTER TABLE `solicitud_cotizacion` ADD `modo_comunicacion` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `total` ,
+ADD `tipo_actividad` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `modo_comunicacion`;
+
+UPDATE `accion` SET `mostrar` = '1' WHERE `accion`.`id_accion` =544 LIMIT 1 ;
+UPDATE `accion` SET `posicion` = '1' WHERE `accion`.`id_accion` =33 LIMIT 1 ;
+
+UPDATE `accion` SET `posicion` = '2' WHERE `accion`.`id_accion` =34 LIMIT 1 ;
+
+UPDATE `accion` SET `posicion` = '3' WHERE `accion`.`id_accion` =260 LIMIT 1 ;
+
+UPDATE `accion` SET `posicion` = '4' WHERE `accion`.`id_accion` =510 LIMIT 1 ;
+
+UPDATE `accion` SET `posicion` = '5' WHERE `accion`.`id_accion` =543 LIMIT 1 ;
+
+
+
+
+ALTER TABLE `tipo_movimiento_bienes` ADD `formato` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `uso` ;
+
+
+
+ALTER TABLE `pagos_financieros` ADD `fecha_anulacion` DATE NOT NULL AFTER `estado` ;
+ALTER TABLE `pagos_financieros` ADD `idtrabajador` INT( 10 ) NOT NULL AFTER `contabilizado` ;
+
+
+ALTER TABLE `cuentas_bancarias` CHANGE `uso_cuenta` `uso_cuenta` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+ALTER TABLE `unidad_ejecutora` CHANGE `codigo` `codigo` VARCHAR( 4 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+UPDATE `tipo_movimiento_bancario` SET `tabla_haber` = '0' WHERE tabla_haber = '';
+
+UPDATE `tipo_movimiento_bancario` SET `tabla_debe` = '0' WHERE tabla_debe = '';
+
+
+ALTER TABLE `pagos_financieros` ADD `idasiento_contable` INT( 20 ) NOT NULL AFTER `idtrabajador` ;
+
+
+UPDATE `cuenta_cuentas_contables` SET `idrubro` = '1' WHERE `idrubro` =9;
+
+UPDATE `tipos_documentos` SET `tabla_debe` = '0' WHERE tabla_debe = '';
+
+UPDATE `tipos_documentos` SET `tabla_haber` = '0' WHERE tabla_haber = '';
+
+
+ALTER TABLE `tipos_documentos` ADD `excluir_contabilidad` VARCHAR( 10 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `reversa_compromiso` ;

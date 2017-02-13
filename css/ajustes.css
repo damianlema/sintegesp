@@ -1,0 +1,26 @@
+div input[type="text"]{
+  height: 26px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: -5px;
+  margin-right: -5px;
+  font-size:11px;
+}
+
+div textarea{
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: -5px;
+  font-size:10px;
+}
+
+div select{
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: -5px;
+}
+
+div label{
+  font-size:11px;
+  text-align: right;
+}

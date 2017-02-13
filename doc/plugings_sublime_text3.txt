@@ -1,0 +1,61 @@
+codefPlugings a instalar:
+
+Sidebar Enhancements (mas opciones para gestionar los archivos)
+
+BracketHighlighter (marca el inicio y final de etiquetas)
+
+Alignment (ctrl+alt+a) y alinea las variables
+
+DOCKBLOCKR   Comentarios avanzados/inteligentes. Si escribes /** y enter
+
+Trailing Spaces (detecta espacios en blanco)
+
+Emmet (agiliza escritura de codigo html)
+
+COLOR PICKER (ctril+shift+c) y sale paleta de colores
+
+Color Highlighter (muestra el color señalado en el codigo ccs)
+
+CodeFormatter
+	Entrar en configuracion por defecto y colocar la ruta del "php_path": "C:/xampp/php/php.exe", 
+	colocar true "format_on_save": true
+
+PHPCompanion (se utiliza para buscar las rutas de las clases o funciones)
+
+
+SublimeLinter
+
+SublimeLinter-php  (detecta errores de php)
+	se debe modificar en seting default
+
+	 "paths": {
+            "linux": [],
+            "osx": [],
+            "windows": ["c:/xampp/php"]
+
+
+
+
+
+ Crear snippet
+Tools-Developer-New Snippet
+
+<snippet>
+	<content><![CDATA[
+/*******************************************************************************************************************
+* @$1
+* @version: 1.0
+* @Fecha creacion:
+* @Autor:
+********************************************************************************************************************
+* @Fecha Modificacion:
+* @Autor:
+* @Descripcion:
+********************************************************************************************************************/
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>com</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
+

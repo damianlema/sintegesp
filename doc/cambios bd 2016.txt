@@ -1,0 +1,74 @@
+﻿//ACTUALIZAR TABLA DE MODULOS SEGUN CORRESPONDA A CADA INSTITUCION
+
+INSERT INTO `modulo` VALUES 
+(1, 'Recursos Humanos', '03', 'si'),
+(2, 'Presupuesto', '01', 'si'),
+(3, 'Compras y Servicios', '02', 'si'),
+(4, 'Administración ', '07', 'si'),
+(5, 'Contabilidad', '08', 'si'),
+(6, 'Tributos Internos', '06', 'si'),
+(7, 'Tesoreria', '09', 'si'),
+(8, 'Bienes', '10', 'si'),
+(10, 'Utilidades', '11', 'si'),
+(11, 'Formularios', '13', 'si'),
+(12, 'Despacho', '05', 'si'),
+(13, 'Nómina', '04', 'si'),
+(14, 'Secretaria de Gob.', '05', 'si'),
+(16, 'Caja Chica', '14', 'no'),
+(17, 'Recaudacion', '15', 'no'),
+(18, 'Chat', '18', 'no'),
+(19, 'Proyectos y Obras', '19', 'si'),
+(20, 'Almacen', '19', 'si');
+
+
+UPDATE `accion` SET `nombre_accion` = 'Ingresos / Egresos' WHERE `accion`.`id_accion` =478 LIMIT 1 ;
+UPDATE `accion` SET `nombre_accion` = 'Guardar Ingresos/Egresos' WHERE `accion`.`id_accion` =479 LIMIT 1 ;
+UPDATE `accion` SET `nombre_accion` = 'Modificar Ingresos/Egresos' WHERE `accion`.`id_accion` =480 LIMIT 1 ;
+UPDATE `accion` SET `nombre_accion` = 'Eliminar Ingresos/Egresos' WHERE `accion`.`id_accion` =481 LIMIT 1 ;
+UPDATE `accion` SET `mostrar` = '0' WHERE `accion`.`id_accion` =482 LIMIT 1 ;
+
+UPDATE `accion` SET `nombre_accion` = 'Procesar Emisión de Pagos',
+`url` = 'modulos/tesoreria/emision_pagos.php',
+`accion_padre` = '368' WHERE `accion`.`id_accion` =483 LIMIT 1 ;
+
+UPDATE `accion` SET `nombre_accion` = 'Modificar Emisión de Pagos',
+`url` = 'modulos/tesoreria/emision_pagos.php',
+`accion_padre` = '368' WHERE `accion`.`id_accion` =484 LIMIT 1 ;
+
+UPDATE `accion` SET `nombre_accion` = 'Anular Emisión de Pagos',
+`url` = 'modulos/tesoreria/emision_pagos.php',
+`accion_padre` = '368' WHERE `accion`.`id_accion` =485 LIMIT 1 ;
+
+UPDATE `accion` SET `nombre_accion` = 'Anular Ingresos/Egresos' WHERE `accion`.`id_accion` =481 LIMIT 1 ;
+
+
+ALTER TABLE `cuentas_bancarias` ADD `monto_libro` DECIMAL( 16, 2 ) NOT NULL AFTER `monto_apertura` ;
+ALTER TABLE `cuentas_bancarias` CHANGE `monto_libro` `monto_libro` DECIMAL( 16, 2 ) NOT NULL DEFAULT '0.00' ;
+
+ALTER TABLE `ingresos_egresos_financieros` ADD `anio_documento` VARCHAR( 4 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `fecha_anulacion` ;
+
+UPDATE `ingresos_egresos_financieros` SET `anio_documento` = '2015'
+
+
+
+
+
+
+29/06/2016
+
+ALTER TABLE `rubro_cuentas_contables` ADD `tipo_cuenta` VARCHAR(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `denominacion`;
+
+
+ALTER TABLE `relacion_retenciones` 
+	ADD `fecha_enteramiento` DATE NOT NULL AFTER `numero_retencion_referencia`, 
+	ADD `fecha_deposito` DATE NOT NULL AFTER `fecha_enteramiento`, 
+	ADD `numero_deposito` VARCHAR(30) NOT NULL AFTER `fecha_deposito`, 
+	ADD `fecha_transferencia` DATE NOT NULL AFTER `numero_deposito`;
+
+ALTER TABLE `relacion_retenciones_externas` 
+	ADD `fecha_enteramiento` DATE NOT NULL AFTER `numero_retencion_referencia`, 
+	ADD `fecha_deposito` DATE NOT NULL AFTER `fecha_enteramiento`, 
+	ADD `numero_deposito` VARCHAR(30) NOT NULL AFTER `fecha_deposito`, 
+	ADD `fecha_transferencia` DATE NOT NULL AFTER `numero_deposito`;
+
+INSERT INTO `accion` (`id_accion`, `nombre_accion`, `id_modulo`, `url`, `mostrar`, `accion_padre`, `posicion`) VALUES (NULL, 'Pago Retención', '0', 'modulos/tributos/pago_retencion.php', '1', '1090', '3');

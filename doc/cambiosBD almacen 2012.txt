@@ -1,0 +1,500 @@
+
+******************************************************************************************************************************************************
+		ALMACEN
+******************************************************************************************************************************************************
+
+INSERT INTO `modulo` (`id_modulo` ,`nombre_modulo` ,`orden` ,`mostrar`)
+VALUES (20 , 'Almacen', '19', 'si');
+
+
+
+INSERT INTO `accion` (`id_accion` ,`nombre_accion` ,`id_modulo` ,`url` ,`mostrar` ,`accion_padre` ,`posicion`)
+VALUES 
+(1122 , 'Administración de Tablas', '20', '', '1', '0', '1'),
+(1123 , 'Tipos de Movimientos', '0', 'modulos/almacen/tipo_movimiento_almacen.php', '1', '1122', '1'),
+(1124 , 'Ingresar Tipo de Movimiento Almacen', '0', 'modulos/almacen/tipo_movimiento_almacen.php', '0', '1123', '0'), 
+(1125 , 'Modificar Tipo de Movimiento Almacen', '0', 'modulos/almacen/tipo_movimiento_almacen.php', '0', '1123', '0'),
+(1126 , 'Eliminar Tipo de Movimiento Almacen', '0', 'modulos/almacen/tipo_movimiento_almacen.php', '0', '1123', '0'),
+(1127 , 'Clasificación de Materias', '0', '', '1', '1152', '2'),
+(1128 , 'Grupo', '0', 'modulos/almacen/grupo_materias_almacen.php', '1', '1127', '1'),
+(1129 , 'Ingresar Grupo de Materias', '0', 'modulos/almacen/grupo_materias_almacen.php', '0', '1128', '0'), 
+(1130 , 'Modificar Grupo de Materias', '0', 'modulos/almacen/grupo_materias_almacen.php', '0', '1128', '0'),
+(1131 , 'Eliminar Grupo de Materias', '0', 'modulos/almacen/grupo_materias_almacen.php', '0', '1128', '0'),
+(1132 , 'Sub-Grupo', '0', 'modulos/almacen/sub_grupo_materias_almacen.php', '1', '1127', '2'),
+(1133 , 'Ingresar Sub-Grupo de Materias', '0', 'modulos/almacen/sub_grupo_materias_almacen.php', '0', '1132', '0'), 
+(1134 , 'Modificar Sub-Grupo de Materias', '0', 'modulos/almacen/sub_grupo_materias_almacen.php', '0', '1132', '0'),
+(1135 , 'Eliminar Sub-Grupo de Materias', '0', 'modulos/almacen/sub_grupo_materias_almacen.php', '0', '1132', '0'),
+(1136 , 'Detalle', '0', 'modulos/almacen/detalle_materias_almacen.php', '1', '1127', '4'),
+(1137 , 'Ingresar Detalle de Materias', '0', 'modulos/almacen/detalle_materias_almacen.php', '0', '1136', '0'), 
+(1138 , 'Modificar Detalle de Materias', '0', 'modulos/almacen/detalle_materias_almacen.php', '0', '1136', '0'),
+(1139 , 'Eliminar Detalle de Materias', '0', 'modulos/almacen/detalle_materias_almacen.php', '0', '1136', '0'),
+(1140 , 'Tipo de Detalle', '0', 'modulos/almacen/tipo_detalle_materias_almacen.php', '1', '1127', '5'),
+(1141 , 'Ingresar Tipo de Detalle de Materias', '0', 'modulos/almacen/tipo_detalle_materias_almacen.php', '0', '1140', '0'), 
+(1142 , 'Modificar Tipo de Detalle de Materias', '0', 'modulos/almacen/tipo_detalle_materias_almacen.php', '0', '1140', '0'),
+(1143 , 'Eliminar Tipo de Detalle de Materias', '0', 'modulos/almacen/tipo_detalle_materias_almacen.php', '0', '1140', '0'),
+(1144 , 'Unidad de Medida', '0', 'lib/materiales/unidad_medida.php', '1', '1152', '3'),
+(1145 , 'Ingresar Unidad de Medida', '0', 'lib/materiales/unidad_medida.php', '0', '1144', '0'), 
+(1146 , 'Modificar Unidad de Medida', '0', 'lib/materiales/unidad_medida.php', '0', '1144', '0'),
+(1147 , 'Eliminar Unidad de Medida', '0', 'lib/materiales/unidad_medida.php', '0', '1144', '0'),
+(1148 , 'Almacen', '0', 'modulos/almacen/almacen.php', '1', '1161', '1'),
+(1149 , 'Ingresar Almacen', '0', 'modulos/almacen/almacen.php', '0', '1148', '0'), 
+(1150 , 'Modificar Unidad de Medida', '0', 'modulos/almacen/almacen.php', '0', '1148', '0'),
+(1151 , 'Eliminar Unidad de Medida', '0', 'modulos/almacen/almacen.php', '0', '1148', '0'),
+(1152 , 'Materias', '0', '', '1', '1122', '2'),
+(1153 , 'Condiciones de Almacenaje', '0', 'modulos/almacen/condicion_almacenaje_materia.php', '1', '1152', '5'),
+(1154 , 'Ingresar Condiciones de Almacenaje', '0', 'modulos/almacen/condicion_almacenaje_materia.php', '0', '1153', '0'), 
+(1155 , 'Modificar Condiciones de Almacenaje', '0', 'modulos/almacen/condicion_almacenaje_materia.php', '0', '1153', '0'),
+(1156 , 'Eliminar Condiciones de Almacenaje', '0', 'modulos/almacen/condicion_almacenaje_materia.php', '0', '1153', '0'),
+(1157 , 'Condiciones de Conservación', '0', 'modulos/almacen/condicion_conservacion_materia.php', '1', '1152', '6'),
+(1158 , 'Ingresar Condiciones de Conservación', '0', 'modulos/almacen/condicion_conservacion_materia.php', '0', '1157', '0'), 
+(1159 , 'Modificar Condiciones de Conservación', '0', 'modulos/almacen/condicion_conservacion_materia.php', '0', '1157', '0'),
+(1160 , 'Eliminar Condiciones de Conservación', '0', 'modulos/almacen/condicion_conservacion_materia.php', '0', '1157', '0'),
+(1161 , 'Organización', '0', '', '1', '1122', '3'),
+(1162 , 'Volumen', '0', 'modulos/almacen/volumen_materia.php', '1', '1152', '3'),
+(1163 , 'Ingresar Volumen', '0', 'modulos/almacen/volumen_materia.php', '0', '1162', '0'), 
+(1164 , 'Modificar Volumen', '0', 'modulos/almacen/volumen_materia.php', '0', '1162', '0'),
+(1165 , 'Eliminar Volumen', '0', 'modulos/almacen/volumen_materia.php', '0', '1162', '0'),
+(1166 , 'Forma', '0', 'modulos/almacen/forma_materia.php', '1', '1152', '4'),
+(1167 , 'Ingresar Forma', '0', 'modulos/almacen/forma_materia.php', '0', '1166', '0'), 
+(1168 , 'Modificar Forma', '0', 'modulos/almacen/forma_materia.php', '0', '1166', '0'),
+(1169 , 'Eliminar Forma', '0', 'modulos/almacen/forma_materia.php', '0', '1166', '0'),
+(1170 , 'Distribución', '0', 'modulos/almacen/distribucion_almacen.php', '1', '1161', '2'),
+(1171 , 'Ingresar Distribución', '0', 'modulos/almacen/distribucion_almacen.php', '0', '1170', '0'), 
+(1172 , 'Modificar Distribución', '0', 'modulos/almacen/distribucion_almacen.php', '0', '1170', '0'),
+(1173 , 'Eliminar Distribución', '0', 'modulos/almacen/distribucion_almacen.php', '0', '1170', '0'),
+(1174 , 'Marca', '0', 'modulos/almacen/marca_materia.php', '1', '1152', '4'),
+(1175 , 'Ingresar Marca', '0', 'modulos/almacen/marca_materia.php', '0', '1174', '0'), 
+(1176 , 'Modificar Marca', '0', 'modulos/almacen/marca_materia.php', '0', '1174', '0'),
+(1177 , 'Eliminar Marca', '0', 'modulos/almacen/marca_materia.php', '0', '1174', '0'),
+(1178 , 'Sección', '0', 'modulos/almacen/seccion_materias_almacen.php', '1', '1127', '3'),
+(1179 , 'Ingresar Seccion de Materias', '0', 'modulos/almacen/seccion_materias_almacen.php', '0', '1178', '0'), 
+(1180 , 'Modificar Seccion de Materias', '0', 'modulos/almacen/seccion_materias_almacen.php', '0', '1178', '0'),
+(1181 , 'Eliminar Seccion de Materias', '0', 'modulos/almacen/seccion_materias_almacen.php', '0', '1178', '0'),
+(1182 , 'Inventario', '20', '', '1', '0', '2'),
+(1185 , 'Reportes', '20', '', '1', '0', '5'),
+(1186 , 'Utilidades', '20', '', '1', '0', '6'),
+(1187 , 'Configuración', '20', 'modulos/almacen/configuracion.php', '1', '0', '7'),
+(1188 , 'Inicial', '0', 'modulos/almacen/inventario_materia.php', '1', '1182', '1'),
+(1189 , 'Consultar Material', '0', 'modulos/almacen/consultar_material.php', '1', '1182', '2'),
+(1190 , 'Movimientos Materiales', '0', 'modulos/almacen/movimiento_materiales.php', '1', '1182', '3'),
+(1191 , 'Ubicación', '0', '', '0', '1188', '3'),
+(1192 , 'Existencia', '0', '', '0', '1188', '3'),
+(1193 , 'Desagregar Unidades', '0', '', '0', '1188', '3'),
+(1194 , 'Reemplazo', '0', '', '0', '1188', '3'),
+(1195 , 'Equivalencias', '0', '', '0', '1188', '3'),
+(1196 , 'Imagen', '0', '', '0', '1188', '3'),
+(1197 , 'Accesorios', '0', '', '0', '1188', '3'),
+(1198 , 'Compra/Proveedor', '0', '', '0', '1188', '3'),
+(1199 , 'Articulo de Compra', '0', '', '0', '1188', '3');
+
+ALTER TABLE `unidad_medida` ADD `tipo_unidad` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Cuenta/Longitud/Superficie/Volumen/Capacidad/Peso' AFTER `abreviado` ;
+
+CREATE TABLE `relacion_contadores` (
+`contador_inventario_materia` INT( 10 ) NOT NULL DEFAULT '1'
+) ENGINE = innodb CHARACTER SET utf8 COLLATE utf8_general_ci;
+INSERT INTO `relacion_contadores` (
+`contador_inventario_materia`
+)
+VALUES (
+'1'
+);
+
+CREATE TABLE `configuracion_almacen` (
+  `idconfiguracion_almacen` int(10) unsigned NOT NULL auto_increment,
+  `iddependencia` int(10) NOT NULL,
+  `primero_almacen` varchar(100) NOT NULL default '',
+  `ci_primero_almacen` varchar(12) NOT NULL default '',
+  `cargo_primero_almacen` varchar(100) NOT NULL default '',
+  `segundo_almacen` varchar(100) NOT NULL default '',
+  `ci_segundo_almacen` varchar(12) NOT NULL default '',
+  `cargo_segundo_almacen` varchar(100) NOT NULL default '',
+  `tercero_almacen` varchar(100) NOT NULL default '',
+  `ci_tercero_almacen` varchar(12) NOT NULL default '',
+  `cargo_tercero_almacen` varchar(100) NOT NULL default '',
+  `nro_remision` int(10) NOT NULL,
+  `status` varchar(1) NOT NULL default '',
+  `usuario` varchar(20) NOT NULL default '',
+  `fechayhora` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`idconfiguracion_almacen`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+
+CREATE TABLE `tipo_movimiento_almacen` (
+`id_tipo_movimiento_almacen` INT( 10 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`codigo` VARCHAR( 2 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`descripcion` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`afecta` VARCHAR( 1 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Entrada/Salida/Transferencia',
+`activo` VARCHAR( 1 ) NOT NULL COMMENT 'Indica si el movimiento afecta a un activo a fin de generar el comprobante de movimiento de Bienes' ,
+`origen_materia` VARCHAR( 1 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Indica si el tipo de movimiento se aplica sobre un producto o bien nuevo o existente',
+`describir_motivo` VARCHAR( 1 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`memoria_fotografica` VARCHAR( 1 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`comprobante` VARCHAR( 150 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Indicar que Comprobante o Formato se imprime cuando se utiliza este tipo de movimiento' ,
+`numero_comprobante` INT( 10 ) NOT NULL COMMENT 'Contador para lleva el numero de comprobante segun el tipo de movimiento',
+`documento_origen` INT( 10 ) NOT NULL COMMENT 'Documento desde el cual pueden ingresar o salir los materiales',
+`usuario` VARCHAR( 40 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`status` VARCHAR( 1 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`fechayhora` DATETIME NOT NULL
+) ENGINE = innodb CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+
+CREATE TABLE `grupo_materias_almacen` (
+  `idgrupo_materias_almacen` int(10) unsigned NOT NULL auto_increment,
+  `codigo` varchar(1) NOT NULL default '',
+  `denominacion` varchar(80) NOT NULL default '',
+  `status` varchar(1) NOT NULL default '',
+  `usuario` varchar(20) NOT NULL default '',
+  `fechayhora` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`idgrupo_materias_almacen`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE `subgrupo_materias_almacen` (
+  `idsubgrupo_materias_almacen` int(10) unsigned NOT NULL auto_increment,
+  `idgrupo_materias_almacen` int(10) NOT NULL,
+  `codigo` varchar(4) NOT NULL default '',
+  `denominacion` varchar(200) NOT NULL,
+  `status` varchar(1) NOT NULL default '',
+  `usuario` varchar(20) NOT NULL default '',
+  `fechayhora` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`idsubgrupo_materias_almacen`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE `seccion_materias_almacen` (
+  `idseccion_materias_almacen` int(10) unsigned NOT NULL auto_increment,
+  `idsubgrupo_materias_almacen` int(10) NOT NULL,
+  `codigo` varchar(10) NOT NULL default '',
+  `denominacion` varchar(80) NOT NULL default '',
+  `status` varchar(1) NOT NULL default '',
+  `usuario` varchar(20) NOT NULL default '',
+  `fechayhora` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`idseccion_materias_almacen`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE `detalle_materias_almacen` (
+  `iddetalle_materias_almacen` int(10) unsigned NOT NULL auto_increment,
+  `idseccion_materias_almacen` int(10) NOT NULL,
+  `codigo` varchar(20) NOT NULL default '',
+  `denominacion` varchar(80) NOT NULL default '',
+  `status` varchar(1) NOT NULL default '',
+  `usuario` varchar(20) NOT NULL default '',
+  `fechayhora` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`iddetalle_materias_almacen`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE `tipo_detalle_almacen` (
+  `idtipo_detalle_almacen` int(10) unsigned NOT NULL auto_increment,
+  `iddetalle_materias_almacen` int(10) unsigned NOT NULL default '0',
+  `tipo` varchar(100) NOT NULL default '',
+  `usuario` varchar(45) NOT NULL default '',
+  `fechayhora` datetime NOT NULL default '0000-00-00 00:00:00',
+  `status` varchar(45) NOT NULL default '',
+  PRIMARY KEY  (`idtipo_detalle_almacen`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+
+
+
+CREATE TABLE `desagrega_unidad_medida` (
+  `iddesagrega_unidad_medida` int(10) unsigned NOT NULL auto_increment,
+  `idunidad_medida` int(10) unsigned NOT NULL COMMENT 'Id de la Unidad de Medida a desglosar o desagregar',
+  `idunidad_medida_desagregada` INT( 10 ) NOT NULL COMMENT 'Id de la Unidad de Medida en que se puede desagregar a la minima expresion',
+  `usuario` varchar(45) NOT NULL default '',
+  `fechayhora` datetime NOT NULL default '0000-00-00 00:00:00',
+  `status` varchar(45) NOT NULL default '',
+  PRIMARY KEY  (`iddesagrega_unidad_medida`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+
+CREATE TABLE `condicion_almacenaje_materia` (
+  `idcondicion_almacenaje_materia` int(10) unsigned NOT NULL auto_increment,
+  `denominacion` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '',
+  `seleccionada` varchar(1) NOT NULL default '' COMMENT 'Checkbox si esta activo sale preseleccionada en el select',
+  `status` varchar(1) NOT NULL default '',
+  `usuario` varchar(20) NOT NULL default '',
+  `fechayhora` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`idcondicion_almacenaje_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `condicion_conservacion_materia` (
+  `idcondicion_conservacion_materia` int(10) unsigned NOT NULL auto_increment,
+  `denominacion` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '',
+  `seleccionada` varchar(1) NOT NULL default '' COMMENT 'Checkbox si esta activo sale preseleccionada en el select',
+  `status` varchar(1) NOT NULL default '',
+  `usuario` varchar(20) NOT NULL default '',
+  `fechayhora` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`idcondicion_conservacion_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `volumen_materia` (
+  `idvolumen_materia` int(10) unsigned NOT NULL auto_increment,
+  `denominacion` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '',
+  `seleccionada` varchar(1) NOT NULL default '' COMMENT 'Checkbox si esta activo sale preseleccionada en el select',
+  `status` varchar(1) NOT NULL default '',
+  `usuario` varchar(20) NOT NULL default '',
+  `fechayhora` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`idvolumen_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `forma_materia` (
+  `idforma_materia` int(10) unsigned NOT NULL auto_increment,
+  `denominacion` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '',
+  `seleccionada` varchar(1) NOT NULL default '' COMMENT 'Checkbox si esta activo sale preseleccionada en el select',
+  `status` varchar(1) NOT NULL default '',
+  `usuario` varchar(20) NOT NULL default '',
+  `fechayhora` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`idforma_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+
+CREATE TABLE `marca_materia` (
+  `idmarca_materia` int(10) unsigned NOT NULL auto_increment,
+  `denominacion` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '',
+  `seleccionada` varchar(1) NOT NULL default '' COMMENT 'Checkbox si esta activo sale preseleccionada en el select',
+  `status` varchar(1) NOT NULL default '',
+  `usuario` varchar(20) NOT NULL default '',
+  `fechayhora` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`idmarca_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+
+CREATE TABLE `almacen` (
+`idalmacen` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`codigo` VARCHAR( 45 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`denominacion` VARCHAR( 45 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Principal/secundario/Deposito/Descarte',
+`ubicacion` VARCHAR( 250 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Ubicacion fisica del Almacen',
+`defecto` VARCHAR( 1 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Checkbox: si esta marcado es el almacen que aparece por defecto a la hora de recibir o despachar mercancia. Solo puede haber uno por defecto',
+`responsable` varchar(80) NOT NULL,
+`ci_responsable` varchar(12) NOT NULL,
+`telefono` varchar(45) NOT NULL default '',
+`email` varchar(45) NOT NULL default '',
+`usuario` VARCHAR( 45 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`fechayhora` DATETIME NOT NULL ,
+`status` VARCHAR( 1 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE = innodb CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+
+
+CREATE TABLE `distribucion_almacen` (
+  `iddistribucion_almacen` int(10) unsigned NOT NULL auto_increment,
+  `idalmacen` int(10) unsigned NOT NULL default '0',
+  `sub_nivel` int(10) unsigned NOT NULL default '0',
+  `codigo` varchar(45) NOT NULL default '',
+  `denominacion` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Denominacion',
+  `largo` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Largo del area de distribución',
+  `ancho` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Ancho del area de distribucion',
+  `alto` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Alto del area de distribucion',
+  `capacidad` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Capacidad de soporte de peso del area de distribucion',
+  `responsable` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `ci_responsable` varchar(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `telefono` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '',
+  `email` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '',
+  `status` varchar(45) NOT NULL default '',
+  `usuario` varchar(45) NOT NULL default '',
+  `fechayhora` datetime NOT NULL default '0000-00-00 00:00:00',
+  `inventario_cerrado` varchar(45) NOT NULL default '',
+  PRIMARY KEY  (`iddistribucion_almacen` )
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+
+
+CREATE TABLE `inventario_materia` (
+  `idinventario_materia` int(10) unsigned NOT NULL auto_increment,
+  `id_tipo_movimiento_almacen` int(10) unsigned NOT NULL default '0',
+  `codigo` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Codigo de Barras o codigo ingresado (colocar un boton para autogenerar el codigo segun un campo llamado contador con ceros antes del numero hasta 12 digitos, ej 000000001245)',
+  `descripcion` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '',
+  `idunidad_medida` int(10) unsigned NOT NULL default '0',
+  `cantidad_unidad` varchar(10) NOT NULL default '0',
+  `iddetalle_materias_almacen` int(10) unsigned NOT NULL default '0' COMMENT 'tabla detalle_materias_almacen segun catalogo publicaicon 15 (colocar un buscar y seleccionar de una lista)',
+  `idtipo_detalle_almacen` int(10) unsigned NOT NULL default '0' COMMENT 'tabla tipo_detalle_almacen mostrar un select con los tipos de detalles (si los tiene) el detalle seleccionado en el campo anterior',
+  `idmarca_materia` int(10) unsigned NOT NULL default '0' COMMENT 'select de la tabla marca_materia',
+  `modelo` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '' COMMENT 'Modelo del producto si aplica',
+  `serializado` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '' COMMENT 'Checkbox para indicar que la materia se controla por seriales',
+  `garantia` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '' COMMENT 'Describir el tipo de garantia del producto',
+  `caduca` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '' COMMENT 'Checkbox que indica si el producto tiene fecha de vencimiento',
+  `utilidad` varchar(12) default NULL COMMENT 'Option con dos opciones: Activo Fijo / Bien de consumo',
+  `idcondicion_almacenaje` int(10) unsigned NOT NULL default '0' COMMENT 'select de la tabla condicion_almacenaje',
+  `idcondicion_conservacion` int(10) unsigned NOT NULL default '0' COMMENT 'select de la tabla condicion_conservacion',
+  `idforma_materia` int(10) unsigned NOT NULL default '0' COMMENT 'select de la tabla forma_materia',
+  `idvolumen_materia` int(10) unsigned NOT NULL default '0' COMMENT 'select de la tabla volumen_materia',
+  `idalmacen` int(10) unsigned NOT NULL default '0' COMMENT 'select de la tabla almacen',
+  `iddistribucion_almacen` int(10) unsigned NOT NULL default '0' COMMENT 'select de la tabla distribucion_almacen. Esta es la ubicacion dentro del almacen del producto',
+  `color` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL default '' COMMENT 'Describir el color si aplica',
+  `peso` varchar(10) NOT NULL default '0',
+  `idunidad_medida_peso` int(10) unsigned NOT NULL default '0' COMMENT 'Select de la tabla unidad con el filtro de mostrar tipo_unidad=peso',
+  `capacidad` varchar(10) NOT NULL default '0',
+  `idunidad_medida_capacidad` int(10) unsigned NOT NULL default '0' COMMENT 'Select de la tabla unidad con el filtro de mostrar tipo_unidad=capacidad',
+  `alto` varchar(10) NOT NULL default '0',
+  `idunidad_medida_alto` int(10) unsigned NOT NULL default '0' COMMENT 'Select de la tabla unidad con el filtro de mostrar tipo_unidad=longitud',
+  `ancho` varchar(10) NOT NULL default '0',
+  `idunidad_medida_ancho` int(10) unsigned NOT NULL default '0' COMMENT 'Select de la tabla unidad con el filtro de mostrar tipo_unidad=longitud',
+  `largo` varchar(10) NOT NULL default '0',
+  `idunidad_medida_largo` int(10) unsigned NOT NULL default '0' COMMENT 'Select de la tabla unidad con el filtro de mostrar tipo_unidad=longitud',
+  `inventario_inicial` decimal(14,2) unsigned NOT NULL COMMENT 'Para ingresar el inventario inicial de este producto',
+  `total_entradas` decimal(14,2) unsigned NOT NULL COMMENT 'Acumulador para sumar las entradas del producto (compras o donaciones)',
+  `total_despachadas` decimal(14,2) unsigned NOT NULL COMMENT 'Acumulador para sumar los despachos del producto (rquisiciones)',
+  `existencia_actual` decimal(14,2) unsigned NOT NULL COMMENT 'Se va actualizando con el inventario inicial + compras - despachos',
+  `stock_minimo` decimal(14,2) unsigned NOT NULL COMMENT 'Valor para alertar cuando el inventario llegue a ese monto',
+  `stock_maximo` decimal(14,2) unsigned NOT NULL COMMENT 'Valor para alertar cuando el inventario llegue a ese monto',
+  `documento_ultima_compra` varchar(12) default NULL COMMENT 'Guardar el numero de la Orden de Compra (actualizable cada vez que se recibe una compra de ese producto)',
+  `fecha_ultima_compra` date default NULL,
+  `ultimo_costo` decimal(14,2) default NULL,
+  `costo_promedio` decimal(14,2) default NULL,
+  `estado` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'inicial / cerrado para cuando se registre la existencia inicial del material',
+  `status` varchar(1) default NULL,
+  `usuario` varchar(20) default NULL,
+  `fechayhora` datetime default NULL,
+  PRIMARY KEY  (`idinventario_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `relacion_compra_materia` (
+  `idrelacion_compra_materia` int(10) unsigned NOT NULL auto_increment,
+  `idorden_compra_servicio` int(10) unsigned NOT NULL default '0',
+  `idinventario_materia` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`idrelacion_compra_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `relacion_desagrega_unidad_materia` (
+  `idrelacion_desagrega_unidad_materia` int(10) unsigned NOT NULL auto_increment,
+  `idinventario_materia` int(10) unsigned NOT NULL default '0',
+  `iddesagrega_unidad_medida` int(10) unsigned NOT NULL default '0',
+  `cantidad_desagrega` int(10) unsigned NOT NULL COMMENT 'Valor para indicar el desagregado de una unidad de medida',
+  PRIMARY KEY  (`idrelacion_desagrega_unidad_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE `relacion_reemplazo_materia` (
+  `idrelacion_reemplazo_materia` int(10) unsigned NOT NULL auto_increment,
+  `idinventario_materia` int(10) unsigned NOT NULL default '0',
+  `idinventario_materia_reemplazo` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`idrelacion_reemplazo_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `relacion_equivalencia_materia` (
+  `idrelacion_equivalencia_materia` int(10) unsigned NOT NULL auto_increment,
+  `idinventario_materia` int(10) unsigned NOT NULL default '0',
+  `idinventario_materia_equivalente` int(10) unsigned NOT NULL default '0',
+  `describir_equivalencia` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Describir como aplicar la equivalencia, Ej: Ampicilina 100mg tiene como equivalente a 2 Ampicilina 50mg',
+  PRIMARY KEY  (`idrelacion_equivalencia_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `relacion_imagen_materia` (
+  `idrelacion_imagen_materia` int(10) unsigned NOT NULL auto_increment,
+  `idinventario_materia` int(10) unsigned NOT NULL default '0',
+  `nombre_imagen` varchar(200) default NULL,
+  `descripcion` varchar(200) default NULL,
+  `principal` varchar(1) default '0',
+  PRIMARY KEY  (`idrelacion_imagen_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `relacion_serial_materia` (
+  `idrelacion_serial_materia` int(10) unsigned NOT NULL auto_increment,
+  `idinventario_materia` int(10) unsigned NOT NULL default '0',
+  `serial` varchar(20) default NULL,
+  `estado` varchar(20) default NULL COMMENT 'Disponible (cuando es recibido) / Despachado (cuando sale del almacen)',
+  PRIMARY KEY  (`idrelacion_serial_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `relacion_vencimiento_materia` (
+  `idrelacion_vencimiento_materia` int(10) unsigned NOT NULL auto_increment,
+  `idinventario_materia` int(10) unsigned NOT NULL default '0',
+  `lote` varchar(20) default NULL,
+  `fecha_vencimiento` date default NULL,
+  `cantidad` int(10) unsigned NOT NULL COMMENT 'Valor para indicar la cantidad de producto con esa fecha de vencimiento y lote',
+  `disponibles` int(10) unsigned NOT NULL COMMENT 'Valor para indicar la cantidad de producto disponibles para despachar con esa fecha de vencimiento y lote',
+  PRIMARY KEY  (`idrelacion_vencimiento_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE `relacion_materia_articulos_Servicios` (
+  `idrelacion_materia_articulos_servicios` int(10) unsigned NOT NULL auto_increment,
+  `idinventario_materia` int(10) unsigned NOT NULL default '0',
+  `idarticulos_servicios` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`idrelacion_materia_articulos_servicios`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `relacion_accesorios_materia` (
+  `idrelacion_accesorios_materia` int(10) unsigned NOT NULL auto_increment,
+  `idinventario_materia` int(10) unsigned NOT NULL default '0',
+  `idinventario_materia_accesoria` int(10) unsigned NOT NULL default '0',
+  `describir_accesorio` varchar(30) default NULL COMMENT 'Describir para que es el producto accesorio o complementario',
+  PRIMARY KEY  (`idrelacion_accesorios_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+
+
+
+CREATE TABLE `movimiento_materia_almacen` (
+`idmovimiento_materia_almacen` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`numero_movimiento` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'numero de relacion de movimiento',
+`fecha_movimiento` date default NULL,
+`idtipos_documentos` VARCHAR( 12 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Selecciona un tipo de documento para las firmas reportesajuste/entrada/salida',
+`afecta` VARCHAR( 12 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'entrada/salida',
+`idtipo_movimiento_almacen` INT( 14 ) NOT NULL COMMENT 'Tipo de movimiento de ajuste / entrada - para salida puede tener varios tipos de movimiento',
+`idalmacen` int(10) unsigned NOT NULL default '0' COMMENT 'select de la tabla almacen para indicar a que almacen entra o sale el material',
+`justificacion` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+`idniveles_organizacionales` INT( 14 ) NOT NULL COMMENT 'Id de la dependencia origen de los materiales (si aplica)',
+`idproveedor` INT( 14 ) NOT NULL COMMENT 'Id del proveedor de la orden de compra (si aplica)',
+`nombre_proveedor` VARCHAR( 250 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Para definir el nombre del proveedor o institucion que reliza la entrega',
+`idorden_compra_servicio` INT( 14 ) NOT NULL COMMENT 'Id de la orden de compra de los materiales (si aplica)',
+`tipo_documento_transaccion` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'que tipo de documento se usa para recibir o entregar la mercancia: Nota de Entrega, Factura, Presupuesto, Acta / Requisición, Memorandum',
+`numero_documento_transaccion` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Numero de documento para recibir la maercancia',
+`fecha_documento_transaccion` VARCHAR( 12 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'fecha de documento se usa para recibir la maercancia: Nota de Entrega, Factura, Presupuesto',
+`elaborado_por` VARCHAR( 40 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'quien elaboro el movimiento',
+`cedula_elaborado_por` VARCHAR( 12 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'cedula de quien elaboro el movimiento',
+`estado` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`fechayhora` DATETIME NOT NULL ,
+`estacion` VARCHAR( 45 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL  ,
+`usuario` VARCHAR( 45 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL 
+) ENGINE = innodb CHARACTER SET utf8 COLLATE utf8_general_ci AUTO_INCREMENT=1;
+
+
+
+
+
+
+CREATE TABLE `relacion_serial_movimiento_materia` (
+  `idrelacion_serial_movimiento_materia` int(10) unsigned NOT NULL auto_increment,
+  `idmovimiento_materia_almacen` int(10) unsigned NOT NULL default '0',	
+  `idinventario_materia` int(10) unsigned NOT NULL default '0',
+  `serial` varchar(20) default NULL,
+  `estado` varchar(20) default NULL COMMENT 'elaboracion (el movimiento esta en elaboracion) / procesado (el movimiento se proceso)',
+  `factor` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'aumenta (para un movimiento que incrementa el inventario) / disminuye (para un movimiento que incrementa el inventario)',
+  PRIMARY KEY  (`idrelacion_serial_movimiento_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
+
+
+CREATE TABLE `relacion_vencimiento_movimiento_materia` (
+  `idrelacion_vencimiento_movimiento_materia` int(10) unsigned NOT NULL auto_increment,
+  `idmovimiento_materia_almacen` int(10) unsigned NOT NULL default '0',
+  `idrelacion_vencimiento_materia` int(10) unsigned NOT NULL default '0',
+  `idinventario_materia` int(10) unsigned NOT NULL default '0',
+  `lote` varchar(20) default NULL,
+  `fecha_vencimiento` date default NULL,
+  `cantidad` int(10) NOT NULL COMMENT 'Valor para indicar la cantidad de producto con esa fecha de vencimiento y lote',
+  `disponibles` int(10) NOT NULL COMMENT 'Valor para indicar la cantidad de producto disponibles para despachar con esa fecha de vencimiento y lote',
+  `factor` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'aumenta (para un movimiento que incrementa el inventario) / disminuye (para un movimiento que incrementa el inventario)',
+  PRIMARY KEY  (`idrelacion_vencimiento_movimiento_materia`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `relacion_ubicacion_materia` (
+`idrelacion_ubicacion_materia` INT( 20 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`idinventario_materia` INT( 20 ) NOT NULL ,
+`idalmacen` INT( 20 ) NOT NULL ,
+`iddistribucion_almacen` INT( 20 ) NOT NULL
+) ENGINE = innodb;

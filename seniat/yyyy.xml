@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RelacionRetencionesISLR RifAgente="G200055405" Periodo="201205">
+			<DetalleRetencion>
+				<RifRetenido>J315008653</RifRetenido>
+				<NumeroFactura>18</NumeroFactura>
+				<NumeroControl>18</NumeroControl>
+				<CodigoConcepto></CodigoConcepto>
+				<MontoOperacion>525587.30</MontoOperacion>
+				<PorcentajeRetencion>2.00</PorcentajeRetencion>
+			</DetalleRetencion>
+			<DetalleRetencion>
+				<RifRetenido>V131279112</RifRetenido>
+				<NumeroFactura>11</NumeroFactura>
+				<NumeroControl>11</NumeroControl>
+				<CodigoConcepto></CodigoConcepto>
+				<MontoOperacion>18666.67</MontoOperacion>
+				<PorcentajeRetencion>3.00</PorcentajeRetencion>
+			</DetalleRetencion>
+</RelacionRetencionesISLR>

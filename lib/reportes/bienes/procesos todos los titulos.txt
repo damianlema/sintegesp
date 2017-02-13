@@ -1,0 +1,1841 @@
+/*
+			//TODOS SELECCIONADOS
+			if ($especificaciones && $codigo_anterior && $fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && $valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($field['costo'], 2, ',', '.'), number_format($valor_actual, 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$pdf->SetWidths(array(25, 25, 95, 85, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+					$pdf->SetFont('Arial', '', 9);
+					
+					$pdf->Row(array(" ", $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']), utf8_decode($field['ubicacion']),utf8_decode($field['marca'])));
+					
+					$pdf->SetWidths(array(25, 25, 110, 20, 25, 25, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'C', 'R', 'R', 'L'));
+					
+					$total_costo = $total_costo + $field['costo'];
+					$total_valor = $total_valor + $valor_actual;
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR, ESPECIFICACIONES, FECHA COMPRA, COSTO, VALOR ACTUAL, SERIAL
+			if ($especificaciones && $codigo_anterior && $fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($field['costo'], 2, ',', '.'), number_format($valor_actual, 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$total_costo = $total_costo + $field['costo'];
+					$total_valor = $total_valor + $valor_actual;
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//SOLO ESPECIFICACIONES
+			elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			
+			//ESPECIFICACIONES Y CODIGO ANTERIOR
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACIONES Y SERIALES
+			elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACIONES Y CODIGO ANTERIOR Y SERIALES
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR
+			elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					if($field['codigo_anterior_bien']<>''){
+						$h++;
+						$registros_seleccion=$registros_seleccion + 1;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+						
+						$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien']));
+						
+						$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					}
+				}
+			}
+			//CODIGO ANTERIOR Y SERIALES
+			elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					if($field['serial']<>''){
+						$h++;
+						$registros_seleccion=$registros_seleccion + 1;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+						
+						$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['serial'])));
+						
+						$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					}
+				}
+			}
+			//SERIALES
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					if($field['serial']<>''){
+						$h++;
+						$registros_seleccion=$registros_seleccion + 1;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+						
+						$pdf->Row(array($field['codigo_bien'], utf8_decode($field['serial'])));
+						
+						$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					}
+				}
+			}
+			//ESPECIFICACIONES Y CODIGO CATALOGO
+			elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'],  utf8_decode($field['especificaciones']), $field['codigo_catalogo']));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACIONES Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['serial']), $field['codigo_catalogo']));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACIONES Y CODIGO ANTERIOR Y SERIALES Y DESCRIPCION CATALOGO
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['serial']), utf8_decode($field['denominacion_catalogo'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACIONES Y CODIGO ANTERIOR Y SERIALES Y MARCA
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['serial']), utf8_decode($field['marca'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACIONES Y CODIGO ANTERIOR Y SERIALES Y FECHA DE COMPRA
+			elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['serial']), $fecha_compra));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACIONES Y CODIGO ANTERIOR Y SERIALES Y COSTO
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['serial']), number_format($field['costo'], 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACIONES Y CODIGO ANTERIOR Y SERIALES Y VALOR ACTUAL
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['serial']), number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACIONES Y CODIGO ANTERIOR Y SERIALES Y UBICACION
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['serial']), utf8_decode($field['ubicacion'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACIONES Y CODIGO ANTERIOR Y CODIGO CATALOGO
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo']));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACIONES Y SERIALES Y CODIGO CATALOGO
+			elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['serial']), $field['codigo_catalogo']));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR Y CODIGO CATALOGO
+			elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], $field['codigo_catalogo']));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR Y DESCRIPCION CATALOGO
+			elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['denominacion_catalogo'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR Y MARCA
+			elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['marca'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR Y FECHA DE COMPRA
+			elseif (!$especificaciones && $codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], $fecha_compra));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR Y COSTO
+			elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], number_format($field['costo'], 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR Y VALOR ACTUAL
+			elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR Y UBICACION
+			elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['ubicacion'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO
+			elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['serial']), $field['codigo_catalogo']));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR Y SERIALES Y DESCRIPCION CATALOGO
+			elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['serial']), utf8_decode($field['denominacion_catalogo'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR Y SERIALES Y MARCA
+			elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['serial']), utf8_decode($field['marca'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR Y SERIALES Y FECHA DE COMPRA
+			elseif (!$especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['serial']), $fecha_compra));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO
+			elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['codigo_catalogo']), utf8_decode($field['denominacion_catalogo']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//SERIALES Y CODIGO CATALOGO
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['serial']), $field['codigo_catalogo']));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//SERIALES Y DESCRIPCION CATALOGO
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['serial']), utf8_decode($field['denominacion_catalogo'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//SERIALES Y MARCA
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['serial']), utf8_decode($field['marca'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//SERIALES Y FECHA DE COMPRA
+			elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['serial']), $fecha_compra));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//SERIALES Y COSTO
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['serial']), number_format($field['costo'], 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//SERIALES Y VALOR ACTUAL
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['serial']), number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//SERIALES Y UBICACION
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['serial']), utf8_decode($field['ubicacion'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO CATALOGO
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_catalogo']));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO CATALOGO Y DESCRIPCION CATALOGO
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO CATALOGO Y MARCA
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_catalogo'], utf8_decode($field['marca'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO CATALOGO Y FECHA DE COMPRA
+			elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_catalogo'], $fecha_compra));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO CATALOGO Y COSTO
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_catalogo'], number_format($field['costo'], 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO CATALOGO Y VALOR ACTUAL
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_catalogo'], number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//CODIGO CATALOGO Y UBICACION
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_catalogo'], utf8_decode($field['ubicacion'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//DESCRIPCION CATALOGO
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['denominacion_catalogo'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//DESCRIPCION CATALOGO Y MARCA
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['denominacion_catalogo']), utf8_decode($field['marca'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//DESCRIPCION CATALOGO Y FECHA DE COMPRA
+			elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['denominacion_catalogo']), $fecha_compra));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//DESCRIPCION CATALOGO Y COSTO
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['denominacion_catalogo']), number_format($field['costo'], 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//DESCRIPCION CATALOGO Y VALOR ACTUAL
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['denominacion_catalogo']), $valor_actual));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//DESCRIPCION CATALOGO Y UBICACION
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['denominacion_catalogo']), utf8_decode($field['ubicacion'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//MARCA
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['marca'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//MARCA y FECHA DE COMPRA
+			elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['marca']), $fecha_compra));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//MARCA y COSTO
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['marca']), number_format($field['costo'], 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//MARCA y VALOR ACTUAL
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['marca']), number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//MARCA y UBICACION
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['marca']), utf8_decode($field['ubicacion'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//FECHA DE COMPRA
+			elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $fecha_compra));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//FECHA DE COMPRA y COSTO
+			elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $fecha_compra, number_format($field['costo'], 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//FECHA DE COMPRA y VALOR ACTUAL
+			elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $fecha_compra, number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//FECHA DE COMPRA y UBICACION
+			elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $fecha_compra, utf8_decode($field['ubicacion'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//COSTO
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], number_format($field['costo'], 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//COSTO Y VALOR ACTUAL
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], number_format($field['costo'], 2, ',', '.'),number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//COSTO Y UBICACION 
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], number_format($field['costo'], 2, ',', '.'), utf8_decode($field['ubicacion'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//VALOR ACTUAL
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//VALOR ACTUAL Y UBICACION 
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					
+					$h++;
+					$registros_seleccion=$registros_seleccion + 1;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], number_format($valor_actual, 2, ',', '.'), utf8_decode($field['ubicacion'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					
+				}
+			}
+			//UBICACION
+			elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					if($field['ubicacion']<>''){
+						$h++;
+						$registros_seleccion=$registros_seleccion + 1;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+						
+						$pdf->Row(array($field['codigo_bien'], $field['ubicacion']));
+						
+						$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+					}
+				}
+			}
+			//ESPECIFICACION CODIGO CATALOGO Y DESCRIPCION CATALOGO
+			elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION CODIGO CATALOGO Y DESCRIPCION CATALOGO Y CODIGO ANTERIOR
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR y DESCRIPCION CATALOGO
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['denominacion_catalogo'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR y MARCA
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['marca'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION DESCRIPCION CATALOGO
+			elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['denominacion_catalogo'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO 
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y MARCA 
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['marca']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y FECHA DE COMPRA 
+			elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], $fecha_compra, utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y COSTO
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], number_format($field['costo'], 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y VALOR ACTUAL
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], number_format($valor_actual, 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y UBICACION
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['ubicacion']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO y MARCA
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']), utf8_decode($field['marca']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y DESCRIPCION CATALOGO y MARCA
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['denominacion_catalogo']), utf8_decode($field['marca']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y DESCRIPCION CATALOGO y FECHA DE COMPRA
+			elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['denominacion_catalogo']), $fecha_compra, utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y DESCRIPCION CATALOGO y COSTO
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['denominacion_catalogo']), number_format($field['costo'], 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y DESCRIPCION CATALOGO y VALOR ACTUAL
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['denominacion_catalogo']), number_format($valor_actual, 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y DESCRIPCION CATALOGO y UBICACION
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['denominacion_catalogo']), utf8_decode($field['ubicacion']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y MARCA y FECHA DE COMPRA
+			elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['marca']), $fecha_compra, utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y MARCA y COSTO
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['marca']), number_format($field['costo'], 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y MARCA y VALOR ACTUAL
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['marca']), number_format($valor_actual, 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y MARCA y UBICACION
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['marca']), utf8_decode($field['ubicacion']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y FECHA DE COMPRA y COSTO
+			elseif ($especificaciones && $codigo_anterior && $fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($field['costo'], 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y FECHA DE COMPRA y VALOR ACTUAL
+			elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($valor_actual, 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y FECHA DE COMPRA y UBICACION
+			elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra, utf8_decode($field['ubicacion']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y COSTO y VALOR ACTUAL
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), number_format($field['costo'], 2, ',', '.'), number_format($valor_actual, 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y COSTO y UBICACION
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), number_format($field['costo'], 2, ',', '.'), utf8_decode($field['ubicacion']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES  Y VALOR ACTUAL y UBICACION
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), number_format($valor_actual, 2, ',', '.'), utf8_decode($field['ubicacion']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y FECHA DE COMPRA
+			elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']), $fecha_compra, utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y COSTO
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']), number_format($field['costo'], 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y VALOR ACTUAL
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']), number_format($valor_actual, 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y UBICACION
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']), utf8_decode($field['ubicacion']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO y MARCA Y FECHA DE COMPRA
+			elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']), utf8_decode($field['marca']), $fecha_compra, utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO y MARCA Y COSTO
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']), utf8_decode($field['marca']), number_format($field['costo'], 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO y MARCA Y VALOR ACTUAL
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']), utf8_decode($field['marca']), number_format($valor_actual, 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO y MARCA Y UBICACION
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']), utf8_decode($field['marca']), utf8_decode($field['ubicacion']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO y MARCA Y FECHA DE COMPRA Y COSTO
+			if ($especificaciones && $codigo_anterior && $fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($field['costo'], 2, ',', '.'),utf8_decode($field['marca']), utf8_decode($field['serial'])));
+					
+					$pdf->SetWidths(array(25, 25, 95, 85, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+					$pdf->SetFont('Arial', '', 9);
+					
+					$pdf->Row(array(" ", $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo'])));
+					
+					$pdf->SetWidths(array(25, 25, 100, 20, 25, 35, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'C', 'R', 'L', 'L'));
+					
+					$total_costo = $total_costo + $field['costo'];
+					$total_valor = $total_valor + $valor_actual;
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO y MARCA Y FECHA DE COMPRA Y VALOR ACTUAL
+			if ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($valor_actual, 2, ',', '.'),utf8_decode($field['marca']), utf8_decode($field['serial'])));
+					
+					$pdf->SetWidths(array(25, 25, 95, 85, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+					$pdf->SetFont('Arial', '', 9);
+					
+					$pdf->Row(array(" ", $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo'])));
+					
+					$pdf->SetWidths(array(25, 25, 100, 20, 25, 35, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'C', 'R', 'L', 'L'));
+					
+					$total_costo = $total_costo + $field['costo'];
+					$total_valor = $total_valor + $valor_actual;
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO y MARCA Y FECHA DE COMPRA Y UBICACION
+			if ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra, utf8_decode($field['marca']), utf8_decode($field['serial'])));
+					
+					$pdf->SetWidths(array(25, 25, 95, 85, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+					$pdf->SetFont('Arial', '', 9);
+					
+					$pdf->Row(array(" ", $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']),utf8_decode($field['ubicacion'])));
+					
+					$pdf->SetWidths(array(25, 25, 120, 25, 35, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'C',  'L', 'L'));
+					
+					$total_costo = $total_costo + $field['costo'];
+					$total_valor = $total_valor + $valor_actual;
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO y MARCA Y FECHA DE COMPRA Y COSTO Y VALOR ACTUAL
+			if ($especificaciones && $codigo_anterior && $fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($field['costo'], 2, ',', '.'),number_format($valor_actual, 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$pdf->SetWidths(array(25, 25, 95, 85, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+					$pdf->SetFont('Arial', '', 9);
+					
+					$pdf->Row(array(" ", $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']),utf8_decode($field['marca'])));
+					
+					$pdf->SetWidths(array(25, 25, 110, 20, 25, 25, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'C', 'R', 'R', 'L'));
+					
+					$total_costo = $total_costo + $field['costo'];
+					$total_valor = $total_valor + $valor_actual;
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO y MARCA Y  COSTO Y VALOR ACTUAL
+			if ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), number_format($field['costo'], 2, ',', '.'),number_format($valor_actual, 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$pdf->SetWidths(array(25, 25, 95, 85, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+					$pdf->SetFont('Arial', '', 9);
+					
+					$pdf->Row(array(" ", $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']),utf8_decode($field['marca'])));
+					
+					$pdf->SetWidths(array(25, 25, 130, 25, 25, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'R', 'R', 'L'));
+					
+					$total_costo = $total_costo + $field['costo'];
+					$total_valor = $total_valor + $valor_actual;
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO y MARCA Y  COSTO Y UBICACION
+			if ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), number_format($field['costo'], 2, ',', '.'),utf8_decode($field['ubicacion']), utf8_decode($field['serial'])));
+					
+					$pdf->SetWidths(array(25, 25, 95, 85, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+					$pdf->SetFont('Arial', '', 9);
+					
+					$pdf->Row(array(" ", $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']),utf8_decode($field['marca'])));
+					
+					$pdf->SetWidths(array(25, 25, 110, 25, 45, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'R', 'L', 'L'));
+					
+					$total_costo = $total_costo + $field['costo'];
+					$total_valor = $total_valor + $valor_actual;
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO y MARCA Y  VALOR ACTUAL Y UBICACION
+			if ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && $valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), number_format($valor_actual, 2, ',', '.'),utf8_decode($field['ubicacion']), utf8_decode($field['serial'])));
+					
+					$pdf->SetWidths(array(25, 25, 95, 85, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+					$pdf->SetFont('Arial', '', 9);
+					
+					$pdf->Row(array(" ", $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']),utf8_decode($field['marca'])));
+					
+					$pdf->SetWidths(array(25, 25, 110, 25, 45, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'R', 'L', 'L'));
+					
+					$total_costo = $total_costo + $field['costo'];
+					$total_valor = $total_valor + $valor_actual;
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO y MARCA Y FECHA DE COMPRA Y COSTO Y UBICACION
+			if ($especificaciones && $codigo_anterior && $fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+						if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+						else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($field['costo'], 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$pdf->SetWidths(array(25, 25, 95, 85, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+					$pdf->SetFont('Arial', '', 9);
+					
+					$pdf->Row(array(" ", $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']),utf8_decode($field['marca']), utf8_decode($field['ubicacion'])));
+					
+					$pdf->SetWidths(array(25, 25, 120, 30, 30, 40));
+					$pdf->SetAligns(array('L', 'L', 'L', 'C', 'R', 'L'));
+					
+					$total_costo = $total_costo + $field['costo'];
+					$total_valor = $total_valor + $valor_actual;
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO 
+			elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), $field['codigo_catalogo'], utf8_decode($field['denominacion_catalogo']), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y MARCA
+			elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), $field['marca']));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y FECHA DE COMPRA
+			elseif ($especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), $fecha_compra));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y COSTO
+			elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), number_format($field['costo'], 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y FECHA DE COMPRA Y COSTO
+			elseif ($especificaciones && !$codigo_anterior && $fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($field['costo'], 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y VALOR ACTUAL
+			elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y FECHA DE COMPRA Y VALOR ACTUAL
+			elseif ($especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y FECHA DE COMPRA Y COSTO Y VALOR ACTUAL
+			elseif ($especificaciones && !$codigo_anterior && $fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($field['costo'], 2, ',', '.'), number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y FECHA DE COMPRA Y COSTO Y VALOR ACTUAL
+			elseif ($especificaciones && $codigo_anterior && $fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($field['costo'], 2, ',', '.'), number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y FECHA DE COMPRA
+			elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y FECHA DE COMPRA Y COSTO
+			elseif ($especificaciones && $codigo_anterior && $fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($field['costo'], 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y FECHA DE COMPRA Y VALOR ACTUAL
+			elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y COSTO
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']),  number_format($field['costo'], 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y VALOR ACTUAL
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']),  number_format($valor_actual, 2, ',', '.')));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y CODIGO ANTERIOR Y UBICACION
+			elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], $field['codigo_anterior_bien'], utf8_decode($field['especificaciones']),  utf8_decode($field['ubicacion'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y SERIAL Y FECHA DE COMPRA
+			elseif ($especificaciones && !$codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), $fecha_compra, utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y SERIAL Y FECHA DE COMPRA Y COSTO
+			elseif ($especificaciones && !$codigo_anterior && $fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($field['costo'], 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y SERIAL Y FECHA DE COMPRA Y COSTO Y VALOR ACTUAL
+			elseif ($especificaciones && !$codigo_anterior && $fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					list($a, $m, $d) = split('[/.-]', $field['fecha_compra']); $fecha_compra = "$d/$m/$a";
+					$valor_actual = $field['costo'] - $field['depreciacion_acumulada'];
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), $fecha_compra, number_format($field['costo'], 2, ',', '.'), number_format($valor_actual, 2, ',', '.'), utf8_decode($field['serial'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			}
+			//ESPECIFICACION Y UBICACION ACTUAL
+			elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+				while ($field = mysql_fetch_array($query)) {
+					$h++;
+					$registros_seleccion=$numero_registros;
+					if ($h%2==0) { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0); }
+					else { $pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(235, 235, 235); $pdf->SetTextColor(0, 0, 0); }
+					
+					$pdf->Row(array($field['codigo_bien'], utf8_decode($field['especificaciones']), utf8_decode($field['ubicacion'])));
+					
+					$linea=$pdf->GetY(); if ($linea>185) { muebles_inventario($pdf, $costo, $ubicacion, $seriales, $especificaciones, $codigo_anterior, $codigo_catalogo, $descripcion_catalogo, $fecha_compra, $valor_actual, $marca, $organizacion, $nivel_organizacion); }
+				}
+			} */

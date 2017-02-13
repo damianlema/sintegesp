@@ -1,0 +1,35 @@
+﻿modificaciones php.ini
+
+1.- Quitar ; de las siguientes extenciones
+
+	extension=php_xmlrpc.dll
+	extension=php_zip.dll
+	extension=php_mysql.dll
+
+2.- Agregar la siguiente linea de extension
+
+	extension=php_gd2.dll
+
+3.- Establecer Zona horaria
+
+	; Defines the default timezone used by the date functions
+	date.timezone = "America/Caracas"
+
+4.- Modificar el tamaño permitido de los archivos a subir
+
+	; Maximum allowed size for uploaded files.
+	upload_max_filesize = 200M
+	
+5.- Ajustar el tamaño de los datos enviados por el POST
+
+	; Maximum size of POST data that PHP will accept.
+	post_max_size = 300M
+
+6.- Desactivar los mensajes de error de PHP
+
+	display_errors = Off
+	
+	short_open_tag = On
+
+dalira1968@hotmail.com
+geno1408@hotm

@@ -1,0 +1,780 @@
+/*
+		
+		if ($especificaciones && $codigo_anterior && $fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && $valor_actual && $marca) {
+			$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C'));
+			$pdf->SetWidths(array(25, 25, 110, 20, 25, 25, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Fecha de Compra', 'Costo de Compra', 'Valor Actual', 'Serial'));
+			$pdf->SetAligns(array('L', 'L', 'L', 'C', 'R', 'R', 'L'));
+		}
+		CODIGO ANTERIOR, ESPECIFICACIONES, FECHA COMPRA, COSTO, VALOR ACTUAL, SERIAL
+		if ($especificaciones && $codigo_anterior && $fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C'));
+			$pdf->SetWidths(array(25, 25, 110, 20, 25, 25, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Fecha de Compra', 'Costo de Compra', 'Valor Actual', 'Serial'));
+			$pdf->SetAligns(array('L', 'L', 'L', 'C', 'R', 'R', 'L'));
+		}
+		// SOLO ESPECIFICACIONES	
+		elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L'));
+			$pdf->SetWidths(array(30, 240));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones')));
+		}
+		// ESPECIFICACIONES	Y CODIGO ANTERIOR
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 210));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones')));
+		}
+		// ESPECIFICACIONES Y SERIAL
+		elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 200, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), 'Serial'));
+		}
+		// ESPECIFICACIONES,	CODIGO ANTERIOR Y SERIAL
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 170, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Serial'));
+		}
+		// CODIGO ANTERIOR 
+		elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L'));
+			$pdf->SetWidths(array(30, 240));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior')));
+		}
+		// CODIGO ANTERIOR Y SERIAL
+		elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 210));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), 'Serial'));
+		}
+		// SERIAL
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L',  'L'));
+			$pdf->SetWidths(array(30, 240));
+			$pdf->Row(array(utf8_decode('Código del Bien'), 'Serial'));
+		}
+		// ESPECIFICACIONES	Y CODIGO CATALOGO
+		elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 210, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo')));
+		}
+		// ESPECIFICACIONES,	CODIGO ANTERIOR Y SERIAL Y CODIGO CATALOGO
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 140, 40, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Serial', utf8_decode('Código Catalogo')));
+		}
+		// ESPECIFICACIONES,	CODIGO ANTERIOR Y SERIAL Y DENOMINACION CATALOGO
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 100, 40, 70));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Serial', utf8_decode('Denominación Catalogo')));
+		}
+		// ESPECIFICACIONES,	CODIGO ANTERIOR Y SERIAL Y MARCA
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 100, 40, 70));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Serial', utf8_decode('Marca')));
+		}
+		// ESPECIFICACIONES,	CODIGO ANTERIOR Y SERIAL Y FECHA DE COMPRA
+		elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 140, 40, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Serial', utf8_decode('Fecha de Compra')));
+		}
+		// ESPECIFICACIONES,	CODIGO ANTERIOR Y SERIAL Y COSTO
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 30, 140, 40, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Serial', utf8_decode('Costo')));
+		}
+		// ESPECIFICACIONES,	CODIGO ANTERIOR Y SERIAL Y VALOR ACTUAL
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 30, 140, 40, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Serial', utf8_decode('Valor Actual')));
+		}
+		// ESPECIFICACIONES,	CODIGO ANTERIOR Y SERIAL Y UBICACION
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 110, 40, 60));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Serial', utf8_decode('Ubicación Física')));
+		}
+		// ESPECIFICACIONES,	CODIGO ANTERIOR  Y CODIGO CATALOGO
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 180,  30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo')));
+		}
+		// ESPECIFICACIONES, SERIAL Y CODIGO CATALOGO
+		elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 170, 40, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), 'Serial', utf8_decode('Código Catalogo')));
+		}
+		// CODIGO ANTERIOR  Y CODIGO CATALOGO
+		elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 210));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'),  utf8_decode('Código Catalogo')));
+		}
+		// CODIGO ANTERIOR  Y DESCRIPCION CATALOGO
+		elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 210));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'),  utf8_decode('Denominación Catalogo')));
+		}
+		// CODIGO ANTERIOR  Y MARCA
+		elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 210));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'),  utf8_decode('Marca')));
+		}
+		// CODIGO ANTERIOR  Y FECHA DE COMPRA
+		elseif (!$especificaciones && $codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 210));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'),  utf8_decode('Fecha de Compra')));
+		}
+		// CODIGO ANTERIOR  Y COSTO
+		elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'),  utf8_decode('Costo')));
+		}
+		// CODIGO ANTERIOR  Y VALOR ACTUAL
+		elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'),  utf8_decode('Valor Actual')));
+		}
+		// CODIGO ANTERIOR  Y UBICACION
+		elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 210));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'),  utf8_decode('Ubicación Física')));
+		}
+		// CODIGO ANTERIOR Y SERIAL Y CODIGO CATALOGO
+		elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 180, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), 'Serial', utf8_decode('Código Catalogo')));
+		}
+		// CODIGO ANTERIOR Y SERIAL Y DESCRIPCION CATALOGO
+		elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 100, 110));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), 'Serial', utf8_decode('Denominación Catalogo')));
+		}
+		// CODIGO ANTERIOR Y SERIAL Y MARCA
+		elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 100, 110));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), 'Serial', utf8_decode('Marca')));
+		}
+		// CODIGO ANTERIOR Y SERIAL Y FECHA DE COMPRA
+		elseif (!$especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 100, 110));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), 'Serial', utf8_decode('Fecha de Compra')));
+		}
+		// CODIGO ANTERIOR Y SERIAL Y CODIGO DE CATALOGO Y DESCRIPCION CATALOGO
+		elseif (!$especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 30, 100, 80));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catalogo'),  'Serial'));
+		}
+		// SERIAL Y CODIGO CATALOGO
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 210, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), 'Serial', utf8_decode('Código Catalogo')));
+		}
+		// SERIAL Y DESCRIPCION CATALOGO
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 110, 130));
+			$pdf->Row(array(utf8_decode('Código del Bien'), 'Serial', utf8_decode('Denominación Catalogo')));
+		}
+		// SERIAL Y MARCA
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 110, 130));
+			$pdf->Row(array(utf8_decode('Código del Bien'), 'Serial', utf8_decode('Marca')));
+		}
+		// SERIAL Y FECHA DE COMPRA
+		elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 110, 130));
+			$pdf->Row(array(utf8_decode('Código del Bien'), 'Serial', utf8_decode('Fecha de Compra')));
+		}
+		// SERIAL Y COSTO
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 110, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), 'Serial', utf8_decode('Costo')));
+		}
+		// SERIAL Y VALOR ACTUAL
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 110, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), 'Serial', utf8_decode('Valor Actual')));
+		}
+		// SERIAL Y UBICACION
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 110, 130));
+			$pdf->Row(array(utf8_decode('Código del Bien'), 'Serial', utf8_decode('Ubicación Física')));
+		}
+		// CODIGO CATALOGO
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L'));
+			$pdf->SetWidths(array(30, 240));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Catalogo')));
+		}
+		// CODIGO CATALOGO Y DESCRIPCION CATALOGO
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 210));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catalogo')));
+		}
+		// CODIGO CATALOGO Y MARCA
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 210));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Catalogo'), utf8_decode('Marca')));
+		}
+		// CODIGO CATALOGO Y FECHA COMPRA
+		elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 210));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Catalogo'), utf8_decode('Fecha de Compra')));
+		}
+		// CODIGO CATALOGO Y COSTO
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Catalogo'), utf8_decode('Costo')));
+		}
+		// CODIGO CATALOGO Y VALOR ACTUAL
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Catalogo'), utf8_decode('Valor Actual')));
+		}
+		// CODIGO CATALOGO Y UBICACION
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 210));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Catalogo'), utf8_decode('Ubicación')));
+		}
+		// DESCRIPCION CATALOGO
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L'));
+			$pdf->SetWidths(array(30, 240));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Denominación Catalogo')));
+		}
+		// DESCRIPCION CATALOGO Y MARCA
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 140, 100));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Denominación Catalogo'), utf8_decode('Marca')));
+		}
+		// DESCRIPCION CATALOGO Y FECHA DE COMPRA
+		elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 140, 100));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Denominación Catalogo'), utf8_decode('Fecha de Compra')));
+		}
+		// DESCRIPCION CATALOGO Y COSTO
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'r'));
+			$pdf->SetWidths(array(30, 140, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Denominación Catalogo'), utf8_decode('Costo')));
+		}
+		// DESCRIPCION CATALOGO Y VALOR ACTUAL
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'r'));
+			$pdf->SetWidths(array(30, 140, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Denominación Catalogo'), utf8_decode('Valor Actual')));
+		}
+		// DESCRIPCION CATALOGO Y UBICACION
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 140, 100));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Denominación Catalogo'), utf8_decode('Ubicación Física')));
+		}
+		// MARCA
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L'));
+			$pdf->SetWidths(array(30, 240));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Marca')));
+		}
+		// MARCA Y FECHA DE COMPRA
+		elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 140, 100));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Marca'), utf8_decode('Fecha de Compra')));
+		}
+		// MARCA Y COSTO
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 140, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Marca'), utf8_decode('Costo')));
+		}
+		// MARCA Y VALOR ACTUAL
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 140, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Marca'), utf8_decode('Valor Actual')));
+		}
+		// MARCA Y UBICACION
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 140, 100));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Marca'), utf8_decode('Ubicación Física')));
+		}
+		// FECHA COMPRA
+		elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L'));
+			$pdf->SetWidths(array(30, 240));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Fecha de Compra')));
+		}
+		// FECHA COMPRA Y COSTO
+		elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('fecha de Compra'), utf8_decode('Costo')));
+		}
+		// FECHA COMPRA Y VALOR ACTUAL
+		elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('fecha de Compra'), utf8_decode('Valor Actual')));
+		}
+		// FECHA COMPRA Y UBICACION
+		elseif (!$especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 140, 100));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Fecha de Compra'), utf8_decode('Ubicación Física')));
+		}
+		// COSTO
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'R'));
+			$pdf->SetWidths(array(30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Costo')));
+		}
+		// COSTO Y VALOR ACTUAL
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'R', 'R'));
+			$pdf->SetWidths(array(30, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Costo'), utf8_decode('Valor Actual')));
+		}
+		// COSTO Y UBICACION
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 30, 210));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Costo'), utf8_decode('Ubicación Física')));
+		}
+		// VALOR ACTUAL
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'R'));
+			$pdf->SetWidths(array(30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Valor Actual')));
+		}
+		// VALOR ACTUAL Y UBICACION
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 30, 210));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Valor Actual'), utf8_decode('Ubicación Física')));
+		}
+		// UBICACION
+		elseif (!$especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L'));
+			$pdf->SetWidths(array(30, 240));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Ubicación Física')));
+		}
+		//ESPECIFICACIONES CODIGO CATALOGO Y DESCRIPCION CATALOGO
+		elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 140, 30, 70));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catalogo')));
+		}
+		//ESPECIFICACIONES CODIGO CATALOGO Y DESCRIPCION CATALOGO Y CODIGO ANTERIOR
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 110, 30, 70));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catalogo')));
+		}
+		//ESPECIFICACIONES CODIGO ANTERIOR Y DESCRIPCION CATALOGO
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 110, 100));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Denominación Catalogo')));
+		}
+		//ESPECIFICACIONES CODIGO ANTERIOR Y MARCA
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 110, 100));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Marca')));
+		}
+		//ESPECIFICACIONES Y DESCRIPCION CATALOGO
+		elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 150, 90));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Denominación Catalogo')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO 
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 100, 25, 55, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catálogo'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y MARCA
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 100, 25, 50, 35));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Marca'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y FECHA DE COMPRA
+		elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 100, 25, 30, 55));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Fecha de Compra'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y COSTO
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 30, 100, 25, 30, 55));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Costo'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y VALOR ACTUAL
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 30, 100, 25, 30, 55));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Valor Actual'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y UBICACION
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 90, 25, 50, 45));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Ubicación Física'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y MARCA
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 20, 90, 20, 50, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catálogo'), utf8_decode('Marca'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y Y DESCRIPCION CATALOGO Y MARCA
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 20, 110, 50, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Denominación Catálogo'), utf8_decode('Marca'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y Y DESCRIPCION CATALOGO Y FECHA DE COMPRA
+		elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 20, 110, 50, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Denominación Catálogo'), utf8_decode('Fecha de Compra'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y Y DESCRIPCION CATALOGO Y COSTO
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 20, 110, 50, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Denominación Catálogo'), utf8_decode('Costo'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y Y DESCRIPCION CATALOGO Y VALOR ACTUAL
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 20, 110, 50, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Denominación Catálogo'), utf8_decode('Valor Actual'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y Y DESCRIPCION CATALOGO Y UBICACION
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 20, 100, 50, 40, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Denominación Catálogo'), utf8_decode('Ubicación Física'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y MARCA Y FECHA DE COMPRA
+		elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 20, 110, 40, 30, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Marca'), utf8_decode('Fecha de Compra'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y MARCA Y COSTO
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 20, 110, 40, 30, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Marca'), utf8_decode('Costo'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y MARCA Y VALOR ACTUAL
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 20, 110, 40, 30, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Marca'), utf8_decode('Valor Actual'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y MARCA Y UBICACION
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 20, 100, 40, 40, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Marca'), utf8_decode('Ubicación'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y FECHA DE COMPRA Y COSTO
+		elseif ($especificaciones && $codigo_anterior && $fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 20, 120, 30, 30, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra'), utf8_decode('Costo'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y FECHA DE COMPRA Y VALOR ACTUAL
+		elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 20, 120, 30, 30, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra'), utf8_decode('Valor Actual'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y FECHA DE COMPRA Y UBICACION
+		elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 20, 110, 30, 40, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra'), utf8_decode('Ubicación Física'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y COSTO Y VALOR ACTUAL
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'R', 'R', 'L'));
+			$pdf->SetWidths(array(30, 20, 120, 30, 30, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Costo'), utf8_decode('Valor Actual'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y COSTO Y UBICACION
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'R', 'L', 'L'));
+			$pdf->SetWidths(array(30, 20, 110, 30, 40, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Costo'), utf8_decode('Ubicación Fisica'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y VALOR ACTUAL Y UBICACION
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'R', 'L', 'L'));
+			$pdf->SetWidths(array(30, 20, 110, 30, 40, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Valor Actual'), utf8_decode('Ubicación Fisica'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y FECHA DE COMPRA
+		elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 20, 110, 20, 40, 20, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catálogo'), utf8_decode('Fecha de Compra'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y COSTO
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 20, 110, 20, 40, 20, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catálogo'), utf8_decode('Costo'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y VALOR ACTUAL
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 20, 110, 20, 40, 20, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catálogo'), utf8_decode('Valor Actual'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y UBICACION
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 20, 90, 20, 40, 40, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catálogo'), utf8_decode('Ubicación'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y MARCA Y FECHA DE COMPRA
+		elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 20, 80, 20, 40, 30, 20, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catálogo'), utf8_decode('Marca'), utf8_decode('Fecha de Compra'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y MARCA Y COSTO
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 20, 80, 20, 40, 30, 20, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catálogo'), utf8_decode('Marca'), utf8_decode('Costo'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y MARCA Y VALOR ACTUAL
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 20, 80, 20, 40, 30, 20, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catálogo'), utf8_decode('Marca'), utf8_decode('Valor Actual'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y MARCA Y UBICACION
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 20, 70, 20, 40, 30, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catálogo'), utf8_decode('Marca'), utf8_decode('Ubicacion'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y MARCA Y FECHA DE COMPRA Y COSTO
+		if ($especificaciones && $codigo_anterior && $fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C'));
+			$pdf->SetWidths(array(25, 25, 100, 20, 25, 35, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Fecha de Compra', 'Costo de Compra', 'Marca', 'Serial'));
+			$pdf->SetAligns(array('L', 'L', 'L', 'C', 'R', 'L', 'L'));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y MARCA Y FECHA DE COMPRA Y VALOR ACTUAL
+		if ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && $marca) {
+			$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C'));
+			$pdf->SetWidths(array(25, 25, 100, 20, 25, 35, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Fecha de Compra', 'Valor Actual', 'Marca', 'Serial'));
+			$pdf->SetAligns(array('L', 'L', 'L', 'C', 'R', 'L', 'L'));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y MARCA Y FECHA DE COMPRA Y UBICACION
+		if ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C'));
+			$pdf->SetWidths(array(25, 25, 120, 25, 35, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Fecha de Compra',  'Marca', 'Serial'));
+			$pdf->SetAligns(array('L', 'L', 'L', 'C', 'L', 'L'));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y MARCA Y FECHA DE COMPRA Y COSTO Y VALOR ACTUAL
+		if ($especificaciones && $codigo_anterior && $fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && $marca) {
+			$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C'));
+			$pdf->SetWidths(array(25, 25, 110, 20, 25, 25, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Fecha de Compra', 'Costo de Compra', 'Valor Actual', 'Serial'));
+			$pdf->SetAligns(array('L', 'L', 'L', 'C', 'R', 'R', 'L'));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y MARCA Y COSTO Y VALOR ACTUAL
+		if ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && $valor_actual && $marca) {
+			$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C'));
+			$pdf->SetWidths(array(25, 25, 130, 25, 25, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Costo de Compra', 'Valor Actual', 'Serial'));
+			$pdf->SetAligns(array('L', 'L', 'L', 'R', 'R', 'L'));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y MARCA Y COSTO Y UBICACION
+		if ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C'));
+			$pdf->SetWidths(array(25, 25, 110, 25, 45, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Costo de Compra', utf8_decode('Ubicación'), 'Serial'));
+			$pdf->SetAligns(array('L', 'L', 'L', 'R', 'L', 'L'));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y MARCA Y VALOR ACTUAL Y UBICACION
+		if ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && $valor_actual && $marca) {
+			$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C'));
+			$pdf->SetWidths(array(25, 25, 110, 25, 45, 40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Valor Actual', utf8_decode('Ubicación'), 'Serial'));
+			$pdf->SetAligns(array('L', 'L', 'L', 'R', 'L', 'L'));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO Y MARCA Y FECHA DE COMPRA Y COSTO Y UBICACION
+		if ($especificaciones && $codigo_anterior && $fecha_compra && $costo && $seriales && $codigo_catalogo && $descripcion_catalogo && $ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C',  'C'));
+			$pdf->SetWidths(array(25, 25, 120, 30, 30,  40));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), 'Fecha de Compra', 'Costo de Compra', 'Serial'));
+			$pdf->SetAligns(array('L', 'L', 'L', 'C', 'R', 'L'));
+		}
+		//ESPECIFICACION Y SERIALES Y CODIGO CATALOGO Y DESCRIPCION CATALOGO 
+		elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && $seriales && $codigo_catalogo && $descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 110, 30, 70, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Código Catalogo'), utf8_decode('Denominación Catálogo'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y MARCA
+		elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && $marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 180,  60));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Marca')));
+		}
+		//ESPECIFICACION Y FECHA DE COMPRA
+		elseif ($especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 180,  60));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra')));
+		}
+		//ESPECIFICACION Y COSTO
+		elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 210,  30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Costo')));
+		}
+		//ESPECIFICACION Y FECHA DE COMPRA Y COSTO
+		elseif ($especificaciones && !$codigo_anterior && $fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 180,  30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra'), utf8_decode('Costo')));
+		}
+		//ESPECIFICACION Y VALOR ACTUAL
+		elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 210,  30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Valor Actual')));
+		}
+		//ESPECIFICACION Y FECHA DE COMPRA Y VALOR ACTUAL
+		elseif ($especificaciones && !$codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 180,  30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra'), utf8_decode('Valor Actual')));
+		}
+		//ESPECIFICACION Y FECHA DE COMPRA Y COSTO Y VALOR ACTUAL
+		elseif ($especificaciones && !$codigo_anterior && $fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'R', 'R'));
+			$pdf->SetWidths(array(30, 150,  30, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra'), utf8_decode('Costo'), utf8_decode('Valor Actual')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y FECHA DE COMPRA Y COSTO Y VALOR ACTUAL
+		elseif ($especificaciones && $codigo_anterior && $fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'R', 'R'));
+			$pdf->SetWidths(array(30, 30, 120,  30, 30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra'), utf8_decode('Costo'), utf8_decode('Valor Actual')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y FECHA DE COMPRA
+		elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 30, 180,  30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y FECHA DE COMPRA Y COSTO
+		elseif ($especificaciones && $codigo_anterior && $fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 30, 150,  30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra'), utf8_decode('Costo')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y  COSTO
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && $costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L',  'R'));
+			$pdf->SetWidths(array(30, 30, 180,   30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Costo')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y  VALOR ACTUAL
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L',  'R'));
+			$pdf->SetWidths(array(30, 30, 180,   30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Valor Actual')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y UBICACION FISICA
+		elseif ($especificaciones && $codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L',  'L'));
+			$pdf->SetWidths(array(30, 30, 130,   80));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Valor Actual')));
+		}
+		//ESPECIFICACION Y CODIGO ANTERIOR Y FECHA DE COMPRA Y VALOR ACTUAL
+		elseif ($especificaciones && $codigo_anterior && $fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L', 'R'));
+			$pdf->SetWidths(array(30, 30, 150,  30, 30));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Código Anterior'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra'), utf8_decode('Valor Actual')));
+		}
+		//ESPECIFICACION Y SERIAL Y FECHA DE COMPRA
+		elseif ($especificaciones && !$codigo_anterior && $fecha_compra && !$costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 150,  30, 60));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y SERIAL Y FECHA DE COMPRA Y COSTO
+		elseif ($especificaciones && !$codigo_anterior && $fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'R', 'L'));
+			$pdf->SetWidths(array(30, 120, 30,  30, 60));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra'), utf8_decode('Costo'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y SERIAL Y FECHA DE COMPRA Y COSTO Y VALOR ACTUAL
+		elseif ($especificaciones && !$codigo_anterior && $fecha_compra && $costo && $seriales && !$codigo_catalogo && !$descripcion_catalogo && !$ubicacion && $valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L', 'R', 'R', 'L'));
+			$pdf->SetWidths(array(30, 90, 30, 30, 30, 60));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Fecha de Compra'), utf8_decode('Costo'), utf8_decode('Valor Actual'), utf8_decode('Serial')));
+		}
+		//ESPECIFICACION Y UBICACION
+		elseif ($especificaciones && !$codigo_anterior && !$fecha_compra && !$costo && !$seriales && !$codigo_catalogo && !$descripcion_catalogo && $ubicacion && !$valor_actual && !$marca) {
+			$pdf->SetAligns(array('L', 'L', 'L'));
+			$pdf->SetWidths(array(30, 170,  70));
+			$pdf->Row(array(utf8_decode('Código del Bien'), utf8_decode('Especificaciones'), utf8_decode('Ubicación Física')));
+		}
+		*/

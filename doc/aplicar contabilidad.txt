@@ -1,0 +1,36 @@
+﻿TAREAS CONTABILIDAD
+
+El tipo de documento ORDEN DE PAGO SIN AFECTACION colocarlo como Excluir Contabilidad
+
+Modificar los tipos de documentos Oficio Nomina y Cheque directo para que afecte
+	orden de pago
+		cuenta de la cuenta bancaria
+
+
+Crear un tipo de Documento Cheque Orden de Pago Sin Afectacion y colocarlo como Excluir Contabilidad
+
+Ejecutar
+actualizar_tipo_documento_cheque_sa.php   colocar el id del tipo de documento creado anteriormente
+
+
+actualizar_asientos_op2.php
+actualizar_asientos.php
+actualizar_asientos_op.php
+
+
+
+07/06/2015
+
+CREAR TIPO DE MOVIMIENTO
+
+Debito transferencia y marcar excluir contabilidad
+
+Credito transferencia y marcar excluir contabilidad
+
+Modificar en base de datos los depositos de traslado por este nuevo tipo de documento
+Los debitos se registraron como un cheque sin afectacion
+
+Ejecutar
+
+actualizar_asientos_op2.php
+

@@ -1,0 +1,6 @@
+CREATE DATABASE `gestion_configuracion_general` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE `anios` (
+`anio` VARCHAR( 45 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`ruta` VARCHAR( 250 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE = innodb CHARACTER SET utf8 COLLATE utf8_general_ci;

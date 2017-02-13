@@ -1,0 +1,53 @@
+/* to add later in all themes, now can be supersed by theme*/
+	table.menu { border-bottom: 1px solid black; width: 800%;}
+	table.menuButtons { width: 70%; }
+	td.viewPropTitle { border: 1px solid white; }
+	td.viewProp {	border: 1px solid white; }
+	table.home { width: 90%; text-align: center; }
+	td.boxtitle { width: 49%; text-align: center; color:#FFFFFF; font-weight:bold}
+	td.boxtitlespace { width: 2%; font-size:0px; padding:0px; }
+	h5 { margin-bottom: 3px; font-size: 12px; }
+	table.query { width: 60%; margin-top: 10px; }
+	div.BrowseOptions { text-align:left; }
+	table.BrowseOption { text-align:left; }
+	div.TableOptions { text-align: left; }
+	table.Indexes { margin: 5px; width: 70%; border: thin grey solid; text-align: center; }
+	body { font-size: 12px; }
+    .Tip { font-size: 10px; background-color : Silver; }
+    .time { font-size: 10px; float: center }
+    div.Rights { border: 1px solid blue; }
+
+    #menu div.barraMenu,
+    #menu div.barraMenu a.botonMenu {
+    font-family: sans-serif, Verdana, Arial;
+    font-size: 12pt;
+	color: white;
+}
+#menu div.barraMenu {
+text-align: left;
+}
+#menu div.barraMenu a.botonMenu {
+background-color: #556975;
+color: white;
+cursor: pointer;
+padding: 4px 6px 2px 5px;
+text-decoration: none;
+}
+
+#menu div.barraMenu a.botonMenu:hover {
+background-color: #637D4D;
+}
+
+#menu div.barraMenu a.botonMenu:active {
+background-color: #637D4D;
+color: black;
+}
+
+A  {color: #white;}
+A:Visited  {color:#black;}
+A:Active  {color: #red;}
+A:Hover  {color: blue;}
+
+body {font-family:verdana,arial;font-size:12pt;margin-top:15px;}
+.recuadros {padding-right:2px; padding-left:2px; padding-top:2px; padding-bottom:2px; position:absolute;background-color:white;color:green;border-style:solid;border-color:black;border-width:1px;visibility:hidden;font-family:verdana,arial;;font-size:11pt;}
+.ancla {position:relative;visibility:visible; background-color:white; font-size:11pt;}

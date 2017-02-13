@@ -1,0 +1,25 @@
+
+en gobernacion
+
+asignar cuentas contables a las cuentas bancarias
+
+
+modificar tipos documento cheque orden de pago para que afecte la cuenta bancaria 
+
+ALTER TABLE `pagos_financieros` ADD `fecha_anulacion` DATE NOT NULL AFTER `estado` ;
+ALTER TABLE `pagos_financieros` ADD `idtrabajador` INT( 10 ) NOT NULL AFTER `contabilizado` ;
+
+
+ALTER TABLE `cuentas_bancarias` CHANGE `uso_cuenta` `uso_cuenta` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+ALTER TABLE `unidad_ejecutora` CHANGE `codigo` `codigo` VARCHAR( 4 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+UPDATE `tipo_movimiento_bancario` SET `tabla_haber` = '0' WHERE tabla_haber = '';
+
+UPDATE `tipo_movimiento_bancario` SET `tabla_debe` = '0' WHERE tabla_debe = '';
+
+
+ALTER TABLE `pagos_financieros` ADD `idasiento_contable` INT( 20 ) NOT NULL AFTER `idtrabajador` ;
+
+
+UPDATE `cuenta_cuentas_contables` SET `idrubro` = '1' WHERE `idrubro` =9;

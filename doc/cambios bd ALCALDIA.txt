@@ -1,0 +1,93 @@
+﻿INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Reconocimientos', '0', '', '0', '8', ''
+);
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Sanciones', '0', '', '0', '8', ''
+);
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Declaracion Jurada', '0', '', '0', '8', ''
+);
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Registro Fotografico', '0', '', '0', '8', ''
+);
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Cursos/Otros Estudios', '0', '', '0', '8', ''
+);
+
+
+ALTER TABLE `movimientos_personal` ADD INDEX `centro_costo` ( `centro_costo` );
+
+UPDATE `accion` SET `posicion` = '1' WHERE `accion`.`id_accion` =946 LIMIT 1 ;
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Ajustar Constantes', '0', 'modulos/nomina/ajustar_constantes.php', '1', '953', '4'
+);
+
+
+ALTER TABLE `generar_nomina` ADD `anio` VARCHAR( 4 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `idfuente_financiamiento` ,
+ADD `idtipo_presupuesto` INT NOT NULL AFTER `anio` ;
+
+UPDATE `generar_nomina` SET `idfuente_financiamiento` = '2';
+
+UPDATE `generar_nomina` SET `anio` = '2015',
+`idtipo_presupuesto` = '1';
+
+UPDATE `trabajador` SET `activo_nomina` = 'no' WHERE `status` = 'e';

@@ -1,0 +1,3 @@
+UPDATE `tipo_movimiento_personal` SET `relacion_laboral` = 'egreso' WHERE `tipo_movimiento_personal`.`idtipo_movimiento` = 2;
+
+UPDATE `accion` SET `url` = 'modulos/almacen/consultar_materia.php' WHERE `accion`.`id_accion` = 1189;

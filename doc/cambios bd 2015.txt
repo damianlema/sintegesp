@@ -1,0 +1,236 @@
+﻿ALTER TABLE `relacion_retenciones_externas` ADD `numero_retencion_referencia` VARCHAR( 12 ) NOT NULL AFTER `monto_contrato`;
+
+
+update relacion_retenciones set `numero_retencion_referencia` = '900000000000'+numero_retencion;
+update relacion_retenciones_externas set `numero_retencion_referencia` = '900000000000'+numero_retencion;
+
+
+
+ALTER TABLE `tabla_prestaciones` ADD `bono_vacacional` DECIMAL( 16, 2 ) NOT NULL AFTER `sueldo` ,
+ADD `bono_fin_anio` DECIMAL( 16, 2 ) NOT NULL AFTER `bono_vacacional` ,
+ADD `otros_complementos` DECIMAL( 16, 2 ) NOT NULL AFTER `bono_fin_anio` ;
+
+ALTER TABLE `conceptos_nomina` ADD `columna_prestaciones` VARCHAR( 12 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `aplica_prestaciones` ;
+
+ALTER TABLE `cargos` DROP INDEX `idcargo`;
+
+ALTER TABLE `relacion_concepto_trabajador` CHANGE `fecha_limite_ejecucion` `fecha_ejecutar_desde` DATE NOT NULL DEFAULT '0000-00-00' ;
+
+ALTER TABLE `relacion_concepto_trabajador` ADD `fecha_ejecutar_hasta` DATE NOT NULL AFTER `fecha_ejecutar_desde` ;
+
+ALTER TABLE `generar_nomina` ADD `idorden_compra_servicio_aporte` INT( 10 ) NOT NULL AFTER `idorden_compra_servicio` ;
+
+ALTER TABLE `rango_tabla_constantes` CHANGE `valor` `valor` DECIMAL( 12, 4 ) NOT NULL ;
+
+ALTER TABLE `configuracion_rrhh` ADD `numero_patronal_ivss` VARCHAR( 20 ) NOT NULL AFTER `dias_prestaciones_mes` ,
+ADD `fecha_inscripcion_patronal_ivss` DATE NOT NULL AFTER `numero_patronal_ivss` ,
+ADD `regimen_ivss` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `fecha_inscripcion_patronal_ivss` ,
+ADD `riesgo_ivss` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `regimen_ivss` ,
+ADD `nombre_apellido_representante_ivss` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `riesgo_ivss` ,
+ADD `cedula_representante_ivss` VARCHAR( 20 ) NOT NULL AFTER `nombre_apellido_representante_ivss` ;
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'I.V.S.S.', '0', 'modulos/rrhh/ivss.php ', '0', '8', '9'
+);
+
+
+ALTER TABLE `trabajador` ADD `numero_registro_ivss` VARCHAR( 20 ) NOT NULL AFTER `fecha_inicio_continuidad` ,
+ADD `fecha_registro_ivss` DATE NOT NULL AFTER `numero_registro_ivss` ;
+
+ALTER TABLE `trabajador` ADD `ocupacion_oficio_ivss` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `fecha_registro_ivss` ,
+ADD `otro_ivss` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `ocupacion_oficio_ivss` ;
+
+
+ALTER TABLE `asiento_contable` ADD `reversado` VARCHAR( 2 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `fechayhora` ;
+
+ALTER TABLE `ingresos_egresos_financieros` ADD `fecha_anulacion` DATE NOT NULL AFTER `idasiento_contable` ;
+
+ALTER TABLE `asiento_contable` ADD `prioridad` VARCHAR( 2 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `reversado` ;
+
+ALTER TABLE `tipo_movimiento_bancario` ADD `excluir_contabilidad` VARCHAR( 2 ) NOT NULL AFTER `afecta` ;
+
+
+
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Eliminar Retencion Externa', '0', 'modulos/tributos/retenciones_externas.php', '0', '738', ''
+);
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Leyes Prestaciones', '0', 'modulos/rrhh/leyes_prestaciones.php', '1', '1', '7'
+);
+
+
+CREATE TABLE `leyes_prestaciones` (
+  `idleyes_prestaciones` int(11) NOT NULL auto_increment,
+  `siglas` varchar(6) NOT NULL,
+  `denominacion` varchar(250) NOT NULL,
+  `calcula` VARCHAR( 15 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `tipo_abono` varchar(15) NOT NULL,
+  `mes_inicial_abono` varchar(10) NOT NULL,
+  `valor_abono` decimal(12,2) NOT NULL,
+  `valor_abono_adicional` decimal(12,2) NOT NULL,
+  `tipo_abono_adicional` varchar(15) NOT NULL,
+  `valor_tope_adicional` decimal(12,2) NOT NULL,
+  `mes_desde` varchar(4) NOT NULL,
+  `anio_desde` varchar(4) NOT NULL,
+  `mes_hasta` varchar(4) NOT NULL,
+  `anio_hasta` varchar(4) NOT NULL,
+  PRIMARY KEY  (`idleyes_prestaciones`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+
+
+INSERT INTO `leyes_prestaciones` VALUES (1, 'LOT90', 'LEY ORGANICA DEL TRABAJO', 'final', 'anual', '12', 30.00, 0.00, 'NA', 0.00, '01', '1970', '06', '1997');
+INSERT INTO `leyes_prestaciones` VALUES (2, 'LOT97', 'LEY ORGANICA DEL TRABAJO 1997', 'mensual', 'mensual', '03', 5.00, 2.00, 'anual', 30.00, '07', '1997', '04', '2012');
+INSERT INTO `leyes_prestaciones` VALUES (3, 'LOTTT', 'LEY ORGANICA DE LOS TRABAJADORES Y LAS TRABAJADORAS', 'trimestral', 'trimestral', '03', 15.00, 2.00, 'anual', 30.00, '05', '2012', '01', '2030');
+
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Modificar Fecha Ingreso', '0', '', '0', '1', ''
+);
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Reconocimientos', '0', '', '0', '8', ''
+);
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Sanciones', '0', '', '0', '8', ''
+);
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Declaracion Jurada', '0', '', '0', '8', ''
+);
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Registro Fotografico', '0', '', '0', '8', ''
+);
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Cursos/Otros Estudios', '0', '', '0', '8', ''
+);
+
+
+ALTER TABLE `movimientos_personal` ADD INDEX `centro_costo` ( `centro_costo` ) ;
+
+UPDATE `accion` SET `posicion` = '1' WHERE `accion`.`id_accion` =946 LIMIT 1 ;
+
+INSERT INTO `accion` (
+`id_accion` ,
+`nombre_accion` ,
+`id_modulo` ,
+`url` ,
+`mostrar` ,
+`accion_padre` ,
+`posicion`
+)
+VALUES (
+NULL , 'Ajustar Constantes', '0', 'modulos/nomina/ajustar_constantes.php', '1', '953', '4'
+);
+
+
+ALTER TABLE `generar_nomina` ADD `anio` VARCHAR( 4 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `idfuente_financiamiento` ,
+ADD `idtipo_presupuesto` INT NOT NULL AFTER `anio` ;
+
+UPDATE `generar_nomina` SET `idfuente_financiamiento` = '2';
+
+UPDATE `generar_nomina` SET `anio` = '2015',
+`idtipo_presupuesto` = '1';
+
+UPDATE `trabajador` SET `activo_nomina` = 'no' WHERE `status` = 'e';
+
+
+
+
+ALTER TABLE `configuracion_contabilidad` ADD `elaborado_por` VARCHAR( 150 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `fechayhora` ,
+ADD `ci_elaborado_por` VARCHAR( 12 ) NOT NULL AFTER `elaborado_por` ,
+ADD `cargo_elaborado_por` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `ci_elaborado_por` ;
+
+ALTER TABLE `configuracion_contabilidad` ADD `conformado_por` VARCHAR( 150 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `cargo_elaborado_por` ,
+ADD `ci_conformado_por` VARCHAR( 12 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `conformado_por` ,
+ADD `cargo_conformado_por` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `ci_conformado_por` ,
+ADD `aprobado_por` VARCHAR( 150 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `cargo_conformado_por` ,
+ADD `ci_aprobado_por` VARCHAR( 12 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `aprobado_por` ,
+ADD `cargo_aprobado_por` VARCHAR( 200 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `ci_aprobado_por` ;
