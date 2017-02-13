@@ -1,4 +1,4 @@
-6.3. Obteniendo información del evento (objeto event)
+﻿6.3. Obteniendo información del evento (objeto event)
 
 Normalmente, los manejadores de eventos requieren información adicional para procesar sus tareas. Si una función por ejemplo se encarga de procesar el evento onclick, quizás necesite saber en que posición estaba el ratón en el momento de pinchar el botón.
 
@@ -303,3 +303,5 @@ Crear un script que informe al usuario en que zona de la pantalla ha pulsado el 
 Descargar página HTML
 
 Ver solución
+
+aaaaaa
