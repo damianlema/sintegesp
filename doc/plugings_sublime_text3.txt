@@ -35,6 +35,9 @@ SublimeLinter-php  (detecta errores de php)
 
 
 
+Git
+
+GitGutter
 
 
  Crear snippet
@@ -58,4 +61,6 @@ Tools-Developer-New Snippet
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<!-- <scope>source.python</scope> -->
 </snippet>
+
+
 
