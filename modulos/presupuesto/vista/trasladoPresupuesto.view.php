@@ -18,40 +18,40 @@ include('templates/header.php');
 		  <fieldset>
 		    <div class="row">
 		    	<div class="form-group col-md-4">
-			    	<label for="numeroSolicitud" class="control-label col-md-6">Número de Solicitud</label>
+			    	<label for="numeroSolicitud" class="control-label col-md-6" style="font-weight: normal !important;">Número de Solicitud</label>
 			    	<input type="text" class="form-control" id="numeroSolicitud" name="numeroSolicitud">
 			    </div>
 			   	<div class="form-group col-md-3">
-			    	<label for="fechaSolicitud" class="control-label col-md-2">Fecha</label>
+			    	<label for="fechaSolicitud" class="control-label col-md-2" style="font-weight: normal !important;">Fecha</label>
 	                <input type='text' class="form-control" id='datetimepicker1' name='datetimepicker1'
 	                		style="width: 95px;" />
 				    <div class="col-md-1" align="right">
 				    </div>
 			    </div>
 			    <div class="form-group col-md-5">
-			    	<label for="disminucionesBs" class="control-label col-md-8"> Total Bs. Disminuciones</label>
+			    	<label for="disminucionesBs" class="control-label col-md-7" style="font-weight: normal !important;"> Total Bs. Disminuciones</label>
 			    	<input type="text" class="form-control" id="disminucionesBs" disabled="" placeholder="Total Bs. Disminunidos">
 			    </div>
 			</div>
 			<div class="row">
 			    <div class="form-group col-md-4">
-			    	<label for="numeroResolucion" class="control-label col-md-6">Número de Resolución</label>
+			    	<label for="numeroResolucion" class="control-label col-md-6" style="font-weight: normal !important;">Número de Resolución</label>
 			    	<input type="text" class="form-control"  id="numeroResolucion">
 			    </div>
 			    <div class="form-group col-md-3">
-			    	<label for="fechaResolucion" class="control-label col-md-2">Fecha</label>
+			    	<label for="fechaResolucion" class="control-label col-md-2" style="font-weight: normal !important;">Fecha</label>
 			    	<input type='text' class="form-control" id='datetimepicker2' style="width: 95px;" />
 				    <div class="col-md-1" align="right">
 				    </div>
 			    </div>
 			    <div class="form-group col-md-5">
-			    	<label for="aumentosBs" class="control-label col-md-8">Total Bs. Aumentos</label>
-			    	<input type="text" class="form-control" id="aumentosBs" disabled="" placeholder="Total Bs. Aumentados">
+			    	<label for="aumentosBs" class="control-label col-md-7" style="font-weight: normal !important;">Total Bs. Aumentos</label>
+			    	<input type="text" class="form-control" id="aumentosBs" disabled="" placeholder="Total Bs. Aumentos">
 			    </div>
 			</div>
 		    <div class="row">
 		    	<div class="col-md-2" align="right">
-		      		<label for="concepto" class="control-label">Concepto</label>
+		      		<label for="concepto" class="control-label" style="font-weight: normal !important;">Concepto</label>
 		      	</div>
 		      	<div class="form-group col-md-10" align="left">
 			        <textarea class="form-control" rows="2" id="concepto" name="concepto"
