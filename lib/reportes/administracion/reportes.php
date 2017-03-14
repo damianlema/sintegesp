@@ -998,7 +998,6 @@ switch ($nombre) {
 					  beneficiarios.nombre,
 					  pagos_financieros.numero_cheque,
 					  tipos_documentos.descripcion
-
 				FROM
 					orden_pago
 					  INNER JOIN beneficiarios ON (orden_pago.idbeneficiarios=beneficiarios.idbeneficiarios)
