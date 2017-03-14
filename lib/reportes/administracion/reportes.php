@@ -1009,7 +1009,6 @@ switch ($nombre) {
 					orden_pago.idorden_pago<>''
 					$filtro
 				GROUP BY orden_pago.idorden_pago ORDER BY orden_pago.codigo_referencia";
-
         } else {
             $filtro .= " AND (orden_pago.anticipo ='si') ";
             $sql = "SELECT
