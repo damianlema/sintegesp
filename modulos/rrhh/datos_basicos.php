@@ -1899,56 +1899,13 @@ function abrirCerrarAguinaldos(){
 <div id="id_interes_mas_antiguedad" style="display:none">
     <form name="formulario_prestaciones" method="post" action="" id="formulario_prestaciones">
         <input name="fecha_ingreso_prestaciones" type="hidden" id="fecha_ingreso_prestaciones">
-        <table align="center" width="80%">
+        <table align="center" width="90%">
             <tr>
-                <td align="right" class='viewPropTitle'>A&ntilde;o</td>
-                <td id="div_anios_prestaciones">
-                    <select id="anio_prestaciones" name="anio_prestaciones">
-                    <option>.:: Seleccione ::.</option>
-                    <?
-for ($i = 1950; $i <= date("Y"); $i++) {
-    ?>
-                        <option value="<?=$i?>"><?=$i?></option>
-                        <?
-}
-?>
-                    </select>
+                <td align="left">Importar desde excel: <input name="archivo_excel" type="file" id="archivo_excel" size="50" />
+                  <input type="button" class="button" name="botonOrdenar" value="Importar" onClick="importarPrestaciones();" />
                 </td>
-            </tr>
-            <tr>
-                <td align="right" class='viewPropTitle'>Mes</td>
-                <td>
-                    <select id="mes_prestaciones" name="mes_prestaciones">
-                        <option value="0">.:: Seleccione ::.</option>
-                        <option value="01">(01) Enero</option>
-                        <option value="02">(02) Febrero</option>
-                        <option value="03">(03) Marzo</option>
-                        <option value="04">(04) Abril</option>
-                        <option value="05">(05) Mayo</option>
-                        <option value="06">(06) Junio</option>
-                        <option value="07">(07) Julio</option>
-                        <option value="08">(08) Agosto</option>
-                        <option value="09">(09) Septiembre</option>
-                        <option value="10">(10) Octubre</option>
-                        <option value="11">(11) Noviembre</option>
-                        <option value="12">(12) Diciembre</option>
-                    </select>
+                <td colspan="2" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
-            </tr>
-            <tr>
-                <td align="right" class='viewPropTitle'>Sueldo del Mes</td>
-                <td><input type="text" id="sueldo_prestaciones" name="sueldo_prestaciones" size="12" onClick="this.select()"></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <table>
-                        <tr>
-                            <td><input type="button" name="boton_ingresar_prestaciones" id="boton_ingresar_prestaciones" class="button" value="Ingresar" onClick="ingresarPrestaciones()"></td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
                 <td colspan="2" align="right">Exportar a Excel: <input type="text" name="archivo" id="archivo"/>
                   <input type="button" class="button" name="botonOrdenar" value="Exportar" onClick="exportarPrestaciones();" />
                 </td>

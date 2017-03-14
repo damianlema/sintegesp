@@ -103,77 +103,77 @@ if ($ejecutar == "ingresarTrabajador") {
         $nro_ficha        = $bus_nomenclatura["descripcion"] . $numero_con_ceros;
 
         $result = mysql_query("insert into trabajador
-													(apellidos,
-													nombres,
-													idnacionalidad,
-													cedula,
-													rif,
-													nro_pasaporte,
-													sexo,
-													fecha_nacimiento,
-													lugar_nacimiento,
-													idedo_civil,
-													direccion,
-													telefono_habitacion,
-													telefono_movil,
-													correo_electronico,
-													status,
-													fechayhora,
-													usuario,
-													estacion,
-													nro_ficha,
-													fecha_ingreso,
-													fecha_inicio_continuidad,
-													idcargo,
-													idunidad_funcional,
-													centro_costo,
-													activo_nomina)
-											values
-													('$apellidos',
-													'$nombres',
-													'$idnacionalidad',
-													'$cedula',
-													'$rif',
-													'$nro_pasaporte',
-													'$sexo',
-													'$fecha_nacimiento',
-													'$lugar_nacimiento',
-													'$idedo_civil',
-													'$direccion',
-													'$telefono_habitacion',
-													'$telefono_movil',
-													'$correo_electronico',
-													'a',
-													'$fh',
-													'$login',
-													'$pc',
-													'$nro_ficha',
-													'$fecha_ingreso',
-													'$fecha_continuidad',
-													'$idcargo',
-													'$idubicacion_funcional',
-													'$idcentro_costo',
-													'si')") or die(mysql_error());
+                                                    (apellidos,
+                                                    nombres,
+                                                    idnacionalidad,
+                                                    cedula,
+                                                    rif,
+                                                    nro_pasaporte,
+                                                    sexo,
+                                                    fecha_nacimiento,
+                                                    lugar_nacimiento,
+                                                    idedo_civil,
+                                                    direccion,
+                                                    telefono_habitacion,
+                                                    telefono_movil,
+                                                    correo_electronico,
+                                                    status,
+                                                    fechayhora,
+                                                    usuario,
+                                                    estacion,
+                                                    nro_ficha,
+                                                    fecha_ingreso,
+                                                    fecha_inicio_continuidad,
+                                                    idcargo,
+                                                    idunidad_funcional,
+                                                    centro_costo,
+                                                    activo_nomina)
+                                            values
+                                                    ('$apellidos',
+                                                    '$nombres',
+                                                    '$idnacionalidad',
+                                                    '$cedula',
+                                                    '$rif',
+                                                    '$nro_pasaporte',
+                                                    '$sexo',
+                                                    '$fecha_nacimiento',
+                                                    '$lugar_nacimiento',
+                                                    '$idedo_civil',
+                                                    '$direccion',
+                                                    '$telefono_habitacion',
+                                                    '$telefono_movil',
+                                                    '$correo_electronico',
+                                                    'a',
+                                                    '$fh',
+                                                    '$login',
+                                                    '$pc',
+                                                    '$nro_ficha',
+                                                    '$fecha_ingreso',
+                                                    '$fecha_continuidad',
+                                                    '$idcargo',
+                                                    '$idubicacion_funcional',
+                                                    '$idcentro_costo',
+                                                    'si')") or die(mysql_error());
 
         echo mysql_insert_id() . "|.|exito";
 
         if ($result) {
 
             $sql_movimientos = mysql_query("insert into movimientos_personal(idtrabajador,
-																			fecha_movimiento,
-																			idtipo_movimiento,
-																			justificacion,
-																			fecha_ingreso,
-																			idcargo,
-																			idubicacion_funcional,
-																			centro_costo)values('" . mysql_insert_id() . "',
-																									 '" . $fecha_ingreso . "',
-																									 '0',
-																									 'INGRESO',
-																									 '" . $fecha_ingreso . "',
-																									 '" . $idcargo . "',
-																									 '" . $idubicacion_funcional . "',
-																									 '" . $idcentro_costo . "')") or die("AQUI:" . mysql_error());
+                                                                            fecha_movimiento,
+                                                                            idtipo_movimiento,
+                                                                            justificacion,
+                                                                            fecha_ingreso,
+                                                                            idcargo,
+                                                                            idubicacion_funcional,
+                                                                            centro_costo)values('" . mysql_insert_id() . "',
+                                                                                                     '" . $fecha_ingreso . "',
+                                                                                                     '0',
+                                                                                                     'INGRESO',
+                                                                                                     '" . $fecha_ingreso . "',
+                                                                                                     '" . $idcargo . "',
+                                                                                                     '" . $idubicacion_funcional . "',
+                                                                                                     '" . $idcentro_costo . "')") or die("AQUI:" . mysql_error());
 
             $sql_consulta_usuarios = mysql_query("select * from usuarios where cedula = '" . $cedula . "'");
             $num_consulta_usuarios = mysql_num_rows($sql_consulta_usuarios);
@@ -187,58 +187,58 @@ if ($ejecutar == "ingresarTrabajador") {
                 //echo $user;
                 $c                    = $user . ".1234";
                 $sql_ingresar_usuario = mysql_query("insert into usuarios(
-																	apellidos,
-																	nombres,
-																	cedula,
-																	login,
-																	clave,
-																	status,
-																	fechayhora,
-																	estacion)VALUES(
-																					'" . $apellidos . "',
-																					'" . $nombres . "',
-																					'" . $cedula . "',
-																					'" . $user . "',
-																					'" . $c . "',
-																					'a',
-																					'" . $fh . "',
-																					'" . $pc . "')") or die("error creando el usuario" . mysql_error());
+                                                                    apellidos,
+                                                                    nombres,
+                                                                    cedula,
+                                                                    login,
+                                                                    clave,
+                                                                    status,
+                                                                    fechayhora,
+                                                                    estacion)VALUES(
+                                                                                    '" . $apellidos . "',
+                                                                                    '" . $nombres . "',
+                                                                                    '" . $cedula . "',
+                                                                                    '" . $user . "',
+                                                                                    '" . $c . "',
+                                                                                    'a',
+                                                                                    '" . $fh . "',
+                                                                                    '" . $pc . "')") or die("error creando el usuario" . mysql_error());
             }
 
             $sql_consulta = mysql_query("select * from beneficiarios where rif = '" . $cedula . "' || rif = '" . $cedula . "'");
             $num_consulta = mysql_num_rows($sql_consulta);
             if ($num_consulta == 0) {
                 $sql_ingresar_beneficiario = mysql_query("insert into beneficiarios(
-																					nombre,
-																					rif,
-																					idtipo_beneficiario,
-																					idtipo_sociedad,
-																					idestado_beneficiario,
-																					idtipos_persona,
-																					idtipo_empresa,
-																					contribuyente_ordinario,
-																					status,
-																					usuario,
-																					fechayhora,
-																					idestado)VALUES(
-																									'" . $apellidos . " " . $nombres . "',
-																									'" . $cedula . "',
-																									'126',
-																									'17',
-																									'12',
-																									'12',
-																									'9',
-																									'si',
-																									'a',
-																									'" . $login . "',
-																									'" . $fh . "',
-																									'1')");
+                                                                                    nombre,
+                                                                                    rif,
+                                                                                    idtipo_beneficiario,
+                                                                                    idtipo_sociedad,
+                                                                                    idestado_beneficiario,
+                                                                                    idtipos_persona,
+                                                                                    idtipo_empresa,
+                                                                                    contribuyente_ordinario,
+                                                                                    status,
+                                                                                    usuario,
+                                                                                    fechayhora,
+                                                                                    idestado)VALUES(
+                                                                                                    '" . $apellidos . " " . $nombres . "',
+                                                                                                    '" . $cedula . "',
+                                                                                                    '126',
+                                                                                                    '17',
+                                                                                                    '12',
+                                                                                                    '12',
+                                                                                                    '9',
+                                                                                                    'si',
+                                                                                                    'a',
+                                                                                                    '" . $login . "',
+                                                                                                    '" . $fh . "',
+                                                                                                    '1')");
             }
         }
 
         $sql_nomenclatura = mysql_query("UPDATE nomenclatura_fichas set numero=numero+1
-											where
-											idnomenclatura_fichas ='" . $bus_nomenclatura["idnomenclatura_fichas"] . "'");
+                                            where
+                                            idnomenclatura_fichas ='" . $bus_nomenclatura["idnomenclatura_fichas"] . "'");
 
     }
 
@@ -246,20 +246,20 @@ if ($ejecutar == "ingresarTrabajador") {
 
 if ($ejecutar == "modificarTrabajador") {
 
-    $result = mysql_query("update trabajador set 	apellidos				= '$apellidos',
-											nombres 				= '$nombres',
-											idnacionalidad 			= '$idnacionalidad',
-											rif 					= '$rif',
-											nro_pasaporte 			= '$nro_pasaporte',
-											sexo 					= '$sexo',
-											fecha_nacimiento 		= '$fecha_nacimiento',
-											lugar_nacimiento 		= '$lugar_nacimiento',
-											idedo_civil				= '$idedo_civil',
-											direccion 				= '$direccion',
-											telefono_habitacion 	= '$telefono_habitacion',
-											telefono_movil 			= '$telefono_movil',
-											correo_electronico 		= '$correo_electronico'
-											where idtrabajador		= '" . $idtrabajador . "'") or die(mysql_error());
+    $result = mysql_query("update trabajador set    apellidos               = '$apellidos',
+                                            nombres                 = '$nombres',
+                                            idnacionalidad          = '$idnacionalidad',
+                                            rif                     = '$rif',
+                                            nro_pasaporte           = '$nro_pasaporte',
+                                            sexo                    = '$sexo',
+                                            fecha_nacimiento        = '$fecha_nacimiento',
+                                            lugar_nacimiento        = '$lugar_nacimiento',
+                                            idedo_civil             = '$idedo_civil',
+                                            direccion               = '$direccion',
+                                            telefono_habitacion     = '$telefono_habitacion',
+                                            telefono_movil          = '$telefono_movil',
+                                            correo_electronico      = '$correo_electronico'
+                                            where idtrabajador      = '" . $idtrabajador . "'") or die(mysql_error());
     echo "exito";
 
 }
@@ -291,7 +291,7 @@ if ($ejecutar == "consultarTrabajador") {
 
     if ($bus_consulta["status"] == "e") {
         $sql_movimiento = mysql_query("select * from movimientos_personal where idtrabajador = '" . $idtrabajador . "'
-																			and idtipo_movimiento = '2'");
+                                                                            and idtipo_movimiento = '2'");
         $bus_movimiento = mysql_fetch_array($sql_movimiento);
     }
 
@@ -357,8 +357,8 @@ if ($ejecutar == "cargarImagen") {
         if (!copy($_FILES['foto_registroFotografico']['tmp_name'], $dir . $nombre_imagen)) {
             ?>
                 <script>
-				parent.document.getElementById('mostrarImagen').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* Disculpe la imagen no se pudo ingresar</td></tr></table>";
-				</script>
+                parent.document.getElementById('mostrarImagen').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* Disculpe la imagen no se pudo ingresar</td></tr></table>";
+                </script>
                 <?
         } else {
             $ruta = 'modulos/rrhh/imagenes/' . $nombre_imagen;
@@ -366,7 +366,7 @@ if ($ejecutar == "cargarImagen") {
 
         ?>
 
-			<script>
+            <script>
             parent.document.getElementById('nombre_imagen').value = '<?=$nombre_imagen?>';
             parent.document.getElementById('mostrarImagen').innerHTML = "<img src='modulos/rrhh/imagenes/<?=$nombre_imagen?>' width = '100' height='120'>";
             parent.document.getElementById('foto').value = '';
@@ -375,11 +375,11 @@ if ($ejecutar == "cargarImagen") {
 
     } else {
         ?>
-			<script>
-			parent.document.getElementById('mostrarImagen').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* Disculpe el archivo que intenta subir NO es una Imagen</td></tr></table>";
-			</script>
+            <script>
+            parent.document.getElementById('mostrarImagen').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* Disculpe el archivo que intenta subir NO es una Imagen</td></tr></table>";
+            </script>
 
-			<?
+            <?
     }
 
 }
@@ -392,47 +392,47 @@ if ($ejecutar == "cargarImagen") {
 
 if ($ejecutar == "subirRegistroFotografico") {
     $sql_ingresar = mysql_query("insert into registro_fotografico_trabajador (idtrabajador,
-																				nombre_imagen,
-																				principal,
-																				descripcion)VALUES('" . $idtrabajador . "',
-																								'" . $nombre_imagen . "',
-																								'0',
-																								'" . $descripcion . "')");
+                                                                                nombre_imagen,
+                                                                                principal,
+                                                                                descripcion)VALUES('" . $idtrabajador . "',
+                                                                                                '" . $nombre_imagen . "',
+                                                                                                '0',
+                                                                                                '" . $descripcion . "')");
 }
 
 if ($ejecutar == "consultar_registroFotografico") {
     ?>
-	<table align="center">
+    <table align="center">
     <tr>
-	<?
+    <?
     $i            = 0;
     $sql_consulta = mysql_query("select * from registro_fotografico_trabajador where idtrabajador = '" . $idtrabajador . "'");
     while ($bus_consulta = mysql_fetch_array($sql_consulta)) {
         ?>
         <td>
 
-        	<table cellpadding="5" cellspacing="5">
+            <table cellpadding="5" cellspacing="5">
                 <tr>
-                	<td align="right"><strong onclick="eliminar_registroFotografico('<?=$bus_consulta["idregistro_fotografico_trabajador"]?>')" style="cursor:pointer">X</strong></td>
+                    <td align="right"><strong onclick="eliminar_registroFotografico('<?=$bus_consulta["idregistro_fotografico_trabajador"]?>')" style="cursor:pointer">X</strong></td>
                 </tr>
                 <tr>
-                	<td align="center"><img src="modulos/rrhh/imagenes/<?=$bus_consulta["nombre_imagen"]?>" width="100" height="100"></td>
+                    <td align="center"><img src="modulos/rrhh/imagenes/<?=$bus_consulta["nombre_imagen"]?>" width="100" height="100"></td>
                 </tr>
                  <tr>
-                	<td align="center"><?=$bus_consulta["descripcion"]?></td>
+                    <td align="center"><?=$bus_consulta["descripcion"]?></td>
                 </tr>
                 <tr>
-                	<td align="center"><input type="radio" name="imagen_principal" id="imagen_principal" value="<?=$bus_consulta["idregistro_fotografico_trabajador"]?>" style="cursor:pointer" onclick="principal_registroFotografico('<?=$bus_consulta["idregistro_fotografico_trabajador"]?>')" <?if ($bus_consulta["principal"] == 1) {echo "checked";}?>></td>
+                    <td align="center"><input type="radio" name="imagen_principal" id="imagen_principal" value="<?=$bus_consulta["idregistro_fotografico_trabajador"]?>" style="cursor:pointer" onclick="principal_registroFotografico('<?=$bus_consulta["idregistro_fotografico_trabajador"]?>')" <?if ($bus_consulta["principal"] == 1) {echo "checked";}?>></td>
                 </tr>
             </table>
 
         </td>
-		<?
+        <?
         if ($i == 6) {
             ?>
-			</tr>
+            </tr>
             <tr>
-			<?
+            <?
             $i = 0;
         } else {
             $i++;
@@ -440,9 +440,9 @@ if ($ejecutar == "consultar_registroFotografico") {
 
     }
     ?>
-	</tr>
+    </tr>
     </table>
-	<?
+    <?
 }
 
 if ($ejecutar == "eliminar_registroFotografico") {
@@ -480,31 +480,31 @@ if ($ejecutar == "modificarDatosEmpleo") {
      */
 
     $sql_actualizar = mysql_query("update trabajador set fecha_ingreso = '" . $fecha_ingreso . "',
-													fecha_inicio_continuidad = '" . $fecha_inicio_continuidad . "',
-													vacaciones = '" . $vacaciones . "',
-													activo_nomina = '" . $activo_nomina . "'
-													where
-													idtrabajador = '" . $idtrabajador . "'") or die(mysql_error());
+                                                    fecha_inicio_continuidad = '" . $fecha_inicio_continuidad . "',
+                                                    vacaciones = '" . $vacaciones . "',
+                                                    activo_nomina = '" . $activo_nomina . "'
+                                                    where
+                                                    idtrabajador = '" . $idtrabajador . "'") or die(mysql_error());
 
     $sql_validar_existe = mysql_query("select * from movimientos_personal where idtrabajador = '" . $idtrabajador . "'
-									  											and idtipo_movimiento = '0'");
+                                                                                and idtipo_movimiento = '0'");
     $sql_existe_ingreso = mysql_num_rows($sql_validar_existe);
     if ($sql_existe_ingreso == 0) {
         $sql_movimientos = mysql_query("insert into movimientos_personal(idtrabajador,
-																			fecha_movimiento,
-																			idtipo_movimiento,
-																			justificacion,
-																			fecha_ingreso,
-																			idcargo,
-																			idubicacion_funcional,
-																			centro_costo)values('" . $idtrabajador . "',
-																									 '" . $fecha_ingreso . "',
-																									 '0',
-																									 'INGRESO',
-																									 '" . $fecha_ingreso . "',
-																									 '" . $idcargo . "',
-																									 '" . $ubicacion_funcional . "',
-																									 '" . $centro_costo . "')") or die("AQUI:" . mysql_error());
+                                                                            fecha_movimiento,
+                                                                            idtipo_movimiento,
+                                                                            justificacion,
+                                                                            fecha_ingreso,
+                                                                            idcargo,
+                                                                            idubicacion_funcional,
+                                                                            centro_costo)values('" . $idtrabajador . "',
+                                                                                                     '" . $fecha_ingreso . "',
+                                                                                                     '0',
+                                                                                                     'INGRESO',
+                                                                                                     '" . $fecha_ingreso . "',
+                                                                                                     '" . $idcargo . "',
+                                                                                                     '" . $ubicacion_funcional . "',
+                                                                                                     '" . $centro_costo . "')") or die("AQUI:" . mysql_error());
     }
 }
 
@@ -516,75 +516,75 @@ if ($ejecutar == "modificarDatosEmpleo") {
 
 if ($ejecutar == "ingresarCargaFamiliar") {
     $result = mysql_query("insert into carga_familiar
-													(idtrabajador,
-													idparentezco,
-													cedula,
-													apellidos,
-													nombres,
-													fecha_nacimiento,
-													flag_constancia,
-													usuario,
-													status,
-													fechayhora,
-													sexo,
-													direccion,
-													telefono,
-													ocupacion,
-													idnacionalidad,
-													estacion,
-													foto)
-											values
-													('" . $idtrabajador . "',
-													'" . $idparentezco . "',
-													'" . $cedula . "',
-													'" . $apellido . "',
-													'" . $nombre . "',
-													'" . $fecha_nacimiento . "',
-													'" . $constancia . "',
-													'" . $login . "',
-													'a',
-													'" . $fh . "',
-													'" . $sexo . "',
-													'" . $direccion . "',
-													'" . $telefono . "',
-													'" . $ocupacion . "',
-													'" . $idnacionalidad . "',
-													'" . $pc . "',
-													'" . $nombre_foto . "')");
+                                                    (idtrabajador,
+                                                    idparentezco,
+                                                    cedula,
+                                                    apellidos,
+                                                    nombres,
+                                                    fecha_nacimiento,
+                                                    flag_constancia,
+                                                    usuario,
+                                                    status,
+                                                    fechayhora,
+                                                    sexo,
+                                                    direccion,
+                                                    telefono,
+                                                    ocupacion,
+                                                    idnacionalidad,
+                                                    estacion,
+                                                    foto)
+                                            values
+                                                    ('" . $idtrabajador . "',
+                                                    '" . $idparentezco . "',
+                                                    '" . $cedula . "',
+                                                    '" . $apellido . "',
+                                                    '" . $nombre . "',
+                                                    '" . $fecha_nacimiento . "',
+                                                    '" . $constancia . "',
+                                                    '" . $login . "',
+                                                    'a',
+                                                    '" . $fh . "',
+                                                    '" . $sexo . "',
+                                                    '" . $direccion . "',
+                                                    '" . $telefono . "',
+                                                    '" . $ocupacion . "',
+                                                    '" . $idnacionalidad . "',
+                                                    '" . $pc . "',
+                                                    '" . $nombre_foto . "')");
 }
 
 if ($ejecutar == "modificarCargaFamiliar") {
 
     if ($nombre_foto != '') {
         mysql_query("update carga_familiar set
-												idparentezco= '" . $idparentezco . "',
-													cedula = '" . $cedula . "',
-													apellidos = '" . $apellido . "',
-													nombres = '" . $nombre . "',
-													fecha_nacimiento = '" . $fecha_nacimiento . "',
-													flag_constancia = '" . $constancia . "',
-													sexo = '" . $sexo . "',
-													direccion = '" . $direccion . "',
-													telefono = '" . $telefono . "',
-													ocupacion = '" . $ocupacion . "',
-													idnacionalidad = '" . $idnacionalidad . "',
-													foto = '" . $nombre_foto . "'
-													where idcarga_familiar = '" . $idcarga_familiar . "'") or die(mysql_error());
+                                                idparentezco= '" . $idparentezco . "',
+                                                    cedula = '" . $cedula . "',
+                                                    apellidos = '" . $apellido . "',
+                                                    nombres = '" . $nombre . "',
+                                                    fecha_nacimiento = '" . $fecha_nacimiento . "',
+                                                    flag_constancia = '" . $constancia . "',
+                                                    sexo = '" . $sexo . "',
+                                                    direccion = '" . $direccion . "',
+                                                    telefono = '" . $telefono . "',
+                                                    ocupacion = '" . $ocupacion . "',
+                                                    idnacionalidad = '" . $idnacionalidad . "',
+                                                    foto = '" . $nombre_foto . "'
+                                                    where idcarga_familiar = '" . $idcarga_familiar . "'") or die(mysql_error());
     } else {
 
         mysql_query("update carga_familiar set
-												idparentezco= '" . $idparentezco . "',
-													cedula = '" . $cedula . "',
-													apellidos = '" . $apellido . "',
-													nombres = '" . $nombre . "',
-													fecha_nacimiento = '" . $fecha_nacimiento . "',
-													flag_constancia = '" . $constancia . "',
-													sexo = '" . $sexo . "',
-													direccion = '" . $direccion . "',
-													telefono = '" . $telefono . "',
-													ocupacion = '" . $ocupacion . "',
-													idnacionalidad = '" . $idnacionalidad . "'
-													where idcarga_familiar = '" . $idcarga_familiar . "'") or die(mysql_error());
+                                                idparentezco= '" . $idparentezco . "',
+                                                    cedula = '" . $cedula . "',
+                                                    apellidos = '" . $apellido . "',
+                                                    nombres = '" . $nombre . "',
+                                                    fecha_nacimiento = '" . $fecha_nacimiento . "',
+                                                    flag_constancia = '" . $constancia . "',
+                                                    sexo = '" . $sexo . "',
+                                                    direccion = '" . $direccion . "',
+                                                    telefono = '" . $telefono . "',
+                                                    ocupacion = '" . $ocupacion . "',
+                                                    idnacionalidad = '" . $idnacionalidad . "'
+                                                    where idcarga_familiar = '" . $idcarga_familiar . "'") or die(mysql_error());
     }
 
 }
@@ -599,26 +599,26 @@ if ($ejecutar == "consultarCargaFamiliar") {
     ?>
 
 <table class="Main" cellpadding="0" cellspacing="0" width="80%">
-				<tr>
-					<td>
-						<form name="grilla" action="" method="POST">
-						<table class="Browse" cellpadding="0" cellspacing="0" width="80%" align=center>
-							<thead>
-								<tr>
-									<!--<td class="Browse">&nbsp;</td>-->
+                <tr>
+                    <td>
+                        <form name="grilla" action="" method="POST">
+                        <table class="Browse" cellpadding="0" cellspacing="0" width="80%" align=center>
+                            <thead>
+                                <tr>
+                                    <!--<td class="Browse">&nbsp;</td>-->
                                     <td align="center" class="Browse">Imagen</td>
-									<td align="center" class="Browse">C&eacute;dula</td>
-									<td align="center" class="Browse">Apellidos</td>
-									<td align="center" class="Browse">Nombres</td>
-									<td align="center" class="Browse" colspan="2">Acci&oacute;n</td>
-								</tr>
-							</thead>
+                                    <td align="center" class="Browse">C&eacute;dula</td>
+                                    <td align="center" class="Browse">Apellidos</td>
+                                    <td align="center" class="Browse">Nombres</td>
+                                    <td align="center" class="Browse" colspan="2">Acci&oacute;n</td>
+                                </tr>
+                            </thead>
 
-							<?php
+                            <?php
 if ($existen_registros == 0) {
         while ($llenar_grilla = mysql_fetch_array($registros_grilla_carga)) {
             ?>
-								<tr bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
+                                <tr bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
                                 <td align='center' class='Browse' width='20%'>
                                 <a href="javascript:;" onClick="document.getElementById('imagen_<?=$llenar_grilla["idcarga_familiar"]?>').style.display= 'block'">Ver Imagen</a>
                                 <div style=" position:absolute; background-color:#CCCCCC; display:none; width:600px; height:400px; border:#666666 solid 1px" id="imagen_<?=$llenar_grilla["idcarga_familiar"]?>">
@@ -628,14 +628,14 @@ if ($existen_registros == 0) {
                                 </td>
                                 <td align='right' class='Browse' width='20%'>
 
-								<?
+                                <?
             if ($llenar_grilla["cedula"] != "") {
                 echo $llenar_grilla["cedula"];
             } else {
                 echo "<center><strong>Sin Nro. de Cedula</strong></center>";
             }
             ?></td>
-								<?
+                                <?
             echo "<td align='left' class='Browse'>" . $llenar_grilla["apellidos"] . "</td>";
             echo "<td align='left' class='Browse'>" . $llenar_grilla["nombres"] . "</td>";
             $c = $llenar_grilla["idcarga_familiar"];
@@ -657,11 +657,11 @@ if ($existen_registros == 0) {
         }
     }
     ?>
-						</table>
-						</form>
-					</td>
-				</tr>
-			</table>
+                        </table>
+                        </form>
+                    </td>
+                </tr>
+            </table>
 
 <?
 }
@@ -679,9 +679,9 @@ if ($ejecutar == "cargarFotoCargaFamiliar") {
         if (!copy($_FILES['foto_cargaFamiliar']['tmp_name'], $dir . $nombre_imagen)) {
             ?>
                 <script>
-				parent.mostrarMensajes("error", "Disculpe la imagen no se pudo ingresar");
-				parent.document.getElementById('foto_cargaFamiliar').value = '';
-				</script>
+                parent.mostrarMensajes("error", "Disculpe la imagen no se pudo ingresar");
+                parent.document.getElementById('foto_cargaFamiliar').value = '';
+                </script>
                 <?
         } else {
             $ruta = 'modulos/rrhh/imagenes/carga_familiar/' . $nombre_imagen;
@@ -689,7 +689,7 @@ if ($ejecutar == "cargarFotoCargaFamiliar") {
 
         ?>
 
-			<script>
+            <script>
             parent.document.getElementById('nombre_foto_cargaFamiliar').value = '<?=$nombre_imagen?>';
 
             </script>
@@ -697,12 +697,12 @@ if ($ejecutar == "cargarFotoCargaFamiliar") {
 
     } else {
         ?>
-			<script>
-			parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen");
-			parent.document.getElementById('foto_cargaFamiliar').value = '';
-			</script>
+            <script>
+            parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen");
+            parent.document.getElementById('foto_cargaFamiliar').value = '';
+            </script>
 
-			<?
+            <?
     }
 
 }
@@ -715,30 +715,30 @@ if ($ejecutar == "cargarFotoCargaFamiliar") {
 
 if ($ejecutar == "ingresarInstruccionAcademica") {
     $sql_ingresar = mysql_query("insert into instruccion_academica (idtrabajador,
-																	idnivel_estudio,
-																	idprofesion,
-																	idmension,
-																	institucion,
-																	anio_egreso,
-																	observaciones,
-																	flag_constancia,
-																	flag_actual,
-																	usuario,
-																	status,
-																	fechayhora,
-																	foto)VALUES('" . $idtrabajador . "',
-																				'" . $idnivel_estudios . "',
-																				'" . $idprofesion . "',
-																				'" . $idmension . "',
-																				'" . $institucion . "',
-																				'" . $anio_egreso . "',
-																				'" . $observaciones . "',
-																				'" . $constancia . "',
-																				'" . $profesion_actual . "',
-																				'" . $login . "',
-																				'a',
-																				'" . $fh . "',
-																				'" . $nombre_foto . "')");
+                                                                    idnivel_estudio,
+                                                                    idprofesion,
+                                                                    idmension,
+                                                                    institucion,
+                                                                    anio_egreso,
+                                                                    observaciones,
+                                                                    flag_constancia,
+                                                                    flag_actual,
+                                                                    usuario,
+                                                                    status,
+                                                                    fechayhora,
+                                                                    foto)VALUES('" . $idtrabajador . "',
+                                                                                '" . $idnivel_estudios . "',
+                                                                                '" . $idprofesion . "',
+                                                                                '" . $idmension . "',
+                                                                                '" . $institucion . "',
+                                                                                '" . $anio_egreso . "',
+                                                                                '" . $observaciones . "',
+                                                                                '" . $constancia . "',
+                                                                                '" . $profesion_actual . "',
+                                                                                '" . $login . "',
+                                                                                'a',
+                                                                                '" . $fh . "',
+                                                                                '" . $nombre_foto . "')");
     if ($sql_ingresar) {
         echo "exito";
     } else {
@@ -751,31 +751,31 @@ if ($ejecutar == "modificarInstruccionAcademica") {
     if ($nombre_foto == "") {
 
         $sql_modificar = mysql_query("update instruccion_academica set idnivel_estudio = '" . $idnivel_estudios . "',
-																	idprofesion = '" . $idprofesion . "',
-																	idmension = '" . $idmension . "',
-																	institucion = '" . $institucion . "',
-																	anio_egreso = '" . $anio_egreso . "',
-																	observaciones = '" . $observaciones . "',
-																	flag_constancia = '" . $constancia . "',
-																	flag_actual = '" . $profesion_actual . "'
-																		where
-																	idinstruccion_academica = '" . $idinstruccion_academica . "'");
+                                                                    idprofesion = '" . $idprofesion . "',
+                                                                    idmension = '" . $idmension . "',
+                                                                    institucion = '" . $institucion . "',
+                                                                    anio_egreso = '" . $anio_egreso . "',
+                                                                    observaciones = '" . $observaciones . "',
+                                                                    flag_constancia = '" . $constancia . "',
+                                                                    flag_actual = '" . $profesion_actual . "'
+                                                                        where
+                                                                    idinstruccion_academica = '" . $idinstruccion_academica . "'");
     } else {
 
         $sql_consulta = mysql_query("select * from instruccion_academica where idinstruccion_academica = '" . $idinstruccion_academica . "'");
         $bus_consulta = mysql_fetch_array($sql_consulta);
 
         $sql_modificar = mysql_query("update instruccion_academica set idnivel_estudio = '" . $idnivel_estudios . "',
-																		idprofesion = '" . $idprofesion . "',
-																		idmension = '" . $idmension . "',
-																		institucion = '" . $institucion . "',
-																		anio_egreso = '" . $anio_egreso . "',
-																		observaciones = '" . $observaciones . "',
-																		flag_constancia = '" . $constancia . "',
-																		flag_actual = '" . $profesion_actual . "',
-																		foto =  '" . $nombre_foto . "'
-																			where
-																		idinstruccion_academica = '" . $idinstruccion_academica . "'");
+                                                                        idprofesion = '" . $idprofesion . "',
+                                                                        idmension = '" . $idmension . "',
+                                                                        institucion = '" . $institucion . "',
+                                                                        anio_egreso = '" . $anio_egreso . "',
+                                                                        observaciones = '" . $observaciones . "',
+                                                                        flag_constancia = '" . $constancia . "',
+                                                                        flag_actual = '" . $profesion_actual . "',
+                                                                        foto =  '" . $nombre_foto . "'
+                                                                            where
+                                                                        idinstruccion_academica = '" . $idinstruccion_academica . "'");
 
     }
 
@@ -808,64 +808,64 @@ if ($ejecutar == "eliminarInstruccionAcademica") {
 if ($ejecutar == "consultarInstruccionAcademica") {
 
     $registros_grilla_carga = mysql_query("select nivel_estudio.denominacion as denominacion_nivel,
-											profesion.denominacion as denominacion_profesion,
-											mension.denominacion as denominacion_mension,
-											nivel_estudio.idnivel_estudio,
-											profesion.idprofesion,
-											mension.idmension,
-											instruccion_academica.idtrabajador,
-											instruccion_academica.institucion,
-											instruccion_academica.anio_egreso,
-											instruccion_academica.observaciones,
-											instruccion_academica.flag_constancia,
-											instruccion_academica.flag_actual,
-											instruccion_academica.idinstruccion_academica,
-											instruccion_academica.foto
-										from nivel_estudio,
-											profesion,
-											mension,
-											instruccion_academica
-										where
-											instruccion_academica.status='a'
-											and nivel_estudio.idnivel_estudio = instruccion_academica.idnivel_estudio
-											and profesion.idprofesion = instruccion_academica.idprofesion
-											and mension.idmension = instruccion_academica.idmension
-											and idtrabajador= " . $idtrabajador) or die("AQUI" . mysql_error());
+                                            profesion.denominacion as denominacion_profesion,
+                                            mension.denominacion as denominacion_mension,
+                                            nivel_estudio.idnivel_estudio,
+                                            profesion.idprofesion,
+                                            mension.idmension,
+                                            instruccion_academica.idtrabajador,
+                                            instruccion_academica.institucion,
+                                            instruccion_academica.anio_egreso,
+                                            instruccion_academica.observaciones,
+                                            instruccion_academica.flag_constancia,
+                                            instruccion_academica.flag_actual,
+                                            instruccion_academica.idinstruccion_academica,
+                                            instruccion_academica.foto
+                                        from nivel_estudio,
+                                            profesion,
+                                            mension,
+                                            instruccion_academica
+                                        where
+                                            instruccion_academica.status='a'
+                                            and nivel_estudio.idnivel_estudio = instruccion_academica.idnivel_estudio
+                                            and profesion.idprofesion = instruccion_academica.idprofesion
+                                            and mension.idmension = instruccion_academica.idmension
+                                            and idtrabajador= " . $idtrabajador) or die("AQUI" . mysql_error());
     if (mysql_num_rows($registros_grilla_carga) > 0) {
         $existen_registros = 0;
     }
 
     ?>
 
-        	<table class="Main" cellpadding="0" cellspacing="0" width="80%">
-				<tr>
-					<td>
-						<form name="grilla" action="instruccion_academica.php" method="POST">
-						<table class="Browse" cellpadding="0" cellspacing="0" width="80%" align=center>
-							<thead>
-								<tr>
-									<!--<td class="Browse">&nbsp;</td>-->
-									<td align="center" class="Browse">Imagen</td>
+            <table class="Main" cellpadding="0" cellspacing="0" width="80%">
+                <tr>
+                    <td>
+                        <form name="grilla" action="instruccion_academica.php" method="POST">
+                        <table class="Browse" cellpadding="0" cellspacing="0" width="80%" align=center>
+                            <thead>
+                                <tr>
+                                    <!--<td class="Browse">&nbsp;</td>-->
+                                    <td align="center" class="Browse">Imagen</td>
                                     <td align="center" class="Browse">Nivel</td>
-									<td align="center" class="Browse">Profesi&oacute;n</td>
-									<td align="center" class="Browse">Mensi&oacute;n</td>
-									<td align="center" class="Browse" colspan="2">Acci&oacute;n</td>
-								</tr>
-							</thead>
+                                    <td align="center" class="Browse">Profesi&oacute;n</td>
+                                    <td align="center" class="Browse">Mensi&oacute;n</td>
+                                    <td align="center" class="Browse" colspan="2">Acci&oacute;n</td>
+                                </tr>
+                            </thead>
 
-							<?php
+                            <?php
 if ($existen_registros == 0) {
         while ($llenar_grilla = mysql_fetch_array($registros_grilla_carga)) {
             ?>
-								<tr bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
-								<td align='center' class='Browse' width='20%'>
+                                <tr bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
+                                <td align='center' class='Browse' width='20%'>
                                 <a href="javascript:;" onClick="document.getElementById('imagen_<?=$llenar_grilla["idinstruccion_academica"]?>').style.display= 'block'">Ver Imagen</a>
                                 <div style=" position:absolute; background-color:#CCCCCC; display:none; width:600px; height:400px; border:#666666 solid 1px;" id="imagen_<?=$llenar_grilla["idinstruccion_academica"]?>">
                                 <div align="right" style="cursor:pointer"><strong onClick="document.getElementById('imagen_<?=$llenar_grilla["idinstruccion_academica"]?>').style.display= 'none'">Cerrar</strong></div>
                                 <img src="modulos/rrhh/imagenes/estudios/<?=$llenar_grilla["foto"]?>">
                                 </div>
                                 </td>
-								<?php
+                                <?php
 echo "<td align='left' class='Browse' width='20%'>" . $llenar_grilla["denominacion_nivel"] . "</td>";
 
             echo "<td align='left' class='Browse'>" . $llenar_grilla["denominacion_profesion"] . "</td>";
@@ -874,21 +874,21 @@ echo "<td align='left' class='Browse' width='20%'>" . $llenar_grilla["denominaci
             $t = $llenar_grilla["idtrabajador"];
             ?>
                                 <td align='center' class='Browse' width='7%'>
-                                	<img src='imagenes/modificar.png' border='0' alt='Modificar' title='Modificar' onclick="seleccionar_instruccionAcademica('<?=$llenar_grilla["idnivel_estudio"]?>', '<?=$llenar_grilla["idprofesion"]?>', <?=$llenar_grilla["idmension"]?>, '<?=$llenar_grilla["institucion"]?>', '<?=$llenar_grilla["anio_egreso"]?>', '<?=$llenar_grilla["observaciones"]?>', '<?=$llenar_grilla["flag_constancia"]?>', '<?=$llenar_grilla["flag_actual"]?>', '<?=$llenar_grilla["idinstruccion_academica"]?>')" style="cursor:pointer">
+                                    <img src='imagenes/modificar.png' border='0' alt='Modificar' title='Modificar' onclick="seleccionar_instruccionAcademica('<?=$llenar_grilla["idnivel_estudio"]?>', '<?=$llenar_grilla["idprofesion"]?>', <?=$llenar_grilla["idmension"]?>, '<?=$llenar_grilla["institucion"]?>', '<?=$llenar_grilla["anio_egreso"]?>', '<?=$llenar_grilla["observaciones"]?>', '<?=$llenar_grilla["flag_constancia"]?>', '<?=$llenar_grilla["flag_actual"]?>', '<?=$llenar_grilla["idinstruccion_academica"]?>')" style="cursor:pointer">
                                 </td>
-								<td align='center' class='Browse' width='7%'>
-                                	<img src='imagenes/delete.png' border='0' alt='Borrar' title='Borrar' style="cursor:pointer" onclick="eliminarInstruccionAcademica('<?=$llenar_grilla["idinstruccion_academica"]?>')">
+                                <td align='center' class='Browse' width='7%'>
+                                    <img src='imagenes/delete.png' border='0' alt='Borrar' title='Borrar' style="cursor:pointer" onclick="eliminarInstruccionAcademica('<?=$llenar_grilla["idinstruccion_academica"]?>')">
                                 </td>
                                 <?
             echo "</tr>";
         }
     }
     ?>
-						</table>
-						</form>
-					</td>
-				</tr>
-			</table>
+                        </table>
+                        </form>
+                    </td>
+                </tr>
+            </table>
  <?
 }
 
@@ -905,9 +905,9 @@ if ($ejecutar == "cargarFotoInstruccionAcademica") {
         if (!copy($_FILES['foto_instruccionAcademica']['tmp_name'], $dir . $nombre_imagen)) {
             ?>
                 <script>
-				parent.mostrarMensajes("error", "Disculpe la imagen no se pudo ingresar");
-				parent.document.getElementById('foto_instruccionAcademica').value = '';
-				</script>
+                parent.mostrarMensajes("error", "Disculpe la imagen no se pudo ingresar");
+                parent.document.getElementById('foto_instruccionAcademica').value = '';
+                </script>
                 <?
         } else {
             $ruta = 'modulos/rrhh/imagenes/estudios/' . $nombre_imagen;
@@ -915,7 +915,7 @@ if ($ejecutar == "cargarFotoInstruccionAcademica") {
 
         ?>
 
-			<script>
+            <script>
             parent.document.getElementById('nombre_foto_instruccionAcademica').value = '<?=$nombre_imagen?>';
 
             </script>
@@ -923,12 +923,12 @@ if ($ejecutar == "cargarFotoInstruccionAcademica") {
 
     } else {
         ?>
-			<script>
-			parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen");
-			parent.document.getElementById('foto_instruccionAcademica').value = '';
-			</script>
+            <script>
+            parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen");
+            parent.document.getElementById('foto_instruccionAcademica').value = '';
+            </script>
 
-			<?
+            <?
     }
 }
 
@@ -950,9 +950,9 @@ if ($ejecutar == "cargarFotoExperienciaLaboral") {
         if (!copy($_FILES['foto_experienciaLaboral']['tmp_name'], $dir . $nombre_imagen)) {
             ?>
                 <script>
-				parent.mostrarMensajes("error", "Disculpe la imagen no se pudo ingresar");
-				parent.document.getElementById('foto_experienciaLaboral').value = '';
-				</script>
+                parent.mostrarMensajes("error", "Disculpe la imagen no se pudo ingresar");
+                parent.document.getElementById('foto_experienciaLaboral').value = '';
+                </script>
                 <?
         } else {
             $ruta = 'modulos/rrhh/imagenes/experiencia_laboral/' . $nombre_imagen;
@@ -960,7 +960,7 @@ if ($ejecutar == "cargarFotoExperienciaLaboral") {
 
         ?>
 
-			<script>
+            <script>
             parent.document.getElementById('nombre_foto_experienciaLaboral').value = '<?=$nombre_imagen?>';
 
             </script>
@@ -968,45 +968,45 @@ if ($ejecutar == "cargarFotoExperienciaLaboral") {
 
     } else {
         ?>
-			<script>
-			parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen");
-			parent.document.getElementById('foto_experienciaLaboral').value = '';
-			</script>
+            <script>
+            parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen");
+            parent.document.getElementById('foto_experienciaLaboral').value = '';
+            </script>
 
-			<?
+            <?
     }
 }
 
 if ($ejecutar == "ingresarExperienciaLaboral") {
     $sql_ingresar = mysql_query("insert into experiencia_laboral(idtrabajador,
-																empresa,
-																desde,
-																hasta,
-																tiempo_servicio,
-																motivo_salida,
-																ultimo_cargo,
-																direccion_empresa,
-																telefono_empresa,
-																observaciones,
-																usuario,
-																status,
-																fechayhora,
-																foto)
-																	VALUES(
-																'" . $idtrabajador . "',
-																'" . $empresa . "',
-																'" . $desde_exp . "',
-																'" . $hasta_exp . "',
-																'" . $tiempo_srv . "',
-																'" . $motivo . "',
-																'" . $ultimo_cargo . "',
-																'" . $direccion_empresa . "',
-																'" . $telefono . "',
-																'" . $observaciones . "',
-																'" . $login . "',
-																'a',
-																'" . $fh . "',
-																'" . $nombre_foto . "')") or die(mysql_error());
+                                                                empresa,
+                                                                desde,
+                                                                hasta,
+                                                                tiempo_servicio,
+                                                                motivo_salida,
+                                                                ultimo_cargo,
+                                                                direccion_empresa,
+                                                                telefono_empresa,
+                                                                observaciones,
+                                                                usuario,
+                                                                status,
+                                                                fechayhora,
+                                                                foto)
+                                                                    VALUES(
+                                                                '" . $idtrabajador . "',
+                                                                '" . $empresa . "',
+                                                                '" . $desde_exp . "',
+                                                                '" . $hasta_exp . "',
+                                                                '" . $tiempo_srv . "',
+                                                                '" . $motivo . "',
+                                                                '" . $ultimo_cargo . "',
+                                                                '" . $direccion_empresa . "',
+                                                                '" . $telefono . "',
+                                                                '" . $observaciones . "',
+                                                                '" . $login . "',
+                                                                'a',
+                                                                '" . $fh . "',
+                                                                '" . $nombre_foto . "')") or die(mysql_error());
 
     if ($sql_ingresar) {
         echo "exito";
@@ -1020,32 +1020,32 @@ if ($ejecutar == "modificarExperienciaLaboral") {
 
     if ($nombre_foto != '') {
         $str_modificar = mysql_query("  UPDATE experiencia_laboral set
-										empresa='" . $empresa . "',
-										desde='" . $desde_exp . "',
-										hasta='" . $hasta_exp . "',
-										tiempo_servicio='" . $tiempo_srv . "',
-										motivo_salida='" . $motivo . "',
-										ultimo_cargo='" . $ultimo_cargo . "',
-										direccion_empresa='" . $direccion_empresa . "',
-										telefono_empresa='" . $telefono . "',
-										observaciones='" . $observaciones . "',
-										foto = '" . $nombre_foto . "'
-											where
-										secuencia='" . $idexperiencia_laboral . "'; ") or die(mysql_error());
+                                        empresa='" . $empresa . "',
+                                        desde='" . $desde_exp . "',
+                                        hasta='" . $hasta_exp . "',
+                                        tiempo_servicio='" . $tiempo_srv . "',
+                                        motivo_salida='" . $motivo . "',
+                                        ultimo_cargo='" . $ultimo_cargo . "',
+                                        direccion_empresa='" . $direccion_empresa . "',
+                                        telefono_empresa='" . $telefono . "',
+                                        observaciones='" . $observaciones . "',
+                                        foto = '" . $nombre_foto . "'
+                                            where
+                                        secuencia='" . $idexperiencia_laboral . "'; ") or die(mysql_error());
     } else {
 
         $str_modificar = mysql_query("  UPDATE experiencia_laboral set
-										empresa='" . $empresa . "',
-										desde='" . $desde_exp . "',
-										hasta='" . $hasta_exp . "',
-										tiempo_servicio='" . $tiempo_srv . "',
-										motivo_salida='" . $motivo . "',
-										ultimo_cargo='" . $ultimo_cargo . "',
-										direccion_empresa='" . $direccion_empresa . "',
-										telefono_empresa='" . $telefono . "',
-										observaciones='" . $observaciones . "'
-											where
-										secuencia='" . $idexperiencia_laboral . "'; ") or die(mysql_error());
+                                        empresa='" . $empresa . "',
+                                        desde='" . $desde_exp . "',
+                                        hasta='" . $hasta_exp . "',
+                                        tiempo_servicio='" . $tiempo_srv . "',
+                                        motivo_salida='" . $motivo . "',
+                                        ultimo_cargo='" . $ultimo_cargo . "',
+                                        direccion_empresa='" . $direccion_empresa . "',
+                                        telefono_empresa='" . $telefono . "',
+                                        observaciones='" . $observaciones . "'
+                                            where
+                                        secuencia='" . $idexperiencia_laboral . "'; ") or die(mysql_error());
 
     }
 
@@ -1083,7 +1083,7 @@ if ($ejecutar == "consultarExperienciaLaboral") {
     <table class="Browse" cellpadding="0" cellspacing="0" width="80%" align=center>
         <thead>
             <tr>
-	            <td align="center" class="Browse">Imagen</td>
+                <td align="center" class="Browse">Imagen</td>
                 <td align="center" class="Browse">Nombre de la Empresa</td>
                 <td align="center" class="Browse">&Uacute;ltimo Cargo</td>
                 <td align="center" class="Browse" colspan="2">Acci&oacute;n</td>
@@ -1093,7 +1093,7 @@ if ($ejecutar == "consultarExperienciaLaboral") {
 
     while ($bus_consulta = mysql_fetch_array($sql_consulta)) {
         ?>
-			<tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
+            <tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
             <td align='center' class='Browse' width='20%'>
             <a href="javascript:;" onClick="document.getElementById('imagen_<?=$bus_consulta["secuencia"]?>').style.display= 'block'">Ver Imagen</a>
             <div style=" position:absolute; background-color:#CCCCCC; display:none; width:600px; height:400px; border:#666666 solid 1px;" id="imagen_<?=$bus_consulta["secuencia"]?>">
@@ -1101,12 +1101,12 @@ if ($ejecutar == "consultarExperienciaLaboral") {
             <?
         if (file_exists("../imagenes/experiencia_laboral/" . $bus_consulta["foto"]) and $bus_consulta["foto"] != '') {
             ?>
-				<img src="modulos/rrhh/imagenes/experiencia_laboral/<?=$bus_consulta["foto"]?>">
-				<?
+                <img src="modulos/rrhh/imagenes/experiencia_laboral/<?=$bus_consulta["foto"]?>">
+                <?
         } else {
             ?>
-				<center><strong style="font-size:18px">SIN IMAGEN</strong></center>
-				<?
+                <center><strong style="font-size:18px">SIN IMAGEN</strong></center>
+                <?
         }
         ?>
 
@@ -1117,7 +1117,7 @@ if ($ejecutar == "consultarExperienciaLaboral") {
                 <td align="center" class="Browse"><img src="imagenes/modificar.png" style="cursor:pointer" alt='Modificar' title='Modificar' onclick="seleccionar_experienciaLaboral('<?=$bus_consulta["secuencia"]?>','<?=$bus_consulta["empresa"]?>', '<?=$bus_consulta["desde"]?>', '<?=$bus_consulta["hasta"]?>', '<?=$bus_consulta["tiempo_servicio"]?>', '<?=$bus_consulta["motivo_salida"]?>', '<?=$bus_consulta["ultimo_cargo"]?>', '<?=$bus_consulta["direccion_empresa"]?>', '<?=$bus_consulta["telefono_empresa"]?>', '<?=$bus_consulta["observaciones"]?>')"></td>
                 <td align="center" class="Browse"><img src="imagenes/delete.png" style="cursor:pointer" alt='Eliminar' title='Eliminar' onclick="eliminarExperienciaLaboral('<?=$bus_consulta["secuencia"]?>')"></td>
       </tr>
-			<?
+            <?
     }
     ?>
     </table>
@@ -1141,19 +1141,19 @@ if ($ejecutar == "consultarFichaMovimientos") {
 
 if ($ejecutar == "buscarMovimientosTrabajador") {
     $sql_consulta = mysql_query("select * FROM
-										movimientos_personal mp
-											WHERE
-										mp.idtrabajador = '" . $idtrabajador . "'
-										order by fecha_movimiento");
+                                        movimientos_personal mp
+                                            WHERE
+                                        mp.idtrabajador = '" . $idtrabajador . "'
+                                        order by fecha_movimiento");
     ?>
     <div align="center" style="font-weight:bold; font-size:12px">LISTA DE MOVIMIENTOS REALIZADOS PARA EL TRABAJADOR</div>
     <br>
-	<br>
+    <br>
 
-	<table align="center" class="Main" cellpadding="0" cellspacing="0" width="90%">
-    	<thead>
-        	<tr>
-            	<td class="Browse" align="center">Tipo Movimiento</td>
+    <table align="center" class="Main" cellpadding="0" cellspacing="0" width="90%">
+        <thead>
+            <tr>
+                <td class="Browse" align="center">Tipo Movimiento</td>
                 <td class="Browse" align="center">Fecha</td>
                 <td class="Browse" align="center">Justificacion</td>
 
@@ -1163,9 +1163,9 @@ if ($ejecutar == "buscarMovimientosTrabajador") {
      <?
     while ($bus_consulta = mysql_fetch_array($sql_consulta)) {
         ?>
-		<tr bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
-        	<td class='Browse'>
-			<?
+        <tr bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
+            <td class='Browse'>
+            <?
         $sql_tipo_movimiento = mysql_query("select * from tipo_movimiento_personal where idtipo_movimiento = '" . $bus_consulta["idtipo_movimiento"] . "'");
         $bus_tipo_movimiento = mysql_fetch_array($sql_tipo_movimiento);
         if ($bus_consulta["idtipo_movimiento"] == 0) {
@@ -1195,17 +1195,17 @@ if ($ejecutar == "buscarMovimientosTrabajador") {
             <?
         if ($bus_consulta["idtipo_movimiento"] != 0 and $bus_consulta["idtipo_movimiento"] != 1000000) {
             ?>
-				<img src="imagenes/delete.png" style="cursor:pointer" onclick="eliminarMovimiento('<?=$bus_consulta["idmovimientos_personal"]?>')">
-				<?
+                <img src="imagenes/delete.png" style="cursor:pointer" onclick="eliminarMovimiento('<?=$bus_consulta["idmovimientos_personal"]?>')">
+                <?
         }
         ?>
             </td>
         </tr>
-		<?
+        <?
     }
     ?>
     </table>
-	<?
+    <?
 }
 
 if ($ejecutar == "ingresarMovimiento") {
@@ -1220,40 +1220,40 @@ if ($ejecutar == "ingresarMovimiento") {
     $sql_consulta_trabajador = mysql_query("select * from trabajador where idtrabajador = '" . $idtrabajador . "'") or die(mysql_error());
     $bus_consulta_trabajador = mysql_fetch_array($sql_consulta_trabajador);
 
-    $sql_ingreso = "insert into movimientos_personal(	  		idtrabajador,
-																	  fecha_movimiento,
-																	  idtipo_movimiento,
-																	  justificacion,
-																	  causal,
-																	  usuario,
-																	  status,
-																	  fechayhora,
-																	  fecha_ingreso,
-																	  fecha_reingreso,
-																	  desde,
-																	  hasta,
-																	  idtipo_nomina,
-																	  nro_ficha,
-																	  fecha_egreso,
-																	  idcargo,
-																	  idubicacion_funcional,
-																	  centro_costo
-																	  )VALUES(
-																		'" . $idtrabajador . "',
-																		'" . $fecha_movimiento . "',
-																		'" . $tipo_movimiento . "',
-																		'" . $justificacion . "',
-																		'" . $causal . "',
-																		'" . $login . "',
-																		'a',
-																		'" . $fh . "',
-																		'" . $fecha_ingreso . "',
-																		'" . $fecha_reingreso . "',
-																		'" . $desde . "',
-																		'" . $hasta . "',
-																		'" . $idtipo_nomina . "',
-																		'" . $ficha . "',
-																		'" . $fecha_egreso . "'";
+    $sql_ingreso = "insert into movimientos_personal(           idtrabajador,
+                                                                      fecha_movimiento,
+                                                                      idtipo_movimiento,
+                                                                      justificacion,
+                                                                      causal,
+                                                                      usuario,
+                                                                      status,
+                                                                      fechayhora,
+                                                                      fecha_ingreso,
+                                                                      fecha_reingreso,
+                                                                      desde,
+                                                                      hasta,
+                                                                      idtipo_nomina,
+                                                                      nro_ficha,
+                                                                      fecha_egreso,
+                                                                      idcargo,
+                                                                      idubicacion_funcional,
+                                                                      centro_costo
+                                                                      )VALUES(
+                                                                        '" . $idtrabajador . "',
+                                                                        '" . $fecha_movimiento . "',
+                                                                        '" . $tipo_movimiento . "',
+                                                                        '" . $justificacion . "',
+                                                                        '" . $causal . "',
+                                                                        '" . $login . "',
+                                                                        'a',
+                                                                        '" . $fh . "',
+                                                                        '" . $fecha_ingreso . "',
+                                                                        '" . $fecha_reingreso . "',
+                                                                        '" . $desde . "',
+                                                                        '" . $hasta . "',
+                                                                        '" . $idtipo_nomina . "',
+                                                                        '" . $ficha . "',
+                                                                        '" . $fecha_egreso . "'";
 
     if ($idnuevo_cargo != '0') {
         $sql_ingreso = $sql_ingreso . ",'" . $idnuevo_cargo . "'";
@@ -1294,7 +1294,7 @@ if ($ejecutar == "ingresarMovimiento") {
     }
 
     $sql_actualizar_trabajador = $sql_actualizar_trabajador . "nro_ficha = '" . $ficha . "'
-									  						where idtrabajador = '" . $idtrabajador . "'";
+                                                            where idtrabajador = '" . $idtrabajador . "'";
 
     $sql_actualizar = mysql_query($sql_actualizar_trabajador) or die("ACTU TRAB" . mysql_error());
 
@@ -1318,7 +1318,7 @@ if ($ejecutar == "ingresarMovimiento") {
     }
 
     registra_transaccion("Se ingreso el movimiento de personal con el ID (" . $idmovimiento_ingresado . ", " . $justificacion . ") al trabajador : " . $idtrabajador . ")
-							", $login, $fh, $pc, 'movimientos_personal');
+                            ", $login, $fh, $pc, 'movimientos_personal');
 }
 
 if ($ejecutar == "modificarMovimiento") {
@@ -1331,31 +1331,31 @@ if ($ejecutar == "modificarMovimiento") {
     }
 
     $sql_ingresar = mysql_query("update movimientos_personal set idtrabajador = '" . $idtrabajador . "',
-																	  fecha_movimiento='" . $fecha_movimiento . "',
-																	  idtipo_movimiento='" . $tipo_movimiento . "',
-																	  justificacion='" . $justificacion . "',
-																	  fecha_ingreso='" . $fecha_ingreso . "',
-																	  idcargo='" . $idnuevo_cargo . "',
-																	  idubicacion_funcional='" . $idubicacion_nueva . "',
-																	  fecha_egreso='" . $fecha_egreso . "',
-																	  causal='" . $causal . "',
-																	  centro_costo='" . $centro_costo . "',
-																	  fecha_reingreso='" . $fecha_reingreso . "',
-																	  desde='" . $desde . "',
-																	  hasta='" . $hasta . "',
-																	  idtipo_nomina='" . $idtipo_nomina . "',
-																	  nro_ficha='" . $ficha . "'
-																		WHERE idmovimientos_personal = '" . $idmovimiento . "'") or die(mysql_error());
+                                                                      fecha_movimiento='" . $fecha_movimiento . "',
+                                                                      idtipo_movimiento='" . $tipo_movimiento . "',
+                                                                      justificacion='" . $justificacion . "',
+                                                                      fecha_ingreso='" . $fecha_ingreso . "',
+                                                                      idcargo='" . $idnuevo_cargo . "',
+                                                                      idubicacion_funcional='" . $idubicacion_nueva . "',
+                                                                      fecha_egreso='" . $fecha_egreso . "',
+                                                                      causal='" . $causal . "',
+                                                                      centro_costo='" . $centro_costo . "',
+                                                                      fecha_reingreso='" . $fecha_reingreso . "',
+                                                                      desde='" . $desde . "',
+                                                                      hasta='" . $hasta . "',
+                                                                      idtipo_nomina='" . $idtipo_nomina . "',
+                                                                      nro_ficha='" . $ficha . "'
+                                                                        WHERE idmovimientos_personal = '" . $idmovimiento . "'") or die(mysql_error());
 
     $sql_consulta = mysql_query("select * from movimientos_personal where idmovimientos_personal = '" . $idmovimiento . "'");
     $bus_consulta = mysql_fetch_array($sql_consulta);
 
     $sql_actualizar = mysql_query("update trabajador set idcargo = '" . $idnuevo_cargo . "',
-															idunidad_funcional = '" . $idubicacion_nueva . "',
-															idcargo = '" . $idnuevo_cargo . "',
-															centro_costo = '" . $centro_costo . "',
-															nro_ficha = '" . $ficha . "'
-									  						where idtrabajador = '" . $idtrabajador . "'") or die(mysql_error());
+                                                            idunidad_funcional = '" . $idubicacion_nueva . "',
+                                                            idcargo = '" . $idnuevo_cargo . "',
+                                                            centro_costo = '" . $centro_costo . "',
+                                                            nro_ficha = '" . $ficha . "'
+                                                            where idtrabajador = '" . $idtrabajador . "'") or die(mysql_error());
 
     registra_transaccion("Se Modifico el movimiento de personal con el ID (" . $idmovimiento . ")", $login, $fh, $pc, 'movimientos_personal');
 }
@@ -1367,10 +1367,10 @@ if ($ejecutar == "eliminarMovimiento") {
     $sql_eliminar = mysql_query("delete from movimientos_personal where idmovimientos_personal = '" . $idmovimiento . "'");
 
     $sql_consultar_movimiento = mysql_query("select * from movimientos_personal where idtrabajador= '" . $bus_consulta["idtrabajador"] . "'
-																				and idtipo_nomina != '0' order by idmovimientos_personal desc limit 0,1") or die("error al consultar el ultimo " . mysql_error());
+                                                                                and idtipo_nomina != '0' order by idmovimientos_personal desc limit 0,1") or die("error al consultar el ultimo " . mysql_error());
     $bus_consultar_movimiento = mysql_fetch_array($sql_consultar_movimiento);
     $sql_actualizar           = mysql_query("update trabajador set idtipo_nomina = '" . $bus_consultar_movimiento["idtipo_nomina"] . "'
-									  							where idtrabajador = '" . $bus_consultar_movimiento["idtrabajador"] . "'") or die("error al actualizar: " . mysql_error());
+                                                                where idtrabajador = '" . $bus_consultar_movimiento["idtrabajador"] . "'") or die("error al actualizar: " . mysql_error());
     registra_transaccion("Se Elimino el movimiento de personal con el ID (" . $idmovimiento . ")", $login, $fh, $pc, 'movimientos_personal');
 
 }
@@ -1592,10 +1592,10 @@ if ($ejecutar == "consultarHistoricoPermisos") {
     $result_select_trabajador = mysql_query($str_select_permisos) or die(mysql_error());
 
     ?>
-		<table border="0" class="Browse" cellpadding="0" cellspacing="0" width="80%" align="center">
-        	<thead>
+        <table border="0" class="Browse" cellpadding="0" cellspacing="0" width="80%" align="center">
+            <thead>
             <tr>
-            	<td width="26%" class="Browse" align="center">Fecha de Inicio</td>
+                <td width="26%" class="Browse" align="center">Fecha de Inicio</td>
                 <td width="29%" class="Browse" align="center">Fecha de Culminaci&oacute;n</td>
                 <td width="15%" class="Browse" align="center">Justificado</td>
                 <td width="19%" class="Browse" align="center">Remunerado</td>
@@ -1603,13 +1603,13 @@ if ($ejecutar == "consultarHistoricoPermisos") {
             </tr>
             </thead>
             <?while ($array_select = mysql_fetch_array($result_select_trabajador)) {?>
-            	<tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
+                <tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
                 <td align="left" class="Browse"><div align="center">
                   <?list($fecha_inicio, $hora) = split('[ ]', $array_select["fecha_inicio"]);?>
-				  <?=$fecha_inicio?>
+                  <?=$fecha_inicio?>
                 </div></td>
                 <td align="left" class="Browse"><div align="center">
-	              <?list($fecha_culminacion, $hora) = split('[ ]', $array_select["fecha_culminacion"]);?>
+                  <?list($fecha_culminacion, $hora) = split('[ ]', $array_select["fecha_culminacion"]);?>
                   <?=$fecha_culminacion?>
                 </div></td>
                 <?if ($array_select["justificado"] == 1) {$justificado = "Si";} else { $justificado = "No";}?>
@@ -1633,57 +1633,57 @@ if ($ejecutar == "consultarHistoricoPermisos") {
 if ($ejecutar == "modificarHistorico") {
 
     $str_actualizar = "update historico_permisos set
-						fecha_solicitud='" . $fecha_solicitud . "',
-						fecha_inicio ='" . $fecha_inicio . "',
-						hora_inicio = '" . $hr_inicio . "',
-						fecha_culminacion = '" . $fecha_culminacion . "',
-						hora_culminacion = '" . $hr_culminacion . "',
-						tiempo_total = '" . $tiempo_horas . "',
-						descuenta_bono_alimentacion = '" . $desc_bono . "',
-						motivo = '" . $motivo . "',
-						justificado = '" . $justificado1 . "',
-						remunerado = '" . $remunerado1 . "',
-						aprobado_por = '" . $aprobado_por . "',
-						ci_aprobado = '" . $ci_aprobado . "',
-						usuario = '" . $login . "',
-						fechayhora = '" . $fh . "'
-						where idhistorico_permisos = '" . $idhistorico . "'";
+                        fecha_solicitud='" . $fecha_solicitud . "',
+                        fecha_inicio ='" . $fecha_inicio . "',
+                        hora_inicio = '" . $hr_inicio . "',
+                        fecha_culminacion = '" . $fecha_culminacion . "',
+                        hora_culminacion = '" . $hr_culminacion . "',
+                        tiempo_total = '" . $tiempo_horas . "',
+                        descuenta_bono_alimentacion = '" . $desc_bono . "',
+                        motivo = '" . $motivo . "',
+                        justificado = '" . $justificado1 . "',
+                        remunerado = '" . $remunerado1 . "',
+                        aprobado_por = '" . $aprobado_por . "',
+                        ci_aprobado = '" . $ci_aprobado . "',
+                        usuario = '" . $login . "',
+                        fechayhora = '" . $fh . "'
+                        where idhistorico_permisos = '" . $idhistorico . "'";
     $result_actualizar = mysql_query($str_actualizar);
 }
 
 if ($ejecutar == "ingresarHistorico") {
 
     $sql_ingresar = "insert into historico_permisos(
-						idtrabajador,
-						fecha_inicio,
-						hora_inicio,
-						fecha_culminacion,
-						hora_culminacion,
-						fecha_solicitud,
-						tiempo_total,
-						descuenta_bono_alimentacion,
-						motivo,
-						justificado,
-						remunerado,
-						aprobado_por,
-						ci_aprobado,
-						usuario,
-						fechayhora) values (
-						'" . $idtrabajador . "',
-						'" . $fecha_inicio . "',
-						'" . $hr_inicio . "',
-						'" . $fecha_culminacion . "',
-						'" . $hr_culminacion . "',
-						'" . $fecha_solicitud . "',
-						'" . $tiempo_horas . "',
-						'" . $desc_bono . "',
-						'" . $motivo . "',
-						'" . $justificado1 . "',
-						'" . $remunerado1 . "',
-						'" . $aprobado_por . "',
-						'" . $ci_aprobado . "',
-						'" . $login . "',
-						'" . $fh . "');";
+                        idtrabajador,
+                        fecha_inicio,
+                        hora_inicio,
+                        fecha_culminacion,
+                        hora_culminacion,
+                        fecha_solicitud,
+                        tiempo_total,
+                        descuenta_bono_alimentacion,
+                        motivo,
+                        justificado,
+                        remunerado,
+                        aprobado_por,
+                        ci_aprobado,
+                        usuario,
+                        fechayhora) values (
+                        '" . $idtrabajador . "',
+                        '" . $fecha_inicio . "',
+                        '" . $hr_inicio . "',
+                        '" . $fecha_culminacion . "',
+                        '" . $hr_culminacion . "',
+                        '" . $fecha_solicitud . "',
+                        '" . $tiempo_horas . "',
+                        '" . $desc_bono . "',
+                        '" . $motivo . "',
+                        '" . $justificado1 . "',
+                        '" . $remunerado1 . "',
+                        '" . $aprobado_por . "',
+                        '" . $ci_aprobado . "',
+                        '" . $login . "',
+                        '" . $fh . "');";
 
     $result_ingresar = mysql_query($sql_ingresar);
 
@@ -1702,26 +1702,26 @@ if ($ejecutar == "ingresarHistorico") {
 
 if ($ejecutar == "ingresarReconocimientos") {
     $sql_ingresar = mysql_query("insert into reconocimientos (idtrabajador,
-															idtipo_reconocimientos,
-															motivo,
-															fecha,
-															numero_documento,
-															fecha_entrega,
-															constancia_anexa,
-															nombre_imagen,
-															observaciones,
-															usuario,
-															fechayhora)VALUES('" . $idtrabajador . "',
-																				'" . $tipo . "',
-																				'" . $motivo . "',
-																				'" . $fecha . "',
-																				'" . $numero_documentos . "',
-																				'" . $fecha_entrega . "',
-																				'" . $constancia_anexa . "',
-																				'" . $nombre_imagen . "',
-																				'" . $observaciones . "',
-																				'" . $login . "',
-																				'" . $fh . "')");
+                                                            idtipo_reconocimientos,
+                                                            motivo,
+                                                            fecha,
+                                                            numero_documento,
+                                                            fecha_entrega,
+                                                            constancia_anexa,
+                                                            nombre_imagen,
+                                                            observaciones,
+                                                            usuario,
+                                                            fechayhora)VALUES('" . $idtrabajador . "',
+                                                                                '" . $tipo . "',
+                                                                                '" . $motivo . "',
+                                                                                '" . $fecha . "',
+                                                                                '" . $numero_documentos . "',
+                                                                                '" . $fecha_entrega . "',
+                                                                                '" . $constancia_anexa . "',
+                                                                                '" . $nombre_imagen . "',
+                                                                                '" . $observaciones . "',
+                                                                                '" . $login . "',
+                                                                                '" . $fh . "')");
     if ($sql_ingresar) {
         echo "exito";
     } else {
@@ -1731,10 +1731,10 @@ if ($ejecutar == "ingresarReconocimientos") {
 
 if ($ejecutar == "modificarReconocimientos") {
     $sql_consulta = mysql_query("SELECT *
-									FROM
-								reconocimientos
-									WHERE
-								idreconocimientos = '" . $idreconocimientos . "'");
+                                    FROM
+                                reconocimientos
+                                    WHERE
+                                idreconocimientos = '" . $idreconocimientos . "'");
     $bus_consulta = mysql_fetch_array($sql_consulta);
 
     if ($bus_consulta["nombre_imagen"] != '') {
@@ -1742,15 +1742,15 @@ if ($ejecutar == "modificarReconocimientos") {
     }
 
     $sql_modificar = mysql_query("UPDATE reconocimientos SET idtipo_reconocimientos = '" . $tipo . "',
-															motivo 					= '" . $motivo . "',
-															fecha 					= '" . $fecha . "',
-															numero_documento 		= '" . $numero_documentos . "',
-															fecha_entrega 			= '" . $fecha_entrega . "',
-															constancia_anexa 		= '" . $constancia_anexa . "',
-															nombre_imagen 			= '" . $nombre_imagen . "',
-															observaciones 			= '" . $observaciones . "'
-																WHERE
-															idreconocimientos	 	= '" . $idreconocimientos . "'");
+                                                            motivo                  = '" . $motivo . "',
+                                                            fecha                   = '" . $fecha . "',
+                                                            numero_documento        = '" . $numero_documentos . "',
+                                                            fecha_entrega           = '" . $fecha_entrega . "',
+                                                            constancia_anexa        = '" . $constancia_anexa . "',
+                                                            nombre_imagen           = '" . $nombre_imagen . "',
+                                                            observaciones           = '" . $observaciones . "'
+                                                                WHERE
+                                                            idreconocimientos       = '" . $idreconocimientos . "'");
     if ($sql_modificar) {
         echo "exito";
     } else {
@@ -1773,10 +1773,10 @@ if ($ejecutar == "consultarReconocimientos") {
     $sql_consulta = mysql_query("select * from reconocimientos where idtrabajador = '" . $idtrabajador . "'") or die(mysql_error());
 
     ?>
-	<table border="0" class="Browse" cellpadding="0" cellspacing="0" width="80%" align="center">
-        	<thead>
+    <table border="0" class="Browse" cellpadding="0" cellspacing="0" width="80%" align="center">
+            <thead>
             <tr>
-            	<td width="19%" class="Browse" align="center">Imagen</td>
+                <td width="19%" class="Browse" align="center">Imagen</td>
                 <td width="26%" class="Browse" align="center">Tipo</td>
                 <td width="29%" class="Browse" align="center">Fecha de Entrega</td>
                 <td width="15%" class="Browse" align="center">Motivo</td>
@@ -1794,19 +1794,19 @@ if ($ejecutar == "consultarReconocimientos") {
             <?
         if (file_exists("../imagenes/reconocimientos/" . $bus_consulta["nombre_imagen"]) and $bus_consulta["nombre_imagen"] != '') {
             ?>
-				<img src="modulos/rrhh/imagenes/reconocimientos/<?=$bus_consulta["nombre_imagen"]?>">
-				<?
+                <img src="modulos/rrhh/imagenes/reconocimientos/<?=$bus_consulta["nombre_imagen"]?>">
+                <?
         } else {
             ?>
-				<center><strong style="font-size:18px">SIN IMAGEN</strong></center>
-				<?
+                <center><strong style="font-size:18px">SIN IMAGEN</strong></center>
+                <?
         }
         ?>
 
             </div>
             </td>
                 <td align="left" class="Browse">
-				<?
+                <?
         $sql_reconocimientos = mysql_query("select * from tipos_reconocimientos where idtipo_reconocimientos = '" . $bus_consulta["idtipo_reconocimientos"] . "'");
         $bus_reconocimientos = mysql_fetch_array($sql_reconocimientos);
 
@@ -1822,7 +1822,7 @@ if ($ejecutar == "consultarReconocimientos") {
             </table>
 
 
-	<?
+    <?
 }
 
 if ($ejecutar == "cargarFotoReconocimientos") {
@@ -1838,8 +1838,8 @@ if ($ejecutar == "cargarFotoReconocimientos") {
         if (!copy($_FILES['foto_reconocimientos']['tmp_name'], $dir . $nombre_imagen)) {
             ?>
                 <script>
-				parent.document.getElementById('mostrarImagen').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* Disculpe la imagen no se pudo ingresar</td></tr></table>";
-				</script>
+                parent.document.getElementById('mostrarImagen').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* Disculpe la imagen no se pudo ingresar</td></tr></table>";
+                </script>
                 <?
         } else {
             $ruta = 'modulos/rrhh/imagenes/reconocimientos/' . $nombre_imagen;
@@ -1847,18 +1847,18 @@ if ($ejecutar == "cargarFotoReconocimientos") {
 
         ?>
 
-			<script>
+            <script>
             parent.document.getElementById('nombre_imagen_reconocimientos').value = '<?=$nombre_imagen?>';
             </script>
             <?
 
     } else {
         ?>
-			<script>
-			parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen");
-			</script>
+            <script>
+            parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen");
+            </script>
 
-			<?
+            <?
     }
 
 }
@@ -1871,26 +1871,26 @@ if ($ejecutar == "cargarFotoReconocimientos") {
 
 if ($ejecutar == "ingresarsanciones") {
     $sql_ingresar = mysql_query("insert into sanciones (idtrabajador,
-															idtipo_sanciones,
-															motivo,
-															fecha,
-															numero_documento,
-															fecha_entrega,
-															constancia_anexa,
-															nombre_imagen,
-															observaciones,
-															usuario,
-															fechayhora)VALUES('" . $idtrabajador . "',
-																				'" . $tipo . "',
-																				'" . $motivo . "',
-																				'" . $fecha . "',
-																				'" . $numero_documentos . "',
-																				'" . $fecha_entrega . "',
-																				'" . $constancia_anexa . "',
-																				'" . $nombre_imagen . "',
-																				'" . $observaciones . "',
-																				'" . $login . "',
-																				'" . $fh . "')");
+                                                            idtipo_sanciones,
+                                                            motivo,
+                                                            fecha,
+                                                            numero_documento,
+                                                            fecha_entrega,
+                                                            constancia_anexa,
+                                                            nombre_imagen,
+                                                            observaciones,
+                                                            usuario,
+                                                            fechayhora)VALUES('" . $idtrabajador . "',
+                                                                                '" . $tipo . "',
+                                                                                '" . $motivo . "',
+                                                                                '" . $fecha . "',
+                                                                                '" . $numero_documentos . "',
+                                                                                '" . $fecha_entrega . "',
+                                                                                '" . $constancia_anexa . "',
+                                                                                '" . $nombre_imagen . "',
+                                                                                '" . $observaciones . "',
+                                                                                '" . $login . "',
+                                                                                '" . $fh . "')");
     if ($sql_ingresar) {
         echo "exito";
     } else {
@@ -1900,26 +1900,26 @@ if ($ejecutar == "ingresarsanciones") {
 
 if ($ejecutar == "modificarsanciones") {
     $sql_consulta = mysql_query("SELECT *
-									FROM
-								sanciones
-									WHERE
-								idsanciones = '" . $idsanciones . "'");
+                                    FROM
+                                sanciones
+                                    WHERE
+                                idsanciones = '" . $idsanciones . "'");
     $bus_consulta = mysql_fetch_array($sql_consulta);
 
     if ($bus_consulta["nombre_imagen"] != '') {
         unlink("../imagenes/sanciones/" . $bus_consulta["nombre_imagen"]);
     }
 
-    $sql_modificar = mysql_query("UPDATE sanciones SET idtipo_sanciones			= '" . $tipo . "',
-															motivo 				= '" . $motivo . "',
-															fecha 				= '" . $fecha . "',
-															numero_documento 	= '" . $numero_documentos . "',
-															fecha_entrega 		= '" . $fecha_entrega . "',
-															constancia_anexa 	= '" . $constancia_anexa . "',
-															nombre_imagen 		= '" . $nombre_imagen . "',
-															observaciones 		= '" . $observaciones . "'
-																WHERE
-															idsanciones 		= '" . $idsanciones . "'");
+    $sql_modificar = mysql_query("UPDATE sanciones SET idtipo_sanciones         = '" . $tipo . "',
+                                                            motivo              = '" . $motivo . "',
+                                                            fecha               = '" . $fecha . "',
+                                                            numero_documento    = '" . $numero_documentos . "',
+                                                            fecha_entrega       = '" . $fecha_entrega . "',
+                                                            constancia_anexa    = '" . $constancia_anexa . "',
+                                                            nombre_imagen       = '" . $nombre_imagen . "',
+                                                            observaciones       = '" . $observaciones . "'
+                                                                WHERE
+                                                            idsanciones         = '" . $idsanciones . "'");
     if ($sql_modificar) {
         echo "exito";
     } else {
@@ -1941,10 +1941,10 @@ if ($ejecutar == "eliminarsancion") {
 if ($ejecutar == "consultarsanciones") {
     $sql_consulta = mysql_query("select * from sanciones where idtrabajador = '" . $idtrabajador . "'");
     ?>
-	<table border="0" class="Browse" cellpadding="0" cellspacing="0" width="80%" align="center">
-        	<thead>
+    <table border="0" class="Browse" cellpadding="0" cellspacing="0" width="80%" align="center">
+            <thead>
             <tr>
-            	<td width="19%" class="Browse" align="center">Imagen</td>
+                <td width="19%" class="Browse" align="center">Imagen</td>
                 <td width="26%" class="Browse" align="center">Tipo</td>
                 <td width="29%" class="Browse" align="center">Fecha de Entrega</td>
                 <td width="15%" class="Browse" align="center">Motivo</td>
@@ -1962,12 +1962,12 @@ if ($ejecutar == "consultarsanciones") {
             <?
         if (file_exists("../imagenes/sanciones/" . $bus_consulta["nombre_imagen"]) and $bus_consulta["nombre_imagen"] != '') {
             ?>
-				<img src="modulos/rrhh/imagenes/sanciones/<?=$bus_consulta["nombre_imagen"]?>">
-				<?
+                <img src="modulos/rrhh/imagenes/sanciones/<?=$bus_consulta["nombre_imagen"]?>">
+                <?
         } else {
             ?>
-				<center><strong style="font-size:18px">SIN IMAGEN</strong></center>
-				<?
+                <center><strong style="font-size:18px">SIN IMAGEN</strong></center>
+                <?
         }
         ?>
 
@@ -1988,7 +1988,7 @@ if ($ejecutar == "consultarsanciones") {
             </table>
 
 
-	<?
+    <?
 }
 
 if ($ejecutar == "cargarFotosanciones") {
@@ -2004,8 +2004,8 @@ if ($ejecutar == "cargarFotosanciones") {
         if (!copy($_FILES['foto_sanciones']['tmp_name'], $dir . $nombre_imagen)) {
             ?>
                 <script>
-				parent.document.getElementById('mostrarImagen').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* Disculpe la imagen no se pudo ingresar</td></tr></table>";
-				</script>
+                parent.document.getElementById('mostrarImagen').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* Disculpe la imagen no se pudo ingresar</td></tr></table>";
+                </script>
                 <?
         } else {
             $ruta = 'modulos/rrhh/imagenes/sanciones/' . $nombre_imagen;
@@ -2013,18 +2013,18 @@ if ($ejecutar == "cargarFotosanciones") {
 
         ?>
 
-			<script>
+            <script>
             parent.document.getElementById('nombre_imagen_sanciones').value = '<?=$nombre_imagen?>';
             </script>
             <?
 
     } else {
         ?>
-			<script>
-			parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen");
-			</script>
+            <script>
+            parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen");
+            </script>
 
-			<?
+            <?
     }
 
 }
@@ -2037,22 +2037,22 @@ if ($ejecutar == "cargarFotosanciones") {
 
 if ($ejecutar == "ingresardeclaracion_jurada") {
     $sql_ingresar = mysql_query("insert into declaracion_jurada (idtrabajador,
-															tipo,
-															fecha_declaracion,
-															fecha_entrega,
-															constancia_anexa,
-															nombre_imagen,
-															observaciones,
-															usuario,
-															fechayhora)VALUES('" . $idtrabajador . "',
-																				'" . $tipo . "',
-																				'" . $fecha_declaracion . "',
-																				'" . $fecha_entrega . "',
-																				'" . $constancia_anexa . "',
-																				'" . $nombre_imagen . "',
-																				'" . $observaciones . "',
-																				'" . $login . "',
-																				'" . $fh . "')");
+                                                            tipo,
+                                                            fecha_declaracion,
+                                                            fecha_entrega,
+                                                            constancia_anexa,
+                                                            nombre_imagen,
+                                                            observaciones,
+                                                            usuario,
+                                                            fechayhora)VALUES('" . $idtrabajador . "',
+                                                                                '" . $tipo . "',
+                                                                                '" . $fecha_declaracion . "',
+                                                                                '" . $fecha_entrega . "',
+                                                                                '" . $constancia_anexa . "',
+                                                                                '" . $nombre_imagen . "',
+                                                                                '" . $observaciones . "',
+                                                                                '" . $login . "',
+                                                                                '" . $fh . "')");
     if ($sql_ingresar) {
         echo "exito";
     } else {
@@ -2062,24 +2062,24 @@ if ($ejecutar == "ingresardeclaracion_jurada") {
 
 if ($ejecutar == "modificardeclaracion_jurada") {
     $sql_consulta = mysql_query("SELECT *
-									FROM
-								declaracion_jurada
-									WHERE
-								iddeclaracion = '" . $iddeclaracion_jurada . "'");
+                                    FROM
+                                declaracion_jurada
+                                    WHERE
+                                iddeclaracion = '" . $iddeclaracion_jurada . "'");
     $bus_consulta = mysql_fetch_array($sql_consulta);
 
     if ($bus_consulta["nombre_imagen"] != '') {
         unlink("../imagenes/declaracion_jurada/" . $bus_consulta["nombre_imagen"]);
     }
 
-    $sql_modificar = mysql_query("UPDATE declaracion_jurada SET tipo 			= '" . $tipo . "',
-															fecha_declaracion 	= '" . $fecha_declaracion . "',
-															fecha_entrega 		= '" . $fecha_entrega . "',
-															constancia_anexa 	= '" . $constancia_anexa . "',
-															nombre_imagen 		= '" . $nombre_imagen . "',
-															observaciones 		= '" . $observaciones . "'
-																WHERE
-															iddeclaracion 		= '" . $iddeclaracion_jurada . "'");
+    $sql_modificar = mysql_query("UPDATE declaracion_jurada SET tipo            = '" . $tipo . "',
+                                                            fecha_declaracion   = '" . $fecha_declaracion . "',
+                                                            fecha_entrega       = '" . $fecha_entrega . "',
+                                                            constancia_anexa    = '" . $constancia_anexa . "',
+                                                            nombre_imagen       = '" . $nombre_imagen . "',
+                                                            observaciones       = '" . $observaciones . "'
+                                                                WHERE
+                                                            iddeclaracion       = '" . $iddeclaracion_jurada . "'");
     if ($sql_modificar) {
         echo "exito";
     } else {
@@ -2101,10 +2101,10 @@ if ($ejecutar == "eliminarDeclaracion_jurada") {
 if ($ejecutar == "consultardeclaracion_jurada") {
     $sql_consulta = mysql_query("select * from declaracion_jurada where idtrabajador = '" . $idtrabajador . "'");
     ?>
-	<table border="0" class="Browse" cellpadding="0" cellspacing="0" width="80%" align="center">
-        	<thead>
+    <table border="0" class="Browse" cellpadding="0" cellspacing="0" width="80%" align="center">
+            <thead>
             <tr>
-            	<td width="19%" class="Browse" align="center">Imagen</td>
+                <td width="19%" class="Browse" align="center">Imagen</td>
                 <td width="26%" class="Browse" align="center">Tipo</td>
                 <td width="29%" class="Browse" align="center">Fecha de Entrega</td>
                 <td width="15%" class="Browse" align="center">Fecha de Declaracion</td>
@@ -2122,12 +2122,12 @@ if ($ejecutar == "consultardeclaracion_jurada") {
             <?
         if (file_exists("../imagenes/declaracion_jurada/" . $bus_consulta["nombre_imagen"]) and $bus_consulta["nombre_imagen"] != '') {
             ?>
-				<img src="modulos/rrhh/imagenes/declaracion_jurada/<?=$bus_consulta["nombre_imagen"]?>">
-				<?
+                <img src="modulos/rrhh/imagenes/declaracion_jurada/<?=$bus_consulta["nombre_imagen"]?>">
+                <?
         } else {
             ?>
-				<center><strong style="font-size:18px">SIN IMAGEN</strong></center>
-				<?
+                <center><strong style="font-size:18px">SIN IMAGEN</strong></center>
+                <?
         }
         ?>
 
@@ -2145,7 +2145,7 @@ if ($ejecutar == "consultardeclaracion_jurada") {
             </table>
 
 
-	<?
+    <?
 }
 
 if ($ejecutar == "cargarFotodeclaracion_jurada") {
@@ -2161,8 +2161,8 @@ if ($ejecutar == "cargarFotodeclaracion_jurada") {
         if (!copy($_FILES['foto_declaracion_jurada']['tmp_name'], $dir . $nombre_imagen)) {
             ?>
                 <script>
-				parent.document.getElementById('mostrarImagen').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* Disculpe la imagen no se pudo ingresar</td></tr></table>";
-				</script>
+                parent.document.getElementById('mostrarImagen').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* Disculpe la imagen no se pudo ingresar</td></tr></table>";
+                </script>
                 <?
         } else {
             $ruta = 'modulos/rrhh/imagenes/declaracion_jurada/' . $nombre_imagen;
@@ -2170,18 +2170,18 @@ if ($ejecutar == "cargarFotodeclaracion_jurada") {
 
         ?>
 
-			<script>
+            <script>
             parent.document.getElementById('nombre_imagen_declaracion_jurada').value = '<?=$nombre_imagen?>';
             </script>
             <?
 
     } else {
         ?>
-			<script>
-			parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen");
-			</script>
+            <script>
+            parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen");
+            </script>
 
-			<?
+            <?
     }
 
 }
@@ -2194,32 +2194,32 @@ if ($ejecutar == "cargarFotodeclaracion_jurada") {
 
 if ($ejecutar == "ingresarCursos") {
     $sql_ingresar = mysql_query("insert into cursos_otros_estudios (idtrabajador,
-															denominacion,
-															detalle_contenido,
-															duracion,
-															dias_horas,
-															desde,
-															hasta,
-															institucion,
-															telefonos,
-															realizado_por,
-															constancia_anexa,
-															nombre_imagen,
-															usuario,
-															fechayhora)VALUES('" . $idtrabajador . "',
-																				'" . $denominacion . "',
-																				'" . $detalle_contenido . "',
-																				'" . $duracion . "',
-																				'" . $tipo_duracion . "',
-																				'" . $desde . "',
-																				'" . $hasta . "',
-																				'" . $institucion . "',
-																				'" . $telefonos . "',
-																				'" . $realizado_por . "',
-																				'" . $constancia_anexa . "',
-																				'" . $nombre_imagen . "',
-																				'" . $login . "',
-																				'" . $fh . "')");
+                                                            denominacion,
+                                                            detalle_contenido,
+                                                            duracion,
+                                                            dias_horas,
+                                                            desde,
+                                                            hasta,
+                                                            institucion,
+                                                            telefonos,
+                                                            realizado_por,
+                                                            constancia_anexa,
+                                                            nombre_imagen,
+                                                            usuario,
+                                                            fechayhora)VALUES('" . $idtrabajador . "',
+                                                                                '" . $denominacion . "',
+                                                                                '" . $detalle_contenido . "',
+                                                                                '" . $duracion . "',
+                                                                                '" . $tipo_duracion . "',
+                                                                                '" . $desde . "',
+                                                                                '" . $hasta . "',
+                                                                                '" . $institucion . "',
+                                                                                '" . $telefonos . "',
+                                                                                '" . $realizado_por . "',
+                                                                                '" . $constancia_anexa . "',
+                                                                                '" . $nombre_imagen . "',
+                                                                                '" . $login . "',
+                                                                                '" . $fh . "')");
     if ($sql_ingresar) {
         echo "exito";
     } else {
@@ -2229,10 +2229,10 @@ if ($ejecutar == "ingresarCursos") {
 
 if ($ejecutar == "modificarCursos") {
     $sql_consulta = mysql_query("SELECT *
-									FROM
-								cursos_otros_estudios
-									WHERE
-								idcurso = '" . $idcursos . "'");
+                                    FROM
+                                cursos_otros_estudios
+                                    WHERE
+                                idcurso = '" . $idcursos . "'");
     $bus_consulta = mysql_fetch_array($sql_consulta);
 
     if ($bus_consulta["nombre_imagen"] != '') {
@@ -2240,20 +2240,20 @@ if ($ejecutar == "modificarCursos") {
     }
 
     $sql_modificar = mysql_query("UPDATE cursos_otros_estudios SET
-															denominacion 			= '" . $denominacion . "',
-															detalle_contenido 		= '" . $detalle_contenido . "',
-															duracion 				= '" . $duracion . "',
-															dias_horas 				= '" . $dias_horas . "',
-															desde 					= '" . $desde . "',
-															hasta 					= '" . $hasta . "',
-															institucion 			= '" . $institucion . "',
-															telefonos 				= '" . $telefonos . "',
-															realizado_por 			= '" . $realizado_por . "',
-															constancia_anexa		= '" . $constancia_anexa . "',
-															nombre_imagen			= '" . $nombre_imagen . "',
-															dias_horas				= '" . $tipo_duracion . "'
-																WHERE
-															idcurso 				= '" . $idcursos . "'") or die(mysql_error());
+                                                            denominacion            = '" . $denominacion . "',
+                                                            detalle_contenido       = '" . $detalle_contenido . "',
+                                                            duracion                = '" . $duracion . "',
+                                                            dias_horas              = '" . $dias_horas . "',
+                                                            desde                   = '" . $desde . "',
+                                                            hasta                   = '" . $hasta . "',
+                                                            institucion             = '" . $institucion . "',
+                                                            telefonos               = '" . $telefonos . "',
+                                                            realizado_por           = '" . $realizado_por . "',
+                                                            constancia_anexa        = '" . $constancia_anexa . "',
+                                                            nombre_imagen           = '" . $nombre_imagen . "',
+                                                            dias_horas              = '" . $tipo_duracion . "'
+                                                                WHERE
+                                                            idcurso                 = '" . $idcursos . "'") or die(mysql_error());
     if ($sql_modificar) {
         echo "exito";
     } else {
@@ -2275,10 +2275,10 @@ if ($ejecutar == "eliminarCursos") {
 if ($ejecutar == "consultarCursos") {
     $sql_consulta = mysql_query("select * from cursos_otros_estudios where idtrabajador = '" . $idtrabajador . "'");
     ?>
-	<table border="0" class="Browse" cellpadding="0" cellspacing="0" width="80%" align="center">
-        	<thead>
+    <table border="0" class="Browse" cellpadding="0" cellspacing="0" width="80%" align="center">
+            <thead>
             <tr>
-            	<td width="19%" class="Browse" align="center">Imagen</td>
+                <td width="19%" class="Browse" align="center">Imagen</td>
                 <td width="26%" class="Browse" align="center">Denominacion</td>
                 <td width="29%" class="Browse" align="center">Desde</td>
                 <td width="15%" class="Browse" align="center">Hasta</td>
@@ -2296,12 +2296,12 @@ if ($ejecutar == "consultarCursos") {
             <?
         if (file_exists("../imagenes/cursos/" . $bus_consulta["nombre_imagen"]) and $bus_consulta["nombre_imagen"] != '') {
             ?>
-				<img src="modulos/rrhh/imagenes/cursos/<?=$bus_consulta["nombre_imagen"]?>">
-				<?
+                <img src="modulos/rrhh/imagenes/cursos/<?=$bus_consulta["nombre_imagen"]?>">
+                <?
         } else {
             ?>
-				<center><strong style="font-size:18px">SIN IMAGEN</strong></center>
-				<?
+                <center><strong style="font-size:18px">SIN IMAGEN</strong></center>
+                <?
         }
         ?>
 
@@ -2319,7 +2319,7 @@ if ($ejecutar == "consultarCursos") {
             </table>
 
 
-	<?
+    <?
 }
 
 if ($ejecutar == "cargarFotoCursos") {
@@ -2335,8 +2335,8 @@ if ($ejecutar == "cargarFotoCursos") {
         if (!copy($_FILES['foto_cursos']['tmp_name'], $dir . $nombre_imagen)) {
             ?>
                 <script>
-			parent.mostrarMensajes("error", "Disculpe la imagen no se pudo ingresar");
-			</script>
+            parent.mostrarMensajes("error", "Disculpe la imagen no se pudo ingresar");
+            </script>
                 <?
         } else {
             $ruta = 'modulos/rrhh/imagenes/cursos/' . $nombre_imagen;
@@ -2344,18 +2344,18 @@ if ($ejecutar == "cargarFotoCursos") {
 
         ?>
 
-			<script>
+            <script>
             parent.document.getElementById('nombre_imagen_cursos').value = '<?=$nombre_imagen?>';
             </script>
             <?
 
     } else {
         ?>
-			<script>
-			parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen..");
-			</script>
+            <script>
+            parent.mostrarMensajes("error", "Disculpe el archivo que intenta subir NO es una Imagen..");
+            </script>
 
-			<?
+            <?
     }
 
 }
@@ -2487,9 +2487,9 @@ if ($ejecutar == "llenarFormulario_vacaciones") {
     $query = mysql_query($sql);
     $array = mysql_fetch_array($query);
     ?>
-    	<table border="0">
-        	<tr>
-            	<td><input type="hidden" value="<?=$array['idhistorico_vacaciones']?>" id="idhistorico_vacaciones_encontrado_vacaciones"/></td>
+        <table border="0">
+            <tr>
+                <td><input type="hidden" value="<?=$array['idhistorico_vacaciones']?>" id="idhistorico_vacaciones_encontrado_vacaciones"/></td>
                 <td><input type="hidden" value="<?=$array['idtrabajador']?>" id="idtrabajador_encontrado_vacaciones"/></td>
 
                 <td><input type="hidden" value="<?=$array['periodo']?>" id="periodo_encontrado_vacaciones"/></td>
@@ -2566,7 +2566,7 @@ if ($ejecutar == "llenargrilla_vacaciones") {
               </tr>
               <?}?>
             </table>
-	<?}
+    <?}
 
 }
 
@@ -2606,69 +2606,69 @@ if ($ejecutar == "accion_vacaciones") {
             }else{*/
 
             $sql_consulta = mysql_query("select * from historico_vacaciones
-									where
-									fecha_inicio_vacacion >= '" . $fecha_inicio_vacacion . "'
-									and fecha_culminacion_vacacion <= '" . $fecha_culminacion_vacacion . "'");
+                                    where
+                                    fecha_inicio_vacacion >= '" . $fecha_inicio_vacacion . "'
+                                    and fecha_culminacion_vacacion <= '" . $fecha_culminacion_vacacion . "'");
             $num_consulta = mysql_num_rows($sql_consulta);
 
             if ($num_consulta > 0) {
                 $sms = 5;
             } else {
                 $str_sql = "INSERT INTO historico_vacaciones (
-														  idtrabajador,
-														  periodo,
-														  numero_memorandum,
-														  fecha_memorandum,
-														  fecha_inicio_vacacion,
-														  fecha_culminacion_vacacion,
+                                                          idtrabajador,
+                                                          periodo,
+                                                          numero_memorandum,
+                                                          fecha_memorandum,
+                                                          fecha_inicio_vacacion,
+                                                          fecha_culminacion_vacacion,
 
-														  cantidad_feriados,
-														  tiempo_disfrute,
-														  fecha_inicio_disfrute,
-														  fecha_reincorporacion,
-														  fecha_reincorporacion_ajustada,
-														  dias_pendiente_disfrute,
-														  dias_bono,
+                                                          cantidad_feriados,
+                                                          tiempo_disfrute,
+                                                          fecha_inicio_disfrute,
+                                                          fecha_reincorporacion,
+                                                          fecha_reincorporacion_ajustada,
+                                                          dias_pendiente_disfrute,
+                                                          dias_bono,
 
-														  monto_bono,
-														  numero_orden_pago,
-														  fecha_cancelacion,
-														  elaborado_por,
-														  ci_elaborado_por,
-														  aprobada_por,
-														  ci_aprobado,
-														  usuario,
-														  fechayhora,
+                                                          monto_bono,
+                                                          numero_orden_pago,
+                                                          fecha_cancelacion,
+                                                          elaborado_por,
+                                                          ci_elaborado_por,
+                                                          aprobada_por,
+                                                          ci_aprobado,
+                                                          usuario,
+                                                          fechayhora,
 
-														  oculto_disfrutados,
-														  oculto_dias
-														  )VALUES(
-																	  '" . $idtrabajador . "',
-																	  '" . $periodo . "',
-																	  '" . $numero_memorandum . "',
-																	  '" . $fecha_memorandum . "',
-																	  '" . $fecha_inicio_vacacion . "',
-																	  '" . $fecha_culminacion_vacacion . "',
-																	  '" . $cantidad_feriados . "',
-																	  '" . $tiempo_disfrute . "',
-																	  '" . $fecha_inicio_disfrute . "',
-																	  '" . $fecha_reincorporacion . "',
-																	  '" . $fecha_reincorporacion_ajustada . "',
-																	  '" . $tiempo_pendiente_disfrute . "',
-																	  '" . $dias_bonificacion . "',
-																	  '" . $monto_bono_vacacional . "',
-																	  '" . $numero_orden_pago . "',
-																	  '" . $fecha_orden_pago . "',
-																	  '" . $elaborado_por . "',
-																	  '" . $ci_elaborado . "',
-																	  '" . $aprobado_por . "',
-																	  '" . $ci_aprobado . "',
-																	  '" . $login . "',
-																	  '" . $fh . "',
+                                                          oculto_disfrutados,
+                                                          oculto_dias
+                                                          )VALUES(
+                                                                      '" . $idtrabajador . "',
+                                                                      '" . $periodo . "',
+                                                                      '" . $numero_memorandum . "',
+                                                                      '" . $fecha_memorandum . "',
+                                                                      '" . $fecha_inicio_vacacion . "',
+                                                                      '" . $fecha_culminacion_vacacion . "',
+                                                                      '" . $cantidad_feriados . "',
+                                                                      '" . $tiempo_disfrute . "',
+                                                                      '" . $fecha_inicio_disfrute . "',
+                                                                      '" . $fecha_reincorporacion . "',
+                                                                      '" . $fecha_reincorporacion_ajustada . "',
+                                                                      '" . $tiempo_pendiente_disfrute . "',
+                                                                      '" . $dias_bonificacion . "',
+                                                                      '" . $monto_bono_vacacional . "',
+                                                                      '" . $numero_orden_pago . "',
+                                                                      '" . $fecha_orden_pago . "',
+                                                                      '" . $elaborado_por . "',
+                                                                      '" . $ci_elaborado . "',
+                                                                      '" . $aprobado_por . "',
+                                                                      '" . $ci_aprobado . "',
+                                                                      '" . $login . "',
+                                                                      '" . $fh . "',
 
-																	  '" . $oculto_dias . "',
-																	  '" . $oculto_disfrutados . "'
-																	  )";
+                                                                      '" . $oculto_dias . "',
+                                                                      '" . $oculto_disfrutados . "'
+                                                                      )";
                 $result = mysql_query($str_sql);
                 if (!$result) {
                     $sms = mysql_error();
@@ -2712,33 +2712,33 @@ if ($ejecutar == "accion_vacaciones") {
 
         } else {
             $str = "UPDATE
-															historico_vacaciones SET
-													idtrabajador 					= '" . $idtrabajador . "',
-													periodo 						= '" . $periodo . "',
-													numero_memorandum 				= '" . $numero_memorandum . "',
-													fecha_memorandum 				= '" . $fecha_memorandum . "',
-													fecha_inicio_vacacion 			= '" . $fecha_inicio_vacacion . "',
-													fecha_culminacion_vacacion 		= '" . $fecha_culminacion_vacacion . "',
-													tiempo_disfrute 				= '" . $tiempo_disfrute . "',
-													fecha_inicio_disfrute 			= '" . $fecha_inicio_disfrute . "',
-													fecha_reincorporacion 			= '" . $fecha_reincorporacion . "',
-													fecha_reincorporacion_ajustada 	= '" . $fecha_reincorporacion_ajustada . "',
-													dias_pendiente_disfrute 		= '" . $tiempo_pendiente_disfrute . "',
-													dias_bono 						= '" . $dias_bonificacion . "',
-													monto_bono 						= '" . $monto_bono_vacacional . "',
-													cantidad_feriados 				= '" . $cantidad_feriados . "',
-													numero_orden_pago 				= '" . $numero_orden_pago . "',
-													fecha_cancelacion 				= '" . $fecha_orden_pago . "',
-													elaborado_por 					= '" . $elaborado_por . "',
-													ci_elaborado_por 				= '" . $ci_elaborado . "',
-													aprobada_por 					= '" . $aprobado_por . "',
-													ci_aprobado 					= '" . $ci_aprobado . "',
-													usuario 						= '" . $login . "',
-													fechayhora 						= '" . $fh . "',
-													oculto_dias 					= '" . $oculto_dias . "',
-													oculto_disfrutados 				= '" . $oculto_disfrutados . "'
-														WHERE
-													idhistorico_vacaciones 			= '" . $idhistorico_vacaciones . "';";
+                                                            historico_vacaciones SET
+                                                    idtrabajador                    = '" . $idtrabajador . "',
+                                                    periodo                         = '" . $periodo . "',
+                                                    numero_memorandum               = '" . $numero_memorandum . "',
+                                                    fecha_memorandum                = '" . $fecha_memorandum . "',
+                                                    fecha_inicio_vacacion           = '" . $fecha_inicio_vacacion . "',
+                                                    fecha_culminacion_vacacion      = '" . $fecha_culminacion_vacacion . "',
+                                                    tiempo_disfrute                 = '" . $tiempo_disfrute . "',
+                                                    fecha_inicio_disfrute           = '" . $fecha_inicio_disfrute . "',
+                                                    fecha_reincorporacion           = '" . $fecha_reincorporacion . "',
+                                                    fecha_reincorporacion_ajustada  = '" . $fecha_reincorporacion_ajustada . "',
+                                                    dias_pendiente_disfrute         = '" . $tiempo_pendiente_disfrute . "',
+                                                    dias_bono                       = '" . $dias_bonificacion . "',
+                                                    monto_bono                      = '" . $monto_bono_vacacional . "',
+                                                    cantidad_feriados               = '" . $cantidad_feriados . "',
+                                                    numero_orden_pago               = '" . $numero_orden_pago . "',
+                                                    fecha_cancelacion               = '" . $fecha_orden_pago . "',
+                                                    elaborado_por                   = '" . $elaborado_por . "',
+                                                    ci_elaborado_por                = '" . $ci_elaborado . "',
+                                                    aprobada_por                    = '" . $aprobado_por . "',
+                                                    ci_aprobado                     = '" . $ci_aprobado . "',
+                                                    usuario                         = '" . $login . "',
+                                                    fechayhora                      = '" . $fh . "',
+                                                    oculto_dias                     = '" . $oculto_dias . "',
+                                                    oculto_disfrutados              = '" . $oculto_disfrutados . "'
+                                                        WHERE
+                                                    idhistorico_vacaciones          = '" . $idhistorico_vacaciones . "';";
             $query = mysql_query($str);
             if (!$query) {
                 $sms = mysql_error();
@@ -2762,32 +2762,32 @@ if ($ejecutar == "eliminar_vacaciones") {
 
 if ($ejecutar == "consultarAsociados_cuentas_bancarias") {
     $sql_consultar = mysql_query("select
-								 t.nombres,
-								 t.apellidos,
-								 cb.nro_cuenta,
-								 cb.tipo,
-								 mc.denominacion as motivo,
-								 mc.idmotivos_cuentas,
-								 b.denominacion,
-								 b.idbanco,
-								 t.idtrabajador,
-								 cb.idcuentas_bancarias_trabajador
-								 	from
-								 trabajador t,
-								 banco b,
-								 cuentas_bancarias_trabajador cb,
-								 motivos_cuentas mc
-								 	where
-								 cb.idtrabajador = '" . $idtrabajador . "'
-								 and t.idtrabajador = cb.idtrabajador
-								 and b.idbanco = cb.banco
-								 and mc.idmotivos_cuentas = cb.motivo");
+                                 t.nombres,
+                                 t.apellidos,
+                                 cb.nro_cuenta,
+                                 cb.tipo,
+                                 mc.denominacion as motivo,
+                                 mc.idmotivos_cuentas,
+                                 b.denominacion,
+                                 b.idbanco,
+                                 t.idtrabajador,
+                                 cb.idcuentas_bancarias_trabajador
+                                    from
+                                 trabajador t,
+                                 banco b,
+                                 cuentas_bancarias_trabajador cb,
+                                 motivos_cuentas mc
+                                    where
+                                 cb.idtrabajador = '" . $idtrabajador . "'
+                                 and t.idtrabajador = cb.idtrabajador
+                                 and b.idbanco = cb.banco
+                                 and mc.idmotivos_cuentas = cb.motivo");
 
     ?>
-	<table border="0" class="Browse" cellpadding="0" cellspacing="0" width="80%" align="center">
-        	<thead>
+    <table border="0" class="Browse" cellpadding="0" cellspacing="0" width="80%" align="center">
+            <thead>
             <tr>
-            	<td width="26%" class="Browse" align="center">Trabajador</td>
+                <td width="26%" class="Browse" align="center">Trabajador</td>
                 <td width="29%" class="Browse" align="center">Nro. de Cuenta</td>
                 <td width="15%" class="Browse" align="center">Tipo de Cuneta</td>
                 <td width="19%" class="Browse" align="center">Motivo de la Cuenta</td>
@@ -2796,7 +2796,7 @@ if ($ejecutar == "consultarAsociados_cuentas_bancarias") {
             </tr>
             </thead>
             <?while ($bus_consultar = mysql_fetch_array($sql_consultar)) {?>
-            	<tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
+                <tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
                 <td align="left" class="Browse"><?=$bus_consultar["nombres"] . " " . $bus_consultar["apellidos"]?></td>
                 <td align="left" class="Browse"><?=$bus_consultar["nro_cuenta"]?></td>
                 <td align="left" class="Browse"><?=$bus_consultar["tipo"]?></td>
@@ -2808,12 +2808,12 @@ if ($ejecutar == "consultarAsociados_cuentas_bancarias") {
                 <td class="Browse" align="center">
                  <img src="imagenes/modificar.png" style="cursor:pointer" alt='Modificar' title='Modificar' onclick="seleccionar_cuentas_bancarias('<?=$bus_consultar["nombres"] . " " . $bus_consultar["apellidos"]?>','<?=$bus_consultar["nro_cuenta"]?>','<?=$bus_consultar["tipo"]?>', '<?=$bus_consultar["idmotivos_cuentas"]?>', '<?=$bus_consultar["idbanco"]?>', '<?=$bus_consultar["idcuentas_bancarias_trabajador"]?>')">                </td>
                  <td class="Browse" align="center">
-                 	<img src="imagenes/delete.png" style="cursor:pointer" alt='Eliminar' title='Eliminar' onclick="seleccionar_cuentas_bancarias('<?=$bus_consultar["nombres"] . " " . $bus_consultar["apellidos"]?>','<?=$bus_consultar["nro_cuenta"]?>','<?=$bus_consultar["tipo"]?>', '<?=$bus_consultar["idmotivos_cuentas"]?>', '<?=$bus_consultar["idbanco"]?>', '<?=$bus_consultar["idcuentas_bancarias_trabajador"]?>')">
+                    <img src="imagenes/delete.png" style="cursor:pointer" alt='Eliminar' title='Eliminar' onclick="seleccionar_cuentas_bancarias('<?=$bus_consultar["nombres"] . " " . $bus_consultar["apellidos"]?>','<?=$bus_consultar["nro_cuenta"]?>','<?=$bus_consultar["tipo"]?>', '<?=$bus_consultar["idmotivos_cuentas"]?>', '<?=$bus_consultar["idbanco"]?>', '<?=$bus_consultar["idcuentas_bancarias_trabajador"]?>')">
                  </td>
           </tr>
             <?}?>
         </table>
-	<?
+    <?
 
 }
 
@@ -2825,14 +2825,14 @@ if ($ejecutar == "ingresarCunetaBancaria") {
         echo 'existe';
     } else {
         $sql_ingresar = mysql_query("insert into cuentas_bancarias_trabajador (idtrabajador,
-																		   nro_cuenta,
-																		   tipo,
-																		   motivo,
-																		   banco)VALUES('" . $idtrabajador . "',
-																		   				'" . $numero_cuenta . "',
-																						'" . $tipo_cuenta . "',
-																						'" . $motivo_cuenta . "',
-																						'" . $banco . "')");
+                                                                           nro_cuenta,
+                                                                           tipo,
+                                                                           motivo,
+                                                                           banco)VALUES('" . $idtrabajador . "',
+                                                                                        '" . $numero_cuenta . "',
+                                                                                        '" . $tipo_cuenta . "',
+                                                                                        '" . $motivo_cuenta . "',
+                                                                                        '" . $banco . "')");
         echo 'exito';
 
     }
@@ -2840,37 +2840,37 @@ if ($ejecutar == "ingresarCunetaBancaria") {
 }
 
 if ($ejecutar == "modificarCunetaBancaria") {
-    $sql_ingresar = mysql_query("update cuentas_bancarias_trabajador set nro_cuenta 			= '" . $numero_cuenta . "',
-																   tipo 							= '" . $tipo_cuenta . "',
-																   motivo 							= '" . $motivo_cuenta . "',
-																   banco 							= '" . $banco . "'
-																	where
-																   idcuentas_bancarias_trabajador 	= '" . $idcuenta_bancaria . "'");
+    $sql_ingresar = mysql_query("update cuentas_bancarias_trabajador set nro_cuenta             = '" . $numero_cuenta . "',
+                                                                   tipo                             = '" . $tipo_cuenta . "',
+                                                                   motivo                           = '" . $motivo_cuenta . "',
+                                                                   banco                            = '" . $banco . "'
+                                                                    where
+                                                                   idcuentas_bancarias_trabajador   = '" . $idcuenta_bancaria . "'");
 }
 
 if ($ejecutar == "eliminarCuentaBancaria") {
     $sql_eliminar = mysql_query("delete from
-										cuentas_bancarias_trabajador
-											where
-										idcuentas_bancarias_trabajador = '" . $idcuenta_bancaria . "'");
+                                        cuentas_bancarias_trabajador
+                                            where
+                                        idcuentas_bancarias_trabajador = '" . $idcuenta_bancaria . "'");
 }
 
 if ($ejecutar == "ingresarInformacionGeneral") {
     $sql_actualizar = mysql_query("update trabajador set
-														idgrupo_sanguineo 			= '" . $idgrupo_sanguineo . "',
-														flag_donante 				= '" . $flag_donante . "',
-														peso 						= '" . $peso . "',
-														talla 						= '" . $talla . "',
-														flag_vehiculo 				= '" . $flag_vehiculo . "',
-														flag_licencia 				= '" . $flag_licencia . "',
-														nombre_emergencia			= '" . $nombre_emergencia . "',
-														telefono_emergencia 		= '" . $telefono_emergencia . "',
-														direccion_emergencia 		= '" . $direccion_emergencia . "',
-														talla_camisa 				= '" . $talla_camisa . "',
-														talla_pantalon 				= '" . $talla_pantalon . "',
-														talla_zapatos 				= '" . $talla_zapatos . "',
-														otras_actividades 			= '" . $otras_actividades . "'
-														where idtrabajador 			= '" . $idtrabajador . "'") or die(mysql_error());
+                                                        idgrupo_sanguineo           = '" . $idgrupo_sanguineo . "',
+                                                        flag_donante                = '" . $flag_donante . "',
+                                                        peso                        = '" . $peso . "',
+                                                        talla                       = '" . $talla . "',
+                                                        flag_vehiculo               = '" . $flag_vehiculo . "',
+                                                        flag_licencia               = '" . $flag_licencia . "',
+                                                        nombre_emergencia           = '" . $nombre_emergencia . "',
+                                                        telefono_emergencia         = '" . $telefono_emergencia . "',
+                                                        direccion_emergencia        = '" . $direccion_emergencia . "',
+                                                        talla_camisa                = '" . $talla_camisa . "',
+                                                        talla_pantalon              = '" . $talla_pantalon . "',
+                                                        talla_zapatos               = '" . $talla_zapatos . "',
+                                                        otras_actividades           = '" . $otras_actividades . "'
+                                                        where idtrabajador          = '" . $idtrabajador . "'") or die(mysql_error());
     if ($sql_actualizar) {
         echo "exito";
     }
@@ -2879,11 +2879,11 @@ if ($ejecutar == "ingresarInformacionGeneral") {
 
 if ($ejecutar == "ingresarInformacionivss") {
     $sql_actualizar = mysql_query("update trabajador set
-														numero_registro_ivss 		= '" . $numero_registro_ivss . "',
-														fecha_registro_ivss 		= '" . $fecha_registro_ivss . "',
-														ocupacion_oficio_ivss 		= '" . $ocupacion_oficio_ivss . "',
-														otro_ivss 					= '" . $otro_ivss . "'
-														where idtrabajador 			= '" . $idtrabajador . "'") or die(mysql_error());
+                                                        numero_registro_ivss        = '" . $numero_registro_ivss . "',
+                                                        fecha_registro_ivss         = '" . $fecha_registro_ivss . "',
+                                                        ocupacion_oficio_ivss       = '" . $ocupacion_oficio_ivss . "',
+                                                        otro_ivss                   = '" . $otro_ivss . "'
+                                                        where idtrabajador          = '" . $idtrabajador . "'") or die(mysql_error());
     if ($sql_actualizar) {
         echo "exito";
     }
@@ -2892,18 +2892,18 @@ if ($ejecutar == "ingresarInformacionivss") {
 
 if ($ejecutar == "mostrarPestanas") {
     ?>
-	<ul>
+    <ul>
         <li>
-        	<a href="javascript:;" onClick="mostrarPestana('div_datosBasicos'), document.getElementById('tabla_botones').style.display = 'block'">
-        		<span>Datos Basicos</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_datosBasicos'), document.getElementById('tabla_botones').style.display = 'block'">
+                <span>Datos Basicos</span>
             </a>
         </li>
         <?
     //if(in_array(167, $privilegios) == true){
     ?>
         <li style="display:block" id="li_informacionGeneral">
-        	<a href="javascript:;" onClick="mostrarPestana('div_informacionGeneral')">
-        		<span>Informacion General</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_informacionGeneral')">
+                <span>Informacion General</span>
             </a>
         </li>
         <?
@@ -2911,8 +2911,8 @@ if ($ejecutar == "mostrarPestanas") {
     //if(in_array(167, $privilegios) == true){
     ?>
         <li style="display:block" id="li_datosEmpleo">
-        	<a href="javascript:;" onClick="mostrarPestana('div_datosEmpleo')">
-        		<span>Datos del Empleo</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_datosEmpleo')">
+                <span>Datos del Empleo</span>
             </a>
         </li>
         <?
@@ -2920,8 +2920,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(1207, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_registroFotografico">
-        	<a href="javascript:;" onClick="mostrarPestana('div_registroFotografico')">
-        		<span>Registro Fotografico</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_registroFotografico')">
+                <span>Registro Fotografico</span>
             </a>
         </li>
         <?
@@ -2931,8 +2931,8 @@ if ($ejecutar == "mostrarPestanas") {
         ?>
 
         <li style="display:block" id="li_cargaFamiliar">
-        	<a href="javascript:;" onClick="mostrarPestana('div_cargaFamiliar')">
-        		<span>Carga Familiar</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_cargaFamiliar')">
+                <span>Carga Familiar</span>
             </a>
         </li>
         <?
@@ -2940,8 +2940,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(18, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_estudiosRealizados">
-        	<a href="javascript:;" onClick="mostrarPestana('div_estudiosRealizados')">
-        		<span>Estudios Realizados</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_estudiosRealizados')">
+                <span>Estudios Realizados</span>
             </a>
         </li>
         <?
@@ -2949,8 +2949,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(1208, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_cursosRealizados">
-        	<a href="javascript:;" onClick="mostrarPestana('div_cursosRealizados')">
-        		<span>Cursos Realizados</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_cursosRealizados')">
+                <span>Cursos Realizados</span>
             </a>
         </li>
         <?
@@ -2958,8 +2958,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(19, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_experienciaLaboral">
-        	<a href="javascript:;" onClick="mostrarPestana('div_experienciaLaboral')">
-        		<span>Experiencia Laboral</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_experienciaLaboral')">
+                <span>Experiencia Laboral</span>
             </a>
         </li>
         <?
@@ -2967,8 +2967,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(20, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_movimientos">
-        	<a href="javascript:;" onClick="mostrarPestana('div_movimientos')">
-        		<span>Movimientos</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_movimientos')">
+                <span>Movimientos</span>
             </a>
         </li>
         <?
@@ -2976,8 +2976,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(21, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_permisos">
-        	<a href="javascript:;" onClick="mostrarPestana('div_permisos')">
-        		<span>Permisos</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_permisos')">
+                <span>Permisos</span>
             </a>
         </li>
         <?
@@ -2985,8 +2985,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(22, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_vacaciones">
-        	<a href="javascript:;" onClick="mostrarPestana('div_vacaciones')">
-        		<span>Vacaciones</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_vacaciones')">
+                <span>Vacaciones</span>
             </a>
         </li>
         <?
@@ -2995,8 +2995,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(23, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_utilidades">
-        	<a href="javascript:;" onClick="mostrarPestana('div_utilidades')">
-        		<span>Utilidades/Bonos</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_utilidades')">
+                <span>Utilidades/Bonos</span>
             </a>
         </li>
         <?
@@ -3004,8 +3004,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(24, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_prestacionesSociales">
-        	<a href="javascript:;" onClick="mostrarPestana('div_prestacionesSociales')">
-        		<span>Prestaciones Sociales</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_prestacionesSociales')">
+                <span>Prestaciones Sociales</span>
             </a>
         </li>
         <?
@@ -3013,8 +3013,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(1206, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_declaracionJurada">
-        	<a href="javascript:;" onClick="mostrarPestana('div_declaracionJurada')">
-        		<span>Declaracion Jurada</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_declaracionJurada')">
+                <span>Declaracion Jurada</span>
             </a>
         </li>
         <?
@@ -3022,8 +3022,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(1205, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_sanciones">
-        	<a href="javascript:;" onClick="mostrarPestana('div_sanciones')">
-        		<span>Sanciones</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_sanciones')">
+                <span>Sanciones</span>
             </a>
         </li>
         <?
@@ -3031,8 +3031,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(1204, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_reconocimientos">
-        	<a href="javascript:;" onClick="mostrarPestana('div_reconocimientos')">
-        		<span>Reconocimientos</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_reconocimientos')">
+                <span>Reconocimientos</span>
             </a>
         </li>
         <?
@@ -3040,8 +3040,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(949, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_cuentas_bancarias">
-        	<a href="javascript:;" onClick="mostrarPestana('div_cuentas_bancarias')">
-        		<span>Cuentas Bancarias</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_cuentas_bancarias')">
+                <span>Cuentas Bancarias</span>
             </a>
         </li>
         <?
@@ -3049,8 +3049,8 @@ if ($ejecutar == "mostrarPestanas") {
     if (in_array(1200, $privilegios) == true) {
         ?>
         <li style="display:block" id="li_ivss">
-        	<a href="javascript:;" onClick="mostrarPestana('div_ivss')">
-        		<span>I.V.S.S.</span>
+            <a href="javascript:;" onClick="mostrarPestana('div_ivss')">
+                <span>I.V.S.S.</span>
             </a>
         </li>
         <?
@@ -3058,19 +3058,19 @@ if ($ejecutar == "mostrarPestanas") {
     ?>
 
     </ul>
-	<?
+    <?
 }
 
 if ($ejecutar == "cargarPeriodosCesantes") {
     $sql_ingresar = mysql_query("insert into periodos_cedentes_trabajadores(
-											idtrabajador,
-											desde,
-											hasta,
-											tiempo)VALUES(
-														'" . $idtrabajador . "',
-														'" . $desde . "',
-														'" . $hasta . "',
-														'" . $tiempo . "')") or die(mysql_error());
+                                            idtrabajador,
+                                            desde,
+                                            hasta,
+                                            tiempo)VALUES(
+                                                        '" . $idtrabajador . "',
+                                                        '" . $desde . "',
+                                                        '" . $hasta . "',
+                                                        '" . $tiempo . "')") or die(mysql_error());
 }
 
 if ($ejecutar == "listarPeriodosCesantes") {
@@ -3079,16 +3079,16 @@ if ($ejecutar == "listarPeriodosCesantes") {
     ?>
 
     <table border="0" class="Browse" cellpadding="0" cellspacing="0" width="80%" align="center">
-        	<thead>
+            <thead>
             <tr>
-            	<td width="20%" class="Browse" align="center">Desde</td>
+                <td width="20%" class="Browse" align="center">Desde</td>
                 <td width="21%" class="Browse" align="center">Hasta</td>
                 <td width="47%" class="Browse" align="center">Tiempo</td>
                 <td class="Browse" align="center" colspan="2">Acci&oacute;n</td>
             </tr>
             </thead>
             <?while ($bus_consultar = mysql_fetch_array($sql_consulta)) {?>
-            	<tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
+                <tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
                 <td align="left" class="Browse"><?=$bus_consultar["desde"]?></td>
                 <td align="left" class="Browse"><?=$bus_consultar["hasta"]?></td>
                 <td align="left" class="Browse"><?=$bus_consultar["tiempo"]?></td>
@@ -3096,14 +3096,14 @@ if ($ejecutar == "listarPeriodosCesantes") {
                  <img src="imagenes/modificar.png" style="cursor:pointer" alt='Modificar' title='Modificar' onclick="seleccionarPeriodosCedentes('<?=$bus_consultar["desde"]?>','<?=$bus_consultar["hasta"]?>','<?=$bus_consultar["tiempo"]?>', '<?=$bus_consultar["idperiodos_cedentes_trabajadores"]?>')">
                  </td>
                  <td width="6%" align="center" class="Browse">
-                 	<img src="imagenes/delete.png" style="cursor:pointer" alt='Eliminar' title='Eliminar' onclick="eliminarPeriodosCedentes('<?=$bus_consultar["idperiodos_cedentes_trabajadores"]?>')">
+                    <img src="imagenes/delete.png" style="cursor:pointer" alt='Eliminar' title='Eliminar' onclick="eliminarPeriodosCedentes('<?=$bus_consultar["idperiodos_cedentes_trabajadores"]?>')">
                  </td>
           </tr>
             <?}?>
         </table>
 
 
-	<?
+    <?
 }
 
 if ($ejecutar == "eliminarPeriodosCedentes") {
@@ -3112,11 +3112,11 @@ if ($ejecutar == "eliminarPeriodosCedentes") {
 
 if ($ejecutar == "modificarPeriodosCedentes") {
     $sql_modificar = mysql_query("update periodos_cedentes_trabajadores set
-													desde ='" . $desde . "',
-													hasta = '" . $hasta . "',
-													tiempo = '" . $tiempo . "'
-													where
-													idperiodos_cedentes_trabajadores = '" . $idperiodos_cedentes_trabajadores . "'");
+                                                    desde ='" . $desde . "',
+                                                    hasta = '" . $hasta . "',
+                                                    tiempo = '" . $tiempo . "'
+                                                    where
+                                                    idperiodos_cedentes_trabajadores = '" . $idperiodos_cedentes_trabajadores . "'");
 }
 
 if ($ejecutar == "calcularTiempoPeriodosCedentes") {
@@ -3146,24 +3146,24 @@ if ($ejecutar == "calcularTiempoPeriodosCedentes") {
 
 if ($ejecutar == "ingresarPrestaciones") {
     $sql_consulta = mysql_query("select * from tabla_prestaciones where anio = '" . $anio . "'
-																	and mes = '" . $mes . "'
-																	and idtrabajador = '" . $idtrabajador . "'");
+                                                                    and mes = '" . $mes . "'
+                                                                    and idtrabajador = '" . $idtrabajador . "'");
     $num_consulta = mysql_num_rows($sql_consulta);
     if ($num_consulta == 0) {
         $sql_ingresar = mysql_query("insert into tabla_prestaciones
-															(anio,
-															 mes,
-															 sueldo,
-															 usuario,
-															 idtrabajador,
-															 fechayhora,
-															 pc)VALUES('" . $anio . "',
-															 			'" . $mes . "',
-																		'" . $sueldo . "',
-																		'" . $login . "',
-																		'" . $idtrabajador . "',
-																		'" . $fh . "',
-																		'" . $pc . "')");
+                                                            (anio,
+                                                             mes,
+                                                             sueldo,
+                                                             usuario,
+                                                             idtrabajador,
+                                                             fechayhora,
+                                                             pc)VALUES('" . $anio . "',
+                                                                        '" . $mes . "',
+                                                                        '" . $sueldo . "',
+                                                                        '" . $login . "',
+                                                                        '" . $idtrabajador . "',
+                                                                        '" . $fh . "',
+                                                                        '" . $pc . "')");
     } else {
         echo "existe";
     }
@@ -3185,15 +3185,15 @@ if ($ejecutar == "consultarPrestaciones") {
     $meses[12]   = "Dic";
 
     ?>
-		<table border="0" class="Browse" cellpadding="0" cellspacing="0" width="100%" align="center">
-        	<thead>
+        <table border="0" class="Browse" cellpadding="0" cellspacing="0" width="100%" align="center">
+            <thead>
             <tr>
-            	<td width="2%" class="Browse" align="center">A&ntilde;o</td>
+                <td width="2%" class="Browse" align="center" style="font-size: 8">A&ntilde;o</td>
                 <td width="2%" class="Browse" align="center">Mes</td>
                 <td width="8%" class="Browse" align="center">Sueldo del Mes</td>
                 <td width="8%" class="Browse" align="center">Otros Complement</td>
                 <td width="8%" class="Browse" align="center">Bono Vacacional</td>
-                <td width="8%" class="Browse" align="center">Bono Fin de A&ntilde;o</td>
+                <td width="8%" class="Browse" align="center" style="font-size: 8">Bono Fin de A&ntilde;o</td>
                 <td width="8%" class="Browse" align="center">Remuner. Mensual</td>
                 <td width="3%" class="Browse" align="center">A</td>
                 <td width="1%" class="Browse" align="center">M</td>
@@ -3304,8 +3304,8 @@ if ($ejecutar == "consultarPrestaciones") {
         $cuenta_meses = $cuenta_meses + 1;
 
         $sql = "select * from leyes_prestaciones where anio_desde <= '" . $bus_consulta["anio"] . "'
-         												and anio_hasta >= '" . $bus_consulta["anio"] . "'
-         												";
+                                                        and anio_hasta >= '" . $bus_consulta["anio"] . "'
+                                                        ";
         $sql_leyes = mysql_query($sql);
 
         //RECORRO LA TABLA DE LEYES PARA SABER CUAL APLICA AL AÑO Y MES DEL BUCLE DE LA TABLA DE PRESTACIONES
@@ -3445,18 +3445,18 @@ if ($ejecutar == "consultarPrestaciones") {
         if ($bus_consulta["anio"] != $anio_totalizar and $anioRegistro >= 0 and $mesRegistro > 0) {
 
             ?>
-				<tr  bordercolor="#000000" bgcolor='#A9D0F5'>
-	                <td align="right" class="Browse" colspan='12'>TOTALES DEL AÑO: <?=$anio_totalizar?></td>
-	                <td align="right" class="Browse"><?=number_format($prestaciones_anuales, 2, ",", ".")?></td>
-	                <td align="right" class="Browse" style="color:#F00"><?=number_format($adelantos_prestaciones_anuales, 2, ",", ".")?></td>
-	                <td align="right" class="Browse">&nbsp;</td>
-	                <td align="right" class="Browse"><?=number_format($intereses_anuales, 2, ",", ".")?></td>
-	                <td align="right" class="Browse" style="color:#F00"><?=number_format($adelantos_intereses_anuales, 2, ",", ".")?></td>
-	                <td align="right" class="Browse"><?=number_format(($prestaciones_anuales + $intereses_anuales - $adelantos_prestaciones_anuales - $adelantos_intereses_anuales), 2, ",", ".")?></td>
-	                <td width="4%" align="center" class="Browse">&nbsp;</td>
-	            </tr>
+                <tr  bordercolor="#000000" bgcolor='#A9D0F5'>
+                    <td align="right" class="Browse" colspan='12'>TOTALES DEL AÑO: <?=$anio_totalizar?></td>
+                    <td align="right" class="Browse"><?=number_format($prestaciones_anuales, 2, ",", ".")?></td>
+                    <td align="right" class="Browse" style="color:#F00"><?=number_format($adelantos_prestaciones_anuales, 2, ",", ".")?></td>
+                    <td align="right" class="Browse">&nbsp;</td>
+                    <td align="right" class="Browse"><?=number_format($intereses_anuales, 2, ",", ".")?></td>
+                    <td align="right" class="Browse" style="color:#F00"><?=number_format($adelantos_intereses_anuales, 2, ",", ".")?></td>
+                    <td align="right" class="Browse"><?=number_format(($prestaciones_anuales + $intereses_anuales - $adelantos_prestaciones_anuales - $adelantos_intereses_anuales), 2, ",", ".")?></td>
+                    <td width="4%" align="center" class="Browse">&nbsp;</td>
+                </tr>
 
-	           <?
+               <?
             $prestaciones_anuales           = 0;
             $intereses_anuales              = 0;
             $adelantos_prestaciones_anuales = 0;
@@ -3478,8 +3478,8 @@ if ($ejecutar == "consultarPrestaciones") {
             $sql_tasas    = mysql_query("select * from tabla_intereses where mes = '" . $bus_consulta["mes"] . "' and anio = '" . $bus_consulta["anio"] . "'");
             $bus_tasas    = mysql_fetch_array($sql_tasas);
             $sql_adelanto = mysql_query("select * from tabla_adelantos
-												where
-													idtabla_prestaciones = '" . $bus_consulta["idtabla_prestaciones"] . "'");
+                                                where
+                                                    idtabla_prestaciones = '" . $bus_consulta["idtabla_prestaciones"] . "'");
             $num_adelanto = mysql_num_rows($sql_adelanto);
             $bus_adelanto = mysql_fetch_array($sql_adelanto);
 
@@ -3508,21 +3508,21 @@ if ($ejecutar == "consultarPrestaciones") {
         }
 
         ?>
-			<tr  bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
-                <td align="center" class="Browse"><?=$bus_consulta["anio"]?></td>
-                <td align="left" class="Browse"><?="(" . $bus_consulta["mes"] . ")&nbsp;" . $meses[$bus_consulta["mes"]]?></td>
-                <td align="right" class="Browse"><input type="text" size="12" id="sueldo_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["sueldo"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
-                									onblur="guardarValorSueldo('sueldo_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
+            <tr  bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
+                <td align="center" class="Browse" style="font-size: 9"><?=$bus_consulta["anio"]?></td>
+                <td align="left" class="Browse" style="font-size: 9"><?="(" . $bus_consulta["mes"] . ")&nbsp;" . $meses[$bus_consulta["mes"]]?></td>
+                <td align="right" class="Browse"><input type="text" size="12" id="sueldo_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["sueldo"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right; font-size: 9;"
+                                                    onblur="guardarValorSueldo('sueldo_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
                 <td align="right" class="Browse"><input type="text" size="12" id="complementos_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["otros_complementos"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
-                									onblur="guardarValorOtros('complementos_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
+                                                    onblur="guardarValorOtros('complementos_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
                 <td align="right" class="Browse"><input type="text" size="12" id="bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["bono_vacacional"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
-                									onblur="guardarValorBonoVacacional('bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
+                                                    onblur="guardarValorBonoVacacional('bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
                 <td align="right" class="Browse"><input type="text" size="12" id="bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["bono_fin_anio"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
-                									onblur="guardarValorBonoFinAnio('bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
+                                                    onblur="guardarValorBonoFinAnio('bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
                 <td align="right" class="Browse"><?=number_format($ingreso_mensual, 2, ",", ".")?></td>
                 <td align="center" class="Browse"><?if ($anioRegistro == '') {echo '0';} else {echo $anioRegistro;}?></td>
                 <td align="center" class="Browse"><?if ($mesRegistro == '') {echo '0';} else {echo $mesRegistro;}?></td>
-                <td align="left" class="Browse"><?=$ley?></td>
+                <td align="left" class="Browse" style="font-size: 7"><?=$ley?></td>
                 <td align="center" class="Browse"><?if ($mostrar == true) {echo number_format($dias_prestaciones, 0);} else {echo "0";}?></td>
                  <td align="center" class="Browse"><?if ($mostrar == true) {echo $dias_adicionales;} else {echo "0";}?></td>
                 <td align="right" class="Browse"><?=number_format($prestaciones_del_mes, 2, ",", ".")?></td>
@@ -3564,13 +3564,13 @@ if ($ejecutar == "consultarPrestaciones") {
 
             ?>
             <tr bordercolor="#000000" bgcolor='#FFFFCC' onMouseOver="setRowColor(this, 0, 'over', '#FFFFCC', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#FFFFCC', '#EAFFEA', '#FFFFAA')" id="tr_adelanto_<?=$bus_consulta["idtabla_prestaciones"]?>" style="visibility:collapse">
-            	<td align="center" class="Browse" colspan="12" style="font-size:14px; font-weight:bold">ADELANTO</td>
+                <td align="center" class="Browse" colspan="12" style="font-size:14px; font-weight:bold">ADELANTO</td>
                 <td align="right" class="Browse"><input type="text" style="text-align:right" id="adelanto_prestaciones_<?=$bus_consulta["idtabla_prestaciones"]?>" size="12"></td>
                 <td align="right" class="Browse" colspan='2'>&nbsp;</td>
                 <td align="right" class="Browse"><input type="text" style="text-align:right" id="adelanto_interes_<?=$bus_consulta["idtabla_prestaciones"]?>" size="12"></td>
                 <td width="3%" align="center" colspan='2' class="Browse"><input type="button" id="boton_actualizar_adelanto_<?=$bus_consulta["idtabla_prestaciones"]?>" name="boton_actualizar_adelanto" value="Ingresar" class="button" onclick="ingresarAdelanto('<?=$bus_consulta["idtabla_prestaciones"]?>', document.getElementById('adelanto_prestaciones_<?=$bus_consulta["idtabla_prestaciones"]?>').value, document.getElementById('adelanto_interes_<?=$bus_consulta["idtabla_prestaciones"]?>').value)"></td>
             </tr>
-			<?
+            <?
         } else {
             ?>
                 <tr bordercolor="#000000" bgcolor='#FFFFCC' onMouseOver="setRowColor(this, 0, 'over', '#FFFFCC', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#FFFFCC', '#EAFFEA', '#FFFFAA')" id="tr_adelanto_<?=$bus_consulta["idtabla_prestaciones"]?>" style="font-weight:bold">
@@ -3582,7 +3582,7 @@ if ($ejecutar == "consultarPrestaciones") {
                     <?//number_format(($bus_adelanto["monto_prestaciones"]+$bus_adelanto["monto_interes"]),2,",",".")?>
                     <td width="3%" align="center" class="Browse" colspan="2"><img src="imagenes/delete.png" style="cursor:pointer" onclick="eliminarAdelanto('<?=$bus_adelanto["idtabla_adelantos"]?>')"></td>
                 </tr>
-			<?
+            <?
         }
         $cont_meses++;
         $interes_acumulado       = $interes_acumulado - $bus_adelanto["monto_interes"];
@@ -3599,16 +3599,16 @@ if ($ejecutar == "consultarPrestaciones") {
         $adelantos_intereses_anuales += $bus_adelanto["monto_interes"];
     }
     ?>
-		 </table>
-		 <?
+         </table>
+         <?
 }
 
 if ($ejecutar == "ingresarAdelanto") {
     $sql_ingresar = mysql_query("insert into tabla_adelantos(idtabla_prestaciones,
-															 monto_prestaciones,
-															 monto_interes)VALUES('" . $idtabla_prestaciones . "',
-															 					'" . $adelanto_prestaciones . "',
-																				'" . $adelanto_interes . "')");
+                                                             monto_prestaciones,
+                                                             monto_interes)VALUES('" . $idtabla_prestaciones . "',
+                                                                                '" . $adelanto_prestaciones . "',
+                                                                                '" . $adelanto_interes . "')");
 }
 
 if ($ejecutar == "eliminarAdelanto") {
@@ -3629,23 +3629,23 @@ if ($ejecutar == "consultarSelectAniosPrestaciones") {
                 } else {
                     if ($m < 10) {$mesIngresar = '0' . $m;} else { $mesIngresar = $m;}
                     $sql_consulta = mysql_query("select * from tabla_prestaciones where anio = '" . $i . "'
-																				and mes = '" . $mesIngresar . "'
-																				and idtrabajador = '" . $idtrabajador . "'");
+                                                                                and mes = '" . $mesIngresar . "'
+                                                                                and idtrabajador = '" . $idtrabajador . "'");
                     $num_consulta = mysql_num_rows($sql_consulta);
                     if ($num_consulta == 0) {
 
                         $sql_ingresar = mysql_query("insert into tabla_prestaciones
-																			(anio,
-																			 mes,
-																			 usuario,
-																			 idtrabajador,
-																			 fechayhora,
-																			 pc)VALUES('" . $i . "',
-																			 			'" . $mesIngresar . "',
-																						'" . $login . "',
-																						'" . $idtrabajador . "',
-																						'" . $fh . "',
-																						'" . $pc . "')");
+                                                                            (anio,
+                                                                             mes,
+                                                                             usuario,
+                                                                             idtrabajador,
+                                                                             fechayhora,
+                                                                             pc)VALUES('" . $i . "',
+                                                                                        '" . $mesIngresar . "',
+                                                                                        '" . $login . "',
+                                                                                        '" . $idtrabajador . "',
+                                                                                        '" . $fh . "',
+                                                                                        '" . $pc . "')");
 
                     }
                 }
@@ -3660,56 +3660,56 @@ if ($ejecutar == "eliminarPrestaciones") {
 
 if ($ejecutar == "actualizarSueldoPrestaciones") {
     $sql_actualizar = mysql_query("update tabla_prestaciones set sueldo = '" . $sueldo . "',
-														 		otros_complementos = '" . $otros . "',
-														 		bono_vacacional = '" . $bono_vacacional . "',
-														 		bono_fin_anio = '" . $bono_fin_anio . "'
-										where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
+                                                                otros_complementos = '" . $otros . "',
+                                                                bono_vacacional = '" . $bono_vacacional . "',
+                                                                bono_fin_anio = '" . $bono_fin_anio . "'
+                                        where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
 }
 
 if ($ejecutar == "guardarValorSueldo") {
     $sql_actualizar = mysql_query("update tabla_prestaciones set sueldo = '" . $sueldo . "'
-										where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
+                                        where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
 }
 
 if ($ejecutar == "guardarValorOtros") {
     $sql_actualizar = mysql_query("update tabla_prestaciones set otros_complementos = '" . $otros . "'
-										where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
+                                        where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
 }
 
 if ($ejecutar == "guardarValorBonoVacacional") {
     $sql_actualizar = mysql_query("update tabla_prestaciones set bono_vacacional = '" . $bono_vacacional . "'
-										where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
+                                        where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
 }
 
 if ($ejecutar == "guardarValorBonoFinAnio") {
     $sql_actualizar = mysql_query("update tabla_prestaciones set bono_fin_anio = '" . $bono_fin_anio . "'
-										where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
+                                        where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
 }
 
 // ********************************************** VACACIONES VENCIDAS ****************************************************
 
 if ($ejecutar == "ingresarVacacionesVencidas") {
     $sql_consulta = mysql_query("select * from tabla_vacaciones where tipo = '" . $tipo . "'
-																	and periodo = '" . $periodo . "'
-																	and idtrabajador = '" . $idtrabajador . "'");
+                                                                    and periodo = '" . $periodo . "'
+                                                                    and idtrabajador = '" . $idtrabajador . "'");
     $num_consulta = mysql_num_rows($sql_consulta);
     if ($num_consulta == 0) {
         $sql_ingresar = mysql_query("insert into tabla_vacaciones
-															(tipo,
-															 periodo,
-															 dias,
-															 sueldo,
-															 usuario,
-															 idtrabajador,
-															 fechayhora,
-															 pc)VALUES('" . $tipo . "',
-															 			'" . $periodo . "',
-																		'" . $dias . "',
-																		'" . $sueldo . "',
-																		'" . $login . "',
-																		'" . $idtrabajador . "',
-																		'" . $fh . "',
-																		'" . $pc . "')");
+                                                            (tipo,
+                                                             periodo,
+                                                             dias,
+                                                             sueldo,
+                                                             usuario,
+                                                             idtrabajador,
+                                                             fechayhora,
+                                                             pc)VALUES('" . $tipo . "',
+                                                                        '" . $periodo . "',
+                                                                        '" . $dias . "',
+                                                                        '" . $sueldo . "',
+                                                                        '" . $login . "',
+                                                                        '" . $idtrabajador . "',
+                                                                        '" . $fh . "',
+                                                                        '" . $pc . "')");
     } else {
         echo "existe";
     }
@@ -3719,10 +3719,10 @@ if ($ejecutar == "consultarVacaciones") {
     $sql_consulta = mysql_query("select * from tabla_vacaciones where idtrabajador = '" . $idtrabajador . "' order by periodo");
 
     ?>
-		<table border="0" class="Browse" cellpadding="0" cellspacing="0" width="98%" align="center">
-        	<thead>
+        <table border="0" class="Browse" cellpadding="0" cellspacing="0" width="98%" align="center">
+            <thead>
             <tr>
-            	<td width="18%" class="Browse" align="center">Tipo</td>
+                <td width="18%" class="Browse" align="center">Tipo</td>
                 <td width="27%" class="Browse" align="center">Periodo</td>
                 <td width="9%" class="Browse" align="center">Dias</td>
                 <td width="24%" class="Browse" align="center">Sueldo del Mes</td>
@@ -3734,7 +3734,7 @@ if ($ejecutar == "consultarVacaciones") {
     while ($bus_consulta = mysql_fetch_array($sql_consulta)) {
         $bono = ($bus_consulta["sueldo"] / 30) * $bus_consulta["dias"];
         ?>
-			<tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
+            <tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
                 <td align="left" class="Browse"><?=ucwords($bus_consulta["tipo"])?></td>
                 <td align="center" class="Browse"><?=$bus_consulta["periodo"]?></td>
                 <td align="left" class="Browse"><?=$bus_consulta["dias"]?></td>
@@ -3742,11 +3742,11 @@ if ($ejecutar == "consultarVacaciones") {
                   <td align="right" class="Browse"><?=number_format($bono, 2, ",", ".")?></td>
                 <td width="5%" align="center" class="Browse"><img src="imagenes/delete.png" style="cursor:pointer" onclick="eliminarVacaciones('<?=$bus_consulta["idtabla_vacaciones"]?>')"></td>
             </tr>
-			<?
+            <?
     }
     ?>
-		 </table>
-		 <?
+         </table>
+         <?
 }
 
 if ($ejecutar == "consultarSelectAniosVacaciones") {
@@ -3756,7 +3756,7 @@ if ($ejecutar == "consultarSelectAniosVacaciones") {
         $i = $anio;
     }
     ?>
-	<select id="periodo_vacaciones" name="periodo_vacaciones">
+    <select id="periodo_vacaciones" name="periodo_vacaciones">
     <option value="0">.:: Seleccione ::.</option>
     <?
     for ($i; $i < date("Y"); $i++) {
@@ -3766,7 +3766,7 @@ if ($ejecutar == "consultarSelectAniosVacaciones") {
     }
     ?>
     </select>
-	<?
+    <?
 }
 
 if ($ejecutar == "eliminarVacaciones") {
@@ -3777,26 +3777,26 @@ if ($ejecutar == "eliminarVacaciones") {
 
 if ($ejecutar == "ingresarAguinaldos") {
     $sql_consulta = mysql_query("select * from tabla_aguinaldos where tipo = '" . $tipo . "'
-																	and periodo = '" . $periodo . "'
-																	and idtrabajador = '" . $idtrabajador . "'");
+                                                                    and periodo = '" . $periodo . "'
+                                                                    and idtrabajador = '" . $idtrabajador . "'");
     $num_consulta = mysql_num_rows($sql_consulta);
     if ($num_consulta == 0) {
         $sql_ingresar = mysql_query("insert into tabla_aguinaldos
-															(tipo,
-															 periodo,
-															 dias,
-															 sueldo,
-															 usuario,
-															 idtrabajador,
-															 fechayhora,
-															 pc)VALUES('" . $tipo . "',
-															 			'" . $periodo . "',
-																		'" . $dias . "',
-																		'" . $sueldo . "',
-																		'" . $login . "',
-																		'" . $idtrabajador . "',
-																		'" . $fh . "',
-																		'" . $pc . "')");
+                                                            (tipo,
+                                                             periodo,
+                                                             dias,
+                                                             sueldo,
+                                                             usuario,
+                                                             idtrabajador,
+                                                             fechayhora,
+                                                             pc)VALUES('" . $tipo . "',
+                                                                        '" . $periodo . "',
+                                                                        '" . $dias . "',
+                                                                        '" . $sueldo . "',
+                                                                        '" . $login . "',
+                                                                        '" . $idtrabajador . "',
+                                                                        '" . $fh . "',
+                                                                        '" . $pc . "')");
     } else {
         echo "existe";
     }
@@ -3806,10 +3806,10 @@ if ($ejecutar == "consultarAguinaldos") {
     $sql_consulta = mysql_query("select * from tabla_aguinaldos where idtrabajador = '" . $idtrabajador . "' order by periodo");
 
     ?>
-		<table border="0" class="Browse" cellpadding="0" cellspacing="0" width="98%" align="center">
-        	<thead>
+        <table border="0" class="Browse" cellpadding="0" cellspacing="0" width="98%" align="center">
+            <thead>
             <tr>
-            	<td width="18%" class="Browse" align="center">Tipo</td>
+                <td width="18%" class="Browse" align="center">Tipo</td>
                 <td width="27%" class="Browse" align="center">Periodo</td>
                 <td width="9%" class="Browse" align="center">Dias</td>
                 <td width="24%" class="Browse" align="center">Sueldo del Mes</td>
@@ -3821,7 +3821,7 @@ if ($ejecutar == "consultarAguinaldos") {
     while ($bus_consulta = mysql_fetch_array($sql_consulta)) {
         $bono = ($bus_consulta["sueldo"] / 30) * $bus_consulta["dias"];
         ?>
-			<tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
+            <tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
                 <td align="left" class="Browse"><?=ucwords($bus_consulta["tipo"])?></td>
                 <td align="center" class="Browse"><?=$bus_consulta["periodo"]?></td>
                 <td align="left" class="Browse"><?=$bus_consulta["dias"]?></td>
@@ -3829,11 +3829,11 @@ if ($ejecutar == "consultarAguinaldos") {
                   <td align="right" class="Browse"><?=number_format($bono, 2, ",", ".")?></td>
                 <td width="5%" align="center" class="Browse"><img src="imagenes/delete.png" style="cursor:pointer" onclick="eliminarAguinaldos('<?=$bus_consulta["idtabla_aguinaldos"]?>')"></td>
             </tr>
-			<?
+            <?
     }
     ?>
-		 </table>
-		 <?
+         </table>
+         <?
 }
 
 if ($ejecutar == "consultarSelectAniosAguinaldos") {
@@ -3843,7 +3843,7 @@ if ($ejecutar == "consultarSelectAniosAguinaldos") {
         $i = $anio;
     }
     ?>
-	<select id="periodo_aguinaldos" name="periodo_aguinaldos">
+    <select id="periodo_aguinaldos" name="periodo_aguinaldos">
     <option value="0">.:: Seleccione ::.</option>
     <?
     for ($i; $i < date("Y"); $i++) {
@@ -3853,7 +3853,7 @@ if ($ejecutar == "consultarSelectAniosAguinaldos") {
     }
     ?>
     </select>
-	<?
+    <?
 }
 
 if ($ejecutar == "eliminarAguinaldos") {
@@ -3864,24 +3864,24 @@ if ($ejecutar == "eliminarAguinaldos") {
 
 if ($ejecutar == "ingresarDeducciones") {
     $sql_consulta = mysql_query("select * from tabla_deducciones where tipo = '" . $tipo . "'
-																	and periodo = '" . $periodo . "'
-																	and idtrabajador = '" . $idtrabajador . "'");
+                                                                    and periodo = '" . $periodo . "'
+                                                                    and idtrabajador = '" . $idtrabajador . "'");
     $num_consulta = mysql_num_rows($sql_consulta);
     if ($num_consulta == 0) {
         $sql_ingresar = mysql_query("insert into tabla_deducciones
-															(tipo,
-															 periodo,
-															 monto,
-															 usuario,
-															 idtrabajador,
-															 fechayhora,
-															 pc)VALUES('" . $tipo . "',
-															 			'" . $periodo . "',
-																		'" . $monto . "',
-																		'" . $login . "',
-																		'" . $idtrabajador . "',
-																		'" . $fh . "',
-																		'" . $pc . "')");
+                                                            (tipo,
+                                                             periodo,
+                                                             monto,
+                                                             usuario,
+                                                             idtrabajador,
+                                                             fechayhora,
+                                                             pc)VALUES('" . $tipo . "',
+                                                                        '" . $periodo . "',
+                                                                        '" . $monto . "',
+                                                                        '" . $login . "',
+                                                                        '" . $idtrabajador . "',
+                                                                        '" . $fh . "',
+                                                                        '" . $pc . "')");
     } else {
         echo "existe";
     }
@@ -3891,10 +3891,10 @@ if ($ejecutar == "consultarDeducciones") {
     $sql_consulta = mysql_query("select * from tabla_deducciones where idtrabajador = '" . $idtrabajador . "' order by periodo");
 
     ?>
-		<table border="0" class="Browse" cellpadding="0" cellspacing="0" width="98%" align="center">
-        	<thead>
+        <table border="0" class="Browse" cellpadding="0" cellspacing="0" width="98%" align="center">
+            <thead>
             <tr>
-            	<td width="19%" class="Browse" align="center">Tipo</td>
+                <td width="19%" class="Browse" align="center">Tipo</td>
                 <td width="26%" class="Browse" align="center">Periodo</td>
                 <td width="27%" class="Browse" align="center">Monto</td>
                 <td class="Browse" align="center">Acci&oacute;n</td>
@@ -3903,17 +3903,17 @@ if ($ejecutar == "consultarDeducciones") {
          <?
     while ($bus_consulta = mysql_fetch_array($sql_consulta)) {
         ?>
-			<tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
+            <tr bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
                 <td align="left" class="Browse"><?=ucwords($bus_consulta["tipo"])?></td>
                 <td align="center" class="Browse"><?=$bus_consulta["periodo"]?></td>
                  <td align="right" class="Browse"><?=number_format($bus_consulta["monto"], 2, ",", ".")?></td>
                 <td width="5%" align="center" class="Browse"><img src="imagenes/delete.png" style="cursor:pointer" onclick="eliminarDeducciones('<?=$bus_consulta["idtabla_deducciones"]?>')"></td>
             </tr>
-			<?
+            <?
     }
     ?>
-		 </table>
-		 <?
+         </table>
+         <?
 }
 
 if ($ejecutar == "consultarSelectAniosDeducciones") {
@@ -3923,7 +3923,7 @@ if ($ejecutar == "consultarSelectAniosDeducciones") {
         $i = $anio;
     }
     ?>
-	<select id="periodo_deducciones" name="periodo_deducciones">
+    <select id="periodo_deducciones" name="periodo_deducciones">
     <option value="0">.:: Seleccione ::.</option>
     <?
     for ($i; $i < date("Y"); $i++) {
@@ -3933,7 +3933,7 @@ if ($ejecutar == "consultarSelectAniosDeducciones") {
     }
     ?>
     </select>
-	<?
+    <?
 }
 
 if ($ejecutar == "eliminarDeducciones") {
@@ -4052,8 +4052,8 @@ if ($ejecutar == "consultarTotalesGeneralesPrestaciones") {
         $cuenta_meses = $cuenta_meses + 1;
 
         $sql = "select * from leyes_prestaciones where anio_desde <= '" . $bus_consulta["anio"] . "'
-         												and anio_hasta >= '" . $bus_consulta["anio"] . "'
-         												";
+                                                        and anio_hasta >= '" . $bus_consulta["anio"] . "'
+                                                        ";
         $sql_leyes = mysql_query($sql);
 
         //RECORRO LA TABLA DE LEYES PARA SABER CUAL APLICA AL AÑO Y MES DEL BUCLE DE LA TABLA DE PRESTACIONES
@@ -4204,8 +4204,8 @@ if ($ejecutar == "consultarTotalesGeneralesPrestaciones") {
             $sql_tasas    = mysql_query("select * from tabla_intereses where mes = '" . $bus_consulta["mes"] . "' and anio = '" . $bus_consulta["anio"] . "'");
             $bus_tasas    = mysql_fetch_array($sql_tasas);
             $sql_adelanto = mysql_query("select * from tabla_adelantos
-												where
-													idtabla_prestaciones = '" . $bus_consulta["idtabla_prestaciones"] . "'");
+                                                where
+                                                    idtabla_prestaciones = '" . $bus_consulta["idtabla_prestaciones"] . "'");
             $num_adelanto = mysql_num_rows($sql_adelanto);
             $bus_adelanto = mysql_fetch_array($sql_adelanto);
 
