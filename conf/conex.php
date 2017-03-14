@@ -19,7 +19,7 @@ function Conectarse()
         exit();
     }
 
-    if (!mysql_select_db("gestion_barrancas_2016", $link)) {
+    if (!mysql_select_db("gestion_mariguitar_2017", $link)) {
 
         echo "Error conectando a la base de datos.";
         exit();
