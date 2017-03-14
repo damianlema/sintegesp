@@ -3189,7 +3189,7 @@ if ($ejecutar == "consultarPrestaciones") {
             <thead>
             <tr>
                 <td width="2%" class="Browse" align="center" style="font-size: 8">A&ntilde;o</td>
-                <td width="2%" class="Browse" align="center">Mes</td>
+                <td width="2%" class="Browse" align="center"s>Mes</td>
                 <td width="8%" class="Browse" align="center">Sueldo del Mes</td>
                 <td width="8%" class="Browse" align="center">Otros Complement</td>
                 <td width="8%" class="Browse" align="center">Bono Vacacional</td>
