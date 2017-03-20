@@ -12,6 +12,6 @@ while($reg_trabajador = mysql_fetch_array($sql_trabajador)){
 
 }
 
-
+//aaaAA
 
 ?>
