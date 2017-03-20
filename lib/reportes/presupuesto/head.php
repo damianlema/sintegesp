@@ -1991,7 +1991,7 @@ function anual_onapre($pdf, $anio_fiscal, $nom_fuente_financiamiento, $nom_tipo_
 	
 	
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
-		$pdf->SetWidths(array(20, 128, 25, 25, 25, 25, 25, 25, 25, 25));
+		$pdf->SetWidths(array(20, 78, 30, 30, 30, 30, 30, 30, 30, 30));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTO INICIAL','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
@@ -2039,14 +2039,14 @@ function consolidado_sector_onapre($pdf, $anio_fiscal, $nom_fuente_financiamient
 	
 	if ($trimestre == '00' or $trimestre == "01"){
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
-		$pdf->SetWidths(array(20, 128, 25, 25, 25, 25, 25, 25, 25, 25));
+		$pdf->SetWidths(array(20, 78, 30, 30, 30, 30, 30, 30, 30, 30));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTO INICIAL','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
 	}
 	else {
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
-		$pdf->SetWidths(array(20, 103, 25, 25, 25, 25, 25, 25, 25, 25, 25));
+		$pdf->SetWidths(array(20, 61, 30, 30, 30, 30, 30, 30, 30, 30, 30));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTARIA ANTERIOR','FINANCIERA ANTERIOR','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
@@ -2098,14 +2098,14 @@ function consolidado_programa_onapre($pdf, $anio_fiscal, $nom_fuente_financiamie
 	
 	if ($trimestre == '00' or $trimestre == "01"){
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
-		$pdf->SetWidths(array(20, 128, 25, 25, 25, 25, 25, 25, 25, 25));
+		$pdf->SetWidths(array(20, 78, 30, 30, 30, 30, 30, 30, 30, 30));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTO INICIAL','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
 	}
 	else {
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
-		$pdf->SetWidths(array(20, 103, 25, 25, 25, 25, 25, 25, 25, 25, 25));
+		$pdf->SetWidths(array(20, 61, 30, 30, 30, 30, 30, 30, 30, 30, 30));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTARIA ANTERIOR','FINANCIERA ANTERIOR','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
@@ -2149,14 +2149,14 @@ function consolidado_categoria_onapre($pdf, $anio_fiscal, $nom_fuente_financiami
 	
 	if ($trimestre == '00' or $trimestre == "01"){
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
-		$pdf->SetWidths(array(20, 128, 25, 25, 25, 25, 25, 25, 25, 25));
+		$pdf->SetWidths(array(20, 78, 30, 30, 30, 30, 30, 30, 30, 30));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTO INICIAL','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
 	}
 	else {
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
-		$pdf->SetWidths(array(20, 103, 25, 25, 25, 25, 25, 25, 25, 25, 25));
+		$pdf->SetWidths(array(20, 61, 30, 30, 30, 30, 30, 30, 30, 30, 30));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTARIA ANTERIOR','FINANCIERA ANTERIOR','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
@@ -2202,14 +2202,14 @@ function consolidado_general_onapre($pdf, $anio_fiscal, $nom_fuente_financiamien
 	
 	if ($trimestre == "00" or $trimestre == "01"){
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
-		$pdf->SetWidths(array(20, 128, 25, 25, 25, 25, 25, 25, 25, 25));
+		$pdf->SetWidths(array(20, 78, 30, 30, 30, 30, 30, 30, 30, 30));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTO INICIAL','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
 	}
 	else {
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
-		$pdf->SetWidths(array(20, 103, 25, 25, 25, 25, 25, 25, 25, 25, 25));
+		$pdf->SetWidths(array(20, 61, 30, 30, 30, 30, 30, 30, 30, 30, 30));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTARIA ANTERIOR','FINANCIERA ANTERIOR','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
