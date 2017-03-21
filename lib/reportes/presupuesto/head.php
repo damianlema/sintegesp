@@ -148,7 +148,7 @@ function catprog($pdf) {
 	$pdf->Cell(70, 5, 'RESPONSABLE', 1, 0, 'C', 1);
 	$pdf->Ln();
 	$pdf->SetAligns(array('C', 'L', 'L'));
-	$pdf->SetWidths(array(25, 100, 70));	
+	$pdf->SetWidths(array(25, 100, 70));
 }
 
 //	Indice de Categorias Programaticas...
@@ -274,11 +274,11 @@ function preori($pdf, $anio_fiscal, $fuente_financiamiento, $tipo_presupuesto) {
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $fuente_financiamiento, 0, 1, 'L');
 	}
 	if ($tipo_presupuesto != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $tipo_presupuesto, 0, 1, 'L');
-	}	
+	}
 	if ($anio_fiscal != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
 	}
 	//Colores de los bordes, fondo y texto
@@ -308,11 +308,11 @@ function preres($pdf, $anio_fiscal, $fuente_financiamiento, $tipo_presupuesto, $
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $fuente_financiamiento, 0, 1, 'L');
 	}
 	if ($tipo_presupuesto != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $tipo_presupuesto, 0, 1, 'L');
-	}	
+	}
 	if ($anio_fiscal != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
 	}
 	//	--------------------
@@ -351,11 +351,11 @@ function consolidado($pdf, $anio_fiscal, $fuente_financiamiento, $tipo_presupues
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $fuente_financiamiento, 0, 1, 'L');
 	}
 	if ($tipo_presupuesto != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $tipo_presupuesto, 0, 1, 'L');
-	}	
+	}
 	if ($anio_fiscal != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
 	}
 	//	--------------------
@@ -393,11 +393,11 @@ function porsector($pdf, $anio_fiscal, $fuente_financiamiento, $tipo_presupuesto
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $fuente_financiamiento, 0, 1, 'L');
 	}
 	if ($tipo_presupuesto != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $tipo_presupuesto, 0, 1, 'L');
-	}	
+	}
 	if ($anio_fiscal != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
 	}
 }
@@ -419,11 +419,11 @@ function consolidado_sector($pdf, $anio_fiscal, $fuente_financiamiento, $tipo_pr
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $fuente_financiamiento, 0, 1, 'L');
 	}
 	if ($tipo_presupuesto != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $tipo_presupuesto, 0, 1, 'L');
-	}	
+	}
 	if ($anio_fiscal != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
 	}
 }
@@ -448,44 +448,44 @@ function detalle_por_partida($pdf, $idcategoria, $idpartida, $anio_fiscal, $fina
 	$query_rendicion_comprobar = mysql_query($sql) or die ($sql.mysql_error());
 	if (mysql_num_rows($query_rendicion_comprobar) != 0) {
 			$sql="SELECT
-				 categoria_programatica.codigo, 
-				 unidad_ejecutora.denominacion as denounidad, 
-				 clasificador_presupuestario.denominacion, 
-				 clasificador_presupuestario.partida, 
-				 clasificador_presupuestario.generica, 
-				 clasificador_presupuestario.especifica, 
-				 clasificador_presupuestario.sub_especifica, 
-				 ordinal.codigo as codordinal, 
-				 ordinal.denominacion AS nomordinal, 
-				 maestro_presupuesto.monto_original, 
+				 categoria_programatica.codigo,
+				 unidad_ejecutora.denominacion as denounidad,
+				 clasificador_presupuestario.denominacion,
+				 clasificador_presupuestario.partida,
+				 clasificador_presupuestario.generica,
+				 clasificador_presupuestario.especifica,
+				 clasificador_presupuestario.sub_especifica,
+				 ordinal.codigo as codordinal,
+				 ordinal.denominacion AS nomordinal,
+				 maestro_presupuesto.monto_original,
 				 SUM(rendicion_cuentas_partidas.disminucion_periodo) As total_disminucion,
 				 '0' AS reservado_disminuir,
 				 '0' AS pre_compromiso,
-				 '0' AS solicitud_aumento, 
-				 SUM(rendicion_cuentas_partidas.aumento_periodo) as total_aumento, 
-				 SUM(rendicion_cuentas_partidas.total_compromisos_periodo) as total_compromisos, 
-				 SUM(rendicion_cuentas_partidas.total_causados_periodo) as total_causados, 
-				 SUM(rendicion_cuentas_partidas.total_pagados_periodo) as total_pagados, 
-				 rendicion_cuentas_partidas.idmaestro_presupuesto AS idRegistro 
-			FROM 
-				 rendicion_cuentas_partidas, 
-				 categoria_programatica, 
-				 unidad_ejecutora, 
-				 clasificador_presupuestario, 
-				 ordinal, 
-				 maestro_presupuesto 
+				 '0' AS solicitud_aumento,
+				 SUM(rendicion_cuentas_partidas.aumento_periodo) as total_aumento,
+				 SUM(rendicion_cuentas_partidas.total_compromisos_periodo) as total_compromisos,
+				 SUM(rendicion_cuentas_partidas.total_causados_periodo) as total_causados,
+				 SUM(rendicion_cuentas_partidas.total_pagados_periodo) as total_pagados,
+				 rendicion_cuentas_partidas.idmaestro_presupuesto AS idRegistro
+			FROM
+				 rendicion_cuentas_partidas,
+				 categoria_programatica,
+				 unidad_ejecutora,
+				 clasificador_presupuestario,
+				 ordinal,
+				 maestro_presupuesto
 			WHERE
-				(rendicion_cuentas_partidas.idmaestro_presupuesto = maestro_presupuesto.idRegistro) AND  
-				 (categoria_programatica.idcategoria_programatica='".$idcategoria."' AND 
-				 categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora) AND 
-				 (clasificador_presupuestario.idclasificador_presupuestario='".$idpartida."') AND 
-				 (maestro_presupuesto.idcategoria_programatica='".$idcategoria."' AND 
-				 maestro_presupuesto.idclasificador_presupuestario='".$idpartida."' AND 
-					(clasificador_presupuestario.sub_especifica='00') AND 
+				(rendicion_cuentas_partidas.idmaestro_presupuesto = maestro_presupuesto.idRegistro) AND
+				 (categoria_programatica.idcategoria_programatica='".$idcategoria."' AND
+				 categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora) AND
+				 (clasificador_presupuestario.idclasificador_presupuestario='".$idpartida."') AND
+				 (maestro_presupuesto.idcategoria_programatica='".$idcategoria."' AND
+				 maestro_presupuesto.idclasificador_presupuestario='".$idpartida."' AND
+					(clasificador_presupuestario.sub_especifica='00') AND
 				 maestro_presupuesto.idordinal=ordinal.idordinal)
-				 $where_ordinal AND 
-				 (maestro_presupuesto.anio='".$anio_fiscal."' AND 
-				 maestro_presupuesto.idfuente_financiamiento='".$financiamiento."' AND 
+				 $where_ordinal AND
+				 (maestro_presupuesto.anio='".$anio_fiscal."' AND
+				 maestro_presupuesto.idfuente_financiamiento='".$financiamiento."' AND
 				 maestro_presupuesto.idtipo_presupuesto='".$tipo_presupuesto."')
 			GROUP BY (categoria_programatica.codigo), (clasificador_presupuestario.partida), (clasificador_presupuestario.generica), (clasificador_presupuestario.especifica), (clasificador_presupuestario.sub_especifica)
 			" ;
@@ -493,89 +493,89 @@ function detalle_por_partida($pdf, $idcategoria, $idpartida, $anio_fiscal, $fina
 			$field=mysql_fetch_array($query);
 			$total_actual = $field['monto_original'] + $field['total_aumento'] - $field['total_disminucion'];
 			$total_actual=number_format($total_actual, 2, ',', '.');
-	} else {	
-		$sql="SELECT categoria_programatica.codigo, 
-				 unidad_ejecutora.denominacion denounidad, 
-				 clasificador_presupuestario.denominacion, 
-				 clasificador_presupuestario.partida, 
-				 clasificador_presupuestario.generica, 
-				 clasificador_presupuestario.especifica, 
-				 clasificador_presupuestario.sub_especifica, 
-				 ordinal.codigo as codordinal, 
-				 ordinal.denominacion AS nomordinal, 
-				 maestro_presupuesto.monto_original, 
+	} else {
+		$sql="SELECT categoria_programatica.codigo,
+				 unidad_ejecutora.denominacion denounidad,
+				 clasificador_presupuestario.denominacion,
+				 clasificador_presupuestario.partida,
+				 clasificador_presupuestario.generica,
+				 clasificador_presupuestario.especifica,
+				 clasificador_presupuestario.sub_especifica,
+				 ordinal.codigo as codordinal,
+				 ordinal.denominacion AS nomordinal,
+				 maestro_presupuesto.monto_original,
 				 maestro_presupuesto.total_disminucion,
 				 maestro_presupuesto.reservado_disminuir,
 				 maestro_presupuesto.pre_compromiso,
-				 maestro_presupuesto.solicitud_aumento, 
-				 maestro_presupuesto.total_aumento, 
-				 maestro_presupuesto.monto_actual, 
-				 maestro_presupuesto.total_compromisos, 
-				 maestro_presupuesto.total_causados, 
-				 maestro_presupuesto.total_pagados, 
-				 maestro_presupuesto.idRegistro 
-			FROM 
-				 categoria_programatica, 
-				 unidad_ejecutora, 
-				 clasificador_presupuestario, 
-				 ordinal, 
-				 maestro_presupuesto 
-			WHERE 
-				 (categoria_programatica.idcategoria_programatica='".$idcategoria."' AND 
-				 categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora) AND 
-				 (clasificador_presupuestario.idclasificador_presupuestario='".$idpartida."') AND 
-				 (maestro_presupuesto.idcategoria_programatica='".$idcategoria."' AND 
-				 maestro_presupuesto.idclasificador_presupuestario='".$idpartida."' AND 
+				 maestro_presupuesto.solicitud_aumento,
+				 maestro_presupuesto.total_aumento,
+				 maestro_presupuesto.monto_actual,
+				 maestro_presupuesto.total_compromisos,
+				 maestro_presupuesto.total_causados,
+				 maestro_presupuesto.total_pagados,
+				 maestro_presupuesto.idRegistro
+			FROM
+				 categoria_programatica,
+				 unidad_ejecutora,
+				 clasificador_presupuestario,
+				 ordinal,
+				 maestro_presupuesto
+			WHERE
+				 (categoria_programatica.idcategoria_programatica='".$idcategoria."' AND
+				 categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora) AND
+				 (clasificador_presupuestario.idclasificador_presupuestario='".$idpartida."') AND
+				 (maestro_presupuesto.idcategoria_programatica='".$idcategoria."' AND
+				 maestro_presupuesto.idclasificador_presupuestario='".$idpartida."' AND
 				 maestro_presupuesto.idordinal=ordinal.idordinal)
-				 $where_ordinal AND 
-				 (maestro_presupuesto.anio='".$anio_fiscal."' AND 
-				 maestro_presupuesto.idfuente_financiamiento='".$financiamiento."' AND 
+				 $where_ordinal AND
+				 (maestro_presupuesto.anio='".$anio_fiscal."' AND
+				 maestro_presupuesto.idfuente_financiamiento='".$financiamiento."' AND
 				 maestro_presupuesto.idtipo_presupuesto='".$tipo_presupuesto."')";
 				 $query=mysql_query($sql) or die ($sql.mysql_error());
 				$field=mysql_fetch_array($query);
-				
+
 				$total_actual=number_format($field[15], 2, ',', '.');
-	}	
-	
-	$partida = $field['partida'].".".$field['generica'].".".$field['especifica'].".".$field['sub_especifica']." ".$field['codordinal']." - ";;	
+	}
+
+	$partida = $field['partida'].".".$field['generica'].".".$field['especifica'].".".$field['sub_especifica']." ".$field['codordinal']." - ";;
 	if ($idordinal != "") $partida.=$field['nomordinal']; else $partida.=$field['denominacion'];
-	
+
 	$monto_original=number_format($field[9], 2, ',', '.');
 	$total_disminucion=number_format($field[10], 2, ',', '.');
 	$total_reservado_disminucion=number_format($field[11], 2, ',', '.');
-	
+
 	// PRE COMPROMISO
-	
+
 	$total_pre_compromiso=number_format($field[12], 2, ',', '.');
 	if ($field[12]==0) $ptotal_precompromiso=0; else $ptotal_precompromiso=(float) ($field[12]*100/$field[15]); $ptotal_precompromiso=number_format($ptotal_precompromiso, 2, ',', '.');
 	$dtotal_precompromiso=(float) ($field[15]-$field[12]-$field[11]-$field[16]); $dtotal_precompromiso=number_format($dtotal_precompromiso, 2, ',', '.');
 	if ($field[12]==0) $pdtotal_precompromiso=0; else $pdtotal_precompromiso=(float) (($field[15]-$field[12]-$field[11])*100/$field[15]); $pdtotal_precompromiso=number_format($pdtotal_precompromiso, 2, ',', '.');
-		
+
 	$total_solicitud_aumento=number_format($field[13], 2, ',', '.');
 	$total_aumento=number_format($field[14], 2, ',', '.');
-	
-	
+
+
 	// COMPROMISO
-	
+
 	$total_compromiso=number_format($field[16], 2, ',', '.');
 	if ($field[16]==0) $ptotal_compromiso=0; else $ptotal_compromiso=(float) ($field[16]*100/$field[15]); $ptotal_compromiso=number_format($ptotal_compromiso, 2, ',', '.');
 	$dtotal_compromiso=(float) ($field[15]-$field[16]-$field[12]-$field[11]); $dtotal_compromiso=number_format($dtotal_compromiso, 2, ',', '.');
 	if ($field[16]==0) $ptotal_compromiso=0; else $pdtotal_compromiso=(float) (($field[15]-$field[16])*100/$field[15]); $pdtotal_compromiso=number_format($pdtotal_compromiso, 2, ',', '.');
-	
+
 	// CAUSADO
-	
+
 	$total_causado=number_format($field[17], 2, ',', '.');
 	if ($field[17]==0) $ptotal_causado=0; else $ptotal_causado=(float) ($field[17]*100/$field[15]); $ptotal_causado=number_format($ptotal_causado, 2, ',', '.');
 	$dtotal_causado=(float) ($field[15]-$field[17]); $dtotal_causado=number_format($dtotal_causado, 2, ',', '.');
 	if ($field[17]==0) $pdtotal_causado=0; else $pdtotal_causado=(float) (($field[15]-$field[17])*100/$field[15]); $pdtotal_causado=number_format($pdtotal_causado, 2, ',', '.');
-	
+
 	// PAGADO
-	
+
 	$total_pagado=number_format($field[18], 2, ',', '.');
 	if ($field[18] == 0) $ptotal_pagado=0; else $ptotal_pagado=(float) ($field[18]*100/$field[15]); $ptotal_pagado=number_format($ptotal_pagado, 2, ',', '.');
 	$dtotal_pagado=(float) ($field[15]-$field[18]); $dtotal_pagado=number_format($dtotal_pagado, 2, ',', '.');
 	if ($field[18]==0 || $field[15]==0) $pdtotal_pagado=0; else $pdtotal_pagado=(float) (($field[15]-$field[18])*100/$field[15]); $pdtotal_pagado=number_format($pdtotal_pagado, 2, ',', '.');
-	
+
 	/////////////////////////////
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, 'Fuente de Financiamiento: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $nom_fuente_financiamiento, 0, 1, 'L');
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, 'Tipo de Presupuesto: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $nom_tipo_presupuesto, 0, 1, 'L');
@@ -597,33 +597,33 @@ function detalle_por_partida($pdf, $idcategoria, $idpartida, $anio_fiscal, $fina
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(30, 5, '('.$total_reservado_disminucion.')', 0, 1, 'R');
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, 'Monto Actual: ', 0, 0, 'L');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(30, 5, $total_actual, 0, 1, 'R');
-	
+
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, 'Total Pre Compromisos: ', 0, 0, 'L');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(30, 5, $total_pre_compromiso, 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(20, 5, "(".$ptotal_precompromiso."%)", 0, 0, 'L');
-	
+
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(15, 5, 'Disponible: ', 0, 0, 'L');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(30, 5, $dtotal_precompromiso, 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(20, 5, "(".$pdtotal_precompromiso."%)", 0, 1, 'L');
-	
+
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, 'Total Compromisos: ', 0, 0, 'L');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(30, 5, $total_compromiso, 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(20, 5, "(".$ptotal_compromiso."%)", 0, 0, 'L');
-	
+
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(15, 5, 'Disponible: ', 0, 0, 'L');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(30, 5, $dtotal_compromiso, 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(20, 5, "(".$pdtotal_compromiso."%)", 0, 1, 'L');
-	
+
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, 'Total Causado: ', 0, 0, 'L');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(30, 5, $total_causado, 0, 0, 'R');
-	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(20, 5, "(".$ptotal_causado."%)", 0, 0, 'L');	
+	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(20, 5, "(".$ptotal_causado."%)", 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(15, 5, 'Disponible: ', 0, 0, 'L');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(30, 5, $dtotal_causado, 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(20, 5, "(".$pdtotal_causado."%)", 0, 1, 'L');
-	
+
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, 'Total Pagado: ', 0, 0, 'L');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(30, 5, $total_pagado, 0, 0, 'R');
-	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(20, 5, "(".$ptotal_pagado."%)", 0, 0, 'L');	
+	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(20, 5, "(".$ptotal_pagado."%)", 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(15, 5, 'Disponible: ', 0, 0, 'L');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(30, 5, $dtotal_pagado, 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(20, 5, "(".$pdtotal_pagado."%)", 0, 10, 'L');
@@ -727,11 +727,11 @@ function disponibilidad_presupuestaria($pdf, $anio_fiscal, $fuente_financiamient
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $fuente_financiamiento, 0, 1, 'L');
 	}
 	if ($tipo_presupuesto != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $tipo_presupuesto, 0, 1, 'L');
-	}	
+	}
 	if ($anio_fiscal != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
 	}
 	//	--------------------
@@ -761,11 +761,11 @@ function disponibilidad_presupuestaria_periodo($pdf, $anio_fiscal, $fuente_finan
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $fuente_financiamiento, 0, 1, 'L');
 	}
 	if ($tipo_presupuesto != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $tipo_presupuesto, 0, 1, 'L');
-	}	
+	}
 	if ($anio_fiscal != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
 	}
 	//	--------------------
@@ -802,11 +802,11 @@ function resumen_actividades($pdf, $anio_fiscal, $fuente_financiamiento, $tipo_p
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $fuente_financiamiento, 0, 1, 'L');
 	}
 	if ($tipo_presupuesto != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $tipo_presupuesto, 0, 1, 'L');
-	}	
+	}
 	if ($anio_fiscal != "") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
 	}
 	//	--------------------
@@ -842,85 +842,85 @@ function movimientos_por_partida($pdf, $idcategoria, $idpartida, $anio_fiscal, $
 		$where_ordinal = " AND maestro_presupuesto.idordinal = '".$idordinal."'";
 	}
 	//	CONSULTO
-	$sql="SELECT categoria_programatica.codigo, 
-				 unidad_ejecutora.denominacion denounidad, 
-				 clasificador_presupuestario.denominacion, 
-				 clasificador_presupuestario.partida, 
-				 clasificador_presupuestario.generica, 
-				 clasificador_presupuestario.especifica, 
-				 clasificador_presupuestario.sub_especifica, 
-				 ordinal.codigo as codordinal, 
-				 ordinal.denominacion as nomordinal, 
-				 maestro_presupuesto.monto_original, 
+	$sql="SELECT categoria_programatica.codigo,
+				 unidad_ejecutora.denominacion denounidad,
+				 clasificador_presupuestario.denominacion,
+				 clasificador_presupuestario.partida,
+				 clasificador_presupuestario.generica,
+				 clasificador_presupuestario.especifica,
+				 clasificador_presupuestario.sub_especifica,
+				 ordinal.codigo as codordinal,
+				 ordinal.denominacion as nomordinal,
+				 maestro_presupuesto.monto_original,
 				 maestro_presupuesto.total_disminucion,
 				 maestro_presupuesto.reservado_disminuir,
 				 maestro_presupuesto.pre_compromiso,
-				 maestro_presupuesto.solicitud_aumento, 
-				 maestro_presupuesto.total_aumento, 
-				 maestro_presupuesto.monto_actual, 
-				 maestro_presupuesto.total_compromisos, 
-				 maestro_presupuesto.total_causados, 
-				 maestro_presupuesto.total_pagados, 
-				 maestro_presupuesto.idRegistro 
-			FROM 
-				 categoria_programatica, 
-				 unidad_ejecutora, 
-				 clasificador_presupuestario, 
-				 ordinal, 
-				 maestro_presupuesto 
-			WHERE 
-				 (categoria_programatica.idcategoria_programatica='".$idcategoria."' AND 
-				 categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora) AND 
-				 (clasificador_presupuestario.idclasificador_presupuestario='".$idpartida."') AND 
-				 (maestro_presupuesto.idcategoria_programatica='".$idcategoria."' AND 
-				 maestro_presupuesto.idclasificador_presupuestario='".$idpartida."' AND 
-				 maestro_presupuesto.idordinal=ordinal.idordinal)  
-				 $where_ordinal AND 
-				 (maestro_presupuesto.anio='".$anio_fiscal."' AND 
-				 maestro_presupuesto.idfuente_financiamiento='".$financiamiento."' AND 
+				 maestro_presupuesto.solicitud_aumento,
+				 maestro_presupuesto.total_aumento,
+				 maestro_presupuesto.monto_actual,
+				 maestro_presupuesto.total_compromisos,
+				 maestro_presupuesto.total_causados,
+				 maestro_presupuesto.total_pagados,
+				 maestro_presupuesto.idRegistro
+			FROM
+				 categoria_programatica,
+				 unidad_ejecutora,
+				 clasificador_presupuestario,
+				 ordinal,
+				 maestro_presupuesto
+			WHERE
+				 (categoria_programatica.idcategoria_programatica='".$idcategoria."' AND
+				 categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora) AND
+				 (clasificador_presupuestario.idclasificador_presupuestario='".$idpartida."') AND
+				 (maestro_presupuesto.idcategoria_programatica='".$idcategoria."' AND
+				 maestro_presupuesto.idclasificador_presupuestario='".$idpartida."' AND
+				 maestro_presupuesto.idordinal=ordinal.idordinal)
+				 $where_ordinal AND
+				 (maestro_presupuesto.anio='".$anio_fiscal."' AND
+				 maestro_presupuesto.idfuente_financiamiento='".$financiamiento."' AND
 				 maestro_presupuesto.idtipo_presupuesto='".$tipo_presupuesto."')";
 	$query=mysql_query($sql) or die ($sql.mysql_error());
 	$field=mysql_fetch_array($query);
-	
-	$partida = $field['partida'].".".$field['generica'].".".$field['especifica'].".".$field['sub_especifica']." ".$field['codordinal']." - ";;	
+
+	$partida = $field['partida'].".".$field['generica'].".".$field['especifica'].".".$field['sub_especifica']." ".$field['codordinal']." - ";;
 	if ($idordinal != "") $partida.=$field['nomordinal']; else $partida.=$field['denominacion'];
-	
+
 	$monto_original=number_format($field[9], 2, ',', '.');
 	$total_disminucion=number_format($field[10], 2, ',', '.');
 	$total_reservado_disminucion=number_format($field[11], 2, ',', '.');
-	
+
 	// PRE COMPROMISO
-	
+
 	$total_pre_compromiso=number_format($field[12], 2, ',', '.');
 	if ($field[12]==0) $ptotal_precompromiso=0; else $ptotal_precompromiso=(float) ($field[12]*100/$field[15]); $ptotal_precompromiso=number_format($ptotal_precompromiso, 2, ',', '.');
 	$dtotal_precompromiso=(float) ($field[15]-$field[12]-$field[11]-$field[16]); $dtotal_precompromiso=number_format($dtotal_precompromiso, 2, ',', '.');
 	if ($field[12]==0) $pdtotal_precompromiso=0; else $pdtotal_precompromiso=(float) (($field[15]-$field[12]-$field[11])*100/$field[15]); $pdtotal_precompromiso=number_format($pdtotal_precompromiso, 2, ',', '.');
-		
+
 	$total_solicitud_aumento=number_format($field[13], 2, ',', '.');
 	$total_aumento=number_format($field[14], 2, ',', '.');
 	$total_actual=number_format($field[15], 2, ',', '.');
-	
+
 	// COMPROMISO
-	
+
 	$total_compromiso=number_format($field[16], 2, ',', '.');
 	if ($field[16]==0) $ptotal_compromiso=0; else $ptotal_compromiso=(float) ($field[16]*100/$field[15]); $ptotal_compromiso=number_format($ptotal_compromiso, 2, ',', '.');
 	$dtotal_compromiso=(float) ($field[15]-$field[16]-$field[12]-$field[11]); $dtotal_compromiso=number_format($dtotal_compromiso, 2, ',', '.');
 	if ($field[16]==0) $ptotal_compromiso=0; else $pdtotal_compromiso=(float) (($field[15]-$field[16])*100/$field[15]); $pdtotal_compromiso=number_format($pdtotal_compromiso, 2, ',', '.');
-	
+
 	// CAUSADO
-	
+
 	$total_causado=number_format($field[17], 2, ',', '.');
 	if ($field[17]==0) $ptotal_causado=0; else $ptotal_causado=(float) ($field[17]*100/$field[15]); $ptotal_causado=number_format($ptotal_causado, 2, ',', '.');
 	$dtotal_causado=(float) ($field[15]-$field[17]); $dtotal_causado=number_format($dtotal_causado, 2, ',', '.');
 	if ($field[17]==0) $pdtotal_causado=0; else $pdtotal_causado=(float) (($field[15]-$field[17])*100/$field[15]); $pdtotal_causado=number_format($pdtotal_causado, 2, ',', '.');
-	
+
 	// PAGADO
-	
+
 	$total_pagado=number_format($field[18], 2, ',', '.');
 	if ($field[18]==0) $ptotal_pagado=0; else $ptotal_pagado=(float) ($field[18]*100/$field[15]); $ptotal_pagado=number_format($ptotal_pagado, 2, ',', '.');
 	$dtotal_pagado=(float) ($field[15]-$field[18]); $dtotal_pagado=number_format($dtotal_pagado, 2, ',', '.');
 	if ($field[18]==0) $pdtotal_pagado=0; else $pdtotal_pagado=(float) (($field[15]-$field[18])*100/$field[15]); $pdtotal_pagado=number_format($pdtotal_pagado, 2, ',', '.');
-	
+
 	/////////////////////////////
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, 'Fuente de Financiamiento: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $nom_fuente_financiamiento, 0, 1, 'L');
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, 'Tipo de Presupuesto: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $nom_tipo_presupuesto, 0, 1, 'L');
@@ -1067,21 +1067,21 @@ function documentos_por_partida($pdf, $idcategoria, $idpartida, $anio_fiscal, $f
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, 'Fuente de Financiamiento: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $nom_fuente_financiamiento, 0, 1, 'L');
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, 'Tipo de Presupuesto: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $nom_tipo_presupuesto, 0, 1, 'L');
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, utf8_decode('Año Fiscal: '), 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
-	
+
 	$categoria_programatica = $categoria['codigo'].' '.$categoria['denominacion'];
 	$clasificador_presupuestario = $partida['codigo'].' '.$partida['denominacion'];
 	$ordinal = $partida['codigo'].' '.$partida['codordinal'].' '.$partida['nomordinal'];
-	
-	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, utf8_decode('Categoria Programatica'), 0, 0, 'L'); 
+
+	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, utf8_decode('Categoria Programatica'), 0, 0, 'L');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, utf8_decode($categoria_programatica), 0, 1, 'L');
-	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, 'Partida: ', 0, 0, 'L'); 
+	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, 'Partida: ', 0, 0, 'L');
 	$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, utf8_decode($clasificador_presupuestario), 0, 1, 'L');
-	
+
 	if ($partida['codordinal'] != "0000") {
-		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, '', 0, 0, 'L'); 
+		$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 5, '', 0, 0, 'L');
 		$pdf->SetFont('Arial', 'B', 8); $pdf->Cell(50, 4, utf8_decode($ordinal), 0, 1, 'L');
 	}
-	
+
 	$pdf->Ln(4);
 	//----------------------------------------------------
 	//Colores de los bordes, fondo y texto
@@ -1175,14 +1175,14 @@ function ejecucion_por_trimestre($pdf, $anio_fiscal, $fuente_financiamiento, $ti
 	$pdf->SetFont('Arial', '', 6); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $tipo_presupuesto, 0, 1, 'L');
 	$pdf->SetFont('Arial', '', 6); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
 	$pdf->Ln(3);
-	
-	
+
+
 	//Colores de los bordes, fondo y texto
 	$pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(240, 240, 240); $pdf->SetTextColor(0, 0, 0);
 	$pdf->SetFont('Arial', 'B', 7);
-	
+
 	$pdf->SetHeight(array(4));
-	
+
 	if ($trimestre == "I"){
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
 		$pdf->SetWidths(array(20, 135, 25, 25, 25, 25, 25, 25, 25));
@@ -1209,16 +1209,16 @@ function traslado_presupuestario($pdf, $nsolicitud, $fsolicitud, $pag, $tipo_par
 	setLogo($pdf);
 	//	--------------------
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
 	$pdf->Cell(50, 5, 'Fecha: ', 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');		
+	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L'); 	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
-	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R'); 
-	$pdf->SetFont('Arial', 'B', 9);	
+	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R');
+	$pdf->SetFont('Arial', 'B', 9);
 	$pdf->Cell(35, 5, $pag, 0, 1, 'L');
 	/////////////////////////////
 	if ($estado=="elaboracion") $titulo="Solicitud de Traslados Presupuestarios";
@@ -1251,16 +1251,16 @@ function traslado_presupuestario_simulado($pdf, $nsolicitud, $fsolicitud, $pag, 
 	setLogo($pdf);
 	//	--------------------
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
 	$pdf->Cell(50, 5, 'Fecha: ', 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');		
+	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L'); 	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
-	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R'); 
-	$pdf->SetFont('Arial', 'B', 9);	
+	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R');
+	$pdf->SetFont('Arial', 'B', 9);
 	$pdf->Cell(35, 5, $pag, 0, 1, 'L');
 	/////////////////////////////
 	if ($estado=="elaboracion") $titulo="Solicitud de Traslados Presupuestarios";
@@ -1297,16 +1297,16 @@ function anexo_traslado_presupuestario($pdf, $nsolicitud, $fsolicitud, $pag, $ti
 	setLogo($pdf);
 	//	--------------------
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
 	$pdf->Cell(50, 5, 'Fecha: ', 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');		
+	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L'); 	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
-	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R'); 
-	$pdf->SetFont('Arial', 'B', 9);	
+	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R');
+	$pdf->SetFont('Arial', 'B', 9);
 	$pdf->Cell(35, 5, $pag, 0, 1, 'L');
 	/////////////////////////////
 	if ($estado=="elaboracion") $titulo="Solicitud de Traslados Presupuestarios";
@@ -1339,16 +1339,16 @@ function anexo_traslado_presupuestario_simulado($pdf, $nsolicitud, $fsolicitud, 
 	setLogo($pdf);
 	//	--------------------
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
 	$pdf->Cell(50, 5, 'Fecha: ', 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');		
+	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L'); 	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
-	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R'); 
-	$pdf->SetFont('Arial', 'B', 9);	
+	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R');
+	$pdf->SetFont('Arial', 'B', 9);
 	$pdf->Cell(35, 5, $pag, 0, 1, 'L');
 	/////////////////////////////
 	if ($estado=="elaboracion") $titulo="Solicitud de Traslados Presupuestarios";
@@ -1385,16 +1385,16 @@ function disminucion_presupuestaria($pdf, $nsolicitud, $fsolicitud, $pag, $tipo_
 	setLogo($pdf);
 	//	--------------------
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
 	$pdf->Cell(50, 5, 'Fecha: ', 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');		
+	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L'); 	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
-	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R'); 
-	$pdf->SetFont('Arial', 'B', 9);	
+	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R');
+	$pdf->SetFont('Arial', 'B', 9);
 	$pdf->Cell(35, 5, $pag, 0, 1, 'L');
 	/////////////////////////////
 	if ($estado=="elaboracion") $titulo="Solicitud de Disminucion Presupuestaria";
@@ -1427,16 +1427,16 @@ function disminucion_presupuestaria_simulado($pdf, $nsolicitud, $fsolicitud, $pa
 	setLogo($pdf);
 	//	--------------------
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
 	$pdf->Cell(50, 5, 'Fecha: ', 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');		
+	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L'); 	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
-	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R'); 
-	$pdf->SetFont('Arial', 'B', 9);	
+	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R');
+	$pdf->SetFont('Arial', 'B', 9);
 	$pdf->Cell(35, 5, $pag, 0, 1, 'L');
 	/////////////////////////////
 	if ($estado=="elaboracion") $titulo="Solicitud de Disminucion Presupuestaria";
@@ -1473,16 +1473,16 @@ function credito_adicional($pdf, $nsolicitud, $fsolicitud, $pag, $tipo_partida, 
 	setLogo($pdf);
 	//	--------------------
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
 	$pdf->Cell(50, 5, 'Fecha: ', 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');		
+	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L'); 	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
-	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R'); 
-	$pdf->SetFont('Arial', 'B', 9);	
+	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R');
+	$pdf->SetFont('Arial', 'B', 9);
 	$pdf->Cell(35, 5, $pag, 0, 1, 'L');
 	/////////////////////////////
 	if ($estado=="elaboracion") $titulo="Solicitud de Créditos Adicionales";
@@ -1515,16 +1515,16 @@ function credito_adicional_simulado($pdf, $nsolicitud, $fsolicitud, $pag, $tipo_
 	setLogo($pdf);
 	//	--------------------
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
 	$pdf->Cell(50, 5, 'Fecha: ', 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');		
+	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L'); 	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
-	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R'); 
-	$pdf->SetFont('Arial', 'B', 9);	
+	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R');
+	$pdf->SetFont('Arial', 'B', 9);
 	$pdf->Cell(35, 5, $pag, 0, 1, 'L');
 	/////////////////////////////
 	if ($estado=="elaboracion") $titulo="Solicitud de Créditos Adicionales";
@@ -1561,16 +1561,16 @@ function rectificacion_partida($pdf, $nsolicitud, $fsolicitud, $pag, $tipo_parti
 	setLogo($pdf);
 	//	--------------------
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
 	$pdf->Cell(50, 5, 'Fecha: ', 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');		
+	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L'); 	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
-	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R'); 
-	$pdf->SetFont('Arial', 'B', 9);	
+	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R');
+	$pdf->SetFont('Arial', 'B', 9);
 	$pdf->Cell(35, 5, $pag, 0, 1, 'L');
 	/////////////////////////////
 	if ($estado=="elaboracion") $titulo="Solicitud de Rectificación Presupuestaria";
@@ -1603,16 +1603,16 @@ function rectificacion_partida_simulado($pdf, $nsolicitud, $fsolicitud, $pag, $t
 	setLogo($pdf);
 	//	--------------------
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
 	$pdf->Cell(50, 5, 'Fecha: ', 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');		
+	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L'); 	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
-	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R'); 
-	$pdf->SetFont('Arial', 'B', 9);	
+	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R');
+	$pdf->SetFont('Arial', 'B', 9);
 	$pdf->Cell(35, 5, $pag, 0, 1, 'L');
 	/////////////////////////////
 	if ($estado=="elaboracion") $titulo="Solicitud de Rectificación Presupuestaria";
@@ -1649,16 +1649,16 @@ function anexo_rectificacion_partida($pdf, $nsolicitud, $fsolicitud, $pag, $tipo
 	setLogo($pdf);
 	//	--------------------
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
 	$pdf->Cell(50, 5, 'Fecha: ', 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');		
+	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L'); 	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
-	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R'); 
-	$pdf->SetFont('Arial', 'B', 9);	
+	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R');
+	$pdf->SetFont('Arial', 'B', 9);
 	$pdf->Cell(35, 5, $pag, 0, 1, 'L');
 	/////////////////////////////
 	if ($estado=="elaboracion") $titulo="Solicitud de Rectificación Presupuestaria";
@@ -1691,16 +1691,16 @@ function anexo_rectificacion_partida_simulado($pdf, $nsolicitud, $fsolicitud, $p
 	setLogo($pdf);
 	//	--------------------
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
 	$pdf->Cell(50, 5, 'Fecha: ', 0, 0, 'R');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');		
+	$pdf->Cell(35, 5, $fsolicitud, 0, 1, 'L');
 	$pdf->SetFont('Arial', 'B', 9);
-	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L'); 	
+	$pdf->Cell(15, 5); $pdf->Cell(120, 5, '', 0, 0, 'L');
 	$pdf->SetFont('Arial', '', 9);
-	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R'); 
-	$pdf->SetFont('Arial', 'B', 9);	
+	$pdf->Cell(50, 5, utf8_decode('Página: '), 0, 0, 'R');
+	$pdf->SetFont('Arial', 'B', 9);
 	$pdf->Cell(35, 5, $pag, 0, 1, 'L');
 	/////////////////////////////
 	if ($estado=="elaboracion") $titulo="Solicitud de Rectificación Presupuestaria";
@@ -1885,14 +1885,14 @@ function mensual_onapre($pdf, $anio_fiscal, $nom_fuente_financiamiento, $nom_tip
 	$pdf->SetFont('Arial', '', 6); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $nom_tipo_presupuesto, 0, 1, 'L');
 	$pdf->SetFont('Arial', '', 6); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
 	$pdf->Ln(3);
-	
-	
+
+
 	//Colores de los bordes, fondo y texto
 	$pdf->SetDrawColor(0, 0, 0); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0);
 	$pdf->SetFont('Arial', 'B', 7);
-	
+
 	$pdf->SetHeight(array(4));
-	
+
 	if ($mes == "01"){
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
 		$pdf->SetWidths(array(20, 128, 25, 25, 25, 25, 25, 25, 25, 25));
@@ -1937,14 +1937,14 @@ function trimestral_onapre($pdf, $anio_fiscal, $nom_fuente_financiamiento, $nom_
 	$pdf->SetFont('Arial', '', 6); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $nom_tipo_presupuesto, 0, 1, 'L');
 	$pdf->SetFont('Arial', '', 6); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
 	$pdf->Ln(3);
-	
-	
+
+
 	//Colores de los bordes, fondo y texto
 	$pdf->SetDrawColor(0, 0, 0); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0);
 	$pdf->SetFont('Arial', 'B', 7);
-	
+
 	$pdf->SetHeight(array(4));
-	
+
 	if ($mes == "01"){
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
 		$pdf->SetWidths(array(20, 128, 25, 25, 25, 25, 25, 25, 25, 25));
@@ -1975,27 +1975,27 @@ function anual_onapre($pdf, $anio_fiscal, $nom_fuente_financiamiento, $nom_tipo_
 	$pdf->SetFont('Arial', 'B', 8);
 	$pdf->Cell(270, 6, utf8_decode('Ejecución ANUAL'), 0, 1, 'C');
 	$pdf->Cell(270, 6, 'Desde: '.$idesde.' Hasta:'.$ihasta, 0, 1, 'C');
-	
+
 	/////////////////////////////
 	$pdf->SetFont('Arial', '', 6); $pdf->Cell(35, 4, 'Fuente de Financiamiento: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $nom_fuente_financiamiento, 0, 1, 'L');
 	$pdf->SetFont('Arial', '', 6); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $nom_tipo_presupuesto, 0, 1, 'L');
 	$pdf->SetFont('Arial', '', 6); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
 	$pdf->Ln(3);
-	
-	
+
+
 	//Colores de los bordes, fondo y texto
 	$pdf->SetDrawColor(0, 0, 0); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0);
 	$pdf->SetFont('Arial', 'B', 7);
-	
+
 	$pdf->SetHeight(array(4));
-	
-	
+
+
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
 		$pdf->SetWidths(array(20, 78, 30, 30, 30, 30, 30, 30, 30, 30));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTO INICIAL','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
-	
+
 	$pdf->Ln(1);
 	$pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0);
 }
@@ -2030,13 +2030,13 @@ function consolidado_sector_onapre($pdf, $anio_fiscal, $nom_fuente_financiamient
 	$pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0);
 	$pdf->SetFont('Arial', 'B', 7);
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'SECTOR: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 9); $pdf->Cell(50, 4, $CodSector.'    '.utf8_decode($Sector), 0, 1, 'L');
-	//$pdf->Cell(205, 7, $CodSector.'    '.utf8_decode($Sector), 1, 1, 'L', 1); 
+	//$pdf->Cell(205, 7, $CodSector.'    '.utf8_decode($Sector), 1, 1, 'L', 1);
 	//Colores de los bordes, fondo y texto
 	$pdf->SetDrawColor(0, 0, 0); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0);
 	$pdf->SetFont('Arial', 'B', 6);
-	
+
 	$pdf->SetHeight(array(4));
-	
+
 	if ($trimestre == '00' or $trimestre == "01"){
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
 		$pdf->SetWidths(array(20, 78, 30, 30, 30, 30, 30, 30, 30, 30));
@@ -2089,13 +2089,13 @@ function consolidado_programa_onapre($pdf, $anio_fiscal, $nom_fuente_financiamie
 	$pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0);
 	$pdf->SetFont('Arial', 'B', 7);
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'PROGRAMA: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 9); $pdf->Cell(50, 4, $CodPrograma.'    '.utf8_decode($Programa), 0, 1, 'L');
-	//$pdf->Cell(205, 7, $CodSector.'    '.utf8_decode($Sector), 1, 1, 'L', 1); 
+	//$pdf->Cell(205, 7, $CodSector.'    '.utf8_decode($Sector), 1, 1, 'L', 1);
 	//Colores de los bordes, fondo y texto
 	$pdf->SetDrawColor(0, 0, 0); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0);
 	$pdf->SetFont('Arial', 'B', 6);
-	
+
 	$pdf->SetHeight(array(4));
-	
+
 	if ($trimestre == '00' or $trimestre == "01"){
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
 		$pdf->SetWidths(array(20, 78, 30, 30, 30, 30, 30, 30, 30, 30));
@@ -2140,13 +2140,13 @@ function consolidado_categoria_onapre($pdf, $anio_fiscal, $nom_fuente_financiami
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Fuente de Financiamiento: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $nom_fuente_financiamiento, 0, 1, 'L');
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $nom_tipo_presupuesto, 0, 1, 'L');
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
-	
+
 	//Colores de los bordes, fondo y texto
 	$pdf->SetDrawColor(0, 0, 0); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0);
 	$pdf->SetFont('Arial', 'B', 6);
-	
+
 	$pdf->SetHeight(array(4));
-	
+
 	if ($trimestre == '00' or $trimestre == "01"){
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
 		$pdf->SetWidths(array(20, 78, 30, 30, 30, 30, 30, 30, 30, 30));
@@ -2193,13 +2193,13 @@ function consolidado_general_onapre($pdf, $anio_fiscal, $nom_fuente_financiamien
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Fuente de Financiamiento: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $nom_fuente_financiamiento, 0, 1, 'L');
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, 'Tipo de Presupuesto: ', 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $nom_tipo_presupuesto, 0, 1, 'L');
 	$pdf->SetFont('Arial', '', 8); $pdf->Cell(35, 4, utf8_decode('Año Fiscal: '), 0, 0, 'L'); $pdf->SetFont('Arial', 'B', 6); $pdf->Cell(50, 4, $anio_fiscal, 0, 1, 'L');
-	
+
 	//Colores de los bordes, fondo y texto
 	$pdf->SetDrawColor(0, 0, 0); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0);
 	$pdf->SetFont('Arial', 'B', 6);
-	
+
 	$pdf->SetHeight(array(4));
-	
+
 	if ($trimestre == "00" or $trimestre == "01"){
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
 		$pdf->SetWidths(array(20, 78, 30, 30, 30, 30, 30, 30, 30, 30));
