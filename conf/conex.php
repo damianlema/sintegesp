@@ -34,4 +34,4 @@ function desconectar()
 }
 
 extract($_SESSION);
-// aaaaaa
+
