@@ -406,7 +406,7 @@ switch ($nombre) {
 					$resultado = $sum_partidas_orden2 - $bruto2;
 					$resultado2 = number_format($resultado,2);
 					//$resultado = $sum_partidas_orden2 - $bruto2;
-					if($resultado != 0 and $resultado > 0){
+					if($resultado != 0 and $resultado > 0 and $chkerror=='si'){
 						echo "
 							<tr>
 								<td align='center' colspan='2' style='$cat'>ERROR: </td>
