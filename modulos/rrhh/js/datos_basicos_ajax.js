@@ -422,15 +422,15 @@ function mostrarPestanas() {
     	if(typeof document.getElementById("li_experienciaLaboral")!=="undefined"){
     		document.getElementById('li_experienciaLaboral').style.display 	= 'block';
     	}
-    	
+
     	if(typeof document.getElementById("li_movimientos")!=="undefined"){
     		document.getElementById('li_movimientos').style.display 	= 'block';
     	}
-    	
+
     	if(typeof document.getElementById("li_permisos")!=="undefined"){
     		document.getElementById('li_permisos').style.display 	= 'block';
     	}
-    	
+
     	if(typeof document.getElementById("li_permisos")!=="undefined"){
     		document.getElementById('li_permisos').style.display 	= 'block';
     	}
@@ -458,11 +458,11 @@ function mostrarPestanas() {
     	if(typeof document.getElementById("li_reconocimientos")!=="undefined"){
     		document.getElementById('li_reconocimientos').style.display 	= 'block';
     	}
-    	
+
     	if(typeof document.getElementById("li_cuentas_bancarias")!=="undefined"){
     		document.getElementById('li_cuentas_bancarias').style.display 	= 'block';
     	}
-    	
+
     	if(typeof document.getElementById("li_informacionGeneral")!=="undefined"){
     		document.getElementById('li_informacionGeneral').style.display 	= 'block';
     	}*/
@@ -1461,11 +1461,11 @@ function seleccionarModificar(idhistorico_permisos, fecha_inicio, hora_inicio, f
     document.getElementById('boton_ingresar_permiso').style.display = 'none';
     document.getElementById('boton_modificar_permiso').style.display = 'block';
 }
-// ************************************************************************************************************************** 
-// ************************************************************************************************************************** 
-// *************************************************** RECONOCIMIENTOS ****************************************************** 
-// ************************************************************************************************************************** 
-// ************************************************************************************************************************** 
+// **************************************************************************************************************************
+// **************************************************************************************************************************
+// *************************************************** RECONOCIMIENTOS ******************************************************
+// **************************************************************************************************************************
+// **************************************************************************************************************************
 function ingresarReconocimientos() {
     var idtrabajador = document.getElementById('idtrabajador').value;
     var tipo = document.getElementById('tipo_reconocimientos').value;
@@ -1590,11 +1590,11 @@ function limpiarReconocimientos() {
     document.getElementById('boton_ingresar_reconocimientos').style.display = "block";
     document.getElementById('boton_modificar_reconocimientos').style.display = "none";
 }
-// ************************************************************************************************************************** 
-// ************************************************************************************************************************** 
-// *************************************************** SANCIONES ****************************************************** 
-// ************************************************************************************************************************** 
-// ************************************************************************************************************************** 
+// **************************************************************************************************************************
+// **************************************************************************************************************************
+// *************************************************** SANCIONES ******************************************************
+// **************************************************************************************************************************
+// **************************************************************************************************************************
 function ingresarsanciones() {
     var idtrabajador = document.getElementById('idtrabajador').value;
     var tipo = document.getElementById('tipo_sanciones').value;
@@ -1719,11 +1719,11 @@ function limpiarsanciones() {
     document.getElementById('boton_ingresar_sanciones').style.display = "block";
     document.getElementById('boton_modificar_sanciones').style.display = "none";
 }
-// ************************************************************************************************************************** 
-// ************************************************************************************************************************** 
-// *************************************************** DECLARACION JURADA ****************************************************** 
-// ************************************************************************************************************************** 
-// ************************************************************************************************************************** 
+// **************************************************************************************************************************
+// **************************************************************************************************************************
+// *************************************************** DECLARACION JURADA ******************************************************
+// **************************************************************************************************************************
+// **************************************************************************************************************************
 function ingresardeclaracion_jurada() {
     var idtrabajador = document.getElementById('idtrabajador').value;
     var tipo = document.getElementById('tipo_declaracion_jurada').value;
@@ -1808,7 +1808,7 @@ function eliminarDeclaracion_jurada(iddeclaracion_jurada) {
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
             if (ajax.readyState == 4) {
-                //alert(ajax.responseText);	
+                //alert(ajax.responseText);
                 consultardeclaracion_jurada(document.getElementById('idtrabajador').value);
             }
         }
@@ -1840,11 +1840,11 @@ function limpiardeclaracion_jurada() {
     document.getElementById('boton_ingresar_declaracion_jurada').style.display = "block";
     document.getElementById('boton_modificar_declaracion_jurada').style.display = "none";
 }
-// ************************************************************************************************************************** 
-// ************************************************************************************************************************** 
-// *************************************************** CURSOS REALIZADOS ****************************************************** 
-// ************************************************************************************************************************** 
-// ************************************************************************************************************************** 
+// **************************************************************************************************************************
+// **************************************************************************************************************************
+// *************************************************** CURSOS REALIZADOS ******************************************************
+// **************************************************************************************************************************
+// **************************************************************************************************************************
 function ingresarCursos() {
     var idtrabajador = document.getElementById('idtrabajador').value;
     var denominacion = document.getElementById('denominacion_cursos').value;
@@ -1944,7 +1944,7 @@ function eliminarCursos(idcursos) {
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
             if (ajax.readyState == 4) {
-                //alert(ajax.responseText);	
+                //alert(ajax.responseText);
                 consultarCursos(document.getElementById('idtrabajador').value);
             }
         }
@@ -2050,15 +2050,15 @@ function consultarVacacionesPendientes(idtrabajador) {
 /*
 function verificarFecha_historicoVacaciones(fecha_inicio, fecha_culminacion){
 	var ajax=nuevoAjax();
-	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);	
+	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.onreadystatechange=function() { 
+	ajax.onreadystatechange=function() {
 		if(ajax.readyState == 1){
 			}
 		if (ajax.readyState==4){
 			document.getElementById('tiempo_disfrute_vacaciones').value 	= ajax.responseText;
 			//obtener_disfrutes_completos_vacaciones(tiempo_disfrute,dias_disfrutados);
-		} 
+		}
 	}
 	ajax.send("fecha_inicio="+fecha_inicio+"&fecha_culminacion="+fecha_culminacion+"&ejecutar=validarFechas_vacaciones");
 }
@@ -2067,15 +2067,15 @@ function verificarFecha_historicoVacaciones(fecha_inicio, fecha_culminacion){
 
 function verificarFechaDisfrute_historicoVacaciones(fecha_inicio, fecha_culminacion){
 	var ajax=nuevoAjax();
-	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);	
+	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.onreadystatechange=function() { 
+	ajax.onreadystatechange=function() {
 		if(ajax.readyState == 1){
 			}
 		if (ajax.readyState==4){
 			document.getElementById('tiempo_pendiente_disfrute_vacaciones').value 	= parseInt(document.getElementById('tiempo_disfrute_vacaciones').value) - parseInt(ajax.responseText)+parseInt(document.getElementById("cantidad_feriados_vacaciones").value);
 			//obtener_disfrutes_completos_vacaciones(tiempo_disfrute,dias_disfrutados);
-		} 
+		}
 	}
 	ajax.send("fecha_inicio="+fecha_inicio+"&fecha_culminacion="+fecha_culminacion+"&ejecutar=validarFechas_vacaciones");
 }
@@ -2084,15 +2084,15 @@ function verificarFechaDisfrute_historicoVacaciones(fecha_inicio, fecha_culminac
 
 function verificarFechaAjustada_historicoVacaciones(fecha_inicio, fecha_culminacion){
 	var ajax=nuevoAjax();
-	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);	
+	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.onreadystatechange=function() { 
+	ajax.onreadystatechange=function() {
 		if(ajax.readyState == 1){
 			}
 		if (ajax.readyState==4){
 			document.getElementById('tiempo_pendiente_disfrute_vacaciones').value 	= (parseInt(document.getElementById('tiempo_disfrute_vacaciones').value) - parseInt(ajax.responseText))+parseInt(document.getElementById('tiempo_pendiente_disfrute_vacaciones').value)+parseInt(document.getElementById("cantidad_feriados_vacaciones").value);
 			//obtener_disfrutes_completos_vacaciones(tiempo_disfrute,dias_disfrutados);
-		} 
+		}
 	}
 	ajax.send("fecha_inicio="+fecha_inicio+"&fecha_culminacion="+fecha_culminacion+"&ejecutar=validarFechas_vacaciones");
 }
@@ -2121,7 +2121,7 @@ function validarPeriodo_vacaciones(periodo){
 	var ajax=nuevoAjax();
 	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.onreadystatechange=function() { 
+	ajax.onreadystatechange=function() {
 		if(ajax.readyState == 1){}
 		if (ajax.readyState==4){
 			var sms = ajax.responseText;
@@ -2131,36 +2131,36 @@ function validarPeriodo_vacaciones(periodo){
 					if(sms == 1){
 						document.getElementById('periodo_vacaciones').style.background = "#ffffff";
 						}else{
-							document.getElementById('periodo_vacaciones').style.background = "#fec092";							
+							document.getElementById('periodo_vacaciones').style.background = "#fec092";
 							}
 					}
-		} 
+		}
 	}
-	ajax.send("periodo="+periodo+"&ejecutar=validarPeriodo_vacaciones");		
+	ajax.send("periodo="+periodo+"&ejecutar=validarPeriodo_vacaciones");
 }
 
 function validarFechasDisfrute_vacaciones(fecha_inicio,feha_culminacion){
 	var ajax=nuevoAjax();
-	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);	
+	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.onreadystatechange=function() { 
+	ajax.onreadystatechange=function() {
 		if(ajax.readyState == 1){
 			}
 		if (ajax.readyState==4){
 			document.getElementById('oculto_disfrutados_vacaciones').value 			= ajax.responseText;
 			document.getElementById('tiempo_pendiente_disfrute_vacaciones').value 	= ajax.responseText;
-			
+
 			document.getElementById('oculto_dias_vacaciones').value 		= ajax.responseText;
 			var tiempo_disfrute 											= document.getElementById('tiempo_disfrute_vacaciones').value;
 			var dias_disfrutados 											= document.getElementById('oculto_disfrutados_vacaciones').value;
-			
+
 			if(document.getElementById('cantidad_feriados_vacaciones').value != ''){
-				restar_feriados_vacaciones(document.getElementById('cantidad_feriados_vacaciones').value);	
+				restar_feriados_vacaciones(document.getElementById('cantidad_feriados_vacaciones').value);
 			}
 			//obtener_disfrutes_completos_vacaciones(tiempo_disfrute,dias_disfrutados);
-		} 
+		}
 	}
-	ajax.send("fecha_inicio="+fecha_inicio+"&fecha_culminacion="+feha_culminacion+"&ejecutar=validarFechas_vacaciones");		
+	ajax.send("fecha_inicio="+fecha_inicio+"&fecha_culminacion="+feha_culminacion+"&ejecutar=validarFechas_vacaciones");
 }
 
 
@@ -2169,35 +2169,35 @@ function validarFechasDisfrute_vacaciones(fecha_inicio,feha_culminacion){
 
 
 function restar_feriados_vacaciones(cant_feriados){
-	
-	
+
+
 	document.getElementById('tiempo_pendiente_disfrute_vacaciones').value = (parseInt(document.getElementById('tiempo_pendiente_disfrute_vacaciones').value)+parseInt(cant_feriados));
-	
-	
+
+
 	document.getElementById('tiempo_pendiente_disfrute_vacaciones').value = (parseInt(document.getElementById('tiempo_pendiente_disfrute_vacaciones').value) - parseInt(document.getElementById('tiempo_disfrute_vacaciones').value));
-	
-	
-	
+
+
+
 	//alert(document.getElementById('tiempo_pendiente_disfrute_vacaciones').value);
-	
-	
-	
+
+
+
 	/*var ajax=nuevoAjax();
 	var dias_disfrute = document.getElementById('oculto_dias_vacaciones').value;
-	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);	
+	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.onreadystatechange=function() { 
+	ajax.onreadystatechange=function() {
 		if(ajax.readyState == 1){}
-		if (ajax.readyState==4){	
-			
+		if (ajax.readyState==4){
+
 			document.getElementById('oculto_disfrutados_vacaciones').value = ajax.responseText;
-			
+
 			var tiempo_disfrute 	= document.getElementById('tiempo_disfrute_vacaciones').value;
 			var dias_disfrutados 	= document.getElementById('oculto_disfrutados_vacaciones').value;
 			//obtener_disfrutes_completos_vacaciones(tiempo_disfrute,dias_disfrutados);
-		} 
+		}
 	}
-	ajax.send("catidad_feriados="+cant_feriados+"&dias_disfrute="+dias_disfrute+"&ejecutar=cant_feriados");		
+	ajax.send("catidad_feriados="+cant_feriados+"&dias_disfrute="+dias_disfrute+"&ejecutar=cant_feriados");
 }
 
 
@@ -2205,9 +2205,9 @@ function restar_feriados_vacaciones(cant_feriados){
 
 function validarFechas_vacaciones(fecha_inicio,feha_culminacion){
 	var ajax=nuevoAjax();
-	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);	
+	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.onreadystatechange=function() { 
+	ajax.onreadystatechange=function() {
 		if(ajax.readyState == 1){
 			}
 		if (ajax.readyState==4){
@@ -2215,16 +2215,16 @@ function validarFechas_vacaciones(fecha_inicio,feha_culminacion){
 			var tiempo_disfrute 											= document.getElementById('tiempo_disfrute_vacaciones').value;
 			var dias_disfrutados 											= document.getElementById('oculto_disfrutados_vacaciones').value;
 			obtener_disfrutes_completos_vacaciones(tiempo_disfrute,dias_disfrutados);
-		} 
+		}
 	}
-	ajax.send("fecha_inicio="+fecha_inicio+"&fecha_culminacion="+feha_culminacion+"&ejecutar=validarFechas_vacaciones");		
+	ajax.send("fecha_inicio="+fecha_inicio+"&fecha_culminacion="+feha_culminacion+"&ejecutar=validarFechas_vacaciones");
 }
 
 function reinicioAjustado_vacaciones(reinicio_ajustado,fecha_reincorporacion){
 	var ajax=nuevoAjax();
 	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.onreadystatechange=function() { 
+	ajax.onreadystatechange=function() {
 		if(ajax.readyState == 1){}
 		if (ajax.readyState==4){
 			var sms = ajax.responseText;
@@ -2235,10 +2235,10 @@ function reinicioAjustado_vacaciones(reinicio_ajustado,fecha_reincorporacion){
 					var hasta = document.getElementById('fecha_reincorporacion_ajustada_vacaciones').value;
 					validarFechasDisfrute_vacaciones(desde,hasta);
 					}
-					
-		} 
+
+		}
 	}
-	ajax.send("reinicio_ajustado="+reinicio_ajustado+"&fecha_reincorporacion="+fecha_reincorporacion+"&ejecutar=reinicioAjustado_vacaciones");		
+	ajax.send("reinicio_ajustado="+reinicio_ajustado+"&fecha_reincorporacion="+fecha_reincorporacion+"&ejecutar=reinicioAjustado_vacaciones");
 }
 
 
@@ -2246,15 +2246,15 @@ function reinicioAjustado_vacaciones(reinicio_ajustado,fecha_reincorporacion){
 function obtener_disfrutes_completos_vacaciones(tiempo_disfrute,tiempo_disfrutado){
 	var ajax=nuevoAjax();
 	var dias_disfrute = document.getElementById('oculto_dias_vacaciones').value;
-	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);	
+	ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.onreadystatechange=function() { 
+	ajax.onreadystatechange=function() {
 		if(ajax.readyState == 1){}
-		if (ajax.readyState==4){	
+		if (ajax.readyState==4){
 			document.getElementById('tiempo_pendiente_disfrute_vacaciones').value = ajax.responseText;
-		} 
+		}
 	}
-	ajax.send("tiempo_disfrute="+tiempo_disfrute+"&tiempo_disfrutado="+tiempo_disfrutado+"&ejecutar=obten_disfrute_completo");		
+	ajax.send("tiempo_disfrute="+tiempo_disfrute+"&tiempo_disfrutado="+tiempo_disfrutado+"&ejecutar=obten_disfrute_completo");
 }
 */
 function llenargrilla_vacaciones(idtrabajador) {
@@ -2280,7 +2280,7 @@ function llenaroculto_vacaciones(valor) {
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
         if (ajax.readyState == 4) {
-            //document.getElementById('grilla').innerHTML = ajax.responseText;			
+            //document.getElementById('grilla').innerHTML = ajax.responseText;
         }
     }
     ajax.send("valor=" + valor + "&ejecutar=llenaroculto_vacaciones");
@@ -3071,10 +3071,10 @@ function consultarTotalesGeneralesPrestaciones() {
             document.getElementById('total_prestaciones_acumuladas').innerHTML = partes[0];
             document.getElementById('total_interes_acumulado').innerHTML = partes[1];
             document.getElementById('total_prestaciones_interes_acumulado').innerHTML = partes[2];
-            document.getElementById('total_vacaciones_acumuladas').innerHTML = partes[3];
-            document.getElementById('total_aguinaldos_acumulados').innerHTML = partes[4];
-            document.getElementById('total_deducciones').innerHTML = partes[5];
-            document.getElementById('total_a_pagar').innerHTML = partes[6];
+            //document.getElementById('total_vacaciones_acumuladas').innerHTML = partes[3];
+            //document.getElementById('total_aguinaldos_acumulados').innerHTML = partes[4];
+            //document.getElementById('total_deducciones').innerHTML = partes[5];
+            document.getElementById('total_a_pagar').innerHTML = partes[3];
         }
     }
     ajax.send("fecha_ingreso=" + fecha_ingreso + "&idtrabajador=" + idtrabajador + "&ejecutar=consultarTotalesGeneralesPrestaciones");

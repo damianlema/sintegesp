@@ -8,14 +8,14 @@ extract($_POST);
 
 
 if($ejecutar == 'seleccionarPeriodo'){
-	$sql_consultar_periodo = mysql_query("select * from 
+	$sql_consultar_periodo = mysql_query("select * from
 										 			periodos_nomina pn,
 													rango_periodo_nomina rpn
-										 			where 
+										 			where
 													pn.idtipo_nomina = '".$idtipo_nomina."'
 													and pn.periodo_activo = 'si'
 													and rpn.idperiodo_nomina = pn.idperiodos_nomina")or die(mysql_error());
-													
+
 //
 	?>
 	<input name="idperiodo" type="hidden" id="idperiodo">
@@ -35,23 +35,23 @@ if($ejecutar == 'seleccionarPeriodo'){
 				while($bus_consultar_periodo= mysql_fetch_array($sql_consultar_periodo)){
 					$num_generar_nomina = 0;
 					$sql_generar_nomina = mysql_query("select * from generar_nomina where idperiodo = '".$bus_consultar_periodo["idrango_periodo_nomina"]."' and estado = 'procesado' and idtipo_nomina = '".$idtipo_nomina."'")or die(mysql_error());
-					 
+
 					$num_generar_nomina = mysql_num_rows($sql_generar_nomina);
 					if($num_generar_nomina != 0){
-						$color = "#FF0000";	
+						$color = "#FF0000";
 						$ancho = "font-weight:bold";
 					}else{
-						$color = "#000000";	
+						$color = "#000000";
 						$ancho = "font-weight:normal";
 					}
 						$desde = explode(" ", $bus_consultar_periodo["desde"]);
 						$hasta = explode(" ", $bus_consultar_periodo["hasta"]);
 					?>
-					<li id="<?=$bus_consultar_periodo["idrango_periodo_nomina"]?>" 
+					<li id="<?=$bus_consultar_periodo["idrango_periodo_nomina"]?>"
                     <?
                     if($color != "#FF0000"){
 					?>
-                    onclick="document.getElementById('div_seleccione').innerHTML = '<?=$desde[0]." - ".$hasta[0]?>', document.getElementById('idperiodo').value = '<?=$bus_consultar_periodo["idrango_periodo_nomina"]?>', document.getElementById('lista').style.display = 'none'" 
+                    onclick="document.getElementById('div_seleccione').innerHTML = '<?=$desde[0]." - ".$hasta[0]?>', document.getElementById('idperiodo').value = '<?=$bus_consultar_periodo["idrango_periodo_nomina"]?>', document.getElementById('lista').style.display = 'none'"
                     <?
 					}
 					?>
@@ -60,11 +60,11 @@ if($ejecutar == 'seleccionarPeriodo'){
 						echo $desde[0]." - ".$hasta[0];
 						?>
 					</li>
-					<?	
-					
+					<?
+
 				}
 			?>
-            
+
             </ul>
         </div>
     </div>
@@ -81,23 +81,23 @@ if($ejecutar == "ingresarDatosBasicos"){
 	$sql_consulta = mysql_query("select * from generar_nomina where idtipo_nomina = '".$idtipo_nomina."' and idperiodo = '".$idperiodo."' and estado = 'Procesado'");
 	$num_consulta = mysql_num_rows($sql_consulta);
 	if($num_consulta == 0){
-	
-		$sql_con = mysql_query("select * from generar_nomina 
-													where idtipo_nomina = '".$idtipo_nomina."' 
-															and idperiodo = '".$idperiodo."' 
+
+		$sql_con = mysql_query("select * from generar_nomina
+													where idtipo_nomina = '".$idtipo_nomina."'
+															and idperiodo = '".$idperiodo."'
 															and (estado = 'Pre Nomina' or estado = 'Elaboracion')")or die(mysql_error());
 		while($bus_con = mysql_fetch_array($sql_con)){
-			$sql_eliminar = mysql_query("delete from generar_nomina 
+			$sql_eliminar = mysql_query("delete from generar_nomina
 											where idgenerar_nomina = '".$bus_con["idgenerar_nomina"]."'");
-			$sql_relacion = mysql_query("delete from relacion_generar_nomina 
-													where 
+			$sql_relacion = mysql_query("delete from relacion_generar_nomina
+													where
 													idgenerar_nomina = '".$bus_con["idgenerar_nomina"]."'");
 		}
-		
-		
-	
-	$sql_ingresr = mysql_query("insert into generar_nomina(descripcion, 
-														   idtipo_nomina, 
+
+
+
+	$sql_ingresr = mysql_query("insert into generar_nomina(descripcion,
+														   idtipo_nomina,
 														   idperiodo,
 														   estado,
 														   fecha_elaboracion,
@@ -122,10 +122,10 @@ if($ejecutar == "ingresarDatosBasicos"){
 																	'".$idfuente_financiamiento."',
 																	'".$anio."',
 																	'".$idtipo_presupuesto."',
-																	'".$idcategoria_programatica."')");	
+																	'".$idcategoria_programatica."')");
 	echo mysql_insert_id()."|.|".date("Y-m-d");
 	}else{
-		echo "existe";	
+		echo "existe";
 	}
 }
 
@@ -140,14 +140,14 @@ if($ejecutar == "consultarTrabajadores"){
 										tr.cedula,
 										tr.idtrabajador,
 										tr.nro_ficha
-											FROM 
+											FROM
 										trabajador tr,
 										relacion_generar_nomina rgn
 											WHERE
 										rgn.idgenerar_nomina = '".$idgenerar_nomina."'
 										and rgn.idtrabajador =  tr.idtrabajador
-										and (tr.nombres like '%".$buscar."%' 
-											 or tr.apellidos like '%".$buscar."%' 
+										and (tr.nombres like '%".$buscar."%'
+											 or tr.apellidos like '%".$buscar."%'
 											 or tr.cedula like '%".$buscar."%')
 										group by tr.idtrabajador
 										order by tr.cedula")or die(mysql_error());
@@ -157,8 +157,8 @@ if($ejecutar == "consultarTrabajadores"){
 										tr.cedula,
 										tr.idtrabajador,
 										tr.nro_ficha
-										
-											FROM 
+
+											FROM
 										trabajador tr,
 										relacion_tipo_nomina_trabajador rtnt
 											WHERE
@@ -167,16 +167,16 @@ if($ejecutar == "consultarTrabajadores"){
 										and tr.status = 'a'
 										and tr.activo_nomina = 'si'
 										and rtnt.idtrabajador =  tr.idtrabajador
-										and (tr.nombres like '%".$buscar."%' 
-											 or tr.apellidos like '%".$buscar."%' 
+										and (tr.nombres like '%".$buscar."%'
+											 or tr.apellidos like '%".$buscar."%'
 											 or tr.cedula like '%".$buscar."%')
 										group by tr.idtrabajador
 										order by tr.cedula")or die(mysql_error());
 	}
-	
+
 
 	?>
-    
+
     <table>
             	<tr>
                 <td>Buscar</td>
@@ -185,7 +185,7 @@ if($ejecutar == "consultarTrabajadores"){
                 </tr>
             </table>
             <br />
-    
+
 	<table class="Browse" cellpadding="0" cellspacing="0" width="98%" align="center">
         <thead>
         <tr>
@@ -207,13 +207,13 @@ if($ejecutar == "consultarTrabajadores"){
                 <td align='left' class='Browse'><?=$bus_consulta["nombres"]?></td>
                 <td align='left' class='Browse'><?=$bus_consulta["apellidos"]?></td>
    			</tr>
-			<?	
+			<?
 			$i++;
 		}
 		?>
-        
+
     </table>
-    
+
 	<?
 }
 
@@ -227,23 +227,23 @@ if($ejecutar == "consultarTrabajadores"){
 
 
 if($ejecutar =="anularNomina"){
-	$sql_anular = mysql_query("update generar_nomina set estado = 'Anulado' where idgenerar_nomina = '".$idgenerar_nomina."'");	
+	$sql_anular = mysql_query("update generar_nomina set estado = 'Anulado' where idgenerar_nomina = '".$idgenerar_nomina."'");
 	$sql_generar_nom = mysql_query("select * from generar_nomina where idgenerar_nomina = '".$idgenerar_nomina."'")or die("AQUI: ".mysql_error());
 	$bus_generar_nom = mysql_fetch_array($sql_generar_nom);
-	
-	
-	$sql_relacion_generar_nomina = mysql_query("select * from relacion_generar_nomina 
-								   								where 
+
+
+	$sql_relacion_generar_nomina = mysql_query("select * from relacion_generar_nomina
+								   								where
 															idgenerar_nomina = '".$idgenerar_nomina."'")or die("relacion_generar_nomina ".mysql_error());
 	while($bus_relacion_generar_nomina = mysql_fetch_array($sql_relacion_generar_nomina)){
-			$sql_consultar_concepto = mysql_query("select * from conceptos_nomina 
-												  	where 
-												  idconceptos_nomina = '".$bus_relacion_generar_nomina["idconcepto"]."' 
+			$sql_consultar_concepto = mysql_query("select * from conceptos_nomina
+												  	where
+												  idconceptos_nomina = '".$bus_relacion_generar_nomina["idconcepto"]."'
 												  and aplica_prestaciones = 'si'")or die("conceptos_nomina ".mysql_error());
             $columna_prestaciones = mysql_fetch_array($sql_consultar_concepto);
 			$num_consultar_concepto = mysql_num_rows($sql_consultar_concepto);
-				
-			
+
+
 			if($num_consultar_concepto > 0) {
                 $sql_generar_nomina = mysql_query("select rpn.desde,
 																rpn.hasta
@@ -261,7 +261,7 @@ if($ejecutar =="anularNomina"){
                 if ($columna_prestaciones["columna_prestaciones"] == 'sueldo') {
                     $sql_restar = mysql_query("update tabla_prestaciones set
 										  					sueldo = sueldo - '" . $bus_relacion_generar_nomina["total"] . "'
-																where 
+																where
 															anio = '" . $anioPrestaciones . "'
 															and mes = '" . $mesPrestaciones . "'
 															and idtrabajador = '" . $bus_relacion_generar_nomina["idtrabajador"] . "'") or die("tabla_prestaciones" . mysql_error());
@@ -287,22 +287,22 @@ if($ejecutar =="anularNomina"){
 															and mes = '" . $mesPrestaciones . "'
 															and idtrabajador = '" . $bus_relacion_generar_nomina["idtrabajador"] . "'") or die("tabla_prestaciones" . mysql_error());
                 }
-				$sql_consulta_tabla_prestaciones = mysql_query("select * from tabla_prestaciones where 
+				$sql_consulta_tabla_prestaciones = mysql_query("select * from tabla_prestaciones where
 															anio = '".$anioPrestaciones."'
 															and mes = '".$mesPrestaciones."'
 															and idtrabajador = '".$bus_relacion_generar_nomina["idtrabajador"]."'");
 				$bus_consulta_tabla_prestaciones = mysql_fetch_array($sql_consulta_tabla_prestaciones);
 				if($bus_consulta_tabla_prestaciones["sueldo"] <= 0){
-					$sql_eliminar_tabla_prestaciones = mysql_query("delete from tabla_prestaciones where 
+					$sql_eliminar_tabla_prestaciones = mysql_query("delete from tabla_prestaciones where
 															anio = '".$anioPrestaciones."'
 															and mes = '".$mesPrestaciones."'
 															and idtrabajador = '".$bus_relacion_generar_nomina["idtrabajador"]."'")	;
 				}
-			
-			
+
+
 			}
 		}
-	
+
 	registra_transaccion('Se anulo la nomina ('.$idgenerar_nomina.')',$login,$fh,$pc,'nomina',$conexion_db);
 	anularOrdenCompra($bus_generar_nom["idorden_compra_servicio"]);
 	anularOrdenCompraAportes($bus_generar_nom["idorden_compra_servicio_aporte"]);
@@ -311,7 +311,7 @@ if($ejecutar =="anularNomina"){
 
 //ANULO LA CERTIFICACION DE NOMINA
 function anularOrdenCompra($id_orden_compra){
-	
+
 	$sql_configuracion = mysql_query("select fecha_cierre from configuracion");
 	$bus_configuracion = mysql_fetch_array($sql_configuracion);
 	if(date("Y-m-d") > $bus_configuracion["fecha_cierre"]){
@@ -319,40 +319,40 @@ function anularOrdenCompra($id_orden_compra){
 	}else{
 		$fecha_anulacion = date("Y-m-d");
 	}
-	
-	
+
+
 	$sql_orden = mysql_query("update orden_compra_servicio set estado = 'anulado',
-																fecha_anulacion = '".$fecha_anulacion."' 
+																fecha_anulacion = '".$fecha_anulacion."'
 														where idorden_compra_servicio = ".$id_orden_compra."")or die(mysql_error());
 	$sql_actualizar_partidas = mysql_query("select * from partidas_orden_compra_servicio where idorden_compra_servicio = ".$id_orden_compra."")or die(mysql_error());
 		while($bus_actualizar_partidas = mysql_fetch_array($sql_actualizar_partidas)){
-			$sql_maestro = mysql_query("update maestro_presupuesto set 
+			$sql_maestro = mysql_query("update maestro_presupuesto set
 												total_compromisos = total_compromisos-".$bus_actualizar_partidas["monto"]."
 												where idRegistro = ".$bus_actualizar_partidas["idmaestro_presupuesto"]."")or die(mysql_error());
-					
-					
+
+
 					$sql_consulta_ordinal = mysql_query("select * from ordinal where codigo = '0000'")or die("ERROR CONSULTANDO EL ORDINAL NO APLICA".mysql_error());
 					$bus_consulta_ordinal = mysql_fetch_array($sql_consulta_ordinal);
-					
+
 					$sql_consultar_maestro = mysql_query("select * from maestro_presupuesto where idRegistro = '".$bus_actualizar_partidas["idmaestro_presupuesto"]."' and idordinal != '".$bus_consulta_ordinal["idordinal"]."'")or die("ERROR CONSULTANDO EL MAESTRO 1:".mysql_error());
 					$num_consulta_maestro = mysql_num_rows($sql_consultar_maestro);
 					if($num_consulta_maestro != 0){
 						$bus_consultar_maestro= mysql_fetch_array($sql_consultar_maestro);
-						$sql_sub_espe = mysql_query("select * from maestro_presupuesto where 
+						$sql_sub_espe = mysql_query("select * from maestro_presupuesto where
 							idcategoria_programatica= '".$bus_consultar_maestro["idcategoria_programatica"]."'
 						and idtipo_presupuesto = '".$bus_consultar_maestro["idtipo_presupuesto"]."'
 						and idfuente_financiamiento = '".$bus_consultar_maestro["idfuente_financiamiento"]."'
 						and idclasificador_presupuestario = '".$bus_consultar_maestro["idclasificador_presupuestario"]."'
-						and idordinal = '".$bus_consulta_ordinal["idordinal"]."'")or die("ERROR CONSULTANDO SUB ESPECIFICA".mysql_error());    
+						and idordinal = '".$bus_consulta_ordinal["idordinal"]."'")or die("ERROR CONSULTANDO SUB ESPECIFICA".mysql_error());
 						$num_sub_espe =mysql_num_rows($sql_sub_espe);
 						if($num_sub_espe != 0){
 							$bus_sub_epe = mysql_fetch_array($sql_sub_espe);
-							$sql_maestro = mysql_query("update maestro_presupuesto set 
+							$sql_maestro = mysql_query("update maestro_presupuesto set
 															total_compromisos = total_compromisos - ".$bus_actualizar_partidas["monto"]."
 															where idRegistro = '".$bus_sub_epe["idmaestro_presupuesto"]."'")or die("ERROR ACTUALIZANDO EL MAESTRO DE PRESUPUESTO 2: ".mysql_error());
-							
+
 						}
-						
+
 						$sql_clasificador = mysql_query("select * from clasificador_presupuestario where idclasificador_presupuestario = '".$bus_consultar_maestro["idclasificador_presupuestario"]."' and sub_especifica != '00'")or die("ERROR CONSULTANDO EL CLASIFICADOR ".mysql_error());
 						$num_clasificador = mysql_num_rows($sql_clasificador);
 						if($num_clasificador > 0){
@@ -362,40 +362,40 @@ function anularOrdenCompra($id_orden_compra){
 							and especifica ='".$bus_clasificador["especifica"]."'
 							and sub_especifica= '00'")or die("ERROR CONSULTANDO EL CLASIFICADOR 2:".mysql_error());
 							$bus_consulta_clasificador= mysql_fetch_array($sql_consulta_clasificador);
-							$sql_id_maestro= mysql_query("select * from maestro_presupuesto where 
+							$sql_id_maestro= mysql_query("select * from maestro_presupuesto where
 							idcategoria_programatica= '".$bus_consultar_maestro["idcategoria_programatica"]."'
 						and idtipo_presupuesto = '".$bus_consultar_maestro["idtipo_presupuesto"]."'
 						and idfuente_financiamiento = '".$bus_consultar_maestro["idfuente_financiamiento"]."'
 						and idclasificador_presupuestario = '".$bus_consulta_clasificador["idclasificador_presupuestario"]."'
 						and idordinal = '".$bus_consulta_ordinal["idordinal"]."'")or die("ERROR CONSULTANDO EL MAESTRO 2:".mysql_error());
 							$bus_id_maestro = mysql_fetch_array($sql_id_maestro);
-							
 
-							$sql_maestro = mysql_query("update maestro_presupuesto set 
+
+							$sql_maestro = mysql_query("update maestro_presupuesto set
 															total_compromisos = total_compromisos - ".$bus_actualizar_partidas["monto"]."
 															where idRegistro = ".$bus_id_maestro["idmaestro_presupuesto"]."")or die("ERROR ACTUALIZANDO EL MAESTRO DE PRESUPUESTO 3: ".mysql_error());
-							
+
 						}
-						
+
 					}
-			
+
 		}
-	
+
 	$sql_relacion_requisicion = mysql_query("select * from relacion_compra_requisicion where idorden_compra = ".$id_orden_compra."");
 	while($bus_relacion_requisicion = mysql_fetch_array($sql_relacion_requisicion)){
 		$sql_insert_relacion_compras = mysql_query("update requisicion set estado = 'procesado' where idrequisicion = '".$bus_relacion_requisicion["idrequisicion"]."'");
 
 	}
-	
+
 	$sql_relacion_solicitud = mysql_query("select * from relacion_compra_solicitud_cotizacion where idorden_compra = ".$id_orden_compra."");
 	while($bus_relacion_solicitud = mysql_fetch_array($sql_relacion_solicitud)){
 		$sql_insert_relacion_compras = mysql_query("update solicitud_cotizacion set estado = 'procesado' where idsolicitud_cotizacion = '".$bus_relacion_solicitud["idsolicitud_cotizacion"]."'");
 
 	}
-	
+
 	$sql_validar_asiento = mysql_query("select * from asiento_contable where iddocumento = ".$id_orden_compra."
 														and tipo_movimiento = 'compromiso'");
-	if (mysql_num_rows($sql_validar_asiento) > 0){	
+	if (mysql_num_rows($sql_validar_asiento) > 0){
 		$sql_asiento_contable = mysql_query("select * from asiento_contable where iddocumento = ".$id_orden_compra." and tipo_movimiento='compromiso'")or die("aqui asiento ".mysql_error());
 		$bus_asiento_contable = mysql_fetch_array($sql_asiento_contable)or die("aqui asiento ".mysql_error());
 		$sql_contable = mysql_query("insert into asiento_contable (idfuente_financiamiento,
@@ -419,13 +419,13 @@ function anularOrdenCompra($id_orden_compra){
 																			'".$login."',
 																			'".date("Y-m-d H:i:s")."',
 																			'2')")or die("aqui insert ".mysql_error());
-		
+
 		$sql_actualizar =mysql_query("update asiento_contable set reversado = 'si'
 										where idasiento_contable = '".$bus_asiento_contable["idasiento_contable"]."'");
 		if($sql_contable){
 			$idasiento_contable = mysql_insert_id();
 			$sql_cuentas_contables = mysql_query("select * from cuentas_asiento_contable where idasiento_contable = '".$bus_asiento_contable["idasiento_contable"]."'");
-			
+
 			while ($bus_cuentas_contables = mysql_fetch_array($sql_cuentas_contables)){
 				if ($bus_cuentas_contables["afecta"] == 'debe'){ $afecta = 'haber'; }else{ $afecta = 'debe'; }
 				$sql_cuenta_contable_debe = mysql_query("insert into cuentas_asiento_contable (idasiento_contable,
@@ -440,11 +440,11 @@ function anularOrdenCompra($id_orden_compra){
 																			'".$afecta."',
 																			'".$bus_cuentas_contables["monto"]."')");
 			}
-		
+
 		}
-	
+
 	}
-	
+
 	if($sql_orden){
 		echo "exito";
 		registra_transaccion("Anular orden Compra (".$id_orden_compra.")",$login,$fh,$pc,'orden_compra_servicios');
@@ -454,8 +454,8 @@ function anularOrdenCompra($id_orden_compra){
 	}
 
 
-	
-	
+
+
 }
 
 //ANULO LA CERTIFICACION DE APORTES
@@ -469,40 +469,40 @@ function anularOrdenCompraAportes($idorden_compra_aporte){
 		}else{
 			$fecha_anulacion = date("Y-m-d");
 		}
-		
-		
+
+
 		$sql_orden = mysql_query("update orden_compra_servicio set estado = 'anulado',
-																	fecha_anulacion = '".$fecha_anulacion."' 
+																	fecha_anulacion = '".$fecha_anulacion."'
 															where idorden_compra_servicio = ".$id_orden_compra."")or die(mysql_error());
 		$sql_actualizar_partidas = mysql_query("select * from partidas_orden_compra_servicio where idorden_compra_servicio = ".$id_orden_compra."")or die(mysql_error());
 		while($bus_actualizar_partidas = mysql_fetch_array($sql_actualizar_partidas)){
-			$sql_maestro = mysql_query("update maestro_presupuesto set 
+			$sql_maestro = mysql_query("update maestro_presupuesto set
 												total_compromisos = total_compromisos-".$bus_actualizar_partidas["monto"]."
 												where idRegistro = ".$bus_actualizar_partidas["idmaestro_presupuesto"]."")or die(mysql_error());
-					
-					
+
+
 					$sql_consulta_ordinal = mysql_query("select * from ordinal where codigo = '0000'")or die("ERROR CONSULTANDO EL ORDINAL NO APLICA".mysql_error());
 					$bus_consulta_ordinal = mysql_fetch_array($sql_consulta_ordinal);
-					
+
 					$sql_consultar_maestro = mysql_query("select * from maestro_presupuesto where idRegistro = '".$bus_actualizar_partidas["idmaestro_presupuesto"]."' and idordinal != '".$bus_consulta_ordinal["idordinal"]."'")or die("ERROR CONSULTANDO EL MAESTRO 1:".mysql_error());
 					$num_consulta_maestro = mysql_num_rows($sql_consultar_maestro);
 					if($num_consulta_maestro != 0){
 						$bus_consultar_maestro= mysql_fetch_array($sql_consultar_maestro);
-						$sql_sub_espe = mysql_query("select * from maestro_presupuesto where 
+						$sql_sub_espe = mysql_query("select * from maestro_presupuesto where
 							idcategoria_programatica= '".$bus_consultar_maestro["idcategoria_programatica"]."'
 						and idtipo_presupuesto = '".$bus_consultar_maestro["idtipo_presupuesto"]."'
 						and idfuente_financiamiento = '".$bus_consultar_maestro["idfuente_financiamiento"]."'
 						and idclasificador_presupuestario = '".$bus_consultar_maestro["idclasificador_presupuestario"]."'
-						and idordinal = '".$bus_consulta_ordinal["idordinal"]."'")or die("ERROR CONSULTANDO SUB ESPECIFICA".mysql_error());    
+						and idordinal = '".$bus_consulta_ordinal["idordinal"]."'")or die("ERROR CONSULTANDO SUB ESPECIFICA".mysql_error());
 						$num_sub_espe =mysql_num_rows($sql_sub_espe);
 						if($num_sub_espe != 0){
 							$bus_sub_epe = mysql_fetch_array($sql_sub_espe);
-							$sql_maestro = mysql_query("update maestro_presupuesto set 
+							$sql_maestro = mysql_query("update maestro_presupuesto set
 															total_compromisos = total_compromisos - ".$bus_actualizar_partidas["monto"]."
 															where idRegistro = '".$bus_sub_epe["idmaestro_presupuesto"]."'")or die("ERROR ACTUALIZANDO EL MAESTRO DE PRESUPUESTO 2: ".mysql_error());
-							
+
 						}
-						
+
 						$sql_clasificador = mysql_query("select * from clasificador_presupuestario where idclasificador_presupuestario = '".$bus_consultar_maestro["idclasificador_presupuestario"]."' and sub_especifica != '00'")or die("ERROR CONSULTANDO EL CLASIFICADOR ".mysql_error());
 						$num_clasificador = mysql_num_rows($sql_clasificador);
 						if($num_clasificador > 0){
@@ -512,40 +512,40 @@ function anularOrdenCompraAportes($idorden_compra_aporte){
 							and especifica ='".$bus_clasificador["especifica"]."'
 							and sub_especifica= '00'")or die("ERROR CONSULTANDO EL CLASIFICADOR 2:".mysql_error());
 							$bus_consulta_clasificador= mysql_fetch_array($sql_consulta_clasificador);
-							$sql_id_maestro= mysql_query("select * from maestro_presupuesto where 
+							$sql_id_maestro= mysql_query("select * from maestro_presupuesto where
 							idcategoria_programatica= '".$bus_consultar_maestro["idcategoria_programatica"]."'
 						and idtipo_presupuesto = '".$bus_consultar_maestro["idtipo_presupuesto"]."'
 						and idfuente_financiamiento = '".$bus_consultar_maestro["idfuente_financiamiento"]."'
 						and idclasificador_presupuestario = '".$bus_consulta_clasificador["idclasificador_presupuestario"]."'
 						and idordinal = '".$bus_consulta_ordinal["idordinal"]."'")or die("ERROR CONSULTANDO EL MAESTRO 2:".mysql_error());
 							$bus_id_maestro = mysql_fetch_array($sql_id_maestro);
-							
 
-							$sql_maestro = mysql_query("update maestro_presupuesto set 
+
+							$sql_maestro = mysql_query("update maestro_presupuesto set
 															total_compromisos = total_compromisos - ".$bus_actualizar_partidas["monto"]."
 															where idRegistro = ".$bus_id_maestro["idmaestro_presupuesto"]."")or die("ERROR ACTUALIZANDO EL MAESTRO DE PRESUPUESTO 3: ".mysql_error());
-							
+
 						}
-						
+
 					}
-			
+
 		}
-	
+
 		$sql_relacion_requisicion = mysql_query("select * from relacion_compra_requisicion where idorden_compra = ".$id_orden_compra."");
 		while($bus_relacion_requisicion = mysql_fetch_array($sql_relacion_requisicion)){
 			$sql_insert_relacion_compras = mysql_query("update requisicion set estado = 'procesado' where idrequisicion = '".$bus_relacion_requisicion["idrequisicion"]."'");
 
 		}
-		
+
 		$sql_relacion_solicitud = mysql_query("select * from relacion_compra_solicitud_cotizacion where idorden_compra = ".$id_orden_compra."");
 		while($bus_relacion_solicitud = mysql_fetch_array($sql_relacion_solicitud)){
 			$sql_insert_relacion_compras = mysql_query("update solicitud_cotizacion set estado = 'procesado' where idsolicitud_cotizacion = '".$bus_relacion_solicitud["idsolicitud_cotizacion"]."'");
 
 		}
-		
+
 		$sql_validar_asiento = mysql_query("select * from asiento_contable where iddocumento = ".$id_orden_compra."
 															and tipo_movimiento = 'compromiso'");
-		if (mysql_num_rows($sql_validar_asiento) > 0){	
+		if (mysql_num_rows($sql_validar_asiento) > 0){
 			$sql_asiento_contable = mysql_query("select * from asiento_contable where iddocumento = ".$id_orden_compra." and tipo_movimiento='compromiso'")or die("aqui asiento ".mysql_error());
 			$bus_asiento_contable = mysql_fetch_array($sql_asiento_contable)or die("aqui asiento ".mysql_error());
 			$sql_contable = mysql_query("insert into asiento_contable (idfuente_financiamiento,
@@ -569,13 +569,13 @@ function anularOrdenCompraAportes($idorden_compra_aporte){
 																				'".$login."',
 																				'".date("Y-m-d H:i:s")."',
 																				'2')")or die("aqui insert ".mysql_error());
-			
+
 			$sql_actualizar =mysql_query("update asiento_contable set reversado = 'si'
 											where idasiento_contable = '".$bus_asiento_contable["idasiento_contable"]."'");
 			if($sql_contable){
 				$idasiento_contable = mysql_insert_id();
 				$sql_cuentas_contables = mysql_query("select * from cuentas_asiento_contable where idasiento_contable = '".$bus_asiento_contable["idasiento_contable"]."'");
-				
+
 				while ($bus_cuentas_contables = mysql_fetch_array($sql_cuentas_contables)){
 					if ($bus_cuentas_contables["afecta"] == 'debe'){ $afecta = 'haber'; }else{ $afecta = 'debe'; }
 					$sql_cuenta_contable_debe = mysql_query("insert into cuentas_asiento_contable (idasiento_contable,
@@ -590,11 +590,11 @@ function anularOrdenCompraAportes($idorden_compra_aporte){
 																				'".$afecta."',
 																				'".$bus_cuentas_contables["monto"]."')");
 				}
-			
+
 			}
-		
+
 		}
-		
+
 		if($sql_orden){
 			echo "exito";
 			registra_transaccion("Anular orden Compra Aportes(".$id_orden_compra.")",$login,$fh,$pc,'orden_compra_servicios');
@@ -610,9 +610,9 @@ function anularOrdenCompraAportes($idorden_compra_aporte){
 
 function call_concepto($idconcepto, $idtrabajador, $destino, $idgenerar_nomina, $idtipo_nomina, $idperiodo, $desagregar_concepto, $factor){
 	//echo "FORMULA";
-	$sql_relacion_formula= mysql_query("SELECT * FROM 
-												relacion_formula_conceptos_nomina 
-													WHERE 
+	$sql_relacion_formula= mysql_query("SELECT * FROM
+												relacion_formula_conceptos_nomina
+													WHERE
 												idconcepto_nomina ='".$idconcepto."'
 												and destino = '".$destino."'
 												order by orden")or die(mysql_error());
@@ -626,7 +626,7 @@ function call_concepto($idconcepto, $idtrabajador, $destino, $idgenerar_nomina, 
 				$formula .= $partes[1];
 			break;
 			case "CN":// SI ES UNA CONSTANTE ENTRA ACA
-				$sql_constantes= mysql_query("SELECT * FROM constantes_nomina 
+				$sql_constantes= mysql_query("SELECT * FROM constantes_nomina
 																					WHERE idconstantes_nomina='".$partes[1]."'");
 											$bus_constantes = mysql_fetch_array($sql_constantes);
 											if($bus_constantes["valor"] == 0){
@@ -646,15 +646,15 @@ function call_concepto($idconcepto, $idtrabajador, $destino, $idgenerar_nomina, 
 											}else{
 												$formula .= $monto;
 											}
-											
+
 			break;
 			case "CO":// SI ES UN CONCEPTO ENTRA ACA
 				//echo "aqui";
 				 $result = call_concepto($partes[1], $idtrabajador, 'principal', $idgenerar_nomina, $idtipo_nomina, $idperiodo, $desagregar_concepto, $factor);
-				 
+
 				 $formula .= $result;
-				 
-				 
+
+
 				if($desagregar_concepto == "si"){
 					eval("\$t = ($result*$factor);");
 					$sql_insertar = mysql_query("insert into conceptos_desagregados(idgenerar_nomina,
@@ -665,11 +665,11 @@ function call_concepto($idconcepto, $idtrabajador, $destino, $idgenerar_nomina, 
 									'".$idtrabajador."',
 									'".$t."')");
 				}
-				
+
 			break;
 			case "THT":// SI ES UNA HOJA DE TIEMPO
-					$sql_hoja_tiempo = mysql_query("select * from hoja_tiempo 
-														where 
+					$sql_hoja_tiempo = mysql_query("select * from hoja_tiempo
+														where
 														idtipo_hoja_tiempo = '".$partes[1]."'
 														and periodo = '".$idperiodo."'")or die(mysql_error());
 					$num_hoja_tiempo = mysql_num_rows($sql_hoja_tiempo);
@@ -677,7 +677,7 @@ function call_concepto($idconcepto, $idtrabajador, $destino, $idgenerar_nomina, 
 						while($bus_hoja_tiempo = mysql_fetch_array($sql_hoja_tiempo)){
 						$sql_relacion_trabajador = mysql_query("select horas from relacion_hoja_tiempo_trabajador
 																where idhoja_tiempo = '".$bus_hoja_tiempo["idhoja_tiempo"]."'
-																and idtrabajador = '".$idtrabajador."'");	
+																and idtrabajador = '".$idtrabajador."'");
 						$bus_relacion_trabajador = mysql_fetch_array($sql_relacion_trabajador);
 						if($bus_relacion_trabajador["horas"] == ""){
 							$formula .= "0";
@@ -685,52 +685,52 @@ function call_concepto($idconcepto, $idtrabajador, $destino, $idgenerar_nomina, 
 							$formula .= $bus_relacion_trabajador["horas"];
 						}
 						}
-						
+
 					}else{
 						$formula .= "0";
 					}
-											
-										
+
+
 										//echo $formula;
 			break;
 			case "TA":// SI ES UNA TABLA CONSTANTE ENTRA ACA
-				$sql_consultar_tabla= mysql_query("SELECT * FROM 
-														tabla_constantes 
-														WHERE 
+				$sql_consultar_tabla= mysql_query("SELECT * FROM
+														tabla_constantes
+														WHERE
 														idtabla_constantes = '".$partes[1]."'");
 				$bus_consultar_tabla = mysql_fetch_array($sql_consultar_tabla);
 				$sql_consulta_siguiente_relacion = mysql_query("SELECT * FROM
-																		relacion_formula_conceptos_nomina 
-																		WHERE idconcepto_nomina = '".$bus_relacion_formula["idconcepto_nomina"]."' 
+																		relacion_formula_conceptos_nomina
+																		WHERE idconcepto_nomina = '".$bus_relacion_formula["idconcepto_nomina"]."'
 																		and orden = '".($bus_relacion_formula["orden"]+1)."'");
 				$bus_consulta_siguiente_relacion = mysql_fetch_array($sql_consulta_siguiente_relacion);
 				$partes_fu = explode("_", $bus_consulta_siguiente_relacion["valor_oculto"]);
 				if($partes_fu[0] == "SI"){
-						$sql_rango = mysql_query("SELECT * FROM 
-													rango_tabla_constantes 
-													WHERE 
+						$sql_rango = mysql_query("SELECT * FROM
+													rango_tabla_constantes
+													WHERE
 														idtabla_constantes = '".$bus_consultar_tabla["idtabla_constantes"]."'
-														and ".$partes_fu[1]." >= desde  
-														and ".$partes_fu[1]." <= hasta 
+														and ".$partes_fu[1]." >= desde
+														and ".$partes_fu[1]." <= hasta
 														order by idrango_tabla_constantes asc limit 0,1");
 						$bus_rango = mysql_fetch_array($sql_rango);
-						
+
 						if($bus_rango["valor"] == ""){
 							$formula .= "0";
 						}else{
 							$formula .= $bus_rango["valor"];
 						}
-						
-						
-				}else if($partes_fu[0] == "FU"){						
+
+
+				}else if($partes_fu[0] == "FU"){
 						if(ereg("numerode", $partes_fu[1])){
-							$tabla = explode("(", $partes_fu[1]);						
+							$tabla = explode("(", $partes_fu[1]);
 							$tabla = substr($tabla[1], 0, strlen($tabla[1])-1);
 							$final = explode("-",$tabla);
-							
+
 							$numero = numerode($final[0], $final[1], $final[2], $idtrabajador);
 						}else if(ereg("tiempobono", $partes_fu[1])){
-							$numero = tiempo_bono($idperiodo,$idtrabajador);											
+							$numero = tiempo_bono($idperiodo,$idtrabajador);
 						}else if(ereg("diafinperiodo", $partes_fu[1])){
                             $numero = dia_fin_periodo($idperiodo);
 
@@ -743,19 +743,19 @@ function call_concepto($idconcepto, $idtrabajador, $destino, $idgenerar_nomina, 
 							$numero = ingresohasta($idtrabajador,$fechas[0]);
 							//echo "años en la empresa ".$numero;
 						}else if(ereg("tiempoentrefechas", $partes_fu[1])){
-							$fechas = explode("(", $partes_fu[1]);	
+							$fechas = explode("(", $partes_fu[1]);
 							$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 							$fechas = explode(",", $fechas);
 							$numero = tiempoentrefechas($fechas[0], $fechas[1]);
 						}else if(ereg("diasferiadosentre", $partes_fu[1])){
-							$fechas = explode("(", $partes_fu[1]);	
+							$fechas = explode("(", $partes_fu[1]);
 							$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 							$fechas = explode(",", $fechas);
 							$numero = diasferiadosentre($fechas[0], $fechas[1]);
 						}else if(ereg("mesactual", $partes_fu[1])){
-							$sql_periodos = mysql_query("select * from 
+							$sql_periodos = mysql_query("select * from
 													rango_periodo_nomina
-													where 
+													where
 													idrango_periodo_nomina = '".$idperiodo."'");
 							$bus_periodos = mysql_fetch_array($sql_periodos);
 							$datos = explode("-", $bus_periodos["desde"]);
@@ -763,29 +763,29 @@ function call_concepto($idconcepto, $idtrabajador, $destino, $idgenerar_nomina, 
 						}else if(ereg("diasmes", $partes_fu[1])){
 							$numero = diasmes(date("Y") , date("m"));
 						}else if(ereg("mesesentre", $partes_fu[1])){
-							$fechas = explode("(", $partes_fu[1]);	
+							$fechas = explode("(", $partes_fu[1]);
 							$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 							$fechas = explode(",", $fechas);
 							$numero = mesesentre($fechas[0], $fechas[1], $idtrabajador);
 						}else if(ereg("diasentre", $partes_fu[1])){
-							$fechas = explode("(", $partes_fu[1]);	
+							$fechas = explode("(", $partes_fu[1]);
 							$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 							$fechas = explode(",", $fechas);
 							$numero = diasentre($fechas[0], $fechas[1], $idtrabajador);
 						}
-						
+
 						$numero = (int)$numero;
-						
-						$sql_rango = mysql_query("SELECT * FROM 
-													rango_tabla_constantes 
-													WHERE 
+
+						$sql_rango = mysql_query("SELECT * FROM
+													rango_tabla_constantes
+													WHERE
 														idtabla_constantes = '".$bus_consultar_tabla["idtabla_constantes"]."'
-														and ".$numero." >= desde  
-														and ".$numero." <= hasta 
+														and ".$numero." >= desde
+														and ".$numero." <= hasta
 														order by idrango_tabla_constantes asc limit 0,1");
 						$bus_rango = mysql_fetch_array($sql_rango);
 						//echo "RANGO ".$bus_rango["valor"];
-						
+
 						if($bus_rango["valor"] == ""){
 							$formula .= "0";
 						}else {
@@ -796,118 +796,118 @@ function call_concepto($idconcepto, $idtrabajador, $destino, $idgenerar_nomina, 
 			case "FU": // SI ES UNA FUNCION ENTRA ACA
 				//echo "aqui";
 				$sql_consultar_anterior = mysql_query("SELECT * FROM
-																relacion_formula_conceptos_nomina 
-																WHERE idconcepto_nomina = '".$bus_relacion_formula["idconcepto_nomina"]."' 
+																relacion_formula_conceptos_nomina
+																WHERE idconcepto_nomina = '".$bus_relacion_formula["idconcepto_nomina"]."'
 																and orden = '".($bus_relacion_formula["orden"]-1)."'");
-				
+
 				$bus_consultar_anterior = mysql_fetch_array($sql_consultar_anterior);
 				$partes_anterior = explode("_", $bus_consultar_anterior["valor_oculto"]);
 					if($partes_anterior[0] != "TA"){
 						//echo $partes[1].".............";
 						if(ereg("numerode", $partes[1])){
-							$tabla = explode("(", $partes[1]);						
+							$tabla = explode("(", $partes[1]);
 							$tabla = substr($tabla[1], 0, strlen($tabla[1])-1);
 							$final = explode("-",$tabla);
 							$result = numerode($final[0], $final[1], $final[2], $idtrabajador);
 							if($result == ""){
 								$formula .= "0";
 							}else{
-								$formula .= $result; 
+								$formula .= $result;
 							}
-							
-							
+
+
 						}else if(ereg("tiempobono", $partes[1])){
-						//echo "ALLA....\n";							
-							$formula .= tiempo_bono($idperiodo,$idtrabajador);							
-														
+						//echo "ALLA....\n";
+							$formula .= tiempo_bono($idperiodo,$idtrabajador);
+
 						}else if(ereg("anioempresa", $partes[1])){
 							$result .= anioempresa($idtrabajador);
-							
+
 							if($result == ""){
 								$formula .= "0";
 							}else{
-								$formula .= $result; 
+								$formula .= $result;
 							}
 							//$cantidad_numero = $result;
 							//echo $cantidad_numero;
 						}else if(ereg("ingresohasta", $partes[1])){
 							$fechas = explode("(", $partes[1]);
-							
+
 							$result = ingresohasta($idtrabajador,$fechas[1]);
 							//echo "años en la empresa ".$numero;
-							
+
 							if($result <= 0){
 								$formula .= "0";
 							}else{
-								$formula .= $result; 
+								$formula .= $result;
 							}
-							
-							
+
+
 						}else if(ereg("tiempoentrefechas", $partes[1])){
-							$fechas = explode("(", $partes[1]);	
+							$fechas = explode("(", $partes[1]);
 							$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 							$fechas = explode(",", $fechas);
 							$result = tiempoentrefechas($fechas[0], $fechas[1]);
-							
+
 							if($result == ""){
 								$formula .= "0";
 							}else{
-								$formula .= $result; 
+								$formula .= $result;
 							}
 						}else if(ereg("diasferiadosentre", $partes[1])){
-							$fechas = explode("(", $partes[1]);	
+							$fechas = explode("(", $partes[1]);
 							$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 							$fechas = explode(",", $fechas);
 							$result = diasferiadosentre($fechas[0], $fechas[1]);
-							
+
 							if($result == ""){
 								$formula .= "0";
 							}else{
-								$formula .= $result; 
+								$formula .= $result;
 							}
-							
+
 						}else if(ereg("mesactual", $partes[1])){
-							$sql_periodos = mysql_query("select * from 
+							$sql_periodos = mysql_query("select * from
 													rango_periodo_nomina
-													where 
+													where
 													idrango_periodo_nomina = '".$idperiodo."'");
 							$bus_periodos = mysql_fetch_array($sql_periodos);
 							$datos = explode("-", $bus_periodos["desde"]);
 							$formula .= $datos[1];
-							
+
 						}else if(ereg("diasmes", $partes[1])){
 							$formula .= diasmes(date("Y") , date("m"));
 						}else if(ereg("mesesentre", $partes[1])){
-							$fechas = explode("(", $partes[1]);	
+							$fechas = explode("(", $partes[1]);
 							$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 							$fechas = explode(",", $fechas);
 							$result = mesesentre($fechas[0], $fechas[1], $idtrabajador);
-							
+
 							if($result == ""){
 								$formula .= "0";
 							}else{
-								$formula .= $result; 
+								$formula .= $result;
 							}
-							
+
 							//echo $formula;
 						}else if(ereg("diasentre", $partes[1])){
-							$fechas = explode("(", $partes[1]);	
+							$fechas = explode("(", $partes[1]);
 							$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 							$fechas = explode(",", $fechas);
 							$result = diasentre($fechas[0], $fechas[1], $idtrabajador);
-							
+
 							if($result == ""){
 								$formula .= "0";
 							}else{
-								$formula .= $result; 
+								$formula .= $result;
 							}
 							//echo "ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 						}else if(ereg("continuidadAdministrativa", $partes[1])){
 								$result = continuidadAdministrativa($idtrabajador, $partes[2]);
 								if($result == ""){
-									$formula .= "0";	
+									$formula .= "0";
 								}else{
-									$formula .= $result;	
+									$formula .= $result;
 								}
 						}else if(ereg("diafinperiodo", $partes[1])){
                             $result = dia_fin_periodo($idperiodo);
@@ -920,8 +920,8 @@ function call_concepto($idconcepto, $idtrabajador, $destino, $idgenerar_nomina, 
                         }
 						//echo $formula;
 					}
-					
-					
+
+
 			break;
 		}
 	}
@@ -961,15 +961,15 @@ if($ejecutar == "generarNomina") {
         $sql_ecasiento = mysql_query("delete from cuentas_asiento_contable where idasiento_contable = '".$bus_asiento["idasiento_contable"]."'")or die (mysql_error());
         $idcertificacion_aporte = '';
     }
-	
+
 	$sql_limpiar = mysql_query("delete from relacion_generar_nomina where idgenerar_nomina = '".$idgenerar_nomina."'");
-	
-	
+
+
 	if($estado == "Pre Nomina"){
-		$sql_actualizar  = mysql_query("update generar_nomina 
-							   				set estado='".$estado."', 
-											fecha_procesado = '".date("Y-m-d")."' 
-												where 
+		$sql_actualizar  = mysql_query("update generar_nomina
+							   				set estado='".$estado."',
+											fecha_procesado = '".date("Y-m-d")."'
+												where
 											idgenerar_nomina = '".$idgenerar_nomina."'");
 	}
 
@@ -978,11 +978,11 @@ if($ejecutar == "generarNomina") {
 										tr.cedula,
 										tr.idtrabajador,
 										no.idcategoria_programatica
-											FROM 
+											FROM
 										trabajador tr,
 										relacion_tipo_nomina_trabajador rtt,
 										niveles_organizacionales no
-											WHERE 
+											WHERE
 										rtt.idtipo_nomina = '".$idtipo_nomina."'
 										and rtt.activa = '1'
 										and rtt.idtrabajador = tr.idtrabajador
@@ -991,10 +991,10 @@ if($ejecutar == "generarNomina") {
 										and tr.vacaciones != 'si'
 										and no.idniveles_organizacionales = tr.centro_costo
 										group by tr.idtrabajador")or die(mysql_error());
-	
+
 	$k=0;
 	//$num_trabajador = mysql_num_rows($sql_trabajador);
-	
+
 	//DETERMINO SI EL PERIODO DE LA NOMINA TIENE CONCEPTOS FRACCIONADOS (CUANDO SE EJECUTA UNA PARTE DE LOS
 	//																	 CONCEPTOS EN UNA QUINCENA Y LA OTRA
 	//																	 PARTE EN LA QUINCENA SIGUIENTE)
@@ -1015,40 +1015,40 @@ if($ejecutar == "generarNomina") {
 	while($bus_trabajador =mysql_fetch_array($sql_trabajador)){
 			$idtrabajador = $bus_trabajador["idtrabajador"]	;
 			$cantidad_numero = 0;
-			
+
 			//OBTENGO LOS CONCEPTOS QUE TIENE EL TRABAJADOR
-			$sql_consulta_asociado = mysql_query("(SELECT * FROM 
-															relacion_concepto_trabajador 
+			$sql_consulta_asociado = mysql_query("(SELECT * FROM
+															relacion_concepto_trabajador
 																WHERE
 															idtrabajador = '".$idtrabajador."'
 															and idtipo_nomina = '".$idtipo_nomina."'
 															and fecha_ejecutar_desde = '0000-00-00'
 															and fecha_ejecutar_hasta = '0000-00-00')
 																UNION
-																	(SELECT * FROM 
-																	relacion_concepto_trabajador 
+																	(SELECT * FROM
+																	relacion_concepto_trabajador
 																		WHERE
 																	idtrabajador = '".$idtrabajador."'
 																	and idtipo_nomina = '".$idtipo_nomina."'
 																	and fecha_ejecutar_desde <= '".$bus_rango_periodo["desde"]."'
 																	and fecha_ejecutar_hasta >= '".$bus_rango_periodo["hasta"]."')")or die(mysql_error());
-			
+
 			//INICIO CICLO CON LOS CONCEPTOS ASOCIADOS QUE TIENE EL TRABAJADOR
 			while($bus_consulta_asociado = mysql_fetch_array($sql_consulta_asociado)){
 				$formula = "";
-				$sql_consulta_tabla = mysql_query("SELECT * FROM ".$bus_consulta_asociado["tabla"]." 
+				$sql_consulta_tabla = mysql_query("SELECT * FROM ".$bus_consulta_asociado["tabla"]."
 															where id".$bus_consulta_asociado["tabla"]." ='".$bus_consulta_asociado["idconcepto"]."'");
 				$bus_consulta_tabla = mysql_fetch_array($sql_consulta_tabla);
-				
+
 				if($bus_consulta_asociado["tabla"] == "conceptos_nomina"){ // SI LA TABLA ES CONCEPTOS
-					$sql_relacion_formula= mysql_query("SELECT * FROM 
-																relacion_formula_conceptos_nomina 
-																	WHERE 
+					$sql_relacion_formula= mysql_query("SELECT * FROM
+																relacion_formula_conceptos_nomina
+																	WHERE
 																idconcepto_nomina ='".$bus_consulta_tabla["idconceptos_nomina"]."'
 																and destino = 'condicion'
 																order by orden");
 					$num_relacion_formula= mysql_num_rows($sql_relacion_formula);
-					
+
 					if($num_relacion_formula > 0){
 						//echo "SI TIENE UN CONDICIONAL ".$idtrabajador;
 
@@ -1063,20 +1063,20 @@ if($ejecutar == "generarNomina") {
 							//echo $formula;
 						}else{
 						//echo "NOOOOOOO";
-							
+
 							$result = call_concepto($bus_consulta_tabla["idconceptos_nomina"], $idtrabajador, 'principal', $idgenerar_nomina, $idtipo_nomina, $idperiodo, $bus_consulta_tabla["desagregar_concepto"], $bus_consulta_tabla["factor_desagregacion"]);
 							$formula .= $result;
 
 						}
 					}else{
-						$sql_relacion_formula= mysql_query("SELECT * FROM 
-																	relacion_formula_conceptos_nomina 
-																		WHERE 
+						$sql_relacion_formula= mysql_query("SELECT * FROM
+																	relacion_formula_conceptos_nomina
+																		WHERE
 																	idconcepto_nomina ='".$bus_consulta_tabla["idconceptos_nomina"]."'
 																	and destino= 'principal'
 																	order by orden");
 						while($bus_relacion_formula = mysql_fetch_array($sql_relacion_formula)){
-							$partes = explode("_", $bus_relacion_formula["valor_oculto"]);	
+							$partes = explode("_", $bus_relacion_formula["valor_oculto"]);
 							switch($partes[0]){
 								case "SI":// SI ES UN SIMBOLO ENTRA ACA
 									//echo "AA";
@@ -1084,7 +1084,7 @@ if($ejecutar == "generarNomina") {
 									//echo $formula;
 								break;
 								case "CN":// SI ES UNA CONSTANTE ENTRA ACA
-									$sql_constantes= mysql_query("SELECT * FROM constantes_nomina 
+									$sql_constantes= mysql_query("SELECT * FROM constantes_nomina
 																			WHERE idconstantes_nomina='".$partes[1]."'");
 									$bus_constantes = mysql_fetch_array($sql_constantes);
 									if($bus_constantes["valor"] == 0){
@@ -1102,16 +1102,16 @@ if($ejecutar == "generarNomina") {
 									if($monto == ""){
 										$formula .= "0";
 									}else{
-										$formula .= $monto; 
+										$formula .= $monto;
 									}
 								break;
 								case "CO":// SI ES UN CONCEPTO ENTRA ACA
-																						
+
 										//echo "CONCEPTO";
-										$result = call_concepto($partes[1], $idtrabajador, 'principal', $idgenerar_nomina, $idtipo_nomina, $idperiodo, $bus_consulta_tabla["desagregar_concepto"], $bus_consulta_tabla["factor_desagregacion"]);	
+										$result = call_concepto($partes[1], $idtrabajador, 'principal', $idgenerar_nomina, $idtipo_nomina, $idperiodo, $bus_consulta_tabla["desagregar_concepto"], $bus_consulta_tabla["factor_desagregacion"]);
 										//echo "RESULTADO: ".$result."............    ";
 										//echo $bus_consulta_tabla["desagregar_concepto"];
-										
+
 										if($bus_consulta_tabla["desagregar_concepto"] == "si"){
 											$sql_insertar = mysql_query("insert into conceptos_desagregados(idgenerar_nomina,
 											idconcepto,
@@ -1121,18 +1121,18 @@ if($ejecutar == "generarNomina") {
 													'".$idtrabajador."',
 													'".eval($result*$bus_consulta_tabla["factor_desagregacion"])."')");
 										}
-										
+
 										if($result == ""){
 											$formula .= "0";
 										}else{
-											$formula .= $result; 
+											$formula .= $result;
 										}
-											
+
 										//echo $formula;
 								break;
 								case "THT":// SI ES UNA HOJA DE TIEMPO
-									
-									$sql_hoja_tiempo = mysql_query("select * from hoja_tiempo where 
+
+									$sql_hoja_tiempo = mysql_query("select * from hoja_tiempo where
 																   		idtipo_hoja_tiempo = '".$partes[1]."'
 																		and idtipo_nomina = '".$idtipo_nomina."'
 																		and periodo = '".$idperiodo."'")or die(mysql_error());
@@ -1140,10 +1140,10 @@ if($ejecutar == "generarNomina") {
 
 									if($num_hoja_tiempo > 0){
 									while($bus_hoja_tiempo = mysql_fetch_array($sql_hoja_tiempo)){
-										$sql_relacion_trabajador = mysql_query("select horas 
+										$sql_relacion_trabajador = mysql_query("select horas
 																from relacion_hoja_tiempo_trabajador
 																where idhoja_tiempo = '".$bus_hoja_tiempo["idhoja_tiempo"]."'
-																and idtrabajador = '".$idtrabajador."'");	
+																and idtrabajador = '".$idtrabajador."'");
 										$bus_relacion_trabajador = mysql_fetch_array($sql_relacion_trabajador);
 										//echo $p++." - VALOR: ".$bus_relacion_trabajador["horas"]." AQUI \n";
 										if($bus_relacion_trabajador["horas"] == "" || $bus_relacion_trabajador["horas"] == "()"){
@@ -1155,45 +1155,45 @@ if($ejecutar == "generarNomina") {
 										}
 									}
 									}else{
-										$formula .= "0";	
+										$formula .= "0";
 									}
 								break;
 								case "TA":// SI ES UNA TABLA CONSTANTE ENTRA ACA
 									//echo $partes[1]." - ";
-									$sql_consultar_tabla= mysql_query("SELECT * FROM 
-																			tabla_constantes 
-																			WHERE 
+									$sql_consultar_tabla= mysql_query("SELECT * FROM
+																			tabla_constantes
+																			WHERE
 																			idtabla_constantes = '".$partes[1]."'");
 									$bus_consultar_tabla = mysql_fetch_array($sql_consultar_tabla);
 									$sql_consulta_siguiente_relacion = mysql_query("SELECT * FROM
-																	relacion_formula_conceptos_nomina 
-																	WHERE idconcepto_nomina = '".$bus_relacion_formula["idconcepto_nomina"]."' 
+																	relacion_formula_conceptos_nomina
+																	WHERE idconcepto_nomina = '".$bus_relacion_formula["idconcepto_nomina"]."'
 																	and orden = '".($bus_relacion_formula["orden"]+1)."'");
 									$bus_consulta_siguiente_relacion = mysql_fetch_array($sql_consulta_siguiente_relacion);
 									$partes_fu = explode("_", $bus_consulta_siguiente_relacion["valor_oculto"]);
 									if($partes_fu[0] == "SI"){
-											$sql_rango = mysql_query("SELECT * FROM 
-														rango_tabla_constantes 
-														WHERE 
+											$sql_rango = mysql_query("SELECT * FROM
+														rango_tabla_constantes
+														WHERE
 															idtabla_constantes = '".$bus_consultar_tabla["idtabla_constantes"]."'
-															and '".$partes_fu[1]."' >= desde  
-															and '".$partes_fu[1]."' <= hasta 
+															and '".$partes_fu[1]."' >= desde
+															and '".$partes_fu[1]."' <= hasta
 															order by idrango_tabla_constantes asc limit 0,1");
 											$bus_rango = mysql_fetch_array($sql_rango);
-											
+
 											if($bus_rango["valor"] == ""){
 												$formula .= "0";
 												$cantidad_numero = 0;
 											}else{
 												$formula .= $bus_rango["valor"];
-												$cantidad_numero = $bus_rango["valor"]; 
+												$cantidad_numero = $bus_rango["valor"];
 											}
-											
-											
-											
+
+
+
 									}else if($partes_fu[0] == "FU"){
 											if(ereg("numerode", $partes_fu[1])){
-												$tabla = explode("(", $partes_fu[1]);						
+												$tabla = explode("(", $partes_fu[1]);
 												$tabla = substr($tabla[1], 0, strlen($tabla[1])-1);
 												$final = explode("-",$tabla);
 												$numero = numerode($final[0], $final[1], $final[2], $idtrabajador);
@@ -1205,73 +1205,73 @@ if($ejecutar == "generarNomina") {
 												//echo $fechas[1];
 												$numero = ingresohasta($idtrabajador,$fechas[1]);
 												//echo "años en la empresa3 ".$numero;
-												
+
 											}else if(ereg("tiempo_bono", $partes_fu[1])){
-											
+
 												$numero = tiempo_bono($idperiodo,$idtrabajador);
-												
+
 											}else if(ereg("diafinperiodo", $partes_fu[1])){
 
                                                 $numero = dia_fin_periodo($idperiodo);
 
                                             }else if(ereg("tiempoentrefechas", $partes_fu[1])){
-												$fechas = explode("(", $partes_fu[1]);	
+												$fechas = explode("(", $partes_fu[1]);
 												$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 												$fechas = explode(",", $fechas);
 												$numero = tiempoentrefechas($fechas[0], $fechas[1]);
 											}else if(ereg("diasferiadosentre", $partes_fu[1])){
-												$fechas = explode("(", $partes_fu[1]);	
+												$fechas = explode("(", $partes_fu[1]);
 												$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 												$fechas = explode(",", $fechas);
 												$numero = diasferiadosentre($fechas[0], $fechas[1]);
 											}else if(ereg("mesactual", $partes_fu[1])){
 												//echo "AQUI TE ENTRO";
-												
-												$sql_periodos = mysql_query("select * from 
+
+												$sql_periodos = mysql_query("select * from
 																		rango_periodo_nomina
-																		where 
+																		where
 																		idrango_periodo_nomina = '".$idperiodo."'");
 												$bus_periodos = mysql_fetch_array($sql_periodos);
 												$datos = explode("-", $bus_periodos["desde"]);
 												$numero = $datos[1];
-												
+
 												//$numero = date("m");
 												//echo " - ".$numero;
 											}else if(ereg("diasmes", $partes_fu[1])){
 												$numero = diasmes(date("Y") , date("m"));
 											}else if(ereg("mesesentre", $partes_fu[1])){
-												$fechas = explode("(", $partes_fu[1]);	
+												$fechas = explode("(", $partes_fu[1]);
 												$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 												$fechas = explode(",", $fechas);
 												$numero = mesesentre($fechas[0], $fechas[1], $idtrabajador);
 											}else if(ereg("diasentre", $partes_fu[1])){
-												$fechas = explode("(", $partes_fu[1]);	
+												$fechas = explode("(", $partes_fu[1]);
 												$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 												$fechas = explode(",", $fechas);
 												$numero = diasentre($fechas[0], $fechas[1], $idtrabajador);
 											}else if(ereg("continuidadAdministrativa", $partes[1])){
 													$result = continuidadAdministrativa($idtrabajador, $partes[2]);
 													if($result == ""){
-														$formula .= "0";	
+														$formula .= "0";
 													}else{
-														$formula .= $result;	
+														$formula .= $result;
 													}
 											}
-											
+
 											$numero = (int)$numero;
-											
-											
-											$sql_rango = mysql_query("SELECT * FROM 
-																		rango_tabla_constantes 
-																		WHERE 
+
+
+											$sql_rango = mysql_query("SELECT * FROM
+																		rango_tabla_constantes
+																		WHERE
 															idtabla_constantes = '".$bus_consultar_tabla["idtabla_constantes"]."'
-															and ".$numero." >= desde  
-															and ".$numero." <= hasta 
+															and ".$numero." >= desde
+															and ".$numero." <= hasta
 															order by idrango_tabla_constantes asc limit 0,1")or die(mysql_error());
 											$bus_rango = mysql_fetch_array($sql_rango);
 											//echo "PRUEBA ".$bus_rango["valor"];
-											
-											
+
+
 											if($bus_rango["valor"] == ""){
 												$formula .= "0";
 												$cantidad_numero = 0;
@@ -1279,51 +1279,51 @@ if($ejecutar == "generarNomina") {
 												$formula .= $bus_rango["valor"];
 												$cantidad_numero = $bus_rango["valor"];
 											}
-											
-											
-											
+
+
+
 									}
 								break;
 								case "FU": // SI ES UNA FUNCION ENTRA ACA
-									
+
 									$sql_consultar_anterior = mysql_query("SELECT * FROM
-																		relacion_formula_conceptos_nomina 
-																		WHERE idconcepto_nomina = '".$bus_relacion_formula["idconcepto_nomina"]."' 
+																		relacion_formula_conceptos_nomina
+																		WHERE idconcepto_nomina = '".$bus_relacion_formula["idconcepto_nomina"]."'
 																		and orden = '".($bus_relacion_formula["orden"]-1)."'
 																		and destino = 'principal'")or die(mysql_error());
-									
+
 									$bus_consultar_anterior = mysql_fetch_array($sql_consultar_anterior);
 									$partes_anterior = explode("_", $bus_consultar_anterior["valor_oculto"]);
 										//echo $partes_anterior[0].".....";
 										if($partes_anterior[0] != "TA"){
 											//echo $partes[1]."...";
 											if(ereg("numerode", $partes[1])){
-												$tabla = explode("(", $partes[1]);						
+												$tabla = explode("(", $partes[1]);
 												$tabla = substr($tabla[1], 0, strlen($tabla[1])-1);
 												$final = explode("-",$tabla);
-												$result = numerode($final[0], $final[1], $final[2], $idtrabajador);	
-												
-												
+												$result = numerode($final[0], $final[1], $final[2], $idtrabajador);
+
+
 												if($result == ""){
 													$formula .= "0";
 												}else{
 													$formula .= $result;
 												}
-												
+
 												$cantidad_numero = numerode($final[0], $final[1], $final[2], $idtrabajador);
 											}else if(ereg("tiempobono", $partes[1])){
 											//echo "AQUI";
 											//$formula .= "PRUEBAAAA";
 												$formula .= tiempo_bono($idperiodo,$idtrabajador);
-												
+
 												//echo "id ".$idtrabajador." ".$formula."...... \n";
-												
-												
+
+
 											}else if(ereg("diafinperiodo", $partes[1])){
                                                 $formula .= dia_fin_periodo($idperiodo);
                                             }else if(ereg("anioempresa", $partes[1])){
 												$result = anioempresa($idtrabajador);
-												
+
 												if($result == ""){
 													$formula .= "0";
 												}else{
@@ -1333,75 +1333,75 @@ if($ejecutar == "generarNomina") {
 												//echo $cantidad_numero;
 											}else if(ereg("ingresohasta", $partes[1])){
 												$fechas = explode("(", $partes[1]);
-												
+
 												$result = ingresohasta($idtrabajador,$fechas[1]);
 												//echo "años en la empresa ".$numero;
-												
+
 												if($result <= 0){
 													$formula .= "0";
 												}else{
-													$formula .= $result; 
+													$formula .= $result;
 												}
-												
-												
+
+
 											}else if(ereg("tiempoentrefechas", $partes[1])){
-												$fechas = explode("(", $partes[1]);	
+												$fechas = explode("(", $partes[1]);
 												$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 												$fechas = explode(",", $fechas);
 												$result = tiempoentrefechas($fechas[0], $fechas[1]);
-												
-												
+
+
 												if($result == ""){
 													$formula .= "0";
 												}else{
 													$formula .= $result;
 												}
-												
-												
-												
+
+
+
 											}else if(ereg("diasferiadosentre", $partes[1])){
-												$fechas = explode("(", $partes[1]);	
+												$fechas = explode("(", $partes[1]);
 												$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 												$fechas = explode(",", $fechas);
 												$result = diasferiadosentre($fechas[0], $fechas[1]);
-												
+
 												if($result == ""){
 													$formula .= "0";
 												}else{
 													$formula .= $result;
 												}
-												
+
 											}else if(ereg("mesactual", $partes[1])){
-												$sql_periodos = mysql_query("select * from 
+												$sql_periodos = mysql_query("select * from
 																		rango_periodo_nomina
-																		where 
+																		where
 																		idrango_periodo_nomina = '".$idperiodo."'");
 												$bus_periodos = mysql_fetch_array($sql_periodos);
 												$datos = explode("-", $bus_periodos["desde"]);
 												$formula .=$datos[1];
-												
+
 											}else if(ereg("diasmes", $partes[1])){
 												$formula .= diasmes(date("Y") , date("m"));
 											}else if(ereg("mesesentre", $partes[1])){
-												
-												$fechas = explode("(", $partes[1]);	
+
+												$fechas = explode("(", $partes[1]);
 												$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 												$fechas = explode(",", $fechas);
-												
+
 												$result = mesesentre($fechas[0], $fechas[1], $idtrabajador);
-												
+
 												if($result == ""){
 													$formula .= "0";
 												}else{
 													$formula .= $result;
 												}
 											}else if(ereg("diasentre", $partes[1])){
-												
-												$fechas = explode("(", $partes[1]);	
+
+												$fechas = explode("(", $partes[1]);
 												$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 												$fechas = explode(",", $fechas);
 												$result = diasentre($fechas[0], $fechas[1], $idtrabajador);
-												
+
 												if($result == ""){
 													$formula .= "0";
 												}else{
@@ -1412,15 +1412,15 @@ if($ejecutar == "generarNomina") {
 													$result = continuidadAdministrativa($idtrabajador, $partes[2]);
 													//echo "AQUI ".$result." AAAAA\n";
 													if($result == ""){
-														$formula .= "0";	
+														$formula .= "0";
 													}else{
-														$formula .= $result;	
+														$formula .= $result;
 													}
-													
-													
+
+
 											}else if($partes_fu[0] == "FU"){
 													if(ereg("numerode", $partes_fu[1])){
-														$tabla = explode("(", $partes_fu[1]);						
+														$tabla = explode("(", $partes_fu[1]);
 														$tabla = substr($tabla[1], 0, strlen($tabla[1])-1);
 														$final = explode("-",$tabla);
 														$numero = numerode($final[0], $final[1], $final[2], $idtrabajador);
@@ -1432,73 +1432,73 @@ if($ejecutar == "generarNomina") {
 														//echo $fechas[1];
 														$numero = ingresohasta($idtrabajador,$fechas[1]);
 														//echo "años en la empresa3 ".$numero;
-														
+
 													}else if(ereg("tiempobono", $partes_fu[1])){
-													
+
 														$numero = tiempo_bono($idperiodo,$idtrabajador);
-														
+
 													}else if(ereg("diafinperiodo", $partes_fu[1])){
 
                                                         $numero = dia_fin_periodo($idperiodo);
 
                                                     }else if(ereg("tiempoentrefechas", $partes_fu[1])){
-														$fechas = explode("(", $partes_fu[1]);	
+														$fechas = explode("(", $partes_fu[1]);
 														$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 														$fechas = explode(",", $fechas);
 														$numero = tiempoentrefechas($fechas[0], $fechas[1]);
 													}else if(ereg("diasferiadosentre", $partes_fu[1])){
-														$fechas = explode("(", $partes_fu[1]);	
+														$fechas = explode("(", $partes_fu[1]);
 														$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 														$fechas = explode(",", $fechas);
 														$numero = diasferiadosentre($fechas[0], $fechas[1]);
 													}else if(ereg("mesactual", $partes_fu[1])){
 														//echo "AQUI TE ENTRO";
-														
-														$sql_periodos = mysql_query("select * from 
+
+														$sql_periodos = mysql_query("select * from
 																				rango_periodo_nomina
-																				where 
+																				where
 																				idrango_periodo_nomina = '".$idperiodo."'");
 														$bus_periodos = mysql_fetch_array($sql_periodos);
 														$datos = explode("-", $bus_periodos["desde"]);
 														$numero = $datos[1];
-														
+
 														//$numero = date("m");
 														//echo " - ".$numero;
 													}else if(ereg("diasmes", $partes_fu[1])){
 														$numero = diasmes(date("Y") , date("m"));
 													}else if(ereg("mesesentre", $partes_fu[1])){
-														$fechas = explode("(", $partes_fu[1]);	
+														$fechas = explode("(", $partes_fu[1]);
 														$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 														$fechas = explode(",", $fechas);
 														$numero = mesesentre($fechas[0], $fechas[1], $idtrabajador);
 													}else if(ereg("diasentre", $partes_fu[1])){
-														$fechas = explode("(", $partes_fu[1]);	
+														$fechas = explode("(", $partes_fu[1]);
 														$fechas = substr($fechas[1], 0, strlen($fechas[1])-1);
 														$fechas = explode(",", $fechas);
 														$numero = diasentre($fechas[0], $fechas[1], $idtrabajador);
 													}else if(ereg("continuidadAdministrativa", $partes[1])){
 															$result = continuidadAdministrativa($idtrabajador, $partes[2]);
 															if($result == ""){
-																$formula .= "0";	
+																$formula .= "0";
 															}else{
-																$formula .= $result;	
+																$formula .= $result;
 															}
 													}
-													
+
 													$numero = (int)$numero;
-													
-													
-													$sql_rango = mysql_query("SELECT * FROM 
-																				rango_tabla_constantes 
-																				WHERE 
+
+
+													$sql_rango = mysql_query("SELECT * FROM
+																				rango_tabla_constantes
+																				WHERE
 																	idtabla_constantes = '".$bus_consultar_tabla["idtabla_constantes"]."'
-																	and ".$numero." >= desde  
-																	and ".$numero." <= hasta 
+																	and ".$numero." >= desde
+																	and ".$numero." <= hasta
 																	order by idrango_tabla_constantes asc limit 0,1")or die(mysql_error());
 													$bus_rango = mysql_fetch_array($sql_rango);
 													//echo "PRUEBA ".$bus_rango["valor"];
-													
-													
+
+
 													if($bus_rango["valor"] == ""){
 														$formula .= "0";
 														$cantidad_numero = 0;
@@ -1506,7 +1506,7 @@ if($ejecutar == "generarNomina") {
 														$formula .= $bus_rango["valor"];
 														$cantidad_numero = $bus_rango["valor"];
 													}
-													
+
 
 											}
 											//echo $partes[1]($idtrabajador)."...";
@@ -1515,7 +1515,7 @@ if($ejecutar == "generarNomina") {
 							}
 						}
 							//echo $formula;
-							
+
 					}//CIERRA SI NO TIENE UNA CONDICION
 				}else{
 					if($bus_consulta_tabla["valor"] == 0){
@@ -1525,7 +1525,7 @@ if($ejecutar == "generarNomina") {
 					}
 				}
 				//echo " | ".$formula;
-				
+
 				//echo "PASO";
 				//echo $formula."-----";
 
@@ -1533,12 +1533,12 @@ if($ejecutar == "generarNomina") {
 				if($formula != ""){
 					//echo 'f '.$formula.".........\n";
 					@eval("\$total = $formula;");
-					
+
 					$sql_division_periodo = mysql_query("select * from relacion_conceptos_periodos
 												where idconcepto = '".$bus_consulta_asociado["idconcepto"]."'
 												and idtipo_nomina = '".$idtipo_nomina."'
 												and idperiodo = '".$idperiodo."'")or die(mysql_error());
-					
+
 					if (mysql_num_rows($sql_division_periodo)){
 						$num_division_periodo = mysql_num_rows($sql_division_periodo) or die("aqui numero relacion ".mysql_error());
 					}else{
@@ -1555,28 +1555,28 @@ if($ejecutar == "generarNomina") {
 					}
 					//echo $total." ........ \n";
 				}
-				
-				
-				
-				
-				$sql_consulta = mysql_query("select * from relacion_generar_nomina where 
+
+
+
+
+				$sql_consulta = mysql_query("select * from relacion_generar_nomina where
 											idgenerar_nomina ='".$idgenerar_nomina."'
 											and idtrabajador = '".$idtrabajador."'
 											and idconcepto = '".$bus_consulta_asociado["idconcepto"]."'
 											and tabla = '".$bus_consulta_asociado["tabla"]."'")or die("!!!!".mysql_error());
 				$num_consulta = mysql_num_rows($sql_consulta);
-				
-				$sql_neutro = mysql_query("select * from ".$bus_consulta_asociado["tabla"]." 
-															where 
+
+				$sql_neutro = mysql_query("select * from ".$bus_consulta_asociado["tabla"]."
+															where
 															id".$bus_consulta_asociado["tabla"]." = ".$bus_consulta_asociado["idconcepto"]."")or die(mysql_error());
 				$bus_neutro = mysql_fetch_array($sql_neutro);
-				
+
 				if($bus_consulta_asociado["tabla"] == "constantes_nomina"){
 					$afecta = $bus_neutro["afecta"];
 				}else{
 					$afecta = $bus_neutro["tipo_concepto"];
 				}
-				
+
 				$sql_afecta = mysql_query("select * from tipo_conceptos_nomina where idconceptos_nomina = '".$afecta."'");
 				$bus_afecta = mysql_fetch_array($sql_afecta);
 				if($bus_afecta["afecta"] == "Asignacion"){
@@ -1592,39 +1592,39 @@ if($ejecutar == "generarNomina") {
 					//echo "CANTIDAD ".$cantidad_numero;
 				//}
 				if($total != 0){
-				//if($id_afecta != 3){														
+				//if($id_afecta != 3){
 					if($num_consulta == 0){
-						$sql_guardar_total= mysql_query("insert into relacion_generar_nomina(idgenerar_nomina, 
-															 idtrabajador, 
+						$sql_guardar_total= mysql_query("insert into relacion_generar_nomina(idgenerar_nomina,
+															 idtrabajador,
 															 idconcepto,
 															 tabla,
 															 total,
-															 cantidad)VALUES('".$idgenerar_nomina."', 
-																			'".$idtrabajador."', 
+															 cantidad)VALUES('".$idgenerar_nomina."',
+																			'".$idtrabajador."',
 																			'".$bus_consulta_asociado["idconcepto"]."',
 																			'".$bus_consulta_asociado["tabla"]."',
 																			'".$total."',
 																			'".$cantidad_numero."')")or die("2222".mysql_error());
-						
+
 					}else{
 						$sql_guardar_total= mysql_query("update relacion_generar_nomina set total = '".$total."'
 												where idgenerar_nomina = '".$idgenerar_nomina."'
 												and idtrabajador = '".$idtrabajador."'
 												and idconcepto = '".$bus_consulta_asociado["idconcepto"]."'
 												and tabla = '".$bus_consulta_asociado["tabla"]."'")or die("4444".mysql_error());
-						
+
 					}
 				//}
-			
+
 				$cantidad_numero=0;
 				if($bus_consulta_asociado["tabla"] == "conceptos_nomina"){
-					$sql_consulta_concepto = mysql_query("select * from conceptos_nomina 
-														 	where idconceptos_nomina = '".$bus_consulta_asociado["idconcepto"]."' 
+					$sql_consulta_concepto = mysql_query("select * from conceptos_nomina
+														 	where idconceptos_nomina = '".$bus_consulta_asociado["idconcepto"]."'
 															and aplica_prestaciones = 'si'");
 
                     $num_consulta_concepto = mysql_num_rows($sql_consulta_concepto);
                     $columna_prestaciones = mysql_fetch_array($sql_consulta_concepto);
-					if($num_consulta_concepto > 0){				
+					if($num_consulta_concepto > 0){
 						if($estado == "Procesado"){
 							$sql_generar_nomina = mysql_query("select rpn.desde,
 																		rpn.hasta
@@ -1637,16 +1637,16 @@ if($ejecutar == "generarNomina") {
 																		and rpn.idrango_periodo_nomina = gn.idperiodo
 																		group by desde")or die(mysql_error());
 							$bus_generar_nomina = mysql_fetch_array($sql_generar_nomina);
-							
-							
+
+
 							list($anioPrestaciones, $mesPrestaciones, $diaPrestaciones) = explode("-", $bus_generar_nomina["desde"]);
-							
-							
+
+
 							$sql_consulta_prestaciones = mysql_query("select * from tabla_prestaciones where anio = '".$anioPrestaciones."'
 																							and mes = '".$mesPrestaciones."'
 																							and idtrabajador = '".$idtrabajador."'");
 							$num_consulta_prestaciones = mysql_num_rows($sql_consulta_prestaciones);
-							
+
 							if($num_consulta_prestaciones == 0){
 		                        if ($columna_prestaciones["columna_prestaciones"]=='sueldo') {
 		                            $sql_ingresar = mysql_query("insert into tabla_prestaciones(anio,
@@ -1705,7 +1705,7 @@ if($ejecutar == "generarNomina") {
 																									'" . $fh . "',
 																									'" . $pc . "')") or die(mysql_error());
 		                        }
-							
+
 							}else{
 								$bus_consulta_prestaciones = mysql_fetch_array($sql_consulta_prestaciones);
 		                        if ($columna_prestaciones["columna_prestaciones"]=='sueldo') {
@@ -1725,46 +1725,46 @@ if($ejecutar == "generarNomina") {
 						}
 					}
 				}
-				
-			
+
+
 			//echo eval("echo $formula;")." ";
 				//if(eval("echo $formula;")){echo "si";}else{echo "no";}
-			
+
 			$conceptos[$k] = array($bus_consulta_asociado["tabla"], $bus_consulta_asociado["idconcepto"], $total, $idtrabajador,$bus_trabajador["idcategoria_programatica"]);
 			$k++;
 			$total = 0;
-			
+
 			}
-			
+
 			}
-			
+
 			//echo "AQUIII";
 			//var_dump($conceptos);
-		
-	//echo "AQUI";	
-	} 
+
+	//echo "AQUI";
+	}
 	//CULMINA CICLO CON LOS TRABAJADORES DE LA NOMINA
-	
-	
-	
-	
-	/// GUARDO LOS DATOS GENERALES DE LA CERTIFICACION 
+
+
+
+
+	/// GUARDO LOS DATOS GENERALES DE LA CERTIFICACION
 	$sql_generar_nomina = mysql_query("select tn.idtipo_documento,
 									  gn.descripcion,
 									  gn.idbeneficiarios
-												  				from 
+												  				from
 												  			generar_nomina gn,
 															tipo_nomina tn
-																where 
+																where
 															gn.idgenerar_nomina = '".$idgenerar_nomina."'
 															and tn.idtipo_nomina =  gn.idtipo_nomina")or die("AQUIIIII".mysql_error());
 	$bus_generar_nomina = mysql_fetch_array($sql_generar_nomina);
-	
+
 	registra_transaccion('Se genero la nomina ('.$idgenerar_nomina.')',$login,$fh,$pc,'nomina',$conexion_db);
-	
+
 	$idtipo_documento = $bus_generar_nomina["idtipo_documento"];
-	
-	
+
+
 	if($idcertificacion == "" || $idcertificacion == 0){
 		$sql_cargar_certificacion = mysql_query("insert into orden_compra_servicio(tipo,
 																			   fecha_elaboracion,
@@ -1798,16 +1798,16 @@ if($ejecutar == "generarNomina") {
 		$idcertificacion = mysql_insert_id();
 
 	//echo "certi".$idcertificacion;
-	/// GUARDO LOS DATOS GENERALES DE LA CERTIFICACION 
-	
+	/// GUARDO LOS DATOS GENERALES DE LA CERTIFICACION
+
 		$sql_actualizar  = mysql_query("update generar_nomina set
 											idorden_compra_servicio = '".$idcertificacion."'
-												where 
+												where
 											idgenerar_nomina = '".$idgenerar_nomina."'");
 
 		$sql_cuentas_contables = mysql_query("select * from tipos_documentos where idtipos_documentos = '".$idtipo_documento."'");
 		$bus_cuentas_contables = mysql_fetch_array($sql_cuentas_contables);
-		
+
 		if ($bus_cuentas_contables["tabla_debe"] != '' and $bus_cuentas_contables["idcuenta_debe"] != 0 and $bus_cuentas_contables["tabla_haber"] != '' and $bus_cuentas_contables["idcuenta_haber"] != ''){
 			$sql_contable = mysql_query("insert into asiento_contable (idfuente_financiamiento,
 																	detalle,
@@ -1828,7 +1828,7 @@ if($ejecutar == "generarNomina") {
 																				'".$login."',
 																				'".date("Y-m-d H:i:s")."',
 																				'2')");
-			
+
 			if($sql_contable){
 				$idasiento_contable = mysql_insert_id();
 				$sql_cuenta_contable_debe = mysql_query("insert into cuentas_asiento_contable (idasiento_contable,
@@ -1849,21 +1849,21 @@ if($ejecutar == "generarNomina") {
 																				'".$bus_cuentas_contables["tabla_haber"]."',
 																				'".$bus_cuentas_contables["idcuenta_haber"]."',
 																				'haber')");
-			
+
 			}
 		}
-	
+
 	}
 
 	foreach($conceptos as $con){
-		
-		
-		
+
+
+
 		if($con[0] == "conceptos_nomina"){
 			//echo "EL MONTO TOTAL ES: ".$con[2];
 			$sql_concepto = mysql_query("select * from conceptos_nomina where idconceptos_nomina = '".$con[1]."'")or die("tttttt".mysql_error());
 			$bus_concepto = mysql_fetch_array($sql_concepto);
-			
+
 			$tipo_concepto = $bus_concepto["tipo_concepto"];
 			$idclasificador_presupuestario = $bus_concepto["idclasificador_presupuestario"];
 			$idordinal = $bus_concepto["idordinal"];
@@ -1978,7 +1978,7 @@ if($ejecutar == "generarNomina") {
 
             //VALIDO QUE EL CONCEPTO ESTE EN LA TABLA DE ARTICULOS SERVICIOS
 			if($idarticulos_servicios == 0){
-				
+
 				$sql_ingresar_articulo = mysql_query("insert into articulos_servicios(codigo,
 																				  tipo,
 																				  descripcion,
@@ -2005,18 +2005,18 @@ if($ejecutar == "generarNomina") {
 																									'".$tipo_concepto."',
 																									'".$login."',
 																									'".$fh."')")or die("HOLAAAAA".mysql_error());
-				
+
 				$id = mysql_insert_id();
 				//echo "ESTE ES EL ID:  ".$id;
 				if($id != 0){
-					$sql_actualizar = mysql_query("update conceptos_nomina set idarticulos_servicios = '".$id."' where idconceptos_nomina = '".$con[1]."'")or die("wwwww".mysql_error());	
+					$sql_actualizar = mysql_query("update conceptos_nomina set idarticulos_servicios = '".$id."' where idconceptos_nomina = '".$con[1]."'")or die("wwwww".mysql_error());
 					if ($idcentro_costo_fijo == 0or $idcentro_costo_fijo == ''){
 						/*
-						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica 
-																  			from 
+						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica
+																  			from
 																		trabajador tr,
 																		niveles_organizacionales no
-																			where 
+																			where
 																		tr.idtrabajador = '".$con[3]."'
 																		and no.idniveles_organizacionales = tr.centro_costo")or die("eeeeee".mysql_error());
 						$bus_categoria_programatica = mysql_fetch_array($sql_categoria_programatica);
@@ -2027,9 +2027,9 @@ if($ejecutar == "generarNomina") {
 					}
 					ingresarMaterial($id, $idcertificacion, $idcentro_costo, 1, $con[2], $idfuente_financiamiento, $idtipo_presupuesto,$idclasificador_presupuestario,$idordinal,$anio,$idcertificacion_aporte);
 				}
-				
+
 				//}// FIN DE SI ES PATRONAL
-				
+
 
             }else{
 					$id = $idarticulos_servicios;
@@ -2041,11 +2041,11 @@ if($ejecutar == "generarNomina") {
 					*/
 					if ($idcentro_costo_fijo == 0 or $idcentro_costo_fijo == ''){
 						/*
-						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica 
-																  			from 
+						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica
+																  			from
 																		trabajador tr,
 																		niveles_organizacionales no
-																			where 
+																			where
 																		tr.idtrabajador = '".$con[3]."'
 																		and no.idniveles_organizacionales = tr.centro_costo")or die("eeeeee".mysql_error());
 						$bus_categoria_programatica = mysql_fetch_array($sql_categoria_programatica);
@@ -2056,15 +2056,15 @@ if($ejecutar == "generarNomina") {
 						$idcentro_costo = $idcentro_costo_fijo;
 					}
 					if($tipo_concepto == 4){
-						$sql_busqueda = mysql_query("select * from articulos_compra_servicio 
-																where 
+						$sql_busqueda = mysql_query("select * from articulos_compra_servicio
+																where
 																idarticulos_servicios = '".$id."'
 																and idcategoria_programatica = '".$idcentro_costo."'
 																and idorden_compra_servicio = '".$idcertificacion_aporte."'")or die("ertyuui".mysql_error());
 					}
 					if($tipo_concepto == 1 || $tipo_concepto == 2){
-						$sql_busqueda = mysql_query("select * from articulos_compra_servicio 
-																where 
+						$sql_busqueda = mysql_query("select * from articulos_compra_servicio
+																where
 																idarticulos_servicios = '".$id."'
 																and idcategoria_programatica = '".$idcentro_costo."'
 																and idorden_compra_servicio = '".$idcertificacion."'")or die("ertyuui".mysql_error());
@@ -2086,19 +2086,19 @@ if($ejecutar == "generarNomina") {
 						}else{
 							ingresarMaterial($id, $idcertificacion_aporte, $idcentro_costo, 1, $con[2], $idfuente_financiamiento, $idtipo_presupuesto,$idclasificador_presupuestario,$idordinal,$anio,$idcertificacion_aporte);
 						}
-					}	
+					}
 				}
-			
-			
-				
-				
+
+
+
+
 			}else if($con[0] == "constantes_nomina"){
-				// AQUI VA EL TEXTO SI ES UNA CONSTANTE	
-				
+				// AQUI VA EL TEXTO SI ES UNA CONSTANTE
+
 				$sql_constante = mysql_query("select * from constantes_nomina where idconstantes_nomina = '".$con[1]."'")or die("AQUIII".mysql_error());
 				$bus_constante = mysql_fetch_array($sql_constante);
-				
-				
+
+
 				$idclasificador_presupuestario = $bus_constante["idclasificador_presupuestario"];
 				$idordinal = $bus_constante["idordinal"];
 				$idarticulos_servicios = $bus_constante["idarticulos_servicios"];
@@ -2210,7 +2210,7 @@ if($ejecutar == "generarNomina") {
 	            }
 
 			if($idarticulos_servicios == 0){
-					
+
 					$sql_ingresar_articulo = mysql_query("insert into articulos_servicios(codigo,
 																				  tipo,
 																				  descripcion,
@@ -2236,17 +2236,17 @@ if($ejecutar == "generarNomina") {
 																									'".$tipo_constante."',
 																									'".$login."',
 																									'".$fh."')")or die("ERROR EN EL INSERT".mysql_error);
-				
+
 				$id = mysql_insert_id();
 				if($id != 0){
-					$sql_actualizar = mysql_query("update constantes_nomina set idarticulos_servicios = '".$id."' where idconstantes_nomina = '".$con[1]."'")or die("ERROR".mysql_error());	
+					$sql_actualizar = mysql_query("update constantes_nomina set idarticulos_servicios = '".$id."' where idconstantes_nomina = '".$con[1]."'")or die("ERROR".mysql_error());
 					if ($idcentro_costo_fijo == 0 or $idcentro_costo_fijo == ''){
 						/*
-						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica 
-																  			from 
+						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica
+																  			from
 																		trabajador tr,
 																		niveles_organizacionales no
-																			where 
+																			where
 																		tr.idtrabajador = '".$con[3]."'
 																		and no.idniveles_organizacionales = tr.centro_costo")or die("eeeeee".mysql_error());
 						$bus_categoria_programatica = mysql_fetch_array($sql_categoria_programatica);
@@ -2256,26 +2256,26 @@ if($ejecutar == "generarNomina") {
 					}else{
 						$idcentro_costo = $idcentro_costo_fijo;
 					}
-					
-					
+
+
 					$sql_consulta_articulos = mysql_query("select * from articulos_servicios where idarticulos_servicios = '".$id."'");
 					$bus_consulta_articulos = mysql_fetch_array($sql_consulta_articulos);
-					
+
 					if($bus_consulta_articulos["tipo_concepto"] == 2 && $bus_consulta_articulos["tipo_concepto"] == 1){
 						ingresarMaterial($id, $idcertificacion, $idcentro_costo, 1, $con[2], $idfuente_financiamiento, $idtipo_presupuesto,$idclasificador_presupuestario,$idordinal,$anio,$idcertificacion_aporte);
 					}
 					if($bus_consulta_articulos["tipo_concepto"] == 4){
 						ingresarMaterial($id, $idcertificacion_aporte, $idcentro_costo, 1, $con[2], $idfuente_financiamiento, $idtipo_presupuesto,$idclasificador_presupuestario,$idordinal,$anio,$idcertificacion_aporte);
 					}
-					
+
 				}
-				
+
 				//}
-				
+
 			}else{
-					
+
 					$id = $idarticulos_servicios;
-					/*$sql_actualizar = mysql_query("update constantes_nomina set 
+					/*$sql_actualizar = mysql_query("update constantes_nomina set
 												  				idarticulos_servicios = '".$id."' where idconstantes_nomina = '".$con[1]."'")or die("AQUIIII".mysql_error());
 					$sql_actualizar = mysql_query("update articulos_servicios set
 												  				idclasificador_presupuestario = '".$idclasificador_presupuestario."'
@@ -2284,11 +2284,11 @@ if($ejecutar == "generarNomina") {
 					//echo "update conceptos_nomina set idarticulos_servicios = '".$id."' where idconceptos_nomina = '".$con[1]."'";
 					if ($idcentro_costo_fijo == 0 or $idcentro_costo_fijo == ''){
 						/*
-						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica 
-																  			from 
+						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica
+																  			from
 																		trabajador tr,
 																		niveles_organizacionales no
-																			where 
+																			where
 																		tr.idtrabajador = '".$con[3]."'
 																		and no.idniveles_organizacionales = tr.centro_costo")or die("eeeeee".mysql_error());
 						$bus_categoria_programatica = mysql_fetch_array($sql_categoria_programatica);
@@ -2299,26 +2299,26 @@ if($ejecutar == "generarNomina") {
 						$idcentro_costo = $idcentro_costo_fijo;
 					}
 					if($tipo_constante==1 || $tipo_constante ==2){
-						$sql_buscar = mysql_query("select * from articulos_compra_servicio 
-																			where 
+						$sql_buscar = mysql_query("select * from articulos_compra_servicio
+																			where
 																			idarticulos_servicios = '".$id."'
-																			and idcategoria_programatica = '".$idcentro_costo."' 
+																			and idcategoria_programatica = '".$idcentro_costo."'
 																			and idorden_compra_servicio = '".$idcertificacion."'")or die("qqqqqq".mysql_error());
 						$num_buscar= mysql_num_rows($sql_buscar);
 					}
 					if($tipo_constante == 4){
-						$sql_buscar = mysql_query("select * from articulos_compra_servicio 
-																			where 
+						$sql_buscar = mysql_query("select * from articulos_compra_servicio
+																			where
 																			idarticulos_servicios = '".$id."'
-																			and idcategoria_programatica = '".$idcentro_costo."' 
+																			and idcategoria_programatica = '".$idcentro_costo."'
 																			and idorden_compra_servicio = '".$idcertificacion_aporte."'")or die("qqqqqq".mysql_error());
 							$num_buscar= mysql_num_rows($sql_buscar);
 					}
-					
-					
+
+
 					//$sql_consulta_articulos = mysql_query("select * from articulos_servicios where idarticulos_servicios = '".$id."'")or die(mysql_error());
 					//$bus_consulta_articulos = mysql_fetch_array($sql_consulta_articulos);
-					
+
 					if($tipo_constante != 3 && $tipo_constante != 4){
 						if($num_buscar > 0){
 							//echo "entro constante ".$bus_consulta_articulos["tipo_concepto"]." id art ".$id;
@@ -2337,49 +2337,49 @@ if($ejecutar == "generarNomina") {
 							ingresarMaterial($id, $idcertificacion_aporte, $idcentro_costo, 1, $con[2], $idfuente_financiamiento, $idtipo_presupuesto,$idclasificador_presupuestario,$idordinal,$anio,$idcertificacion_aporte);
 						}
 					}
-					
-			}	
+
+			}
 			}
 		}
-		
+
 		if($estado == "Procesado"){
-			
-			if($idcertificacion_aporte == ''){ 
-				$idcertificacion_aporte=0; 
+
+			if($idcertificacion_aporte == ''){
+				$idcertificacion_aporte=0;
 			}else{
 				$sql_actualizar_certificacion = mysql_query("update orden_compra_servicio
 														set total = sub_total - exento
 														where idorden_compra_servicio = '".$idcertificacion_aporte."'");
-			}	
+			}
 			$sql_actualizar_certificacion = mysql_query("update orden_compra_servicio
 													set total = sub_total - exento
 													where idorden_compra_servicio = '".$idcertificacion."'");
-			/*$sql_actualizar  = mysql_query("update generar_nomina 
-						   				set estado='procesado', 
+			/*$sql_actualizar  = mysql_query("update generar_nomina
+						   				set estado='procesado',
 										fecha_procesado = '".date("Y-m-d")."',
 										idorden_compra_servicio = '".$idcertificacion."',
 										idorden_compra_servicio_aporte = '".$idcertificacion_aporte."'
-											where 
+											where
 										idgenerar_nomina = '".$idgenerar_nomina."'");
 			*/
-			$sql_actualizar  = mysql_query("update generar_nomina 
-						   				set estado='procesado', 
+			$sql_actualizar  = mysql_query("update generar_nomina
+						   				set estado='procesado',
 										fecha_procesado = '".date("Y-m-d")."',
 										idorden_compra_servicio_aporte = '".$idcertificacion_aporte."'
-											where 
+											where
 										idgenerar_nomina = '".$idgenerar_nomina."'");
 
-			echo "exito"."|.|".$idcertificacion."|.|".$idcertificacion_aporte;	
-			
+			echo "exito"."|.|".$idcertificacion."|.|".$idcertificacion_aporte;
+
 		}else{
-			if($idcertificacion_aporte == ''){ 
-				$idcertificacion_aporte=0; 
+			if($idcertificacion_aporte == ''){
+				$idcertificacion_aporte=0;
 			}else{
 				$sql_actualizar_certificacion = mysql_query("update orden_compra_servicio
 														set total = sub_total - exento
 														where idorden_compra_servicio = '".$idcertificacion_aporte."'");
 			}
-				
+
 			$sql_actualizar_certificacion = mysql_query("update orden_compra_servicio
 														set total = sub_total - exento
 														where idorden_compra_servicio = '".$idcertificacion."'");
@@ -2388,14 +2388,14 @@ if($ejecutar == "generarNomina") {
 			$sql_actualizar  = mysql_query("update generar_nomina set
 											idorden_compra_servicio = '".$idcertificacion."',
 											idorden_compra_servicio_aporte = '".$idcertificacion_aporte."'
-												where 
+												where
 											idgenerar_nomina = '".$idgenerar_nomina."'");
 			*/
 			$sql_actualizar  = mysql_query("update generar_nomina set
 											idorden_compra_servicio_aporte = '".$idcertificacion_aporte."'
-												where 
+												where
 											idgenerar_nomina = '".$idgenerar_nomina."'");
-			
+
 			echo $idcertificacion."|.|".$idcertificacion_aporte;
 		}
 
@@ -2424,13 +2424,13 @@ if($ejecutar == "procesarCertificacion"){
 
 
 if($ejecutar == "consultarEstadoCertificacion"){
-	$sql_consulta = mysql_query("select * from orden_compra_servicio 
+	$sql_consulta = mysql_query("select * from orden_compra_servicio
 									where idorden_compra_servicio = '".$idorden_compra_servicio."'")or die(mysql_error());
 	$bus_consulta = mysql_fetch_array($sql_consulta)or die(mysql_error());
 
 	$enviar = $bus_consulta["estado"]."|.|".$bus_consulta["numero_orden"];
 	if($idorden_compra_servicio_aporte != 0 && $idorden_compra_servicio_aporte != ''){
-		$sql_consulta = mysql_query("select * from orden_compra_servicio 
+		$sql_consulta = mysql_query("select * from orden_compra_servicio
 									where idorden_compra_servicio = '".$idorden_compra_servicio_aporte."'")or die(mysql_error());
 		$bus_consulta = mysql_fetch_array($sql_consulta)or die(mysql_error());
 		$enviar = $enviar."|.|".$bus_consulta["estado"]."|.|".$bus_consulta["numero_orden"];
@@ -2447,10 +2447,10 @@ if($ejecutar == "consultarEstadoCertificacion"){
 
 
 function procesarCertificacion($id_orden_compra){
-	$sql_compra_servicio = mysql_query("select * 
-											from 
-										orden_compra_servicio 
-											where 
+	$sql_compra_servicio = mysql_query("select *
+											from
+										orden_compra_servicio
+											where
 										idorden_compra_servicio = ".$id_orden_compra."")or die("SELECT DE L ORDEN DE COMPRA: ".mysql_error());
 	$bus_compra_servicio = mysql_fetch_array($sql_compra_servicio);
 
@@ -2493,12 +2493,12 @@ function procesarCertificacion($id_orden_compra){
 		$idcertificacion = mysql_insert_id();
 
 		$sql_actualizar_nomina = mysql_query("update generar_nomina set idorden_compra_servicio_aporte='".$idcertificacion."'
-												where idorden_compra_servicio_aporte ='".$id_orden_compra."'");						
+												where idorden_compra_servicio_aporte ='".$id_orden_compra."'");
 
-		$sql_articulos_compra_servicio = mysql_query("select * 
-														from 
-													articulos_compra_servicio 
-														where 
+		$sql_articulos_compra_servicio = mysql_query("select *
+														from
+													articulos_compra_servicio
+														where
 													idorden_compra_servicio = ".$id_orden_compra."")or die("ERROR EN LA CONSULTA A LOS ARTICULOS: ".mysql_error());
 
 
@@ -2534,22 +2534,22 @@ function procesarCertificacion($id_orden_compra){
 		}
 
 
-		$sql_partidas_compra_servicio = mysql_query("select * 
-														from 
-													partidas_orden_compra_servicio 
-														where 
+		$sql_partidas_compra_servicio = mysql_query("select *
+														from
+													partidas_orden_compra_servicio
+														where
 													idorden_compra_servicio = ".$id_orden_compra."")or die("ERROR EN LA CONSULTA A LOS ARTICULOS: ".mysql_error());
 
 		while($bus_partidas_compra_servicio = mysql_fetch_array($sql_partidas_compra_servicio)){
 
-			$sql_partida = mysql_query("insert into partidas_orden_compra_servicio 
-																			(estado, 
-																				monto, 
+			$sql_partida = mysql_query("insert into partidas_orden_compra_servicio
+																			(estado,
+																				monto,
 																				monto_original,
 																				idmaestro_presupuesto,
 																				idorden_compra_servicio
 																				)VALUES(
-																			'".$bus_partidas_compra_servicio["estado"]."', 
+																			'".$bus_partidas_compra_servicio["estado"]."',
 																			'".$bus_partidas_compra_servicio["monto"]."',
 																			'".$bus_partidas_compra_servicio["monto"]."',
 																			'".$bus_partidas_compra_servicio["idmaestro_presupuesto"]."',
@@ -2560,7 +2560,7 @@ function procesarCertificacion($id_orden_compra){
 
 		$sql_cuentas_contables = mysql_query("select * from tipos_documentos where idtipos_documentos = '".$idtipo_documento."'");
 			$bus_cuentas_contables = mysql_fetch_array($sql_cuentas_contables);
-			
+
 
 
 			if ($bus_cuentas_contables["tabla_debe"] != '' and $bus_cuentas_contables["idcuenta_debe"] != 0 and $bus_cuentas_contables["tabla_haber"] != '' and $bus_cuentas_contables["idcuenta_haber"] != ''){
@@ -2583,7 +2583,7 @@ function procesarCertificacion($id_orden_compra){
 																				'".$login."',
 																				'".date("Y-m-d H:i:s")."',
 																				'2')");
-			
+
 				if($sql_contable){
 					$idasiento_contable = mysql_insert_id();
 					$sql_cuenta_contable_debe = mysql_query("insert into cuentas_asiento_contable (idasiento_contable,
@@ -2612,58 +2612,58 @@ function procesarCertificacion($id_orden_compra){
 	}
 
 
-	$sql_actualizar_compra_servicio = mysql_query("update orden_compra_servicio 
+	$sql_actualizar_compra_servicio = mysql_query("update orden_compra_servicio
 														set exento = 0,
 														sub_total = 0
-														where 
+														where
 							idorden_compra_servicio = ".$id_orden_compra."")or die("ERROR EN LA CONSULTA A LOS ARTICULOS: ".mysql_error());
-																									
-	$sql_partida = mysql_query("update partidas_orden_compra_servicio set  
-														monto = 0 
+
+	$sql_partida = mysql_query("update partidas_orden_compra_servicio set
+														monto = 0
 														where idorden_compra_servicio = '".$id_orden_compra."'")or die("ERROR ACTUALIZANDO LAS PARTIDAS CON SOBREGIRO: ".mysql_error());
-														
+
 	///**********************************************************************************************
-	
-	
-	$sql_articulos_compra_servicio = mysql_query("select * 
-														from 
-													articulos_compra_servicio 
-														where 
+
+
+	$sql_articulos_compra_servicio = mysql_query("select *
+														from
+													articulos_compra_servicio
+														where
 													idorden_compra_servicio = ".$id_orden_compra."")or die("ERROR EN LA CONSULTA A LOS ARTICULOS: ".mysql_error());
-	$sql_compra_servicio = mysql_query("select * 
-											from 
-										orden_compra_servicio 
-											where 
+	$sql_compra_servicio = mysql_query("select *
+											from
+										orden_compra_servicio
+											where
 										idorden_compra_servicio = ".$id_orden_compra."")or die("SELECT DE L ORDEN DE COMPRA: ".mysql_error());
 	$bus_compra_servicio = mysql_fetch_array($sql_compra_servicio);
 	$anio = $bus_compra_servicio["anio"];
 	$idfuente_financiamiento = $bus_compra_servicio["idfuente_financiamiento"];
 	$idtipo_presupuesto = $bus_compra_servicio["idtipo_presupuesto"];
 	$idcentro_costo_fijo = $bus_compra_servicio["idcategoria_programatica"];
-	
+
 	while($bus_articulos_compra_servicio = mysql_fetch_array($sql_articulos_compra_servicio)){
-	
+
 		//*************************************************************************************
-		$sql_articulos_servicios = mysql_query("select * 
-													from 
-												articulos_servicios 
-													where 
+		$sql_articulos_servicios = mysql_query("select *
+													from
+												articulos_servicios
+													where
 												idarticulos_servicios = '".$bus_articulos_compra_servicio["idarticulos_servicios"]."'");
 		$bus_articulos_servicios =  mysql_fetch_array($sql_articulos_servicios);
 		$idordinal = $bus_articulos_servicios["idordinal"];
-		
+
 		$id_clasificador_presupuestario = $bus_articulos_servicios["idclasificador_presupuestario"];
 		if ($idcentro_costo_fijo == 0 or $idcentro_costo_fijo == ''){
 			$id_categoria_programatica = $bus_articulos_compra_servicio["idcategoria_programatica"];
 		}else{
 			$id_categoria_programatica = $idcentro_costo_fijo;
 		}
-		
+
 		$total_articulo_individual = $bus_articulos_compra_servicio["cantidad"] * $bus_articulos_compra_servicio["precio_unitario"];
-		
+
 		if($bus_articulos_servicios["tipo_concepto"] == 1){
 			$monto_total = $total_articulo_individual;
-			$exento = 0; 
+			$exento = 0;
 		}else if($bus_articulos_servicios["tipo_concepto"] == 3){
 			$monto_total = 0;
 			$exento = 0;
@@ -2674,162 +2674,162 @@ function procesarCertificacion($id_orden_compra){
 			$monto_total = 0;
 			$exento = $total_articulo_individual;
 		}
-	
-	
-	
-			$sql_actualizar_compra_servicio = mysql_query("update orden_compra_servicio 
+
+
+
+			$sql_actualizar_compra_servicio = mysql_query("update orden_compra_servicio
 														set exento = exento + '".$exento."',
 														sub_total = sub_total + '".$monto_total."'
-														where 
+														where
 													idorden_compra_servicio = ".$id_orden_compra."")or die("ERROR EN LA CONSULTA A LOS ARTICULOS: ".mysql_error());
-			
+
 
 			$sql_validar_asiento = mysql_query("select * from asiento_contable where iddocumento = ".$id_orden_compra."
 														and tipo_movimiento = 'compromiso'");
 				if (mysql_num_rows($sql_validar_asiento) > 0){
-					
+
 					$bus_asiento_contable = mysql_fetch_array($sql_validar_asiento);
-			
+
 					$sql_cuentas_contables = mysql_query("select * from cuentas_asiento_contable where idasiento_contable = '".$bus_asiento_contable["idasiento_contable"]."'
-																order by afecta");	
-																
+																order by afecta");
+
 					while ($bus_cuentas_contables = mysql_fetch_array($sql_cuentas_contables)){
 						$actualizar_cuentas = mysql_query("update cuentas_asiento_contable set monto = monto + '".$monto_total."'
 																		where idcuentas_asiento_contable = '".$bus_cuentas_contables["idcuentas_asiento_contable"]."'");
 					}
 				}
-			
-			
+
+
 			//echo $bus_articulos_comora_servicio["idarticulos_compra_servicio"];
-			
-			/*										
-			$sql2 = mysql_query("update articulos_compra_servicio set total = '".$monto_total."', 
+
+			/*
+			$sql2 = mysql_query("update articulos_compra_servicio set total = '".$monto_total."',
 									  exento = '".$exento."',
-									  precio_unitario = '".$bus_articulos_compra_servicio["precio_unitario"]."', 
+									  precio_unitario = '".$bus_articulos_compra_servicio["precio_unitario"]."',
 									  cantidad = ".$bus_articulos_compra_servicio["cantidad"]."
-									  where 
+									  where
 									  idarticulos_compra_servicio = ".$bus_articulos_compra_servicio["idarticulos_compra_servicio"]."")
 									  or die("error update articulos".mysql_error());
 			*/
-		
+
 			// CONSULTA DEL TOTAL DISPONIBLE EN EL PRESUPUESTO PARA SABER SI EL PRODUCTO PUEE SER PROCESADO O RECHAZADO POR FALTA DE DISPONIBILIDAD PRESUPUESTARIA
-			$sql = mysql_query("select * from articulos_compra_servicio 
-									where idarticulos_compra_servicio = ".$bus_articulos_compra_servicio["idarticulos_compra_servicio"]." 
+			$sql = mysql_query("select * from articulos_compra_servicio
+									where idarticulos_compra_servicio = ".$bus_articulos_compra_servicio["idarticulos_compra_servicio"]."
 									")or die("error todos los articulos".mysql_error());
 			$bus = mysql_fetch_array($sql);
-			
-		if($bus_articulos_servicios["tipo_concepto"] == 1 || $bus_articulos_servicios["tipo_concepto"] == 4){	
-			
-				$total_imputable = $monto_total;				
+
+		if($bus_articulos_servicios["tipo_concepto"] == 1 || $bus_articulos_servicios["tipo_concepto"] == 4){
+
+				$total_imputable = $monto_total;
 				//$total_imputable = $total_imputable+$total_impuesto;
-//*********************************************************************************				
+//*********************************************************************************
 				//echo "año ".$anio." categoria ".$id_categoria_programatica." clasificadr ".$id_clasificador_presupuestario." fuente ".$idfuente_financiamiento." tipo ".$idtipo_presupuesto." ordinal ".$idordinal;
-				
-				$sql_maestro = mysql_query("select * from maestro_presupuesto where anio = '".$anio."' 
-												and idcategoria_programatica = '".$id_categoria_programatica."' 
+
+				$sql_maestro = mysql_query("select * from maestro_presupuesto where anio = '".$anio."'
+												and idcategoria_programatica = '".$id_categoria_programatica."'
 												and idclasificador_presupuestario = '".$id_clasificador_presupuestario."'
 												and idfuente_financiamiento = '".$idfuente_financiamiento."'
 												and idtipo_presupuesto = '".$idtipo_presupuesto."'
 												and idordinal = '".$idordinal."'")
 												or die("ERROR SELECCIONANDO EL MAESTRO PARA LOS IMPUESTOS: ".mysql_error());
-				
+
 				$bus_maestro = mysql_fetch_array($sql_maestro);
-				
+
 				$disponible = consultarDisponibilidad($bus_maestro["idRegistro"]);
 				//echo "disponible ....".$bus_maestro["idRegistro"];
 				if($total_imputable > $disponible){
-														
-					$sql_partida = mysql_query("update partidas_orden_compra_servicio set estado = 'sobregiro', 
-														monto = monto + '".$monto_total."' 
+
+					$sql_partida = mysql_query("update partidas_orden_compra_servicio set estado = 'sobregiro',
+														monto = monto + '".$monto_total."'
 														where idorden_compra_servicio = ".$id_orden_compra."
 														and idmaestro_presupuesto = '".$bus_maestro["idRegistro"]."'")
 														or die("ERROR ACTUALIZANDO LAS PARTIDAS CON SOBREGIRO: ".mysql_error());
 					$estado = "sin disponibilidad";
 				}else{
-					$sql_partida = mysql_query("update partidas_orden_compra_servicio set estado = 'disponible', 
-									monto = monto + '".$monto_total."' 
+					$sql_partida = mysql_query("update partidas_orden_compra_servicio set estado = 'disponible',
+									monto = monto + '".$monto_total."'
 									where idorden_compra_servicio = ".$id_orden_compra."
 									and idmaestro_presupuesto = ".$bus_maestro["idRegistro"]."")
 									or die("ERROR ACTUALIZANDO LAS PARTIDAS DISPONIBLES: ".mysql_error());
-				
+
 					$estado = "aprobado";
-					
+
 				}
 				//echo $bus_maestro["idRegistro"]." ".$estado;
-			
+
 		}else{
 			$estado = "aprobado";
 		}
-			// CONSULTA DEL TOTAL DISPONIBLE EN EL PRESUPUESTO PARA SABER SI EL PRODUCTO PUEE SER PROCESADO O RECHAZADO POR FALTA DE DISPONIBILIDAD PRESUPUESTARIA		
-				
-		$sql2 = mysql_query("update articulos_compra_servicio set estado = '".$estado."' 
+			// CONSULTA DEL TOTAL DISPONIBLE EN EL PRESUPUESTO PARA SABER SI EL PRODUCTO PUEE SER PROCESADO O RECHAZADO POR FALTA DE DISPONIBILIDAD PRESUPUESTARIA
+
+		$sql2 = mysql_query("update articulos_compra_servicio set estado = '".$estado."'
 								where idarticulos_compra_servicio = ".$bus_articulos_compra_servicio["idarticulos_compra_servicio"]."")
 								or die("ERRO ACTUALIZANDO EL ESTADO DE LOS ARTICULOS: ".mysql_error());
-			
-	
+
+
 	//*****************************************************************************************
 	}// CIERRE DEL WHILE DE CONSULTA DE LOS ARTICULOS DE LA ORDEN
 
 
-	$sql_actualizar_compra_servicio = mysql_query("update orden_compra_servicio 
+	$sql_actualizar_compra_servicio = mysql_query("update orden_compra_servicio
 														set total = sub_total - exento
-														where 
+														where
 													idorden_compra_servicio = ".$id_orden_compra."")
 													or die("ERROR EN LA CONSULTA A LOS ARTICULOS: ".mysql_error());
 
 
-	$sql_articulos = mysql_query("select * from articulos_compra_servicio 
+	$sql_articulos = mysql_query("select * from articulos_compra_servicio
 												where idorden_compra_servicio = ".$id_orden_compra."")
 												or die("ERROR SELECCIONANDO LOS ARTICULOS: ".mysql_error());
 	$num_articulos = mysql_num_rows($sql_articulos);
-	
+
 	if($num_articulos != 0){
 		$sql_orden_duplicados = mysql_query("select * from orden_compra_servicio where idorden_compra_servicio = ".$id_orden_compra."");
 		$bus_orden_duplicados = mysql_fetch_array($sql_orden_duplicados);
 		if($bus_orden_duplicados["duplicados"] == 0){
-			$sql_articulos = mysql_query("select * from articulos_compra_servicio 
-													where idorden_compra_servicio = ".$id_orden_compra." 
+			$sql_articulos = mysql_query("select * from articulos_compra_servicio
+													where idorden_compra_servicio = ".$id_orden_compra."
 													and (estado = 'rechazado' or estado = 'sin disponibilidad')")
 													or die("ERROR SELECCIONANDO ARTICULOS COMPRA SERVICIOS: ".mysql_error());
 		$num_articulos = mysql_num_rows($sql_articulos);
-		
+
 		if($num_articulos == 0){
-			$sql_impuestos = mysql_query("select * from relacion_impuestos_ordenes_compras where 
-														idorden_compra_servicio = ".$id_orden_compra." 
+			$sql_impuestos = mysql_query("select * from relacion_impuestos_ordenes_compras where
+														idorden_compra_servicio = ".$id_orden_compra."
 														and (estado = 'rechazado' or estado = 'sin disponibilidad')")
 												or die("ERROR SELECCIONANDO LA RELACION DE IMPUESTOS ORDENES COMPRAS: ".mysql_error());
 			$num_impuestos = mysql_num_rows($sql_impuestos);
-			
+
 			if($num_impuestos == 0){
 				$sql_actualizar_partidas = mysql_query("select * from partidas_orden_compra_servicio where idorden_compra_servicio = ".$id_orden_compra."")or die("ERROR SELECCIONANDO LAS PARTIDAS DE LA ORDEN DE COMPRAS: ".mysql_error());
 				while($bus_actualizar_partidas = mysql_fetch_array($sql_actualizar_partidas)){
-				
-					$sql_maestro = mysql_query("update maestro_presupuesto set 
+
+					$sql_maestro = mysql_query("update maestro_presupuesto set
 															total_compromisos = total_compromisos + ".$bus_actualizar_partidas["monto"]."
 															where idRegistro = ".$bus_actualizar_partidas["idmaestro_presupuesto"]."")or die("ERROR ACTUALIZANDO EL MAESTRO DE PRESUPUESTO: ".mysql_error());
-															
+
 					$sql_consulta_ordinal = mysql_query("select * from ordinal where codigo = '0000'")or die("ERROR CONSULTANDO EL ORDINAL NO APLICA".mysql_error());
 					$bus_consulta_ordinal = mysql_fetch_array($sql_consulta_ordinal);
-					
+
 					$sql_consultar_maestro = mysql_query("select * from maestro_presupuesto where idRegistro = '".$bus_actualizar_partidas["idmaestro_presupuesto"]."' and idordinal != '".$bus_consulta_ordinal["idordinal"]."'")or die("ERROR CONSULTANDO EL MAESTRO 1:".mysql_error());
 					$num_consulta_maestro = mysql_num_rows($sql_consultar_maestro);
 					if($num_consulta_maestro != 0){
 						$bus_consultar_maestro= mysql_fetch_array($sql_consultar_maestro);
-						$sql_sub_espe = mysql_query("select * from maestro_presupuesto where 
+						$sql_sub_espe = mysql_query("select * from maestro_presupuesto where
 							idcategoria_programatica= '".$bus_consultar_maestro["idcategoria_programatica"]."'
 						and idtipo_presupuesto = '".$bus_consultar_maestro["idtipo_presupuesto"]."'
 						and idfuente_financiamiento = '".$bus_consultar_maestro["idfuente_financiamiento"]."'
 						and idclasificador_presupuestario = '".$bus_consultar_maestro["idclasificador_presupuestario"]."'
-						and idordinal = '".$bus_consulta_ordinal["idordinal"]."'")or die("ERROR CONSULTANDO SUB ESPECIFICA".mysql_error());    
+						and idordinal = '".$bus_consulta_ordinal["idordinal"]."'")or die("ERROR CONSULTANDO SUB ESPECIFICA".mysql_error());
 						$num_sub_espe =mysql_num_rows($sql_sub_espe);
 						if($num_sub_espe != 0){
 							$bus_sub_epe = mysql_fetch_array($sql_sub_espe);
-							$sql_maestro = mysql_query("update maestro_presupuesto set 
+							$sql_maestro = mysql_query("update maestro_presupuesto set
 															total_compromisos = total_compromisos + ".$bus_actualizar_partidas["monto"]."
 															where idRegistro = '".$bus_sub_epe["idmaestro_presupuesto"]."'")or die("ERROR ACTUALIZANDO EL MAESTRO DE PRESUPUESTO 2: ".mysql_error());
-							
+
 						}
-						
+
 						$sql_clasificador = mysql_query("select * from clasificador_presupuestario where idclasificador_presupuestario = '".$bus_consultar_maestro["idclasificador_presupuestario"]."' and sub_especifica != '00'")or die("ERROR CONSULTANDO EL CLASIFICADOR ".mysql_error());
 						$num_clasificador = mysql_num_rows($sql_clasificador);
 						if($num_clasificador > 0){
@@ -2839,40 +2839,40 @@ function procesarCertificacion($id_orden_compra){
 							and especifica ='".$bus_clasificador["especifica"]."'
 							and sub_especifica= '00'")or die("ERROR CONSULTANDO EL CLASIFICADOR 2:".mysql_error());
 							$bus_consulta_clasificador= mysql_fetch_array($sql_consulta_clasificador);
-							$sql_id_maestro= mysql_query("select * from maestro_presupuesto where 
+							$sql_id_maestro= mysql_query("select * from maestro_presupuesto where
 								idcategoria_programatica= '".$bus_consultar_maestro["idcategoria_programatica"]."'
 								and idtipo_presupuesto = '".$bus_consultar_maestro["idtipo_presupuesto"]."'
 								and idfuente_financiamiento = '".$bus_consultar_maestro["idfuente_financiamiento"]."'
 								and idclasificador_presupuestario = '".$bus_consulta_clasificador["idclasificador_presupuestario"]."'
 								and idordinal = '".$bus_consulta_ordinal["idordinal"]."'
 								and anio = '".$bus_consultar_maestro["anio"]."'")or die("ERROR CONSULTANDO EL MAESTRO 2:".mysql_error());
-							
+
 							$bus_id_maestro = mysql_fetch_array($sql_id_maestro)or die("ERROR EN CONSULTA".mysql_error());
-							
-							$sql_maestro = mysql_query("update maestro_presupuesto set 
+
+							$sql_maestro = mysql_query("update maestro_presupuesto set
 															total_compromisos = total_compromisos + ".$bus_actualizar_partidas["monto"]."
 															where idRegistro = '".$bus_id_maestro["idmaestro_presupuesto"]."'")or die("ERROR ACTUALIZANDO EL MAESTRO DE PRESUPUESTO 3: ".$sql_id_maestro." ".mysql_error());
-							
+
 						}
-						
+
 					}
-					
+
 
 				}
-					
+
 				$sql_orden = mysql_query("select * from orden_compra_servicio where idorden_compra_servicio = ".$id_orden_compra."")or die("ERROR SELECCIONANDO LA ORDEN DE COMPRA: ".mysql_error());
 				$bus_orden = mysql_fetch_array($sql_orden);
 				$tipo_orden = $bus_orden["tipo"];
-			
+
 				$sql_configuracion = mysql_query("select * from configuracion");
 				$bus_configuracion = mysql_fetch_array($sql_configuracion);
 				$anio_fiscal = $bus_configuracion["anio_fiscal"];
-				
-				
+
+
 				$sql_nro_orden = mysql_query("select * from tipos_documentos where idtipos_documentos = ".$tipo_orden."");
 				$bus_nro_orden = mysql_fetch_array($sql_nro_orden);
-				
-				
+
+
 				if($bus_nro_orden["documento_asociado"] != 0){
 						$sql_documento_asociado = mysql_query("select * from tipos_documentos where idtipos_documentos = ".$bus_nro_orden["documento_asociado"]."");
 						$bus_documento_asociado = mysql_fetch_array($sql_documento_asociado);
@@ -2887,12 +2887,12 @@ function procesarCertificacion($id_orden_compra){
 
 					$sql_existe_numero = mysql_query("select * from orden_compra_servicio where numero_orden = '".$codigo_orden."'")or die("cero".mysql_error());
 					$bus_existe = mysql_num_rows($sql_existe_numero);
-					
+
 					while ($bus_existe > 0){
 						$sql_actualizar_numero = mysql_query("update tipos_documentos set nro_contador = nro_contador + 1 where idtipos_documentos = ".$id_a_actualizar."")or die("uno".mysql_error());
-						
 
-		
+
+
 						$sql_nro_orden = mysql_query("select * from tipos_documentos where idtipos_documentos = ".$tipo_orden."");
 						$bus_nro_orden = mysql_fetch_array($sql_nro_orden);
 							if($bus_nro_orden["documento_asociado"] != 0){
@@ -2906,71 +2906,71 @@ function procesarCertificacion($id_orden_compra){
 								$codigo_orden = $bus_nro_orden["siglas"]."-".$anio_fiscal."-".$bus_nro_orden["nro_contador"];
 								$nro_orden_pago = $bus_nro_orden["nro_contador"];
 							}
-						
-						
+
+
 						$sql_existe_numero = mysql_query("select * from orden_compra_servicio where numero_orden = '".$codigo_orden."'")or die("cero".mysql_error());
 						$bus_existe = mysql_num_rows($sql_existe_numero);
 					}
-				
-				
-				
+
+
+
 				// ACA SE GENERA EL NUMERO DE CONTROL DE LA ORDEN DE COMPRA
 
 
 				$codigo_referencia = 90000000000+$nro_orden_compra;
-				
-				$sql_actualizar_orden = mysql_query("update orden_compra_servicio set estado = 'procesado', 
+
+				$sql_actualizar_orden = mysql_query("update orden_compra_servicio set estado = 'procesado',
 														numero_orden = '".$codigo_orden."',
 														fecha_orden = '".date("Y-m-d")."',
 														codigo_referencia = '".$codigo_referencia."'
 													where idorden_compra_servicio = ".$id_orden_compra."")
 													or die("error".mysql_error());
-				
-				
-				
-				
-				
+
+
+
+
+
 			//	echo "select * from relacion_compra_requisicion where idorden_compra = ".$id_orden_compra."";
 				$sql_relacion_compra_requisicion = mysql_query("select * from relacion_compra_requisicion where idorden_compra = ".$id_orden_compra."")or die("ERROR EN EL SELECT ".mysql_error());
-				
+
 				while ($bus_relacion_compra_requisicion = mysql_fetch_array($sql_relacion_compra_requisicion))
 				{
 				//echo "update requisicion set estado = 'ordenado' where idrequisicion = ".$bus_relacion_compra_requisicion["idrequisicion"]."";
 					$sql_actualizar_requisicion = mysql_query("update requisicion set estado = 'ordenado' where idrequisicion = ".$bus_relacion_compra_requisicion["idrequisicion"]."")or die("ERROR EN EL UPDATE".mysql_error());
-				}			
-				
-				
-				
+				}
+
+
+
 				$sql_relacion_compra_solicitud = mysql_query("select * from relacion_compra_solicitud_cotizacion where idorden_compra = ".$id_orden_compra."");
-				
+
 				while ($bus_relacion_compra_solicitud = mysql_fetch_array($sql_relacion_compra_solicitud))
 				{
-					$sql_actualizar_solicitud = mysql_query("update solicitud_cotizacion set estado = 'ordenado', 
-																						nro_orden = '".$codigo_orden."' 
+					$sql_actualizar_solicitud = mysql_query("update solicitud_cotizacion set estado = 'ordenado',
+																						nro_orden = '".$codigo_orden."'
 																					where idsolicitud_cotizacion = ".$bus_relacion_compra_solicitud["idsolicitud_cotizacion"]."");
 				}
-				
+
 				$sql_relacion_compra_requisicion = mysql_query("select * from relacion_compra_requisicion where idorden_compra = ".$id_orden_compra."");
-				
+
 				while ($bus_relacion_compra_requisicion = mysql_fetch_array($sql_relacion_compra_requisicion))
 				{
-					$sql_actualizar_requisicion = mysql_query("update requisicion set estado = 'ordenado', 
-																						nro_orden = '".$codigo_orden."' 
+					$sql_actualizar_requisicion = mysql_query("update requisicion set estado = 'ordenado',
+																						nro_orden = '".$codigo_orden."'
 																					where idrequisicion = ".$bus_relacion_compra_requisicion["idrequision"]."");
-				}	
-					
+				}
+
 				//ACTUALIZAR ASIENTO CONTABLE
-				
+
 				$sql_validar_asiento = mysql_query("select * from asiento_contable where iddocumento = ".$id_orden_compra."
 														and tipo_movimiento = 'compromiso'");
-				if (mysql_num_rows($sql_validar_asiento) > 0){	
+				if (mysql_num_rows($sql_validar_asiento) > 0){
 					$sql_asiento_contable = mysql_query("update asiento_contable set estado = 'procesado',
 																fecha_contable = '".date("Y-m-d")."'
 											 where iddocumento = '".$id_orden_compra."'
 											 		and tipo_movimiento = 'compromiso'")or die("error".mysql_error());
-				}	
-					
-					
+				}
+
+
 				// ACTUALIZAR EL ULTIMO COSTO DE LOS PRODUCTOS
 				$sql_select_articulos_compra = mysql_query("select * from articulos_compra_servicio where idorden_compra_servicio = '".$id_orden_compra."'");
 				while($bus_select_articulos_compra = mysql_fetch_array($sql_select_articulos_compra)){
@@ -2983,13 +2983,13 @@ function procesarCertificacion($id_orden_compra){
 						}else{
 							$costo_promedio = ($costo_actual+$ultimo_costo)/2;
 						}
-					
+
 					$sql_actualizar_articulo = mysql_query("update articulos_servicios set ultimo_costo = '".$costo_actual."',
 													costo_promedio = '".$costo_promedio."',
-													fecha_ultima_compra = '".date("Y-m-d")."' 
+													fecha_ultima_compra = '".date("Y-m-d")."'
 													where idarticulos_servicios = '".$bus_select_articulos_compra["idarticulos_servicios"]."'");
 				}
-				
+
 
 				if($sql_actualizar_orden){
 					$sql_actualizar_numero = mysql_query("update tipos_documentos set nro_contador = nro_contador + 1 where idtipos_documentos = ".$tipo_orden."")or die("uno".mysql_error());
@@ -3010,7 +3010,7 @@ function procesarCertificacion($id_orden_compra){
 	}else{
 		return "sinMateriales";
 	}
-	
+
 }
 
 
@@ -3026,90 +3026,90 @@ function actualizarPrecioCantidad($id_articulo, $id_orden_compra, $id_categoria_
 
 	$sql_articulos_servicios = mysql_query("select * from articulos_servicios where idarticulos_servicios = '".$id_articulo."'")or die("XXXX".mysql_error());
 	$bus_articulos_servicios = mysql_fetch_array($sql_articulos_servicios);
-	
+
 	//ACTUALIZO EL MATERIAL DE LA CERTIFICACION DE ASIGNACIONES Y DEDUCCIONES
 	if ($bus_articulos_servicios["tipo_concepto"] == 1 || $bus_articulos_servicios["tipo_concepto"] == 2) {
-	
+
 		$sql_actualizar = mysql_query("update articulos_compra_servicio set
 													total = total + ".$precio.",
 													precio_unitario = precio_unitario + ".$precio."
-													where 
+													where
 													idarticulos_compra_servicio = '".$id_articulo_compra."'
 													and idorden_compra_servicio = '".$id_orden_compra."'")or die("ALLA".mysql_error());
-		
+
 		//$idordinal = $bus_articulos_servicios["idordinal"];
-		
-		
+
+
 		$sql_articulos_compra_servicio = mysql_query("select * from articulos_compra_servicio where idarticulos_compra_servicio = '".$id_articulo_compra."'")or die("FFFF".mysql_error());
 		$bus_articulos_compra_servicio = mysql_fetch_array($sql_articulos_compra_servicio);
-		
+
 		//$id_categoria_programatica = $id_categoria_programatica;
 		//$id_clasificador_presupuestario = $bus_articulos_servicios["idclasificador_presupuestario"];
 		//echo $id_clasificador_presupuestario;
-		
+
 		if($cantidad != 0){
-			$total_articulo_individual = $cantidad * $precio;	
+			$total_articulo_individual = $cantidad * $precio;
 		}else{
-			$total_articulo_individual = $precio;	
+			$total_articulo_individual = $precio;
 		}
-		
+
 //			echo "TOTAL ARTICULO INDIVIDUAL: ".$total_articulo_individual;
-		
+
 		//echo "TIPO CONCEPTO: ".$bus_articulos_servicios["tipo_concepto"]."<br />";
 		if($bus_articulos_servicios["tipo_concepto"] == 1){
-			
+
 			$monto_total = $total_articulo_individual;
-			$t_exento = 0; 
+			$t_exento = 0;
 		}else{
 			$monto_total = 0;
 			$t_exento = $total_articulo_individual;
 		}
-					
+
 		// busco el precio y la cantidad anteriores para restarsela a los totales
 		$sql_orden_compra_viejo = mysql_query("select * from orden_compra_servicio where idorden_compra_servicio = '".$id_orden_compra."'")or die("TTTTT".mysql_error());
 		$bus_orden_compra_viejo = mysql_fetch_array($sql_orden_compra_viejo);
-	
+
 		$exento_viejo = $bus_orden_compra_viejo["exento"];
 		$sub_total_viejo = $bus_orden_compra_viejo["sub_total"];
-		
-	
+
+
 		// ACTUALIZO LOS TOTALES EN LA TABLA ORDEN_COMPRA_SERVICIO
 		$total_anterior = $sub_total_viejo - $exento_viejo;
 		$total_nuevo = $monto_total - $exento;
-		$sql_actualiza_totales = mysql_query("update orden_compra_servicio set 
+		$sql_actualiza_totales = mysql_query("update orden_compra_servicio set
 													sub_total = sub_total  + '".$monto_total."',
 													exento = exento + '".$t_exento."',
 													total = total + '".$total_nuevo."'
 													where idorden_compra_servicio=".$id_orden_compra." ")or die("4: ".mysql_error());
-		
-		
+
+
 		$sql_validar_asiento = mysql_query("select * from asiento_contable where iddocumento = ".$id_orden_compra."
 													and tipo_movimiento = 'compromiso'")or die(mysql_error());
 		if (mysql_num_rows($sql_validar_asiento) > 0){
-			
+
 			$bus_asiento_contable = mysql_fetch_array($sql_validar_asiento);
-	
+
 			$sql_cuentas_contables = mysql_query("select * from cuentas_asiento_contable where idasiento_contable = '".$bus_asiento_contable["idasiento_contable"]."'
-														order by afecta")or die(" uno ".mysql_error());	
-														
+														order by afecta")or die(" uno ".mysql_error());
+
 			while ($bus_cuentas_contables = mysql_fetch_array($sql_cuentas_contables)){
 				//echo " actualizar precio monto ".$monto_total;
 				$actualizar_cuentas = mysql_query("update cuentas_asiento_contable set monto = monto + '".$monto_total."'
 																where idcuentas_asiento_contable = '".$bus_cuentas_contables["idcuentas_asiento_contable"]."'")or die("dos ".mysql_error());
 			}
-		}			
-		
-		
+		}
+
+
 		// CONSULTA DEL TOTAL DISPONIBLE EN EL PRESUPUESTO PARA SABER SI EL PRODUCTO PUEE SER PROCESADO O RECHAZADO POR FALTA DE DISPONIBILIDAD PRESUPUESTARIA
-		
-		
-		$sql = mysql_query("select * from articulos_compra_servicio where 
+
+
+		$sql = mysql_query("select * from articulos_compra_servicio where
 												idarticulos_compra_servicio = '".$id_articulo_compra."'")or die("5: ".mysql_error());
 		$bus = mysql_fetch_array($sql);
-		
+
 		// en cualquiera de Estos estados el articulo tiene partida en el maestro
-		if($bus["estado"] == "aprobado" || $bus["estado"] == "sin disponibilidad"){ 
-			$sql_compra_servicio = mysql_query("select * from orden_compra_servicio where 
+		if($bus["estado"] == "aprobado" || $bus["estado"] == "sin disponibilidad"){
+			$sql_compra_servicio = mysql_query("select * from orden_compra_servicio where
 												idorden_compra_servicio = '".$id_orden_compra."'")or die("6: ".mysql_error());
 			$bus_compra_servicio = mysql_fetch_array($sql_compra_servicio);
 			//echo "ID: ".$bus_compra_servicio["idcategoria_programatica"]." ";
@@ -3117,7 +3117,7 @@ function actualizarPrecioCantidad($id_articulo, $id_orden_compra, $id_categoria_
 			$partida_impuestos = 0;
 
 			$sql_imputable = mysql_query("select precio_unitario from articulos_compra_servicio where idarticulos_compra_servicio = '".$id_articulo_compra."'")or die("12: ".mysql_error());
-										
+
 			$bus_imputable = mysql_fetch_array($sql_imputable);
 			$suma_partida = $bus_imputable["precio_unitario"];
 			//echo "TOTAL: ".$total_imputable. "ID ";
@@ -3128,8 +3128,8 @@ function actualizarPrecioCantidad($id_articulo, $id_orden_compra, $id_categoria_
 			if($bus_articulos_servicios["tipo_concepto"] == 1){
 
 
-				$sql_maestro = mysql_query("select * from maestro_presupuesto where anio = '".$anio."' 
-												and idcategoria_programatica = '".$id_categoria_programatica."' 
+				$sql_maestro = mysql_query("select * from maestro_presupuesto where anio = '".$anio."'
+												and idcategoria_programatica = '".$id_categoria_programatica."'
 												and idclasificador_presupuestario = '".$id_clasificador_presupuestario."'
 												and idfuente_financiamiento = '".$fuente_financiamiento."'
 												and idtipo_presupuesto = '".$tipo_presupuesto."'
@@ -3140,63 +3140,63 @@ function actualizarPrecioCantidad($id_articulo, $id_orden_compra, $id_categoria_
 				if($existe_maestro<=0){
 					$estado = "rechazado";
 				}else{
-				
+
 					$sql_consultar_existe = mysql_query("select * from partidas_orden_compra_servicio where idmaestro_presupuesto = '".$bus_maestro["idRegistro"]."' and idorden_compra_servicio = '".$id_orden_compra."'");
 					$num_consultar_existe = mysql_num_rows($sql_consultar_existe);
 					$disponible = $bus_maestro["monto_actual"]-$bus_maestro["total_compromisos"];
 					//$disponible = consultarDisponibilidad($bus_maestro["idRegistro"]);
-					
-					
+
+
 					if($num_consultar_existe > 0){
 						if($suma_partida > $disponible){
-							$sql_partida = mysql_query("update partidas_orden_compra_servicio set estado = 'sobregiro', 
+							$sql_partida = mysql_query("update partidas_orden_compra_servicio set estado = 'sobregiro',
 																	monto = monto + '".$precio."',
-																	monto_original = monto_original + '".$precio."' 
-																	where 
+																	monto_original = monto_original + '".$precio."'
+																	where
 																	idorden_compra_servicio = '".$id_orden_compra."'
 																	and idmaestro_presupuesto = '".$bus_maestro["idRegistro"]."'")or die("15: ".mysql_error());
 							$estado = "sin disponibilidad";
-							
+
 						}else{
 							//echo "PRUEBA: ".$bus_maestro["idRegistro"]." ------ ";
-							$sql_partida = mysql_query("update partidas_orden_compra_servicio set estado = 'disponible', 
+							$sql_partida = mysql_query("update partidas_orden_compra_servicio set estado = 'disponible',
 															monto = monto + '".$precio."',
-															monto_original = monto_original + '".$precio."' 
-															where 
+															monto_original = monto_original + '".$precio."'
+															where
 															idorden_compra_servicio = ".$id_orden_compra."
 															and idmaestro_presupuesto = '".$bus_maestro["idRegistro"]."'")or die("16: ".mysql_error());
-						
-						
+
+
 							$estado = "aprobado";
 						}
 					}else{
 						if($suma_partida > $disponible){
-							$es = "sobregiro";	
+							$es = "sobregiro";
 							$estado = "sin disponibilidad";
 						}else{
 							$es = "disponible";
 							$estado = "aprobado";
-						}	
+						}
 
 						if($total_articulo_individual != 0){
 						//echo "entro aqui";
-							$sql_partida = mysql_query("insert into partidas_orden_compra_servicio 
-																			(estado, 
-																				monto, 
+							$sql_partida = mysql_query("insert into partidas_orden_compra_servicio
+																			(estado,
+																				monto,
 																				monto_original,
 																				idmaestro_presupuesto,
 																				idorden_compra_servicio
 																				)VALUES(
-																			'".$es."', 
+																			'".$es."',
 																			'".$precio."',
 																			'".$precio."',
 																			'".$bus_maestro["idRegistro"]."',
-																			'".$id_orden_compra."')")or die("15: ".mysql_error());		
+																			'".$id_orden_compra."')")or die("15: ".mysql_error());
 						}
 
 					}
-					
-									
+
+
 				}//else{
 					//echo "ALLA";
 					//$estado = "aprobado";
@@ -3210,12 +3210,12 @@ function actualizarPrecioCantidad($id_articulo, $id_orden_compra, $id_categoria_
 				$estado = "aprobado";
 			}
 		}
-		
-			// CONSULTA DEL TOTAL DISPONIBLE EN EL PRESUPUESTO PARA SABER SI EL PRODUCTO PUEE SER PROCESADO O RECHAZADO POR FALTA DE DISPONIBILIDAD PRESUPUESTARIA		
-			
-			$sql2 = mysql_query("update articulos_compra_servicio set estado = '".$estado."' 
+
+			// CONSULTA DEL TOTAL DISPONIBLE EN EL PRESUPUESTO PARA SABER SI EL PRODUCTO PUEE SER PROCESADO O RECHAZADO POR FALTA DE DISPONIBILIDAD PRESUPUESTARIA
+
+			$sql2 = mysql_query("update articulos_compra_servicio set estado = '".$estado."'
 																where idarticulos_compra_servicio = '".$id_articulo_compra."'")or die("17: ".mysql_error());
-			
+
 		if($sql2){
 				//registra_transaccion("Actualizar Precio Cantidad de Orden de Compra (".$id_articulo_compra.")",$login,$fh,$pc,'orden_compra_servicios');
 
@@ -3226,91 +3226,91 @@ function actualizarPrecioCantidad($id_articulo, $id_orden_compra, $id_categoria_
 				//echo $sql2." MYSQL ERROR: ".mysql_error();
 		}
 	}
-	
-	
+
+
 	//ACTUALIZO EL MATERIAL DE LA CERTIFICACION DE APORTES
 	if ($bus_articulos_servicios["tipo_concepto"] == 4) {
-	
+
 		$sql_actualizar = mysql_query("update articulos_compra_servicio set
 													total = total + ".$precio.",
 													precio_unitario = precio_unitario + ".$precio."
-													where 
+													where
 													idarticulos_compra_servicio = '".$id_articulo_compra."'
 													and idorden_compra_servicio = '".$idcertificacion_aporte."'")or die("ALLA".mysql_error());
-		
+
 		//$idordinal = $bus_articulos_servicios["idordinal"];
-		
-		
+
+
 		$sql_articulos_compra_servicio = mysql_query("select * from articulos_compra_servicio where idarticulos_compra_servicio = '".$id_articulo_compra."'")or die("FFFF".mysql_error());
 		$bus_articulos_compra_servicio = mysql_fetch_array($sql_articulos_compra_servicio);
-		
+
 		$id_categoria_programatica = $id_categoria_programatica;
 		//$id_clasificador_presupuestario = $bus_articulos_servicios["idclasificador_presupuestario"];
 		//echo $id_clasificador_presupuestario;
-		
+
 		if($cantidad != 0){
-			$total_articulo_individual = $cantidad * $precio;	
+			$total_articulo_individual = $cantidad * $precio;
 		}else{
-			$total_articulo_individual = $precio;	
+			$total_articulo_individual = $precio;
 		}
-		
+
 //			echo "TOTAL ARTICULO INDIVIDUAL: ".$total_articulo_individual;
-		
+
 		//echo "TIPO CONCEPTO: ".$bus_articulos_servicios["tipo_concepto"]."<br />";
 		if($bus_articulos_servicios["tipo_concepto"] == 4){
-			
+
 			$monto_total = $total_articulo_individual;
-			$t_exento = 0; 
+			$t_exento = 0;
 		}else{
 			$monto_total = 0;
 			$t_exento = $total_articulo_individual;
 		}
-					
+
 		// busco el precio y la cantidad anteriores para restarsela a los totales
 		$sql_orden_compra_viejo = mysql_query("select * from orden_compra_servicio where idorden_compra_servicio = '".$idcertificacion_aporte."'")or die("TTTTT".mysql_error());
 		$bus_orden_compra_viejo = mysql_fetch_array($sql_orden_compra_viejo);
-	
+
 		$exento_viejo = $bus_orden_compra_viejo["exento"];
 		$sub_total_viejo = $bus_orden_compra_viejo["sub_total"];
-		
-	
+
+
 		// ACTUALIZO LOS TOTALES EN LA TABLA ORDEN_COMPRA_SERVICIO
 		$total_anterior = $sub_total_viejo - $exento_viejo;
 		$total_nuevo = $monto_total - $exento;
-		$sql_actualiza_totales = mysql_query("update orden_compra_servicio set 
+		$sql_actualiza_totales = mysql_query("update orden_compra_servicio set
 													sub_total = sub_total  + '".$monto_total."',
 													exento = exento + '".$t_exento."',
 													total = total + '".$total_nuevo."'
 													where idorden_compra_servicio=".$idcertificacion_aporte." ")or die("4: ".mysql_error());
-		
-		
+
+
 		$sql_validar_asiento = mysql_query("select * from asiento_contable where iddocumento = ".$idcertificacion_aporte."
 													and tipo_movimiento = 'compromiso'")or die(mysql_error());
 		if (mysql_num_rows($sql_validar_asiento) > 0){
-			
+
 			$bus_asiento_contable = mysql_fetch_array($sql_validar_asiento);
-	
+
 			$sql_cuentas_contables = mysql_query("select * from cuentas_asiento_contable where idasiento_contable = '".$bus_asiento_contable["idasiento_contable"]."'
-														order by afecta")or die(" uno ".mysql_error());	
-														
+														order by afecta")or die(" uno ".mysql_error());
+
 			while ($bus_cuentas_contables = mysql_fetch_array($sql_cuentas_contables)){
 				//echo " actualizar precio monto ".$monto_total;
 				$actualizar_cuentas = mysql_query("update cuentas_asiento_contable set monto = monto + '".$monto_total."'
 																where idcuentas_asiento_contable = '".$bus_cuentas_contables["idcuentas_asiento_contable"]."'")or die("dos ".mysql_error());
 			}
-		}			
-		
-		
+		}
+
+
 		// CONSULTA DEL TOTAL DISPONIBLE EN EL PRESUPUESTO PARA SABER SI EL PRODUCTO PUEE SER PROCESADO O RECHAZADO POR FALTA DE DISPONIBILIDAD PRESUPUESTARIA
-		
-		
-		$sql = mysql_query("select * from articulos_compra_servicio where 
+
+
+		$sql = mysql_query("select * from articulos_compra_servicio where
 												idarticulos_compra_servicio = '".$id_articulo_compra."'")or die("5: ".mysql_error());
 		$bus = mysql_fetch_array($sql);
-		
+
 		// en cualquiera de Estos estados el articulo tiene partida en el maestro
-		if($bus["estado"] == "aprobado" || $bus["estado"] == "sin disponibilidad"){ 
-			$sql_compra_servicio = mysql_query("select * from orden_compra_servicio where 
+		if($bus["estado"] == "aprobado" || $bus["estado"] == "sin disponibilidad"){
+			$sql_compra_servicio = mysql_query("select * from orden_compra_servicio where
 												idorden_compra_servicio = '".$idcertificacion_aporte."'")or die("6: ".mysql_error());
 			$bus_compra_servicio = mysql_fetch_array($sql_compra_servicio);
 			//echo "ID: ".$bus_compra_servicio["idcategoria_programatica"]." ";
@@ -3318,7 +3318,7 @@ function actualizarPrecioCantidad($id_articulo, $id_orden_compra, $id_categoria_
 			$partida_impuestos = 0;
 
 			$sql_imputable = mysql_query("select precio_unitario from articulos_compra_servicio where idarticulos_compra_servicio = '".$id_articulo_compra."'")or die("12: ".mysql_error());
-										
+
 			$bus_imputable = mysql_fetch_array($sql_imputable);
 			$suma_partida = $bus_imputable["precio_unitario"];
 			//echo "TOTAL: ".$total_imputable. "ID ";
@@ -3329,8 +3329,8 @@ function actualizarPrecioCantidad($id_articulo, $id_orden_compra, $id_categoria_
 			if($bus_articulos_servicios["tipo_concepto"] == 4){
 
 
-				$sql_maestro = mysql_query("select * from maestro_presupuesto where anio = '".$anio."' 
-												and idcategoria_programatica = '".$id_categoria_programatica."' 
+				$sql_maestro = mysql_query("select * from maestro_presupuesto where anio = '".$anio."'
+												and idcategoria_programatica = '".$id_categoria_programatica."'
 												and idclasificador_presupuestario = '".$id_clasificador_presupuestario."'
 												and idfuente_financiamiento = '".$fuente_financiamiento."'
 												and idtipo_presupuesto = '".$tipo_presupuesto."'
@@ -3341,63 +3341,63 @@ function actualizarPrecioCantidad($id_articulo, $id_orden_compra, $id_categoria_
 				if($existe_maestro<=0){
 					$estado = "rechazado";
 				}else{
-				
+
 					$sql_consultar_existe = mysql_query("select * from partidas_orden_compra_servicio where idmaestro_presupuesto = '".$bus_maestro["idRegistro"]."' and idorden_compra_servicio = '".$idcertificacion_aporte."'");
 					$num_consultar_existe = mysql_num_rows($sql_consultar_existe);
 					$disponible = $bus_maestro["monto_actual"]-$bus_maestro["total_compromisos"];
 					//$disponible = consultarDisponibilidad($bus_maestro["idRegistro"]);
-					
-					
+
+
 					if($num_consultar_existe > 0){
 						if($suma_partida > $disponible){
-							$sql_partida = mysql_query("update partidas_orden_compra_servicio set estado = 'sobregiro', 
+							$sql_partida = mysql_query("update partidas_orden_compra_servicio set estado = 'sobregiro',
 																	monto = monto + '".$precio."',
-																	monto_original = monto_original + '".$precio."' 
-																	where 
+																	monto_original = monto_original + '".$precio."'
+																	where
 																	idorden_compra_servicio = '".$idcertificacion_aporte."'
 																	and idmaestro_presupuesto = '".$bus_maestro["idRegistro"]."'")or die("15: ".mysql_error());
 							$estado = "sin disponibilidad";
-							
+
 						}else{
 							//echo "PRUEBA: ".$bus_maestro["idRegistro"]." ------ ";
-							$sql_partida = mysql_query("update partidas_orden_compra_servicio set estado = 'disponible', 
+							$sql_partida = mysql_query("update partidas_orden_compra_servicio set estado = 'disponible',
 															monto = monto + '".$precio."',
-															monto_original = monto_original + '".$precio."' 
-															where 
+															monto_original = monto_original + '".$precio."'
+															where
 															idorden_compra_servicio = ".$idcertificacion_aporte."
 															and idmaestro_presupuesto = '".$bus_maestro["idRegistro"]."'")or die("16: ".mysql_error());
-						
-						
+
+
 							$estado = "aprobado";
 						}
 					}else{
 						if($suma_partida > $disponible){
-							$es = "sobregiro";	
+							$es = "sobregiro";
 							$estado = "sin disponibilidad";
 						}else{
 							$es = "disponible";
 							$estado = "aprobado";
-						}	
+						}
 
 						if($total_articulo_individual != 0){
 						//echo "entro aqui";
-							$sql_partida = mysql_query("insert into partidas_orden_compra_servicio 
-																			(estado, 
-																				monto, 
+							$sql_partida = mysql_query("insert into partidas_orden_compra_servicio
+																			(estado,
+																				monto,
 																				monto_original,
 																				idmaestro_presupuesto,
 																				idorden_compra_servicio
 																				)VALUES(
-																			'".$es."', 
+																			'".$es."',
 																			'".$precio."',
 																			'".$precio."',
 																			'".$bus_maestro["idRegistro"]."',
-																			'".$idcertificacion_aporte."')")or die("15: ".mysql_error());		
+																			'".$idcertificacion_aporte."')")or die("15: ".mysql_error());
 						}
 
 					}
-					
-									
+
+
 				}//else{
 					//echo "ALLA";
 					//$estado = "aprobado";
@@ -3406,12 +3406,12 @@ function actualizarPrecioCantidad($id_articulo, $id_orden_compra, $id_categoria_
 		}else{
 			$estado = "rechazado";
 		}
-		
-			// CONSULTA DEL TOTAL DISPONIBLE EN EL PRESUPUESTO PARA SABER SI EL PRODUCTO PUEE SER PROCESADO O RECHAZADO POR FALTA DE DISPONIBILIDAD PRESUPUESTARIA		
-			
-			$sql2 = mysql_query("update articulos_compra_servicio set estado = '".$estado."' 
+
+			// CONSULTA DEL TOTAL DISPONIBLE EN EL PRESUPUESTO PARA SABER SI EL PRODUCTO PUEE SER PROCESADO O RECHAZADO POR FALTA DE DISPONIBILIDAD PRESUPUESTARIA
+
+			$sql2 = mysql_query("update articulos_compra_servicio set estado = '".$estado."'
 																where idarticulos_compra_servicio = '".$id_articulo_compra."'")or die("17: ".mysql_error());
-			
+
 		if($sql2){
 				//registra_transaccion("Actualizar Precio Cantidad de Orden de Compra (".$id_articulo_compra.")",$login,$fh,$pc,'orden_compra_servicios');
 
@@ -3422,9 +3422,9 @@ function actualizarPrecioCantidad($id_articulo, $id_orden_compra, $id_categoria_
 				//echo $sql2." MYSQL ERROR: ".mysql_error();
 		}
 	}
-	
-	
-	
+
+
+
 }
 
 
@@ -3436,20 +3436,20 @@ function actualizarPrecioCantidad($id_articulo, $id_orden_compra, $id_categoria_
 
 
 function ingresarMaterial($id_material, $id_orden_compra, $id_categoria_programatica, $cantidad, $precio_unitario, $fuente_financiamiento, $tipo_presupuesto,$id_clasificador_presupuestario, $idordinal,$anio,$idcertificacion_aporte){
-	
+
 //VERIFICO EL TIPO DE CONCEPTO, SI ES ASIGNACION(1) O DEDUCCION(2) VAN A LA CERTIFICACION DE Nomina
-	
+
 	$sql_articulos_servicios = mysql_query("select * from articulos_servicios where idarticulos_servicios = '".$id_material."'");
 	$bus_articulos_servicios = mysql_fetch_array($sql_articulos_servicios);
-	
+
 	if ($bus_articulos_servicios["tipo_concepto"] == 1 || $bus_articulos_servicios["tipo_concepto"] == 2) {
-	
-		$sql = mysql_query("select * from articulos_compra_servicio where 
-														idarticulos_servicios = ".$id_material." 
-														and idorden_compra_servicio = ".$id_orden_compra." 
+
+		$sql = mysql_query("select * from articulos_compra_servicio where
+														idarticulos_servicios = ".$id_material."
+														and idorden_compra_servicio = ".$id_orden_compra."
 														and idcategoria_programatica = '".$id_categoria_programatica."'")or die("TTTTTT".mysql_error());
 		$num = mysql_num_rows($sql);
-		
+
 		// SI EL ARTICULO NO EXISTE ENTRE LOS ARTICULOS CARGADOS
 		if($num == 0){
 
@@ -3460,26 +3460,26 @@ function ingresarMaterial($id_material, $id_orden_compra, $id_categoria_programa
 			}
 			$sql_orden = mysql_query("select * from orden_compra_servicio where idorden_compra_servicio = ".$id_orden_compra."");
 			$bus_orden = mysql_fetch_array($sql_orden);
-			
+
 			//BUSCO EL IMPUESTO QUE SE LE APLICA AL ARTICULO PARA SABER SI TIENE PARTIDA PROPIA O SE VA A CARGAR A LA PARTIDA DEL ARTICULO
-		
+
 
 			// AGREGO EL ARTICULO DE LA SOLICITUD DE COTIZACION A LA ORDEN DE COMPRA
-			
+
 			if($bus_articulos_servicios["tipo_concepto"] == 1){
 				$monto_total = $total_articulo_individual;
-				$exento = 0; 
+				$exento = 0;
 			}else{
 				$monto_total = 0;
 				$exento = $total_articulo_individual;
 			}
-			
+
 			//echo "MONTO TOTAL: ".$monto_total;
 			//echo "EXENTO: ".$exento;
-			
-			
+
+
 			if($total_articulo_individual != 0) {
-				
+
 					$sql = mysql_query("insert into articulos_compra_servicio (idorden_compra_servicio,
 																			idarticulos_servicios,
 																			idcategoria_programatica,
@@ -3601,7 +3601,7 @@ function ingresarMaterial($id_material, $id_orden_compra, $id_categoria_programa
 																									estado,
 																									status,
 																									usuario,
-																									fechayhora) 
+																									fechayhora)
 																								values (" . $id_orden_compra . ",
 																										" . $bus_maestro["idRegistro"] . ",
 																										" . $precio_unitario . ",
@@ -3642,12 +3642,12 @@ function ingresarMaterial($id_material, $id_orden_compra, $id_categoria_programa
 	}
 	if ($bus_articulos_servicios["tipo_concepto"] == 4) {
 	//CARGO EL MATERIAL A LA CERTIFICACION DE APORTES PATRONALES;
-		$sql = mysql_query("select * from articulos_compra_servicio where 
-														idarticulos_servicios = ".$id_material." 
-														and idorden_compra_servicio = ".$idcertificacion_aporte." 
+		$sql = mysql_query("select * from articulos_compra_servicio where
+														idarticulos_servicios = ".$id_material."
+														and idorden_compra_servicio = ".$idcertificacion_aporte."
 														and idcategoria_programatica = '".$id_categoria_programatica."'")or die("TTTTTT".mysql_error());
 		$num = mysql_num_rows($sql);
-		
+
 		// SI EL ARTICULO NO EXISTE ENTRE LOS ARTICULOS CARGADOS
 		if($num == 0){
 
@@ -3658,26 +3658,26 @@ function ingresarMaterial($id_material, $id_orden_compra, $id_categoria_programa
 			}
 			$sql_orden = mysql_query("select * from orden_compra_servicio where idorden_compra_servicio = ".$id_orden_compra."");
 			$bus_orden = mysql_fetch_array($sql_orden);
-			
+
 			//BUSCO EL IMPUESTO QUE SE LE APLICA AL ARTICULO PARA SABER SI TIENE PARTIDA PROPIA O SE VA A CARGAR A LA PARTIDA DEL ARTICULO
-		
+
 
 			// AGREGO EL ARTICULO DE LA SOLICITUD DE COTIZACION A LA ORDEN DE COMPRA
-			
+
 			//if($bus_articulos_servicios["tipo_concepto"] == 4){
 			$monto_total = $total_articulo_individual;
-			$exento = 0; 
+			$exento = 0;
 			//}else{
 			//	$monto_total = 0;
 			//	$exento = $total_articulo_individual;
 			//}
-			
+
 			//echo "MONTO TOTAL: ".$monto_total;
 			//echo "EXENTO: ".$exento;
-			
-			
+
+
 			if($total_articulo_individual != 0) {
-				
+
 					$sql = mysql_query("insert into articulos_compra_servicio (idorden_compra_servicio,
 																			idarticulos_servicios,
 																			idcategoria_programatica,
@@ -3799,7 +3799,7 @@ function ingresarMaterial($id_material, $id_orden_compra, $id_categoria_programa
 																									estado,
 																									status,
 																									usuario,
-																									fechayhora) 
+																									fechayhora)
 																								values (" . $idcertificacion_aporte . ",
 																										" . $bus_maestro["idRegistro"] . ",
 																										" . $precio_unitario . ",
@@ -3822,7 +3822,7 @@ function ingresarMaterial($id_material, $id_orden_compra, $id_categoria_programa
 						}
 
 					}
-				} 
+				}
 				// actualizo el estado del material ingresado
 				$sql_update_articulos_compras = mysql_query("update articulos_compra_servicio set estado = '" . $estado . "'
 																	where idarticulos_compra_servicio = " . $id_ultimo_generado . "");
@@ -3835,9 +3835,9 @@ function ingresarMaterial($id_material, $id_orden_compra, $id_categoria_programa
 					//echo "fallo";
 				}
 			}
-	
+
 	}
-	
+
 }
 
 
@@ -3849,20 +3849,20 @@ function ingresarMaterial($id_material, $id_orden_compra, $id_categoria_programa
 
 
 if($ejecutar == "validarErroresConceptos"){
-	$sql_articulos_orden_compra_servicio = mysql_query("select * from articulos_compra_servicio,  
-																		unidad_medida, 
-																		articulos_servicios, 
+	$sql_articulos_orden_compra_servicio = mysql_query("select * from articulos_compra_servicio,
+																		unidad_medida,
+																		articulos_servicios,
 																		categoria_programatica
-									 where 
-									 	articulos_compra_servicio.idorden_compra_servicio = '".$id_orden_compra."' 
-									  	and articulos_servicios.idarticulos_servicios = articulos_compra_servicio.idarticulos_servicios 
+									 where
+									 	articulos_compra_servicio.idorden_compra_servicio = '".$id_orden_compra."'
+									  	and articulos_servicios.idarticulos_servicios = articulos_compra_servicio.idarticulos_servicios
 										and articulos_servicios.idunidad_medida = unidad_medida.idunidad_medida
-										and categoria_programatica.idcategoria_programatica = articulos_compra_servicio.idcategoria_programatica 
-										order by categoria_programatica.codigo,articulos_compra_servicio.idarticulos_compra_servicio")or die(mysql_error());	
+										and categoria_programatica.idcategoria_programatica = articulos_compra_servicio.idcategoria_programatica
+										order by categoria_programatica.codigo,articulos_compra_servicio.idarticulos_compra_servicio")or die(mysql_error());
 	$error= "no";
 	while($bus_articulos_orden_compra_servicio = mysql_fetch_array($sql_articulos_orden_compra_servicio)){
 		if($bus_articulos_orden_compra_servicio["estado"] == "rechazado" || $bus_articulos_orden_compra_servicio["estado"] == "sin disponibilidad"){
-			$error = "si";	
+			$error = "si";
 		}
 	}
 	echo $error;
@@ -3879,56 +3879,56 @@ if($ejecutar == "validarErroresConceptos"){
 
 if($ejecutar == "consultarConceptos"){
 	$sql_suma_asignaciones = mysql_query("select SUM(articulos_compra_servicio.total) as total_asignaciones
-											from 
-											articulos_servicios, 
+											from
+											articulos_servicios,
 											articulos_compra_servicio
-											where 
+											where
 											articulos_compra_servicio.idorden_compra_servicio = '".$id_orden_compra."'
 											and articulos_servicios.idarticulos_servicios = articulos_compra_servicio.idarticulos_servicios
 											and articulos_servicios.tipo_concepto = 1")or die(mysql_error());
 	$bus_suma_asignaciones = mysql_fetch_array($sql_suma_asignaciones);
-	
-	
+
+
 	$sql_suma_deducciones = mysql_query("select SUM(articulos_compra_servicio.precio_unitario) as total_deducciones
-													 	from 
-														articulos_servicios, 
-														articulos_compra_servicio 
-														where 
+													 	from
+														articulos_servicios,
+														articulos_compra_servicio
+														where
 														articulos_compra_servicio.idorden_compra_servicio = '".$id_orden_compra."'
 														and articulos_servicios.idarticulos_servicios = articulos_compra_servicio.idarticulos_servicios
 														and articulos_servicios.tipo_concepto = 2")or die(mysql_error());
 	$bus_suma_deducciones = mysql_fetch_array($sql_suma_deducciones);
 
 	$total = $bus_suma_asignaciones["total_asignaciones"] - $bus_suma_deducciones["total_deducciones"];
-	$sql_actualizar_compra_servicio = mysql_query("update orden_compra_servicio 
+	$sql_actualizar_compra_servicio = mysql_query("update orden_compra_servicio
 														set exento = '".$bus_suma_deducciones["total_deducciones"]."',
 														sub_total = '".$bus_suma_asignaciones["total_asignaciones"]."',
 														total = '".$total."'
-														where 
+														where
 													idorden_compra_servicio = ".$id_orden_compra."")or die("ERROR EN LA ACTUALIZACION DE LOS TOTALES ".mysql_error());
 
 	if($tipo == "detallado"){
-	
-	
-	$sql_articulos_orden_compra_servicio = mysql_query("select * from articulos_compra_servicio,  
-																		unidad_medida, 
-																		articulos_servicios, 
+
+
+	$sql_articulos_orden_compra_servicio = mysql_query("select * from articulos_compra_servicio,
+																		unidad_medida,
+																		articulos_servicios,
 																		categoria_programatica
-									 where 
+									 where
 									 	articulos_compra_servicio.idorden_compra_servicio = '".$id_orden_compra."'
-									  	and articulos_servicios.idarticulos_servicios = articulos_compra_servicio.idarticulos_servicios 
+									  	and articulos_servicios.idarticulos_servicios = articulos_compra_servicio.idarticulos_servicios
 										and articulos_servicios.idunidad_medida = unidad_medida.idunidad_medida
-										and categoria_programatica.idcategoria_programatica = articulos_compra_servicio.idcategoria_programatica 
-										order by articulos_servicios.tipo_concepto, 
+										and categoria_programatica.idcategoria_programatica = articulos_compra_servicio.idcategoria_programatica
+										order by articulos_servicios.tipo_concepto,
 										categoria_programatica.codigo,
 										articulos_compra_servicio.idarticulos_compra_servicio")or die(mysql_error());
-	
+
 	$num = mysql_num_rows($sql_articulos_orden_compra_servicio);
-	
-	
-	
-	
-	
+
+
+
+
+
 	?>
     <table cellpadding="3" cellspacing="10">
         <tr>
@@ -3948,18 +3948,18 @@ if($ejecutar == "consultarConceptos"){
     <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0" class="Browse">
 <thead>
           <tr>
-            
+
             <td class="Browse"><div align="center">Categoria</div></td>
             <td class="Browse"><div align="center">Tipo</div></td>
             <td class="Browse"><div align="center">Descripci&oacute;n</div></td>
             <td class="Browse"><div align="center">Monto</div></td>
-			
+
           </tr>
           </thead>
-          <? 
-		  
+          <?
+
           while($bus_articulos_orden_compra_servicio = mysql_fetch_array($sql_articulos_orden_compra_servicio)){
-			
+
             if($bus_articulos_orden_compra_servicio["tipo_concepto"] == 1){
 				$color = "#9CF";
 				$tipo_concepto =  "Asignacion";
@@ -3969,9 +3969,9 @@ if($ejecutar == "consultarConceptos"){
 			}else if($bus_articulos_orden_compra_servicio["tipo_concepto"] == 4){
 				$tipo_concepto =  "Aporte Patronal";
 			}else{
-				$tipo_concepto = "Neutro";	
+				$tipo_concepto = "Neutro";
 			}
-		if($tipo_concepto != "Aporte Patronal" and $tipo_concepto != 'Neutro'){	
+		if($tipo_concepto != "Aporte Patronal" and $tipo_concepto != 'Neutro'){
           	if($bus_articulos_orden_compra_servicio["estado"] == "rechazado"){
 			?>
 			<tr bgcolor='#FF0000' onMouseOver="setRowColor(this, 0, 'over', '#FF0000', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#FF0000', '#EAFFEA', '#FFFFAA')">
@@ -3984,39 +3984,39 @@ if($ejecutar == "consultarConceptos"){
 			?>
 			<tr style="background-color:<?=$color?>" onMouseOver="setRowColor(this, 0, 'over', '<?=$color?>', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '<?=$color?>', '#EAFFEA', '#FFFFAA')">
 			<?
-			
+
 			}
 		  ?>
-          
+
            <td class='Browse' align='left'><?=$bus_articulos_orden_compra_servicio["codigo"]?></td>
             <td class='Browse' align='left'>
 			<?=$tipo_concepto?>
             </td>
-             <td class='Browse' align='left'><?=$bus_articulos_orden_compra_servicio[30]?> 
+             <td class='Browse' align='left'><?=$bus_articulos_orden_compra_servicio[30]?>
               <div align="right"></div></td>
-            
-            
+
+
           <td class="Browse" align="right">
-				<? 
+				<?
 				echo number_format($bus_articulos_orden_compra_servicio["precio_unitario"],2,',','.');
                 ?>             </td>
 				<?
                 if($bus_orden["estado"] == "elaboracion"){
 				?>
             	<td class='Browse' align="center">
-					<a href="javascript:;" onclick=""><a href="javascript:;" onclick=""><img src="imagenes/refrescar.png" onclick=" 
-                                actualizarPrecioCantidad(<?=$bus_articulos_orden_compra_servicio["idorden_compra_servicio"]?>, 
+					<a href="javascript:;" onclick=""><a href="javascript:;" onclick=""><img src="imagenes/refrescar.png" onclick="
+                                actualizarPrecioCantidad(<?=$bus_articulos_orden_compra_servicio["idorden_compra_servicio"]?>,
                                 document.getElementById('precio<?=$bus_articulos_orden_compra_servicio["idarticulos_compra_servicio"]?>').value,
-                                document.getElementById('cantidad<?=$bus_articulos_orden_compra_servicio["idarticulos_compra_servicio"]?>').value, 
-                                <?=$bus_articulos_orden_compra_servicio["idarticulos_servicios"]?>, 
-                                <?=$bus_articulos_orden_compra_servicio["idarticulos_compra_servicio"]?>, 
+                                document.getElementById('cantidad<?=$bus_articulos_orden_compra_servicio["idarticulos_compra_servicio"]?>').value,
+                                <?=$bus_articulos_orden_compra_servicio["idarticulos_servicios"]?>,
+                                <?=$bus_articulos_orden_compra_servicio["idarticulos_compra_servicio"]?>,
                                 document.getElementById('anio').value,
                                 document.getElementById('fuente_financiamiento').value,
                                 document.getElementById('tipo_presupuesto').value,
                                 document.getElementById('id_ordinal').value,
                                 document.getElementById('contribuyente_ordinario').value,
-                                document.getElementById('anio').value)" 
-                                title="Actualizar Precio y Cantidad" /></a></td>  
+                                document.getElementById('anio').value)"
+                                title="Actualizar Precio y Cantidad" /></a></td>
 <td class='Browse' align="center">
                     <a href="javascript:;" onClick="eliminarMateriales(<?=$bus_articulos_orden_compra_servicio["idorden_compra_servicio"]?>, <?=$bus_articulos_orden_compra_servicio["idarticulos_compra_servicio"]?>, <?=$bus_articulos_orden_compra_servicio["idsolicitud_cotizacion"]?>, document.getElementById('id_categoria_programatica').value, document.getElementById('anio').value, document.getElementById('fuente_financiamiento').value, document.getElementById('tipo_presupuesto').value, document.getElementById('id_ordinal').value, document.getElementById('contribuyente_ordinario').value,
 document.getElementById('anio').value)">
@@ -4027,35 +4027,35 @@ document.getElementById('anio').value)">
           </tr>
           <?
           }
-		  
+
 		  }
-		  
+
           ?>
         </table>
-        <?	
-		
+        <?
+
 	}else{
 	// AQUI VA SI ES RESUMIDO	 **********************************************************************************************************
 		$sql_asignaciones = mysql_query("select SUM(articulos_compra_servicio.total) as total,
 												SUM(articulos_compra_servicio.cantidad) as cantidad,
 												SUM(articulos_compra_servicio.precio_unitario) as precio_unitario,
 												articulos_servicios.descripcion,
-												articulos_servicios.tipo_concepto, 
+												articulos_servicios.tipo_concepto,
 												articulos_compra_servicio.estado
-																		from 
-																		articulos_compra_servicio, 
-																		unidad_medida, 
-																		articulos_servicios, 
+																		from
+																		articulos_compra_servicio,
+																		unidad_medida,
+																		articulos_servicios,
 																		categoria_programatica
-									 where 
+									 where
 									 	articulos_compra_servicio.idorden_compra_servicio = '".$id_orden_compra."'
-									  	and articulos_servicios.idarticulos_servicios = articulos_compra_servicio.idarticulos_servicios 
+									  	and articulos_servicios.idarticulos_servicios = articulos_compra_servicio.idarticulos_servicios
 										and articulos_servicios.idunidad_medida = unidad_medida.idunidad_medida
-										and categoria_programatica.idcategoria_programatica = articulos_compra_servicio.idcategoria_programatica 
+										and categoria_programatica.idcategoria_programatica = articulos_compra_servicio.idcategoria_programatica
 										group by articulos_servicios.idarticulos_servicios
 										order by articulos_servicios.tipo_concepto")or die(mysql_error());
 	?>
-	
+
 	<table cellpadding="3" cellspacing="10">
         <tr>
         <td style="cursor:pointer" bgcolor="#EAEAEA" onclick="consultarConceptos('<?=$id_orden_compra?>', 'resumido')"><strong>Resumido</strong></td>
@@ -4074,18 +4074,18 @@ document.getElementById('anio').value)">
     <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0" class="Browse">
 <thead>
           <tr>
-            
+
             <!-- <td class="Browse"><div align="center">Categoria</div></td> -->
             <td class="Browse"><div align="center">Tipo</div></td>
             <td class="Browse"><div align="center">Descripcion</div></td>
             <td class="Browse"><div align="center">Monto</div></td>
-			
+
           </tr>
           </thead>
-          <? 
-		  
+          <?
+
           while($bus_articulos_orden_compra_servicio = mysql_fetch_array($sql_asignaciones)){
-			
+
             if($bus_articulos_orden_compra_servicio["tipo_concepto"] == 1){
 				$color = "#9CF";
 				$tipo_concepto =  "Asignacion";
@@ -4095,9 +4095,9 @@ document.getElementById('anio').value)">
 			}else if($bus_articulos_orden_compra_servicio["tipo_concepto"] == 4){
 				$tipo_concepto =  "Aporte Patronal";
 			}else{
-				$tipo_concepto = "Neutro";	
+				$tipo_concepto = "Neutro";
 			}
-			
+
 			if($tipo_concepto != "Aporte Patronal"){
           	if($bus_articulos_orden_compra_servicio["estado"] == "rechazado"){
 			?>
@@ -4111,18 +4111,18 @@ document.getElementById('anio').value)">
 			?>
 			<tr style="background-color:<?=$color?>" onMouseOver="setRowColor(this, 0, 'over', '<?=$color?>', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '<?=$color?>', '#EAFFEA', '#FFFFAA')">
 			<?
-			
+
 			}
 		  ?>
-          
+
          <!--  <td class='Browse' align='left'><?=$bus_articulos_orden_compra_servicio["codigo"]?></td>-->
             <td class='Browse' align='left'>
 			<?=$tipo_concepto?>
             </td>
-             <td class='Browse' align='left'><?=$bus_articulos_orden_compra_servicio["descripcion"]?> 
+             <td class='Browse' align='left'><?=$bus_articulos_orden_compra_servicio["descripcion"]?>
               <div align="right"></div></td>
-            
-            
+
+
           <td class="Browse" align="right">
 				<?
 				echo number_format($bus_articulos_orden_compra_servicio["precio_unitario"],2,',','.');
@@ -4131,19 +4131,19 @@ document.getElementById('anio').value)">
                 if($bus_orden["estado"] == "elaboracion"){
 				?>
             <td class='Browse' align="center">
-			<a href="javascript:;" onclick=""><a href="javascript:;" onclick=""><img src="imagenes/refrescar.png" onclick=" 
-                                actualizarPrecioCantidad(<?=$bus_articulos_orden_compra_servicio["idorden_compra_servicio"]?>, 
+			<a href="javascript:;" onclick=""><a href="javascript:;" onclick=""><img src="imagenes/refrescar.png" onclick="
+                                actualizarPrecioCantidad(<?=$bus_articulos_orden_compra_servicio["idorden_compra_servicio"]?>,
                                 document.getElementById('precio<?=$bus_articulos_orden_compra_servicio["idarticulos_compra_servicio"]?>').value,
-                                document.getElementById('cantidad<?=$bus_articulos_orden_compra_servicio["idarticulos_compra_servicio"]?>').value, 
-                                <?=$bus_articulos_orden_compra_servicio["idarticulos_servicios"]?>, 
-                                <?=$bus_articulos_orden_compra_servicio["idarticulos_compra_servicio"]?>, 
+                                document.getElementById('cantidad<?=$bus_articulos_orden_compra_servicio["idarticulos_compra_servicio"]?>').value,
+                                <?=$bus_articulos_orden_compra_servicio["idarticulos_servicios"]?>,
+                                <?=$bus_articulos_orden_compra_servicio["idarticulos_compra_servicio"]?>,
                                 document.getElementById('anio').value,
                                 document.getElementById('fuente_financiamiento').value,
                                 document.getElementById('tipo_presupuesto').value,
                                 document.getElementById('id_ordinal').value,
                                 document.getElementById('contribuyente_ordinario').value,
-                                document.getElementById('anio').value)" 
-                                title="Actualizar Precio y Cantidad" /></a></td>  
+                                document.getElementById('anio').value)"
+                                title="Actualizar Precio y Cantidad" /></a></td>
 <td class='Browse' align="center">
                     <a href="javascript:;" onClick="eliminarMateriales(<?=$bus_articulos_orden_compra_servicio["idorden_compra_servicio"]?>, <?=$bus_articulos_orden_compra_servicio["idarticulos_compra_servicio"]?>, <?=$bus_articulos_orden_compra_servicio["idsolicitud_cotizacion"]?>, document.getElementById('id_categoria_programatica').value, document.getElementById('anio').value, document.getElementById('fuente_financiamiento').value, document.getElementById('tipo_presupuesto').value, document.getElementById('id_ordinal').value, document.getElementById('contribuyente_ordinario').value)">
            			<img src="imagenes/delete.png" title="Eliminar Materiales">           		</a>            </td>
@@ -4156,16 +4156,16 @@ document.getElementById('anio').value)">
           }
           ?>
         </table>
-    
-    
-    
-    
-	
+
+
+
+
+
 	<?
-	
-	
-	
-	
+
+
+
+
 	}
 }
 
@@ -4174,48 +4174,48 @@ document.getElementById('anio').value)">
 
 if($ejecutar == "consultarConceptosAportes"){
 	$sql_suma_asignaciones = mysql_query("select SUM(articulos_compra_servicio.total) as total_asignaciones
-											from 
-											articulos_servicios, 
-											articulos_compra_servicio 
-											where 
+											from
+											articulos_servicios,
+											articulos_compra_servicio
+											where
 											articulos_compra_servicio.idorden_compra_servicio = '".$id_orden_compra_aportes."'
 											and articulos_servicios.idarticulos_servicios = articulos_compra_servicio.idarticulos_servicios
 											and articulos_servicios.tipo_concepto = 4")or die(mysql_error());
 	$bus_suma_asignaciones = mysql_fetch_array($sql_suma_asignaciones);
-	
-	
+
+
 	$total_deducciones = 0;
 
 	$total = $bus_suma_asignaciones["total_asignaciones"] - $total_deducciones;
-	$sql_actualizar_compra_servicio = mysql_query("update orden_compra_servicio 
+	$sql_actualizar_compra_servicio = mysql_query("update orden_compra_servicio
 														set exento = '".$total_deducciones."',
 														sub_total = '".$bus_suma_asignaciones["total_asignaciones"]."',
 														total = '".$total."'
-														where 
+														where
 													idorden_compra_servicio = ".$id_orden_compra_aportes."")or die($id_orden_compra_aportes."aaaaaERROR EN LA ACTUALIZACION DE LOS TOTALES APORTES ".mysql_error());
 
 	if($tipo == "detallado"){
-	
-	
-	$sql_articulos_orden_compra_servicio = mysql_query("select * from articulos_compra_servicio,  
-																		unidad_medida, 
-																		articulos_servicios, 
+
+
+	$sql_articulos_orden_compra_servicio = mysql_query("select * from articulos_compra_servicio,
+																		unidad_medida,
+																		articulos_servicios,
 																		categoria_programatica
-									 where 
+									 where
 									 	articulos_compra_servicio.idorden_compra_servicio = '".$id_orden_compra_aportes."'
-									  	and articulos_servicios.idarticulos_servicios = articulos_compra_servicio.idarticulos_servicios 
+									  	and articulos_servicios.idarticulos_servicios = articulos_compra_servicio.idarticulos_servicios
 										and articulos_servicios.idunidad_medida = unidad_medida.idunidad_medida
-										and categoria_programatica.idcategoria_programatica = articulos_compra_servicio.idcategoria_programatica 
-										order by articulos_servicios.tipo_concepto, 
+										and categoria_programatica.idcategoria_programatica = articulos_compra_servicio.idcategoria_programatica
+										order by articulos_servicios.tipo_concepto,
 										categoria_programatica.codigo,
 										articulos_compra_servicio.idarticulos_compra_servicio")or die(mysql_error());
-	
+
 	$num = mysql_num_rows($sql_articulos_orden_compra_servicio);
-	
-	
-	
-	
-	
+
+
+
+
+
 	?>
     <table cellpadding="3" cellspacing="10">
         <tr>
@@ -4253,10 +4253,10 @@ if($ejecutar == "consultarConceptosAportes"){
             ?>
           </tr>
           </thead>
-          <? 
-		  
+          <?
+
           while($bus_articulos_orden_compra_servicio = mysql_fetch_array($sql_articulos_orden_compra_servicio)){
-			
+
             if($bus_articulos_orden_compra_servicio["tipo_concepto"] == 1){
 				$color = "#9CF";
 				$tipo_concepto =  "Asignacion";
@@ -4266,9 +4266,9 @@ if($ejecutar == "consultarConceptosAportes"){
 			}else if($bus_articulos_orden_compra_servicio["tipo_concepto"] == 4){
 				$tipo_concepto =  "Aporte Patronal";
 			}else{
-				$tipo_concepto = "Neutro";	
+				$tipo_concepto = "Neutro";
 			}
-		if($tipo_concepto == "Aporte Patronal"){	
+		if($tipo_concepto == "Aporte Patronal"){
           	if($bus_articulos_orden_compra_servicio["estado"] == "rechazado"){
 			?>
 			<tr bgcolor='#FF0000' onMouseOver="setRowColor(this, 0, 'over', '#FF0000', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#FF0000', '#EAFFEA', '#FFFFAA')">
@@ -4281,7 +4281,7 @@ if($ejecutar == "consultarConceptosAportes"){
 			?>
 			<tr style="background-color:<?=$color?>" onMouseOver="setRowColor(this, 0, 'over', '<?=$color?>', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '<?=$color?>', '#EAFFEA', '#FFFFAA')">
 			<?
-			
+
 			}
 		  ?>
           <?
@@ -4301,47 +4301,47 @@ if($ejecutar == "consultarConceptosAportes"){
             <td class='Browse' align='left'>
 			<?=$tipo_concepto?>
             </td>
-            <td class='Browse' align='left'><?=$bus_articulos_orden_compra_servicio[30]?> 
+            <td class='Browse' align='left'><?=$bus_articulos_orden_compra_servicio[30]?>
               <div align="right"></div></td>
-            
-            
+
+
           	<td class="Browse" align="right">
-				<? 
+				<?
 				echo number_format($bus_articulos_orden_compra_servicio["precio_unitario"],2,',','.');
                 ?>             </td>
-				
+
         </tr>
           <?
           }
-		  
+
 		  }
-		  
+
           ?>
         </table>
-        <?	
-		
+        <?
+
 	}else{
 	// AQUI VA SI ES RESUMIDO	 **********************************************************************************************************
 		$sql_asignaciones = mysql_query("select SUM(articulos_compra_servicio.total) as total,
 												SUM(articulos_compra_servicio.cantidad) as cantidad,
 												SUM(articulos_compra_servicio.precio_unitario) as precio_unitario,
 												articulos_servicios.descripcion,
-												articulos_servicios.tipo_concepto, 
+												articulos_servicios.tipo_concepto,
 												articulos_compra_servicio.estado
-																		from 
-																		articulos_compra_servicio, 
-																		unidad_medida, 
-																		articulos_servicios, 
+																		from
+																		articulos_compra_servicio,
+																		unidad_medida,
+																		articulos_servicios,
 																		categoria_programatica
-									 where 
+									 where
 									 	articulos_compra_servicio.idorden_compra_servicio = '".$id_orden_compra_aportes."'
-									  	and articulos_servicios.idarticulos_servicios = articulos_compra_servicio.idarticulos_servicios 
+									  	and articulos_servicios.idarticulos_servicios = articulos_compra_servicio.idarticulos_servicios
 										and articulos_servicios.idunidad_medida = unidad_medida.idunidad_medida
-										and categoria_programatica.idcategoria_programatica = articulos_compra_servicio.idcategoria_programatica 
+										and categoria_programatica.idcategoria_programatica = articulos_compra_servicio.idcategoria_programatica
 										group by articulos_servicios.idarticulos_servicios
 										order by articulos_servicios.tipo_concepto")or die(mysql_error());
 	?>
-	
+
 	<table cellpadding="3" cellspacing="10">
         <tr>
         <td style="cursor:pointer" bgcolor="#EAEAEA" onclick="consultarConceptosAportes('<?=$id_orden_compra_aportes?>', 'resumido')"><strong>Resumido</strong></td>
@@ -4378,10 +4378,10 @@ if($ejecutar == "consultarConceptosAportes"){
             ?>
           </tr>
           </thead>
-          <? 
-		  
+          <?
+
           while($bus_articulos_orden_compra_servicio = mysql_fetch_array($sql_asignaciones)){
-			
+
             if($bus_articulos_orden_compra_servicio["tipo_concepto"] == 1){
 				$color = "#9CF";
 				$tipo_concepto =  "Asignacion";
@@ -4391,9 +4391,9 @@ if($ejecutar == "consultarConceptosAportes"){
 			}else if($bus_articulos_orden_compra_servicio["tipo_concepto"] == 4){
 				$tipo_concepto =  "Aporte Patronal";
 			}else{
-				$tipo_concepto = "Neutro";	
+				$tipo_concepto = "Neutro";
 			}
-			
+
 			if($tipo_concepto == "Aporte Patronal"){
           	if($bus_articulos_orden_compra_servicio["estado"] == "rechazado"){
 			?>
@@ -4407,7 +4407,7 @@ if($ejecutar == "consultarConceptosAportes"){
 			?>
 			<tr style="background-color:<?=$color?>" onMouseOver="setRowColor(this, 0, 'over', '<?=$color?>', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '<?=$color?>', '#EAFFEA', '#FFFFAA')">
 			<?
-			
+
 			}
 		  ?>
           <?
@@ -4427,31 +4427,31 @@ if($ejecutar == "consultarConceptosAportes"){
             <td class='Browse' align='left'>
 			<?=$tipo_concepto?>
             </td>
-             <td class='Browse' align='left'><?=$bus_articulos_orden_compra_servicio["descripcion"]?> 
+             <td class='Browse' align='left'><?=$bus_articulos_orden_compra_servicio["descripcion"]?>
               <div align="right"></div></td>
-            
-            
+
+
           <td class="Browse" align="right">
 				<?
 				echo number_format($bus_articulos_orden_compra_servicio["precio_unitario"],2,',','.');
                 ?>             </td>
-				
+
           </tr>
           <?
 		  }
           }
           ?>
         </table>
-    
-    
-    
-    
-	
+
+
+
+
+
 	<?
-	
-	
-	
-	
+
+
+
+
 	}
 }
 
@@ -4464,13 +4464,13 @@ if($ejecutar == "consultarConceptosAportes"){
 
 
 if($ejecutar == "consultarPartidas"){
-	
+
 $sql_orden = mysql_query("select * from orden_compra_servicio where idorden_compra_servicio = '".$id_orden_compra."'");
 $bus_orden = mysql_fetch_array($sql_orden);
-//and idclasificador_presupuestario = ".$bus_orden["idclasificador_presupuestario"]." 
+//and idclasificador_presupuestario = ".$bus_orden["idclasificador_presupuestario"]."
 
 $sql_partidas = mysql_query("select * from partidas_orden_compra_servicio where idorden_compra_servicio = '".$id_orden_compra."' order by idmaestro_presupuesto");
-																		
+
 $num_partidas = mysql_num_rows($sql_partidas);
 if($num_partidas != 0){
 	?>
@@ -4484,33 +4484,33 @@ if($num_partidas != 0){
             <td class="Browse"><div align="center">Monto a Comprometer</div></td>
           </tr>
           </thead>
-          <? 
+          <?
           while($bus_partidas = mysql_fetch_array($sql_partidas)){
-		  
+
 		  $sql_maestro = mysql_query("select * from maestro_presupuesto where idRegistro = ".$bus_partidas["idmaestro_presupuesto"]."");
 		  $bus_maestro = mysql_fetch_array($sql_maestro);
-		  
-		  
-		  
-		  
+
+
+
+
           	if($bus_partidas["estado"] == "sobregiro"){
 		  ?>
 			<tr bgcolor="#FFFF00" onMouseOver="setRowColor(this, 0, 'over', '#FFFF00', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#FFFF00', '#EAFFEA', '#FFFFAA')">
 			<?
 			}else if($bus_partidas["estado"] == "disponible"){
 			?>
-			
+
             <tr bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
 			<?
 			}
-			
-			
+
+
           $sql_clasificador = mysql_query("select * from clasificador_presupuestario where idclasificador_presupuestario = '".$bus_maestro["idclasificador_presupuestario"]."'");
 		  $bus_clasificador = mysql_fetch_array($sql_clasificador);
 		  ?>
-            
-            
-            
+
+
+
             <td class='Browse' align='left'>
 			<?
             $sql_categoria_programatica = mysql_query("select * from categoria_programatica where idcategoria_programatica = '".$bus_maestro["idcategoria_programatica"]."'");
@@ -4530,23 +4530,23 @@ if($num_partidas != 0){
           <?
           }
           ?>
-        </table>																	
+        </table>
 <?
     }else{
 	echo "No hay Partidas Asociadas";
-    }																		
+    }
 }
 
 
 
 if($ejecutar == "consultarPartidasAportes"){
-	
+
 $sql_orden = mysql_query("select * from orden_compra_servicio where idorden_compra_servicio = '".$id_orden_compra_aportes."'");
 $bus_orden = mysql_fetch_array($sql_orden);
-//and idclasificador_presupuestario = ".$bus_orden["idclasificador_presupuestario"]." 
+//and idclasificador_presupuestario = ".$bus_orden["idclasificador_presupuestario"]."
 
 $sql_partidas = mysql_query("select * from partidas_orden_compra_servicio where idorden_compra_servicio = '".$id_orden_compra_aportes."' order by idmaestro_presupuesto");
-																		
+
 $num_partidas = mysql_num_rows($sql_partidas);
 if($num_partidas != 0){
 	?>
@@ -4560,33 +4560,33 @@ if($num_partidas != 0){
             <td class="Browse"><div align="center">Monto a Comprometer</div></td>
           </tr>
           </thead>
-          <? 
+          <?
           while($bus_partidas = mysql_fetch_array($sql_partidas)){
-		  
+
 		  $sql_maestro = mysql_query("select * from maestro_presupuesto where idRegistro = ".$bus_partidas["idmaestro_presupuesto"]."");
 		  $bus_maestro = mysql_fetch_array($sql_maestro);
-		  
-		  
-		  
-		  
+
+
+
+
           	if($bus_partidas["estado"] == "sobregiro"){
 		  ?>
 			<tr bgcolor="#FFFF00" onMouseOver="setRowColor(this, 0, 'over', '#FFFF00', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#FFFF00', '#EAFFEA', '#FFFFAA')">
 			<?
 			}else if($bus_partidas["estado"] == "disponible"){
 			?>
-			
+
             <tr bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
 			<?
 			}
-			
-			
+
+
           $sql_clasificador = mysql_query("select * from clasificador_presupuestario where idclasificador_presupuestario = '".$bus_maestro["idclasificador_presupuestario"]."'");
 		  $bus_clasificador = mysql_fetch_array($sql_clasificador);
 		  ?>
-            
-            
-            
+
+
+
             <td class='Browse' align='left'>
 			<?
             $sql_categoria_programatica = mysql_query("select * from categoria_programatica where idcategoria_programatica = '".$bus_maestro["idcategoria_programatica"]."'");
@@ -4606,11 +4606,11 @@ if($num_partidas != 0){
           <?
           }
           ?>
-        </table>																	
+        </table>
 <?
     }else{
 	echo "No hay Partidas Asociadas";
-    }																		
+    }
 }
 
 
@@ -4622,12 +4622,12 @@ if($ejecutar == "modificarNomina"){
 																		idcategoria_programatica = '".$idcentro_costo_fijo."',
 																		idbeneficiarios = '".$id_beneficiarios."'
 										where idgenerar_nomina ='".$idgenerar_nomina."'");
-	
+
 	$sql_buscar_certificacion = mysql_query("select * from generar_nomina where idgenerar_nomina ='".$idgenerar_nomina."'");
 	$bus_buscar_certificacion = mysql_fetch_array($sql_buscar_certificacion);
 	$id_orden_compra = $bus_buscar_certificacion["idorden_compra_servicio"];
 	//ACTUALIZO LA CERTIFICACION DE COMPROMISO
-	
+
 	$sql_certificacion = mysql_query("update orden_compra_servicio set justificacion = '".$justificacion."',
 																		idfuente_financiamiento = '".$idfuente_financiamiento."',
 																		idtipo_presupuesto = '".$idtipo_presupuesto."',
@@ -4635,7 +4635,7 @@ if($ejecutar == "modificarNomina"){
 																		idcategoria_programatica = '".$idcentro_costo_fijo."',
 																		idbeneficiarios = '".$id_beneficiarios."'
 															where idorden_compra_servicio = ".$id_orden_compra."");
-	
+
 	//ACTUALIZO EL ASIENTO CONTABLE
 	$sql_validar_asiento = mysql_query("select * from asiento_contable where iddocumento = ".$id_orden_compra."
 														and tipo_movimiento = 'compromiso'");
@@ -4644,7 +4644,7 @@ if($ejecutar == "modificarNomina"){
 														where iddocumento = ".$id_orden_compra."
 															and tipo_movimiento = 'compromiso'
 															and (estado = 'elaboracion' or estado = 'procesado')")or die("error aqui1 ".mysql_error());
-														
+
 		$sql_asiento_contable_anulado = mysql_query("update asiento_contable set detalle = '".'ANULACION DE ASIENTO: '.$justificacion."'
 														where iddocumento = ".$id_orden_compra."
 														and tipo_movimiento = 'compromiso'
@@ -4692,16 +4692,16 @@ if($ejecutar == "nuevaCertificacion") {
         $sql_ecasiento = mysql_query("delete from cuentas_asiento_contable where idasiento_contable = '".$bus_asiento["idasiento_contable"]."'")or die (mysql_error());
         $idcertificacion_aporte = '';
     }
-	
-	/// GUARDO LOS DATOS GENERALES DE LA CERTIFICACION 
+
+	/// GUARDO LOS DATOS GENERALES DE LA CERTIFICACION
 	$sql_generar_nomina = mysql_query("select tn.idtipo_documento,
 									  gn.descripcion,
 									  gn.idbeneficiarios,
 									  gn.idcategoria_programatica
-												  				from 
+												  				from
 												  			generar_nomina gn,
 															tipo_nomina tn
-																where 
+																where
 															gn.idgenerar_nomina = '".$idgenerar_nomina."'
 															and tn.idtipo_nomina =  gn.idtipo_nomina")or die("AQUIIIII".mysql_error());
 	$bus_generar_nomina = mysql_fetch_array($sql_generar_nomina);
@@ -4711,7 +4711,7 @@ if($ejecutar == "nuevaCertificacion") {
 	$sql_relacion_generar_nomina = mysql_query("select * from relacion_generar_nomina
 												where idgenerar_nomina = '".$idgenerar_nomina."'
 												")or die(mysql_error());
-	
+
 	while($bus_conceptos =mysql_fetch_array($sql_relacion_generar_nomina)){
 		$idconcepto = $bus_conceptos["idconcepto"];
 
@@ -4750,7 +4750,7 @@ if($ejecutar == "nuevaCertificacion") {
 
 			$sql_cuentas_contables = mysql_query("select * from tipos_documentos where idtipos_documentos = '".$idtipo_documento."'");
 			$bus_cuentas_contables = mysql_fetch_array($sql_cuentas_contables);
-			
+
 
 
 			if ($bus_cuentas_contables["tabla_debe"] != '' and $bus_cuentas_contables["idcuenta_debe"] != 0 and $bus_cuentas_contables["tabla_haber"] != '' and $bus_cuentas_contables["idcuenta_haber"] != ''){
@@ -4773,7 +4773,7 @@ if($ejecutar == "nuevaCertificacion") {
 																				'".$login."',
 																				'".date("Y-m-d H:i:s")."',
 																				'2')");
-			
+
 				if($sql_contable){
 					$idasiento_contable = mysql_insert_id();
 					$sql_cuenta_contable_debe = mysql_query("insert into cuentas_asiento_contable (idasiento_contable,
@@ -4797,13 +4797,13 @@ if($ejecutar == "nuevaCertificacion") {
 				}
 			}
 		}
-	
+
 
 		if($bus_conceptos['tabla'] == "conceptos_nomina"){
 			//echo "EL MONTO TOTAL ES: ".$con[2];
 			$sql_concepto = mysql_query("select * from conceptos_nomina where idconceptos_nomina = '".$bus_conceptos['idconcepto']."'")or die("tttttt".mysql_error());
 			$bus_concepto = mysql_fetch_array($sql_concepto);
-			
+
 			$tipo_concepto = $bus_concepto["tipo_concepto"];
 			$idclasificador_presupuestario = $bus_concepto["idclasificador_presupuestario"];
 			$idordinal = $bus_concepto["idordinal"];
@@ -4910,7 +4910,7 @@ if($ejecutar == "nuevaCertificacion") {
 
 	            //VALIDO QUE EL CONCEPTO ESTE EN LA TABLA DE ARTICULOS SERVICIOS PARA LOS APORTES
 				if($idarticulos_servicios == 0){
-					
+
 					$sql_ingresar_articulo = mysql_query("insert into articulos_servicios(codigo,
 																					  tipo,
 																				  descripcion,
@@ -4937,17 +4937,17 @@ if($ejecutar == "nuevaCertificacion") {
 																									'".$tipo_concepto."',
 																									'".$login."',
 																									'".$fh."')")or die("HOLAAAAA".mysql_error());
-				
+
 					$id = mysql_insert_id();
 					//echo "ESTE ES EL ID:  ".$id;
 					if($id != 0){
-						$sql_actualizar = mysql_query("update conceptos_nomina set idarticulos_servicios = '".$id."' where idconceptos_nomina = '".$con[1]."'")or die("wwwww".mysql_error());	
+						$sql_actualizar = mysql_query("update conceptos_nomina set idarticulos_servicios = '".$id."' where idconceptos_nomina = '".$con[1]."'")or die("wwwww".mysql_error());
 						if ($idcentro_costo_fijo == 0 or $idcentro_costo_fijo == ''){
-							$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica 
-																  			from 
+							$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica
+																  			from
 																		trabajador tr,
 																		niveles_organizacionales no
-																			where 
+																			where
 																		tr.idtrabajador = '".$bus_conceptos['idtrabajador']."'
 																		and no.idniveles_organizacionales = tr.centro_costo")or die("eeeeee".mysql_error());
 							$bus_categoria_programatica = mysql_fetch_array($sql_categoria_programatica);
@@ -4957,16 +4957,16 @@ if($ejecutar == "nuevaCertificacion") {
 						}
 						ingresarMaterial($id, $idcertificacion_aporte, $idcentro_costo, 1, $bus_conceptos["total"], $idfuente_financiamiento, $tipo_presupuesto,$idclasificador_presupuestario,$idordinal,$anio,$idcertificacion_aporte);
 					}
-					
-					
+
+
 	            }else{
 					$id = $idarticulos_servicios;
 					if ($idcentro_costo_fijo == 0 or $idcentro_costo_fijo == ''){
-						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica 
-															  			from 
+						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica
+															  			from
 																	trabajador tr,
 																	niveles_organizacionales no
-																		where 
+																		where
 																	tr.idtrabajador = '".$bus_conceptos['idtrabajador']."'
 																	and no.idniveles_organizacionales = tr.centro_costo")or die("eeeeee".mysql_error());
 						$bus_categoria_programatica = mysql_fetch_array($sql_categoria_programatica);
@@ -4974,15 +4974,15 @@ if($ejecutar == "nuevaCertificacion") {
 					}else{
 						$idcentro_costo = $idcentro_costo_fijo;
 					}
-					
-					$sql_busqueda = mysql_query("select * from articulos_compra_servicio 
-																where 
+
+					$sql_busqueda = mysql_query("select * from articulos_compra_servicio
+																where
 																idarticulos_servicios = '".$id."'
 																and idcategoria_programatica = '".$bus_categoria_programatica["idcategoria_programatica"]."'
 																and idorden_compra_servicio = '".$idcertificacion_aporte."'")or die("ertyuui".mysql_error());
-					
+
 					$num_busqueda = mysql_num_rows($sql_busqueda);
-					
+
 					if($num_busqueda > 0){
 						$bus_busqueda = mysql_fetch_array($sql_busqueda);
 						actualizarPrecioCantidad($id, $idcertificacion_aporte, $idcentro_costo, 1, $bus_conceptos["total"], $idfuente_financiamiento, $idtipo_presupuesto,$idclasificador_presupuestario,$idordinal, $bus_busqueda["idarticulos_compra_servicio"], $bus_conceptos['idtrabajador'],$anio,$idcertificacion_aporte);
@@ -4996,7 +4996,7 @@ if($ejecutar == "nuevaCertificacion") {
 	        if($tipo_concepto == 1 || $tipo_concepto == 2){
 	            //VALIDO QUE EL CONCEPTO ESTE EN LA TABLA DE ARTICULOS SERVICIOS
 				if($idarticulos_servicios == 0){
-					
+
 					$sql_ingresar_articulo = mysql_query("insert into articulos_servicios(codigo,
 																			  tipo,
 																			  descripcion,
@@ -5023,18 +5023,18 @@ if($ejecutar == "nuevaCertificacion") {
 																								'".$tipo_concepto."',
 																								'".$login."',
 																								'".$fh."')")or die("HOLAAAAA".mysql_error());
-			
+
 					$id = mysql_insert_id();
 					//echo "ESTE ES EL ID:  ".$id;
 					if($id != 0){
-						$sql_actualizar = mysql_query("update conceptos_nomina set idarticulos_servicios = '".$id."' where idconceptos_nomina = '".$con[1]."'")or die("wwwww".mysql_error());	
-						
+						$sql_actualizar = mysql_query("update conceptos_nomina set idarticulos_servicios = '".$id."' where idconceptos_nomina = '".$con[1]."'")or die("wwwww".mysql_error());
+
 						if ($idcentro_costo_fijo == 0 or $idcentro_costo_fijo == ''){
-							$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica 
-																  			from 
+							$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica
+																  			from
 																		trabajador tr,
 																		niveles_organizacionales no
-																			where 
+																			where
 																		tr.idtrabajador = '".$bus_conceptos['idtrabajador']."'
 																		and no.idniveles_organizacionales = tr.centro_costo")or die("eeeeee".mysql_error());
 							$bus_categoria_programatica = mysql_fetch_array($sql_categoria_programatica);
@@ -5045,7 +5045,7 @@ if($ejecutar == "nuevaCertificacion") {
 						}
 						ingresarMaterial($id, $idcertificacion, $idcentro_costo, 1, $bus_conceptos["total"], $idfuente_financiamiento, $tipo_presupuesto,$idclasificador_presupuestario,$idordinal,$anio,$idcertificacion_aporte);
 					}
-					
+
 	            }else{
 					$id = $idarticulos_servicios;
 					//$sql_actualizar = mysql_query("update conceptos_nomina set idarticulos_servicios = '".$id."' where idconceptos_nomina = '".$con[1]."'")or die("aquiii".mysql_error());
@@ -5054,11 +5054,11 @@ if($ejecutar == "nuevaCertificacion") {
 																where idarticulos_servicios = '".$id."'");
 					*/
 					if ($idcentro_costo_fijo == 0 or $idcentro_costo_fijo == ''){
-						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica 
-															  			from 
+						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica
+															  			from
 																	trabajador tr,
 																	niveles_organizacionales no
-																		where 
+																		where
 																	tr.idtrabajador = '".$bus_conceptos['idtrabajador']."'
 																	and no.idniveles_organizacionales = tr.centro_costo")or die("eeeeee".mysql_error());
 						$bus_categoria_programatica = mysql_fetch_array($sql_categoria_programatica);
@@ -5066,15 +5066,15 @@ if($ejecutar == "nuevaCertificacion") {
 					}else{
 						$idcentro_costo = $idcentro_costo_fijo;
 					}
-					
-					$sql_busqueda = mysql_query("select * from articulos_compra_servicio 
-																where 
+
+					$sql_busqueda = mysql_query("select * from articulos_compra_servicio
+																where
 																idarticulos_servicios = '".$id."'
 																and idcategoria_programatica = '".$idcentro_costo."'
 																and idorden_compra_servicio = '".$idcertificacion."'")or die("ertyuui".mysql_error());
-					
+
 					$num_busqueda = mysql_num_rows($sql_busqueda);
-					
+
 					if($num_busqueda > 0){
 						$bus_busqueda = mysql_fetch_array($sql_busqueda);
 						actualizarPrecioCantidad($id, $idcertificacion, $idcentro_costo, 1, $bus_conceptos["total"], $idfuente_financiamiento, $idtipo_presupuesto,$idclasificador_presupuestario,$idordinal, $bus_busqueda["idarticulos_compra_servicio"], $bus_conceptos['idtrabajador'],$anio,$idcertificacion_aporte);
@@ -5085,12 +5085,12 @@ if($ejecutar == "nuevaCertificacion") {
 			} //FIN DE LA VALIDACION DEL CONCEPTO TIPO ASIGNACION O DEDUCCION
 
 		}else if($bus_conceptos['tabla'] == "constantes_nomina"){
-			// AQUI VA EL TEXTO SI ES UNA CONSTANTE	
-			
+			// AQUI VA EL TEXTO SI ES UNA CONSTANTE
+
 			$sql_constante = mysql_query("select * from constantes_nomina where idconstantes_nomina = '".$bus_conceptos['idconcepto']."'")or die("AQUIII".mysql_error());
 			$bus_constante = mysql_fetch_array($sql_constante);
-			
-			
+
+
 			$idclasificador_presupuestario = $bus_constante["idclasificador_presupuestario"];
 			$idordinal = $bus_constante["idordinal"];
 			$idarticulos_servicios = $bus_constante["idarticulos_servicios"];
@@ -5194,9 +5194,9 @@ if($ejecutar == "nuevaCertificacion") {
                         }
                     }
                 }
-           
+
 				if($idarticulos_servicios == 0){
-					
+
 					$sql_ingresar_articulo = mysql_query("insert into articulos_servicios(codigo,
 																				  tipo,
 																				  descripcion,
@@ -5222,16 +5222,16 @@ if($ejecutar == "nuevaCertificacion") {
 																									'".$tipo_constante."',
 																									'".$login."',
 																									'".$fh."')")or die("ERROR EN EL INSERT".mysql_error);
-				
+
 					$id = mysql_insert_id();
 					if($id != 0){
-						$sql_actualizar = mysql_query("update constantes_nomina set idarticulos_servicios = '".$id."' where idconstantes_nomina = '".$con[1]."'")or die("ERROR".mysql_error());	
+						$sql_actualizar = mysql_query("update constantes_nomina set idarticulos_servicios = '".$id."' where idconstantes_nomina = '".$con[1]."'")or die("ERROR".mysql_error());
 						if ($idcentro_costo_fijo == 0 or $idcentro_costo_fijo == ''){
-							$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica 
-																  			from 
+							$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica
+																  			from
 																		trabajador tr,
 																		niveles_organizacionales no
-																			where 
+																			where
 																		tr.idtrabajador = '".$bus_conceptos['idtrabajador']."'
 																		and no.idniveles_organizacionales = tr.centro_costo")or die("eeeeee".mysql_error());
 							$bus_categoria_programatica = mysql_fetch_array($sql_categoria_programatica);
@@ -5239,16 +5239,16 @@ if($ejecutar == "nuevaCertificacion") {
 						}else{
 							$idcentro_costo = $idcentro_costo_fijo;
 						}
-						
+
 						$sql_consulta_articulos = mysql_query("select * from articulos_servicios where idarticulos_servicios = '".$id."'");
 						$bus_consulta_articulos = mysql_fetch_array($sql_consulta_articulos);
-						
+
 						ingresarMaterial($id, $idcertificacion_aporte, $idcentro_costo, 1, $bus_conceptos['total'], $idfuente_financiamiento, $idtipo_presupuesto,$idclasificador_presupuestario,$idordinal,$anio,$idcertificacion_aporte);
 					}
 				}else{
-					
+
 					$id = $idarticulos_servicios;
-					/*$sql_actualizar = mysql_query("update constantes_nomina set 
+					/*$sql_actualizar = mysql_query("update constantes_nomina set
 												  				idarticulos_servicios = '".$id."' where idconstantes_nomina = '".$bus_conceptos['idconcepto']."'")or die("AQUIIII".mysql_error());
 					$sql_actualizar = mysql_query("update articulos_servicios set
 												  				idclasificador_presupuestario = '".$idclasificador_presupuestario."'
@@ -5256,11 +5256,11 @@ if($ejecutar == "nuevaCertificacion") {
 					//echo "update conceptos_nomina set idarticulos_servicios = '".$id."' where idconceptos_nomina = '".$con[1]."'";
 					*/
 					if ($idcentro_costo_fijo == 0 or $idcentro_costo_fijo == ''){
-						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica 
-															  			from 
+						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica
+															  			from
 																	trabajador tr,
 																	niveles_organizacionales no
-																		where 
+																		where
 																	tr.idtrabajador = '".$bus_conceptos['idtrabajador']."'
 																	and no.idniveles_organizacionales = tr.centro_costo")or die("eeeeee".mysql_error());
 						$bus_categoria_programatica = mysql_fetch_array($sql_categoria_programatica);
@@ -5268,14 +5268,14 @@ if($ejecutar == "nuevaCertificacion") {
 					}else{
 						$idcentro_costo = $idcentro_costo_fijo;
 					}
-					
-					$sql_buscar = mysql_query("select * from articulos_compra_servicio 
-																		where 
+
+					$sql_buscar = mysql_query("select * from articulos_compra_servicio
+																		where
 																		idarticulos_servicios = '".$id."'
-																		and idcategoria_programatica = '".$idcentro_costo."' 
+																		and idcategoria_programatica = '".$idcentro_costo."'
 																		and idorden_compra_servicio = '".$idcertificacion_aporte."'")or die("qqqqqq".mysql_error());
 					$num_buscar= mysql_num_rows($sql_buscar);
-					
+
 					if($num_buscar > 0){
 						//echo "entro constante ".$bus_consulta_articulos["tipo_concepto"]." id art ".$id;
 						$bus_busqueda = mysql_fetch_array($sql_buscar);
@@ -5283,7 +5283,7 @@ if($ejecutar == "nuevaCertificacion") {
 					}else{
 						ingresarMaterial($id, $idcertificacion_aporte, $idcentro_costo, 1, $bus_conceptos['total'], $idfuente_financiamiento, $idtipo_presupuesto,$idclasificador_presupuestario,$idordinal,$anio,$idcertificacion_aporte);
 					}
-					
+
 				}
 			} // FIN DE SI ES TIPO APORTE
 
@@ -5291,7 +5291,7 @@ if($ejecutar == "nuevaCertificacion") {
 			if($tipo_concepto==1 || $tipo_concepto ==2){
 
 				if($idarticulos_servicios == 0){
-					
+
 					$sql_ingresar_articulo = mysql_query("insert into articulos_servicios(codigo,
 																				  tipo,
 																				  descripcion,
@@ -5317,16 +5317,16 @@ if($ejecutar == "nuevaCertificacion") {
 																									'".$tipo_constante."',
 																									'".$login."',
 																									'".$fh."')")or die("ERROR EN EL INSERT".mysql_error);
-				
+
 					$id = mysql_insert_id();
 					if($id != 0){
-						$sql_actualizar = mysql_query("update constantes_nomina set idarticulos_servicios = '".$id."' where idconstantes_nomina = '".$con[1]."'")or die("ERROR".mysql_error());	
+						$sql_actualizar = mysql_query("update constantes_nomina set idarticulos_servicios = '".$id."' where idconstantes_nomina = '".$con[1]."'")or die("ERROR".mysql_error());
 						if ($idcentro_costo_fijo == 0 or $idcentro_costo_fijo == ''){
-							$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica 
-																  			from 
+							$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica
+																  			from
 																		trabajador tr,
 																		niveles_organizacionales no
-																			where 
+																			where
 																		tr.idtrabajador = '".$bus_conceptos['idtrabajador']."'
 																		and no.idniveles_organizacionales = tr.centro_costo")or die("eeeeee".mysql_error());
 							$bus_categoria_programatica = mysql_fetch_array($sql_categoria_programatica);
@@ -5334,16 +5334,16 @@ if($ejecutar == "nuevaCertificacion") {
 						}else{
 							$idcentro_costo = $idcentro_costo_fijo;
 						}
-						
+
 						$sql_consulta_articulos = mysql_query("select * from articulos_servicios where idarticulos_servicios = '".$id."'");
 						$bus_consulta_articulos = mysql_fetch_array($sql_consulta_articulos);
-						
+
 						ingresarMaterial($id, $idcertificacion, $idcentro_costo, 1, $bus_conceptos['total'], $idfuente_financiamiento, $idtipo_presupuesto,$idclasificador_presupuestario,$idordinal,$anio,$idcertificacion_aporte);
 					}
 				}else{
-					
+
 					$id = $idarticulos_servicios;
-					/*$sql_actualizar = mysql_query("update constantes_nomina set 
+					/*$sql_actualizar = mysql_query("update constantes_nomina set
 												  				idarticulos_servicios = '".$id."' where idconstantes_nomina = '".$bus_conceptos['idconcepto']."'")or die("AQUIIII".mysql_error());
 					$sql_actualizar = mysql_query("update articulos_servicios set
 												  				idclasificador_presupuestario = '".$idclasificador_presupuestario."'
@@ -5351,11 +5351,11 @@ if($ejecutar == "nuevaCertificacion") {
 					//echo "update conceptos_nomina set idarticulos_servicios = '".$id."' where idconceptos_nomina = '".$con[1]."'";
 					*/
 					if ($idcentro_costo_fijo == 0 or $idcentro_costo_fijo == ''){
-						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica 
-															  			from 
+						$sql_categoria_programatica = mysql_query("select no.idcategoria_programatica
+															  			from
 																	trabajador tr,
 																	niveles_organizacionales no
-																		where 
+																		where
 																	tr.idtrabajador = '".$bus_conceptos['idtrabajador']."'
 																	and no.idniveles_organizacionales = tr.centro_costo")or die("eeeeee".mysql_error());
 						$bus_categoria_programatica = mysql_fetch_array($sql_categoria_programatica);
@@ -5363,14 +5363,14 @@ if($ejecutar == "nuevaCertificacion") {
 					}else{
 						$idcentro_costo = $idcentro_costo_fijo;
 					}
-					
-					$sql_buscar = mysql_query("select * from articulos_compra_servicio 
-																		where 
+
+					$sql_buscar = mysql_query("select * from articulos_compra_servicio
+																		where
 																		idarticulos_servicios = '".$id."'
-																		and idcategoria_programatica = '".$idcentro_costo."' 
+																		and idcategoria_programatica = '".$idcentro_costo."'
 																		and idorden_compra_servicio = '".$idcertificacion."'")or die("qqqqqq".mysql_error());
 					$num_buscar= mysql_num_rows($sql_buscar);
-				
+
 					if($num_buscar > 0){
 						//echo "entro constante ".$bus_consulta_articulos["tipo_concepto"]." id art ".$id;
 						$bus_busqueda = mysql_fetch_array($sql_buscar);
@@ -5378,23 +5378,23 @@ if($ejecutar == "nuevaCertificacion") {
 					}else{
 						ingresarMaterial($id, $idcertificacion, $idcentro_costo, 1, $bus_conceptos['total'], $idfuente_financiamiento, $idtipo_presupuesto,$idclasificador_presupuestario,$idordinal,$anio,$idcertificacion_aporte);
 					}
-					
-				}	
+
+				}
 			} // FIN DE SI ES TIPO ASIGNACION O DEDUCCION
 
 		}
-		
+
 	}
 
 	//ACTUALIZO LOS TOTALES DE LAS CERTIFICACIONES
-	if($idcertificacion_aporte == ''){ 
-		$idcertificacion_aporte=0; 
+	if($idcertificacion_aporte == ''){
+		$idcertificacion_aporte=0;
 	}else{
 		$sql_actualizar_certificacion = mysql_query("update orden_compra_servicio
 												set total = sub_total - exento
 												where idorden_compra_servicio = '".$idcertificacion_aporte."'");
 	}
-	echo $idcertificacion."|.|".$idcertificacion_aporte;	
+	echo $idcertificacion."|.|".$idcertificacion_aporte;
 	$sql_actualizar_certificacion = mysql_query("update orden_compra_servicio
 												set total = sub_total - exento
 												where idorden_compra_servicio = '".$idcertificacion."'");
@@ -5402,7 +5402,7 @@ if($ejecutar == "nuevaCertificacion") {
 	$sql_actualizar  = mysql_query("update generar_nomina set
 											idorden_compra_servicio = '".$idcertificacion."',
 											idorden_compra_servicio_aporte = '".$idcertificacion_aporte."'
-												where 
+												where
 											idgenerar_nomina = '".$idgenerar_nomina."'");
 
 }

@@ -3189,24 +3189,26 @@ if ($ejecutar == "consultarPrestaciones") {
             <thead>
             <tr>
                 <td width="2%" class="Browse" align="center" style="font-size: 8">A&ntilde;o</td>
-                <td width="2%" class="Browse" align="center"s>Mes</td>
-                <td width="8%" class="Browse" align="center">Sueldo del Mes</td>
-                <td width="8%" class="Browse" align="center">Otros Complement</td>
-                <td width="8%" class="Browse" align="center">Bono Vacacional</td>
+                <td width="2%" class="Browse" align="center" style="font-size: 8">Mes</td>
+                <td width="8%" class="Browse" align="center" style="font-size: 8">Sueldo del Mes</td>
+                <td width="8%" class="Browse" align="center" style="font-size: 8">Otros Complement</td>
+                <td width="2%" class="Browse" align="center" style="font-size: 8">DBV</td>
+                <td width="8%" class="Browse" align="center" style="font-size: 8">Bono Vacacional</td>
+                <td width="2%" class="Browse" align="center" style="font-size: 8">DBFA</td>
                 <td width="8%" class="Browse" align="center" style="font-size: 8">Bono Fin de A&ntilde;o</td>
-                <td width="8%" class="Browse" align="center">Remuner. Mensual</td>
-                <td width="3%" class="Browse" align="center">A</td>
+                <td width="8%" class="Browse" align="center" style="font-size: 8">Remuner. Mensual</td>
+                <td width="1%" class="Browse" align="center">A</td>
                 <td width="1%" class="Browse" align="center">M</td>
-                <td width="2%" class="Browse" align="center">Ley</td>
-                <td width="1%" class="Browse" align="center">Dias Prest</td>
-                <td width="1%" class="Browse" align="center">Dias Adici</td>
-                <td width="8%" class="Browse" align="center">Prest del Mes</td>
-                <td width="10%" class="Browse" align="center">Prest Acumula</td>
-                <td width="8%" class="Browse" align="center">Tasa de Interes</td>
-                <td width="5%" class="Browse" align="center">Interes Prest.</td>
-                <td width="10%" class="Browse" align="center">Interes Acumulado</td>
-                <td width="12%" class="Browse" align="center">Prest + Int Acumulad</td>
-                <td class="Browse" align="center" colspan='2'>Acci&oacute;n</td>
+                <td width="1%" class="Browse" align="center">Ley</td>
+                <td width="1%" class="Browse" align="center">DP</td>
+                <td width="1%" class="Browse" align="center">DA</td>
+                <td width="6%" class="Browse" align="center" style="font-size: 8">Prest del Mes</td>
+                <td width="10%" class="Browse" align="center" style="font-size: 8">Prest Acumula</td>
+                <td width="8%" class="Browse" align="center" style="font-size: 8">Tasa de Interes</td>
+                <td width="5%" class="Browse" align="center" style="font-size: 8">Interes Prest.</td>
+                <td width="10%" class="Browse" align="center" style="font-size: 8">Interes Acumulado</td>
+                <td width="12%" class="Browse" align="center" style="font-size: 8">Prest + Int Acumulad</td>
+                <td class="Browse" align="center" colspan='2' style="font-size: 8">Acci&oacute;n</td>
             </tr>
             </thead>
          <?
@@ -3446,7 +3448,7 @@ if ($ejecutar == "consultarPrestaciones") {
 
             ?>
                 <tr  bordercolor="#000000" bgcolor='#A9D0F5'>
-                    <td align="right" class="Browse" colspan='12'>TOTALES DEL AÑO: <?=$anio_totalizar?></td>
+                    <td align="right" class="Browse" colspan='14'>TOTALES DEL AÑO: <?=$anio_totalizar?></td>
                     <td align="right" class="Browse"><?=number_format($prestaciones_anuales, 2, ",", ".")?></td>
                     <td align="right" class="Browse" style="color:#F00"><?=number_format($adelantos_prestaciones_anuales, 2, ",", ".")?></td>
                     <td align="right" class="Browse">&nbsp;</td>
@@ -3515,8 +3517,12 @@ if ($ejecutar == "consultarPrestaciones") {
                                                     onblur="guardarValorSueldo('sueldo_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
                 <td align="right" class="Browse"><input type="text" size="12" id="complementos_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["otros_complementos"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
                                                     onblur="guardarValorOtros('complementos_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
+                <td align="right" class="Browse"><input type="text" size="6" id="dias_bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["dias_bono_vacacional"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
+                                                    onblur="guardarValorDiasBonoVacacional('dias_bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
                 <td align="right" class="Browse"><input type="text" size="12" id="bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["bono_vacacional"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
                                                     onblur="guardarValorBonoVacacional('bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
+                <td align="right" class="Browse"><input type="text" size="6" id="dias_bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["dias_bono_fin_anio"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
+                                                    onblur="guardarValorDiasBonoFinAnio('dias_bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
                 <td align="right" class="Browse"><input type="text" size="12" id="bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["bono_fin_anio"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
                                                     onblur="guardarValorBonoFinAnio('bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
                 <td align="right" class="Browse"><?=number_format($ingreso_mensual, 2, ",", ".")?></td>
@@ -3527,7 +3533,7 @@ if ($ejecutar == "consultarPrestaciones") {
                  <td align="center" class="Browse"><?if ($mostrar == true) {echo $dias_adicionales;} else {echo "0";}?></td>
                 <td align="right" class="Browse"><?=number_format($prestaciones_del_mes, 2, ",", ".")?></td>
                 <td align="right" class="Browse"><?=number_format($prestaciones_acumuladas, 2, ",", ".")?></td>
-                <td align="right" class="Browse"><?=number_format($bus_tasas["interes"], 2, ",", ".")?> %</td>
+                <td align="right" class="Browse"><?=number_format($bus_tasas["interes"], 2, ",", ".")?></td>
                 <td align="right" class="Browse"><?=number_format($interes_prestaciones, 2, ",", ".")?></td>
                 <td align="right" class="Browse"><?=number_format($interes_acumulado, 2, ",", ".")?></td>
                 <td align="right" class="Browse"><?=number_format($prestacion_interes_acumulado, 2, ",", ".")?></td>
@@ -3564,7 +3570,7 @@ if ($ejecutar == "consultarPrestaciones") {
 
             ?>
             <tr bordercolor="#000000" bgcolor='#FFFFCC' onMouseOver="setRowColor(this, 0, 'over', '#FFFFCC', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#FFFFCC', '#EAFFEA', '#FFFFAA')" id="tr_adelanto_<?=$bus_consulta["idtabla_prestaciones"]?>" style="visibility:collapse">
-                <td align="center" class="Browse" colspan="12" style="font-size:14px; font-weight:bold">ADELANTO</td>
+                <td align="center" class="Browse" colspan="14" style="font-size:14px; font-weight:bold">ADELANTO</td>
                 <td align="right" class="Browse"><input type="text" style="text-align:right" id="adelanto_prestaciones_<?=$bus_consulta["idtabla_prestaciones"]?>" size="12"></td>
                 <td align="right" class="Browse" colspan='2'>&nbsp;</td>
                 <td align="right" class="Browse"><input type="text" style="text-align:right" id="adelanto_interes_<?=$bus_consulta["idtabla_prestaciones"]?>" size="12"></td>
@@ -3574,7 +3580,7 @@ if ($ejecutar == "consultarPrestaciones") {
         } else {
             ?>
                 <tr bordercolor="#000000" bgcolor='#FFFFCC' onMouseOver="setRowColor(this, 0, 'over', '#FFFFCC', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#FFFFCC', '#EAFFEA', '#FFFFAA')" id="tr_adelanto_<?=$bus_consulta["idtabla_prestaciones"]?>" style="font-weight:bold">
-                    <td align="center" class="Browse" colspan="12" style="font-size:14px; font-weight:bold">ADELANTO</td>
+                    <td align="center" class="Browse" colspan="14" style="font-size:14px; font-weight:bold">ADELANTO</td>
                     <td align="right" class="Browse" style="color:#F00"><?=number_format($bus_adelanto["monto_prestaciones"], 2, ",", ".")?></td>
                     <td align="right" class="Browse" colspan='2'>&nbsp;</td>
                     <td align="right" class="Browse" style="color:#F00"><?=number_format($bus_adelanto["monto_interes"], 2, ",", ".")?></td>
@@ -4250,7 +4256,7 @@ if ($ejecutar == "consultarTotalesGeneralesPrestaciones") {
 
     $total_interes_prestaciones = $prestacion_interes_acumulado - $prestaciones_acumuladas;
 
-    $sql_vacaciones = mysql_query("select * from tabla_vacaciones where idtrabajador = '" . $idtrabajador . "'");
+    /*$sql_vacaciones = mysql_query("select * from tabla_vacaciones where idtrabajador = '" . $idtrabajador . "'");
     while ($bus_vacaciones = mysql_fetch_array($sql_vacaciones)) {
         $total_vacaciones += ($bus_vacaciones["sueldo"] / 30) * $bus_vacaciones["dias"];
     }
@@ -4266,13 +4272,14 @@ if ($ejecutar == "consultarTotalesGeneralesPrestaciones") {
     }
 
     $total_a_pagar = ($prestacion_interes_acumulado + $total_vacaciones + $total_aguinaldos) - $total_deducciones;
-
+    */
+    $total_a_pagar = $prestacion_interes_acumulado;
     echo number_format($prestaciones_acumuladas, 2, ",", ".") . "|.|" .
     number_format($total_interes_prestaciones, 2, ",", ".") . "|.|" .
     number_format($prestacion_interes_acumulado, 2, ",", ".") . "|.|" .
-    number_format($total_vacaciones, 2, ",", ".") . "|.|" .
-    number_format($total_aguinaldos, 2, ",", ".") . "|.|" .
-    number_format($total_deducciones, 2, ",", ".") . "|.|" .
+    //number_format($total_vacaciones, 2, ",", ".") . "|.|" .
+    //number_format($total_aguinaldos, 2, ",", ".") . "|.|" .
+    //number_format($total_deducciones, 2, ",", ".") . "|.|" .
     number_format($total_a_pagar, 2, ",", ".");
 
 }

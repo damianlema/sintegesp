@@ -1864,6 +1864,8 @@ function abrirCerrarAguinaldos(){
         <td id="total_prestaciones_interes_acumulado" style="text-align:right; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
         <td align="left"><strong>Bs.</strong></td>
     </tr>
+    <?php
+    /*
     <tr>
       <td align="right" class='viewPropTitle'>Total Vacaciones y bonos Vencidos</td>
         <td id="total_vacaciones_acumuladas" style="text-align:right; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
@@ -1879,6 +1881,8 @@ function abrirCerrarAguinaldos(){
         <td id="total_deducciones" style="text-align:right; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
         <td align="left"><strong>Bs.</strong></td>
     </tr>
+    */
+   ?>
     <tr>
       <td align="right" class='viewPropTitle'>Total a pagar</td>
         <td id="total_a_pagar" style="text-align:right; color:#900; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
@@ -1919,7 +1923,8 @@ function abrirCerrarAguinaldos(){
 
     <br>
 
-
+<?php
+/*
     <table align="center" width="100%" style="background-color:#09F; color:#FFF; font-weight:bold">
         <tr>
             <td style="color:#FFF">Vacacionales Vencidas</td>
@@ -2100,7 +2105,8 @@ for ($i = 1997; $i < date("Y"); $i++) {
     <div id="lista_deducciones"></div>
 
     </div>
-
+*/
+?>
 
 
     </div>
