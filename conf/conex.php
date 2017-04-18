@@ -28,6 +28,7 @@ function Conectarse()
     return $link;
 }
 
+
 function desconectar()
 {
     mysql_close();
