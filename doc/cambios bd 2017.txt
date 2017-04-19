@@ -1,3 +1,6 @@
 UPDATE `tipo_movimiento_personal` SET `relacion_laboral` = 'egreso' WHERE `tipo_movimiento_personal`.`idtipo_movimiento` = 2;
 
-UPDATE `accion` SET `url` = 'modulos/almacen/consultar_materia.php' WHERE `accion`.`id_accion` = 1189;
+INSERT INTO `accion` (`id_accion`, `nombre_accion`, `id_modulo`, `url`, `mostrar`, `accion_padre`, `posicion`) VALUES (NULL, 'Importar Prestaciones', '0', 'modulos/rrhh/cargar_prestaciones.php ', '1', '5', '5');
+
+ALTER TABLE `tabla_prestaciones` ADD `dias_bono_vacacional` INT(4) NOT NULL AFTER `sueldo`;
+ALTER TABLE `tabla_prestaciones` ADD `dias_bono_fin_anio` INT(4) NOT NULL AFTER `bono_vacacional`;
