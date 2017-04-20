@@ -1843,58 +1843,40 @@ function abrirCerrarAguinaldos(){
 
     <!-- ********************************************* PRESTACIONES SOCIALES *********************************************-->
     <div id="div_prestacionesSociales" style="display:none">
-
-    <table align="center" width="40%">
-    <tr>
-        <td align="right" class='viewPropTitle'>Fecha de Ingreso:</td>
-        <td id="div_fecha_ingreso_prestaciones" colspan="2"></td>
-    </tr>
-    <tr>
-      <td align="right" class='viewPropTitle'>Total Prestaciones Acumuladas</td>
-        <td id="total_prestaciones_acumuladas" style="text-align:right; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
-         <td align="left"><strong>Bs.</strong></td>
-    </tr>
-    <tr>
-      <td align="right" class='viewPropTitle'>Total Interes Acumulado</td>
-        <td id="total_interes_acumulado" style="text-align:right; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
-        <td align="left"><strong>Bs.</strong></td>
-    </tr>
-    <tr>
-      <td align="right" class='viewPropTitle'>Total Prestaciones + Interes Acumulados</td>
-        <td id="total_prestaciones_interes_acumulado" style="text-align:right; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
-        <td align="left"><strong>Bs.</strong></td>
-    </tr>
-    <?php
-    /*
-    <tr>
-      <td align="right" class='viewPropTitle'>Total Vacaciones y bonos Vencidos</td>
-        <td id="total_vacaciones_acumuladas" style="text-align:right; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
-        <td align="left"><strong>Bs.</strong></td>
-    </tr>
-    <tr>
-      <td align="right" class='viewPropTitle'>Total aguinaldo y otros bonos vencidos</td>
-        <td id="total_aguinaldos_acumulados" style="text-align:right; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
-        <td align="left"><strong>Bs.</strong></td>
-    </tr>
-    <tr>
-      <td align="right" class='viewPropTitle'>Total Deducciones</td>
-        <td id="total_deducciones" style="text-align:right; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
-        <td align="left"><strong>Bs.</strong></td>
-    </tr>
-    */
-   ?>
-    <tr>
-      <td align="right" class='viewPropTitle'>Total a pagar</td>
-        <td id="total_a_pagar" style="text-align:right; color:#900; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
-        <td align="left"><strong>Bs.</strong></td>
-    </tr>
-    </table>
+      <div>
+        <table align="center" width="40%">
+          <tr>
+              <td align="right" class='viewPropTitle'>Fecha de Ingreso:</td>
+              <td id="div_fecha_ingreso_prestaciones" colspan="2"></td>
+          </tr>
+          <tr>
+            <td align="right" class='viewPropTitle'>Total Prestaciones Acumuladas</td>
+              <td id="total_prestaciones_acumuladas" style="text-align:right; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
+               <td align="left"><strong>Bs.</strong></td>
+          </tr>
+          <tr>
+            <td align="right" class='viewPropTitle'>Total Interes Acumulado</td>
+              <td id="total_interes_acumulado" style="text-align:right; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
+              <td align="left"><strong>Bs.</strong></td>
+          </tr>
+          <tr>
+            <td align="right" class='viewPropTitle'>Total Prestaciones + Interes Acumulados</td>
+              <td id="total_prestaciones_interes_acumulado" style="text-align:right; color:#000; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
+              <td align="left"><strong>Bs.</strong></td>
+          </tr>
+          <tr>
+            <td align="right" class='viewPropTitle'>Total a pagar</td>
+              <td id="total_a_pagar" style="text-align:right; color:#900; font-family:Arial, Helvetica, sans-serif; font-size:14px; font-weight:bold"></td>
+              <td align="left"><strong>Bs.</strong></td>
+          </tr>
+        </table>
+      </div>
     <br>
 
 
 <table align="center" width="100%" style="color:#FFF; background-color:#09F;font-weight:bold">
     <tr>
-      <td style="color:#FFF">Antiguedad mas Intereses</td>
+      <td style="color:#FFF">Antiguedad m&aacute;s Intereses</td>
       <td align="right" onClick="abrirCerrarAntiguedadIntereses()" style="cursor:pointer; color:#FFF" id="td_signo_mas_antiguedad">+</td>
     </tr>
 </table>
@@ -1915,8 +1897,11 @@ function abrirCerrarAguinaldos(){
                 </td>
             </tr>
         </table>
-        </form>
+    </form>
 
+    <a href="modulos/rrhh/documentos/carga_prestaciones.xls">Descargar modelo de archivo carga masiva</a>
+    <br>
+    <a href="modulos/rrhh/documentos/instrucciones_prestaciones.pdf">Descargar instrucciones para carga masiva</a>
 
     <div id="lista_prestaciones"></div>
     </div>
