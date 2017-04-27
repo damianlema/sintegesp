@@ -19,7 +19,7 @@ function Conectarse()
         exit();
     }
 
-    if (!mysql_select_db("gestion_mapire_Itrimestre", $link)) {
+    if (!mysql_select_db("gestion_mapire_2017_itrimestre", $link)) {
 
         echo "Error conectando a la base de datos.";
         exit();
