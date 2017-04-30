@@ -19,11 +19,7 @@ function Conectarse()
         exit();
     }
 
-<<<<<<< HEAD
-    if (!mysql_select_db("gestion_mapire_2017_itrimestre", $link)) {
-=======
     if (!mysql_select_db("gestion_mariguitar_2017abr2017", $link)) {
->>>>>>> 6c1073ead21b30b8524dfe128d0b87ab1e83f603
 
         echo "Error conectando a la base de datos.";
         exit();
@@ -38,4 +34,6 @@ function desconectar()
 }
 
 extract($_SESSION);
+
+
 
