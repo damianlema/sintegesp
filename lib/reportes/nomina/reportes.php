@@ -2863,7 +2863,7 @@ switch ($nombre) {
 					$filtro_unidad
 					$filtro_centro
 				GROUP BY rgn.idtrabajador
-				ORDER BY length(cedula), cedula";
+				ORDER BY apellidos, nombres";
 
 
 
@@ -2874,7 +2874,7 @@ switch ($nombre) {
 		while ($field_trabajador = mysql_fetch_array($query_trabajador)) {
 			$pdf->SetDrawColor(0, 0, 0); $pdf->SetFillColor(255, 255, 255); $pdf->SetTextColor(0, 0, 0);
 			$pdf->SetFont('Arial', '', 10);
-			$pdf->Row(array($x, number_format($field_trabajador['cedula'], 0, '', '.'), utf8_decode($field_trabajador['nombres'].' '.$field_trabajador['apellidos']), number_format($field_trabajador['total'], 2, ',', '.')));
+			$pdf->Row(array($x, number_format($field_trabajador['cedula'], 0, '', '.'), utf8_decode($field_trabajador['apellidos'].', '.$field_trabajador['nombres']), number_format($field_trabajador['total'], 2, ',', '.')));
 			
 			$linea = $pdf->GetY(); if ($linea > 250) nomina_detalle_conceptos($pdf, $field_titulo['titulo_nomina'], $periodo, $field_titulo['concepto'], $titulo_nivel);
 			$x++;
