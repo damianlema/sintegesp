@@ -17,17 +17,15 @@ extract($_POST);
 																			status = 'a',
 																			usuario = '".$login."',
 																			fechayhora= '".$fh."',
-																			dias_prestaciones_mes = '".$dias_prestaciones_mes."',
-																			meses_inicio_pago_prestaciones = '".$mes_inicio_pago_prestaciones."',
                                       numero_patronal_ivss = '".$numero_patronal_ivss."',
                                       fecha_inscripcion_patronal_ivss = '".$fecha_inscripcion_patronal_ivss."',
                                       regimen_ivss = '".$regimen_ivss."',
                                       riesgo_ivss = '".$riesgo_ivss."',
                                       nombre_apellido_representante_ivss = '".$nombre_apellido_representante_ivss."',
                                       cedula_representante_ivss = '".$cedula_representante_ivss."'")or die(mysql_query());
-				
+
 				$sql_actualizar_dependencia = mysql_query("update dependencias set idmodulo = '".$_SESSION["modulo"]."' where iddependencia = '".$dependencias."'");
-																			
+
 			?>
 			<script>
 			mostrarMensajes("exito", "La configuracion ha sido Guardada con Exito");
@@ -67,7 +65,7 @@ $bus = mysql_fetch_array($sql);
 	  	<?
 	  }
 	  ?>
-      </select>  
+      </select>
       </td>
     </tr>
      <tr>
@@ -128,45 +126,7 @@ $bus = mysql_fetch_array($sql);
        <td>&nbsp;</td>
        <td>&nbsp;</td>
      </tr>
-     <tr>
-       <td class="viewPropTitle">Mes Inicio Pago de Prestaciones</td>
-       <td>
-       <select name="mes_inicio_pago_prestaciones" id="mes_inicio_pago_prestaciones">
-       		<?
-            for($i=1;$i<=12;$i++){
-			?>
-			<option <? if($bus["meses_inicio_pago_prestaciones"] == $i){echo "selected";}?> value="<?=$i?>"><?=$i?></option>
-			<?	
-			}
-			?>
-       </select>
-            
-       </td>
-       <td>&nbsp;</td>
-       <td>&nbsp;</td>
-       <td>&nbsp;</td>
-       <td>&nbsp;</td>
-     </tr>
-     <tr>
-       <td class="viewPropTitle">Dias Prestaciones al Mes</td>
-       <td>
-       
-       <select name="dias_prestaciones_mes" id="dias_prestaciones_mes">
-       		<?
-            for($i=1;$i<=30;$i++){
-			?>
-			<option <? if($bus["dias_prestaciones_mes"] == $i){echo "selected";}?> value="<?=$i?>"><?=$i?></option>
-			<?	
-			}
-			?>
-       </select>
-       
-       </td>
-       <td>&nbsp;</td>
-       <td>&nbsp;</td>
-       <td>&nbsp;</td>
-       <td>&nbsp;</td>
-     </tr>
+
     <tr>
       <td colspan="6">&nbsp;</td>
     </tr>
@@ -190,7 +150,7 @@ $bus = mysql_fetch_array($sql);
               align         : "Tr",
               ifFormat      : "%Y-%m-%d"
               });
-            </script>                  
+            </script>
        </td>
        <td>&nbsp;</td>
        <td>&nbsp;</td>

@@ -12,26 +12,26 @@ extract($_POST);
 $nombre = $_FILES['archivo_excel']['name'];
 $nombre_temp = $_FILES['archivo_excel']['tmp_name'];
 if (move_uploaded_file($nombre_temp, "servidor/archivos/".$nombre)){
-require_once 'Excel/reader.php';
-$data = new Spreadsheet_Excel_Reader();
-$data->setOutputEncoding('CP1251');
-$data->read('servidor/archivos/'.$nombre);
-error_reporting(E_ALL ^ E_NOTICE);
-	for($i=1;$i<($cantidad_filas+1);$i++){
-	echo $nombre;
+	require_once 'Excel/reader.php';
+	$data = new Spreadsheet_Excel_Reader();
+	$data->setOutputEncoding('CP1251');
+	$data->read('servidor/archivos/'.$nombre);
+	error_reporting(E_ALL ^ E_NOTICE);
+		for($i=1;$i<($cantidad_filas+1);$i++){
+			echo $nombre;
 				$sql_categoria_programatica = mysql_query("select * from categoria_programatica where codigo = '".$data->sheets[0]['cells'][$i][1]."'");
 				$bus_categoria_programatica = mysql_fetch_array($sql_categoria_programatica);
 				$num_categoria_programatica = mysql_num_rows($sql_categoria_programatica);
-				
+
 				if($num_categoria_programatica > 0){
-				
-				
+
+
 				$sql_clasificador_presupuestario = mysql_query("select * from clasificador_presupuestario where codigo_cuenta = '".$data->sheets[0]['cells'][$i][2]."'")or die(mysql_error());
 				$bus_clasificador_presupuestario = mysql_fetch_array($sql_clasificador_presupuestario);
 				$num_clasificador_presupuestario = mysql_num_rows($sql_clasificador_presupuestario);
-				
+
 				if($num_clasificador_presupuestario > 0){
-				
+
 				//if(strlen($data->sheets[0]['cells'][$i][3],0,1) == 5){
 					//$parte1_ordinal = substr($data->sheets[0]['cells'][$i][3],0,1);
 					//$parte2_ordinal = substr($data->sheets[0]['cells'][$i][3],2,4);
@@ -39,18 +39,18 @@ error_reporting(E_ALL ^ E_NOTICE);
 				//}else{
 					$ordinal = $data->sheets[0]['cells'][$i][3];
 					//echo $ordinal;
-				//}	
-					
+				//}
+
 				$sql_ordinal = mysql_query("select * from ordinal where codigo = '".$ordinal."'");
 				$bus_ordinal = mysql_fetch_array($sql_ordinal);
 				$num_ordinal = mysql_num_rows($sql_ordinal);
-				
+
 				if ($num_ordinal > 0){
 					$sql_configuracion = mysql_query("select * from configuracion");
 					$bus_configuracion = mysql_fetch_array($sql_configuracion);
-					
-														
-														
+
+
+
 					$sql_maestro = mysql_query("insert into maestro_presupuesto(
 													idcategoria_programatica,
 													anio,
@@ -74,7 +74,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 													'a',
 													'".$login."',
 													'".$fh."')")or die(mysql_error());
-				
+
 					if($sql_maestro){
 						echo "Linea Numero $i -> Se proceso la categoria programatica nro: ".$data->sheets[0]['cells'][$i][1]."<br />";
 					}else{
@@ -89,12 +89,12 @@ error_reporting(E_ALL ^ E_NOTICE);
 		}else{
 			echo "<strong style='color:#FF0000'>La categoria programatica nro: ".$data->sheets[0]['cells'][$i][1].", no se encontro<br /></strong>";
 		}
-		
+
 	}
 }else{
 	echo $nombre;
    echo "DISCULPE EL ARCHIVO NO SE PUDO GUARDAR POR FAVOR INTENTE DE NUEVO";
-} 
+}
 
 }else{
 ?>
@@ -112,7 +112,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 	  while($bus_fuente_financiamiento = mysql_fetch_array($sql_fuente_financiamiento)){
 	  	?>
 		<option value="<?=$bus_fuente_financiamiento["idfuente_financiamiento"]?>"><?=$bus_fuente_financiamiento["denominacion"]?></option>
-		<?	
+		<?
 	  }
 	  ?>
 	  </select>
@@ -121,7 +121,7 @@ error_reporting(E_ALL ^ E_NOTICE);
     <tr>
       <td>Tipo de Presupuesto</td>
       <td>
-      
+
       <?
       $sql_tipo_presupuesto = mysql_query("select * from tipo_presupuesto");
 	  ?>
@@ -130,11 +130,11 @@ error_reporting(E_ALL ^ E_NOTICE);
 	  while($bus_tipo_presupuesto = mysql_fetch_array($sql_tipo_presupuesto)){
 	  	?>
 		<option value="<?=$bus_tipo_presupuesto["idtipo_presupuesto"]?>"><?=$bus_tipo_presupuesto["denominacion"]?></option>
-		<?	
+		<?
 	  }
 	  ?>
 	  </select>
-      
+
       </td>
     </tr>
     <tr>

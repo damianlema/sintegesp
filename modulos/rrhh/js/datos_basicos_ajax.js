@@ -2784,6 +2784,20 @@ function guardarValorOtros(complementos_prestaciones_modificar_idtabla_prestacio
     ajax.send("otros=" + otros + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorOtros");
 }
 
+function guardarValorDiasBonoVacacional(dias_bono_vacacional_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
+    var dias_bv = document.getElementById("" + dias_bono_vacacional_prestaciones_modificar_idtabla_prestaciones + "").value;
+    var ajax = nuevoAjax();
+    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 1) {}
+        if (ajax.readyState == 4) {
+            consultarPrestaciones();
+        }
+    }
+    ajax.send("dias_bv=" + dias_bv + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorDiasBonoVacacional");
+}
+
 function guardarValorBonoVacacional(bono_vacacional_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
     var bono_vacacional = document.getElementById("" + bono_vacacional_prestaciones_modificar_idtabla_prestaciones + "").value;
     var ajax = nuevoAjax();
@@ -2796,6 +2810,20 @@ function guardarValorBonoVacacional(bono_vacacional_prestaciones_modificar_idtab
         }
     }
     ajax.send("bono_vacacional=" + bono_vacacional + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorBonoVacacional");
+}
+
+function guardarValorDiasBonoFinAnio(dias_bono_fin_anio_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
+    var dias_bfa = document.getElementById("" + dias_bono_fin_anio_prestaciones_modificar_idtabla_prestaciones + "").value;
+    var ajax = nuevoAjax();
+    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 1) {}
+        if (ajax.readyState == 4) {
+            consultarPrestaciones();
+        }
+    }
+    ajax.send("dias_bfa=" + dias_bfa + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorDiasBonoFinAnio");
 }
 
 function guardarValorBonoFinAnio(bono_fin_anio_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
@@ -3078,4 +3106,38 @@ function consultarTotalesGeneralesPrestaciones() {
         }
     }
     ajax.send("fecha_ingreso=" + fecha_ingreso + "&idtrabajador=" + idtrabajador + "&ejecutar=consultarTotalesGeneralesPrestaciones");
+}
+
+
+function importarPrestaciones() {
+
+  var archivo_importar = document.getElementById("archivo_excel_importar").value;
+  alert(archivo_importar);
+
+  var idtrabajador = document.getElementById("idtrabajador").value;
+  if (archivo_importar=="") alert("¡Debe seleccionar un archivo a importar!");
+  else {
+      var ajax=nuevoAjax();
+      ajax.open("POST", "lib/reportes/recursos_humanos/datos_basicos_ajax.php", true);
+      ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+      ajax.onreadystatechange=function() {
+        if(ajax.readyState == 1){
+          document.getElementById("divCargando").style.display = "block";
+          }
+        if (ajax.readyState==4) {
+            alert(ajax.responseText);
+          document.getElementById("divCargando").style.display = "none";
+        }
+      }
+      ajax.send("archivo_importar="+archivo_importar+"&idtrabajador="+idtrabajador+ "&ejecutar=importarPrestaciones");
+  }
+}
+
+function handleFiles(archivo){
+    for (var i=0, il=archivo.length; i<il; i++){
+        file = archivo[i];
+        alert(file.name);
+        alert(file.size);
+        alert(file.type);
+    }
 }

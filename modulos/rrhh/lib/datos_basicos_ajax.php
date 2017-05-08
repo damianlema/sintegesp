@@ -598,7 +598,7 @@ if ($ejecutar == "consultarCargaFamiliar") {
     $registros_grilla_carga = mysql_query("select * from carga_familiar where idtrabajador = '" . $idtrabajador . "'");
     ?>
 
-<table class="Main" cellpadding="0" cellspacing="0" width="80%">
+    <table class="Main" cellpadding="0" cellspacing="0" width="80%">
                 <tr>
                     <td>
                         <form name="grilla" action="" method="POST">
@@ -615,7 +615,7 @@ if ($ejecutar == "consultarCargaFamiliar") {
                             </thead>
 
                             <?php
-if ($existen_registros == 0) {
+    if ($existen_registros == 0) {
         while ($llenar_grilla = mysql_fetch_array($registros_grilla_carga)) {
             ?>
                                 <tr bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
@@ -854,7 +854,7 @@ if ($ejecutar == "consultarInstruccionAcademica") {
                             </thead>
 
                             <?php
-if ($existen_registros == 0) {
+    if ($existen_registros == 0) {
         while ($llenar_grilla = mysql_fetch_array($registros_grilla_carga)) {
             ?>
                                 <tr bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
@@ -866,7 +866,7 @@ if ($existen_registros == 0) {
                                 </div>
                                 </td>
                                 <?php
-echo "<td align='left' class='Browse' width='20%'>" . $llenar_grilla["denominacion_nivel"] . "</td>";
+    echo "<td align='left' class='Browse' width='20%'>" . $llenar_grilla["denominacion_nivel"] . "</td>";
 
             echo "<td align='left' class='Browse'>" . $llenar_grilla["denominacion_profesion"] . "</td>";
             echo "<td align='left' class='Browse'>" . $llenar_grilla["denominacion_mension"] . "</td>";
@@ -1075,10 +1075,10 @@ if ($ejecutar == "consultarExperienciaLaboral") {
 
     $sql_consulta = mysql_query("select * from experiencia_laboral where idtrabajador = '" . $idtrabajador . "'");
     ?>
-<br>
-<h2 class="sqlmVersion"></h2>
-<br>
-<div align="center">
+    <br>
+    <h2 class="sqlmVersion"></h2>
+    <br>
+    <div align="center">
 
     <table class="Browse" cellpadding="0" cellspacing="0" width="80%" align=center>
         <thead>
@@ -3190,12 +3190,24 @@ if ($ejecutar == "consultarPrestaciones") {
             <tr>
                 <td width="2%" class="Browse" align="center" style="font-size: 8">A&ntilde;o</td>
                 <td width="2%" class="Browse" align="center" style="font-size: 8">Mes</td>
-                <td width="8%" class="Browse" align="center" style="font-size: 8">Sueldo del Mes</td>
-                <td width="8%" class="Browse" align="center" style="font-size: 8">Otros Complement</td>
-                <td width="2%" class="Browse" align="center" style="font-size: 8">DBV</td>
-                <td width="8%" class="Browse" align="center" style="font-size: 8">Bono Vacacional</td>
-                <td width="2%" class="Browse" align="center" style="font-size: 8">DBFA</td>
-                <td width="8%" class="Browse" align="center" style="font-size: 8">Bono Fin de A&ntilde;o</td>
+                <td width="8%" class="Browse" align="center" style="font-size: 8"
+                    title="Ingrese lo devengado por sueldo o salario en el mes"
+                    >Sueldo del Mes</td>
+                <td width="8%" class="Browse" align="center" style="font-size: 8"
+                    title="Ingrese la sumatoria de los conceptos adicionales que son parte de la remuneración mensual"
+                    >Otros Complemento</td>
+                <td width="2%" class="Browse" align="center" style="font-size: 8"
+                    title="Ingrese los días pagados por Bono Vacacional en ese periodo. De esta forma se cálcula la alícuota del Bono Vacacional y se suma a la Remuneración Mensual. En caso de fijar un valor de días de Bono Vacacional (DBV), esta alícuota sera prioritaria aunque indique el valor del Bono Vacacional pagado en ese periodo.&#013&#013La alícuota del bono vacacional es calculada de la siguiente forma: &#013&#013AlicuotaBV = (((Sueldo + Otros Complementos) / 30) x DBV / 360) x 30&#013"
+                    >DBV</td>
+                <td width="8%" class="Browse" align="center" style="font-size: 8"
+                    title="Ingrese el valor del Bono Vacacional pagado en ese periodo.&#013&#013Si el valor de DBV (dias bono vacacional) es mayor a cero (0), no se tomará en cuenta el monto que ingrese en esta celda, sino el monto del cálculo de la Alícuota del Bono Vacacional"
+                    >Bono Vacacional</td>
+                <td width="2%" class="Browse" align="center" style="font-size: 8"
+                    title="Ingrese los días pagados por Bono de Fin de Año o Aguinaldo en ese periodo. De esta forma se cálcula la alícuota del Bono de Fin de Año y se suma a la Remuneración Mensual. En caso de fijar un valor de días de Bono de Fin de Año (DBFA), esta alícuota sera prioritaria aunque indique el valor del Bono de Fin de Año pagado en ese periodo.&#013&#013La alícuota del bono de fin de año es calculada de la siguiente forma: &#013&#013AlicuotaBFA = ((((Sueldo + Otros Complementos) / 30) + AlicuotaBV / 30) x DBFA / 360) x 30&#013"
+                    >DBFA</td>
+                <td width="8%" class="Browse" align="center" style="font-size: 8"
+                    title="Ingrese el valor del Bono de Fin de Año pagado en ese periodo.&#013&#013Si el valor de DBFA (dias bono de fin de año) es mayor a cero (0), no se tomará en cuenta el monto que ingrese en esta celda, sino el monto del cálculo de la Alícuota del Bono de Fin de Año"
+                    >Bono Fin de A&ntilde;o</td>
                 <td width="8%" class="Browse" align="center" style="font-size: 8">Remuner. Mensual</td>
                 <td width="1%" class="Browse" align="center">A</td>
                 <td width="1%" class="Browse" align="center">M</td>
@@ -3291,15 +3303,17 @@ if ($ejecutar == "consultarPrestaciones") {
     $adelantos_prestaciones_anuales = 0;
     $adelantos_intereses_anuales    = 0;
 
-    $sql_consulta                                = mysql_query("select * from tabla_prestaciones where idtrabajador = '" . $idtrabajador . "' order by anio, mes");
+    $sql_consulta = mysql_query("select * from tabla_prestaciones
+                                        where idtrabajador = '" . $idtrabajador . "' order by anio, mes");
     list($anioIngreso, $mesIngreso, $diaIngreso) = explode("-", $fecha_ingreso);
 
     //BUCLE PARA IR REVISANDO CADA AÑO Y MES DE LA TABLA DE PRESTACIONES
     while ($bus_consulta = mysql_fetch_array($sql_consulta)) {
+
         $dias_prestaciones = 0;
         $dias_adicionales  = 0;
 
-        $resultado_fecha                                = diferenciaEntreDosFechas($fecha_ingreso, $bus_consulta["anio"] . "-" . $bus_consulta["mes"] . "-01");
+        $resultado_fecha = diferenciaEntreDosFechas($fecha_ingreso, $bus_consulta["anio"] . "-" . $bus_consulta["mes"] . "-01");
         list($anioRegistro, $mesRegistro, $diaRegistro) = explode("|.|", $resultado_fecha);
         //CONTADOR DE LOS MESES QUE VAN TRANSCURRIENDO, LO UTILIZO PARA CONTROLAR SI LA APLICACION
         //DE LA LEY ES MENSUAL, TRIMESTRAL O ANUAL
@@ -3317,6 +3331,7 @@ if ($ejecutar == "consultarPrestaciones") {
             $mes_desde  = $bus_leyes["mes_desde"];
             $anio_hasta = $bus_leyes["anio_hasta"];
             $mes_hasta  = $bus_leyes["mes_hasta"];
+            $capitaliza_intereses = $bus_leyes["capitaliza_intereses"];
 
             //$mes_inicio_prentaciones = $bus_leyes["mes_inicial_abono"];
             //ECHO " AÑO desde: ".$anio_desde." AÑO TABLA: ".$bus_consulta["anio"].'<BR>';
@@ -3444,7 +3459,7 @@ if ($ejecutar == "consultarPrestaciones") {
         }
         //FIN WHILE LEYES APLICADAS
 
-        if ($bus_consulta["anio"] != $anio_totalizar and $anioRegistro >= 0 and $mesRegistro > 0) {
+        if ($bus_consulta["anio"] != $anio_totalizar and $anio_totalizar > 0 and $anioRegistro >= 0 and $mesRegistro >= 0) {
 
             ?>
                 <tr  bordercolor="#000000" bgcolor='#A9D0F5'>
@@ -3485,20 +3500,48 @@ if ($ejecutar == "consultarPrestaciones") {
             $num_adelanto = mysql_num_rows($sql_adelanto);
             $bus_adelanto = mysql_fetch_array($sql_adelanto);
 
-            $ingreso_mensual = $bus_consulta["sueldo"] + $bus_consulta["otros_complementos"] + $bus_consulta["bono_vacacional"] + $bus_consulta["bono_fin_anio"];
+            //ALICUOTA BONO VACACIONAL
+            $alicuota_bv = 0;
+            if ($bus_consulta["dias_bono_vacacional"] > 0){
+                $mensual_bono_vacacional = ((($bus_consulta["sueldo"] + $bus_consulta["otros_complementos"]) / 30) *
+                                                $bus_consulta["dias_bono_vacacional"] / 360) * 30;
+                $alicuota_bv = $mensual_bono_vacacional;
+            }else{
+                $mensual_bono_vacacional = $bus_consulta["bono_vacacional"];
+            }
+
+            //ALICUOTA AGUINALDO
+            if ($bus_consulta["dias_bono_fin_anio"] > 0){
+                $mensual_bono_fin_anio = (((($bus_consulta["sueldo"] + $bus_consulta["otros_complementos"]) / 30)
+                                                + ($alicuota_bv / 30))
+                                                * $bus_consulta["dias_bono_fin_anio"] / 360) * 30;
+            }else{
+                $mensual_bono_fin_anio = $bus_consulta["bono_fin_anio"];
+            }
+
+            $ingreso_mensual = $bus_consulta["sueldo"] + $bus_consulta["otros_complementos"]
+                                + $mensual_bono_vacacional + $mensual_bono_fin_anio;
+
 
             $prestaciones_del_mes = (($ingreso_mensual / 30) * ($dias_prestaciones + $dias_adicionales));
             $prestaciones_acumuladas += $prestaciones_del_mes;
 
-            $interes_prestaciones_del_mes = (($prestaciones_del_mes * $bus_tasas["interes"]) / 100) / 12;
-
-            /*$interes_prestaciones = ($prestacion_interes_acumulado*30*$bus_tasas["interes"])/36000;
-            $interes_acumulado += ($prestacion_interes_acumulado*30*$bus_tasas["interes"])/36000;
-             */
-
-            //CALCULO SIN CAPITALIZAR LOS INTERESES
-            $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
-            $interes_acumulado += (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+            if ($capitaliza_intereses == 'Si'){
+                //CALCULO CAPITALIZANDO LOS INTERESES
+                if($prestacion_interes_acumulado > 0){
+                    $interes_prestaciones = ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_prestaciones_del_mes = ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_acumulado += ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
+                }else{
+                    $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_prestaciones_del_mes = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_acumulado += (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                }
+            }else{
+                //CALCULO SIN CAPITALIZAR LOS INTERESES
+                $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                $interes_acumulado += (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+            }
 
             $prestacion_interes_acumulado = ($prestaciones_acumuladas + $interes_acumulado);
 
@@ -3513,18 +3556,72 @@ if ($ejecutar == "consultarPrestaciones") {
             <tr  bordercolor="#000000" bgcolor='#e7dfce' onMouseOver="setRowColor(this, 0, 'over', '#e7dfce', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#e7dfce', '#EAFFEA', '#FFFFAA')">
                 <td align="center" class="Browse" style="font-size: 9"><?=$bus_consulta["anio"]?></td>
                 <td align="left" class="Browse" style="font-size: 9"><?="(" . $bus_consulta["mes"] . ")&nbsp;" . $meses[$bus_consulta["mes"]]?></td>
-                <td align="right" class="Browse"><input type="text" size="12" id="sueldo_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["sueldo"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right; font-size: 9;"
-                                                    onblur="guardarValorSueldo('sueldo_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
-                <td align="right" class="Browse"><input type="text" size="12" id="complementos_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["otros_complementos"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
-                                                    onblur="guardarValorOtros('complementos_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
-                <td align="right" class="Browse"><input type="text" size="6" id="dias_bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["dias_bono_vacacional"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
-                                                    onblur="guardarValorDiasBonoVacacional('dias_bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
-                <td align="right" class="Browse"><input type="text" size="12" id="bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["bono_vacacional"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
-                                                    onblur="guardarValorBonoVacacional('bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
-                <td align="right" class="Browse"><input type="text" size="6" id="dias_bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["dias_bono_fin_anio"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
-                                                    onblur="guardarValorDiasBonoFinAnio('dias_bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
-                <td align="right" class="Browse"><input type="text" size="12" id="bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>" value="<?=number_format($bus_consulta["bono_fin_anio"], 2, ",", ".")?>" onclick="this.select()" style="text-align:right"
-                                                    onblur="guardarValorBonoFinAnio('bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"></td>
+                <td align="right" class="Browse">
+                    <input  type="text"
+                            size="12"
+                            id="sueldo_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>"
+                            value="<?=number_format($bus_consulta["sueldo"], 2, ",", ".")?>"
+                            onclick="this.select()"
+                            style="text-align:right; font-size: 9;"
+                            onblur="guardarValorSueldo('sueldo_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"
+                        title="Ingrese lo devengado por sueldo o salario en el mes"
+                    >
+                </td>
+                <td align="right" class="Browse">
+                    <input  type="text"
+                            size="12"
+                            id="complementos_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>"
+                            value="<?=number_format($bus_consulta["otros_complementos"], 2, ",", ".")?>"
+                            onclick="this.select()"
+                            style="text-align:right"
+                            onblur="guardarValorOtros('complementos_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"
+                        title="Ingrese la sumatoria de los conceptos adicionales que son parte de la remuneración mensual"
+                    >
+                </td>
+                <td align="right" class="Browse">
+                    <input  type="text"
+                            size="6"
+                            id="dias_bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>"
+                            value="<?=number_format($bus_consulta["dias_bono_vacacional"], 2, ",", ".")?>"
+                            onclick="this.select()"
+                            style="text-align:right"
+                            onblur="guardarValorDiasBonoVacacional('dias_bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"
+                        title="Ingrese los días pagados por Bono Vacacional en ese periodo. De esta forma se cálcula la alícuota del Bono Vacacional y se suma a la Remuneración Mensual. En caso de fijar un valor de días de Bono Vacacional (DBV), esta alícuota sera prioritaria aunque indique el valor del Bono Vacacional pagado en ese periodo.&#013&#013La alícuota del bono vacacional es calculada de la siguiente forma: &#013&#013AlicuotaBV = (((Sueldo + Otros Complementos) / 30) x DBV / 360) x 30&#013"
+                    >
+                </td>
+                <td align="right" class="Browse">
+                    <input  type="text"
+                            size="12"
+                            id="bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>"
+                            value="<?=number_format($bus_consulta["bono_vacacional"], 2, ",", ".")?>"
+                            onclick="this.select()"
+                            style="text-align:right"
+                            onblur="guardarValorBonoVacacional('bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"
+                        title="Ingrese el valor del Bono Vacacional pagado en ese periodo.&#013&#013Si el valor de DBV (dias bono vacacional) es mayor a cero (0), no se tomará en cuenta el monto que ingrese en esta celda, sino el monto del cálculo de la Alícuota del Bono Vacacional"
+                    >
+                </td>
+                <td align="right" class="Browse">
+                    <input  type="text"
+                            size="6"
+                            id="dias_bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>"
+                            value="<?=number_format($bus_consulta["dias_bono_fin_anio"], 2, ",", ".")?>"
+                            onclick="this.select()"
+                            style="text-align:right"
+                            onblur="guardarValorDiasBonoFinAnio('dias_bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"
+                        title="Ingrese los días pagados por Bono de Fin de Año o Aguinaldo en ese periodo. De esta forma se cálcula la alícuota del Bono de Fin de Año y se suma a la Remuneración Mensual. En caso de fijar un valor de días de Bono de Fin de Año (DBFA), esta alícuota sera prioritaria aunque indique el valor del Bono de Fin de Año pagado en ese periodo.&#013&#013La alícuota del bono de fin de año es calculada de la siguiente forma: &#013&#013AlicuotaBFA = ((((Sueldo + Otros Complementos) / 30) + AlicuotaBV / 30) x DBFA / 360) x 30&#013"
+                    >
+                </td>
+                <td align="right" class="Browse">
+                    <input  type="text"
+                            size="12"
+                            id="bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>"
+                            value="<?=number_format($bus_consulta["bono_fin_anio"], 2, ",", ".")?>"
+                            onclick="this.select()"
+                            style="text-align:right"
+                            onblur="guardarValorBonoFinAnio('bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>', '<?=$bus_consulta["idtabla_prestaciones"]?>', this.value)"
+                    title="Ingrese el valor del Bono de Fin de Año pagado en ese periodo.&#013&#013Si el valor de DBFA (dias bono de fin de año) es mayor a cero (0), no se tomará en cuenta el monto que ingrese en esta celda, sino el monto del cálculo de la Alícuota del Bono de Fin de Año"
+                    >
+                </td>
                 <td align="right" class="Browse"><?=number_format($ingreso_mensual, 2, ",", ".")?></td>
                 <td align="center" class="Browse"><?if ($anioRegistro == '') {echo '0';} else {echo $anioRegistro;}?></td>
                 <td align="center" class="Browse"><?if ($mesRegistro == '') {echo '0';} else {echo $mesRegistro;}?></td>
@@ -3537,40 +3634,24 @@ if ($ejecutar == "consultarPrestaciones") {
                 <td align="right" class="Browse"><?=number_format($interes_prestaciones, 2, ",", ".")?></td>
                 <td align="right" class="Browse"><?=number_format($interes_acumulado, 2, ",", ".")?></td>
                 <td align="right" class="Browse"><?=number_format($prestacion_interes_acumulado, 2, ",", ".")?></td>
-                <?/*
-        <td width="3%" align="center" class="Browse">
-
-        <img src="imagenes/modificar.png" onclick="actualizarSueldoPrestaciones('sueldo_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>',
-        'complementos_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>',
-        'bono_vacacional_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>',
-        'bono_fin_anio_prestaciones_modificar_<?=$bus_consulta["idtabla_prestaciones"]?>',
-        '<?=$bus_consulta["idtabla_prestaciones"]?>')" style="cursor:pointer">
-
-        </td>
-
-         */
-        ?>
-                <td width="4%" align="center" class="Browse"><img src="imagenes/delete.png" style="cursor:pointer" onclick="eliminarPrestaciones('<?=$bus_consulta["idtabla_prestaciones"]?>')"></td>
-
-
-                <td width="4%" align="center" class="Browse">
+                <td width="4%" align="center" class="Browse" colspan="2">
                 <?
-        if ($num_adelanto == 0) {
-            ?>
-                <img src="imagenes/add.png" style="cursor:pointer" onclick="document.getElementById('tr_adelanto_<?=$bus_consulta["idtabla_prestaciones"]?>').style.visibility = 'visible'">
-                <?
-        } else {?> &nbsp; <?}
-        ?>
+                if ($num_adelanto == 0) {
+                    ?>
+                        <img src="imagenes/add.png" style="cursor:pointer" onclick="document.getElementById('tr_adelanto_<?=$bus_consulta["idtabla_prestaciones"]?>').style.visibility = 'visible'">
+                        <?
+                } else {?> &nbsp; <?}
+                ?>
 
-                </td>
-            </tr>
-            <?
+                        </td>
+                    </tr>
+                    <?
 
-        if ($num_adelanto == 0) {
+                if ($num_adelanto == 0) {
 
             ?>
             <tr bordercolor="#000000" bgcolor='#FFFFCC' onMouseOver="setRowColor(this, 0, 'over', '#FFFFCC', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#FFFFCC', '#EAFFEA', '#FFFFAA')" id="tr_adelanto_<?=$bus_consulta["idtabla_prestaciones"]?>" style="visibility:collapse">
-                <td align="center" class="Browse" colspan="14" style="font-size:14px; font-weight:bold">ADELANTO</td>
+                <td align="center" class="Browse" colspan="15" style="font-size:14px; font-weight:bold">ADELANTO</td>
                 <td align="right" class="Browse"><input type="text" style="text-align:right" id="adelanto_prestaciones_<?=$bus_consulta["idtabla_prestaciones"]?>" size="12"></td>
                 <td align="right" class="Browse" colspan='2'>&nbsp;</td>
                 <td align="right" class="Browse"><input type="text" style="text-align:right" id="adelanto_interes_<?=$bus_consulta["idtabla_prestaciones"]?>" size="12"></td>
@@ -3580,7 +3661,7 @@ if ($ejecutar == "consultarPrestaciones") {
         } else {
             ?>
                 <tr bordercolor="#000000" bgcolor='#FFFFCC' onMouseOver="setRowColor(this, 0, 'over', '#FFFFCC', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#FFFFCC', '#EAFFEA', '#FFFFAA')" id="tr_adelanto_<?=$bus_consulta["idtabla_prestaciones"]?>" style="font-weight:bold">
-                    <td align="center" class="Browse" colspan="14" style="font-size:14px; font-weight:bold">ADELANTO</td>
+                    <td align="center" class="Browse" colspan="15" style="font-size:14px; font-weight:bold">ADELANTO</td>
                     <td align="right" class="Browse" style="color:#F00"><?=number_format($bus_adelanto["monto_prestaciones"], 2, ",", ".")?></td>
                     <td align="right" class="Browse" colspan='2'>&nbsp;</td>
                     <td align="right" class="Browse" style="color:#F00"><?=number_format($bus_adelanto["monto_interes"], 2, ",", ".")?></td>
@@ -3682,8 +3763,18 @@ if ($ejecutar == "guardarValorOtros") {
                                         where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
 }
 
+if ($ejecutar == "guardarValorDiasBonoVacacional") {
+    $sql_actualizar = mysql_query("update tabla_prestaciones set dias_bono_vacacional = '" . $dias_bv . "'
+                                        where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
+}
+
 if ($ejecutar == "guardarValorBonoVacacional") {
     $sql_actualizar = mysql_query("update tabla_prestaciones set bono_vacacional = '" . $bono_vacacional . "'
+                                        where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
+}
+
+if ($ejecutar == "guardarValorDiasBonoFinAnio") {
+    $sql_actualizar = mysql_query("update tabla_prestaciones set dias_bono_fin_anio = '" . $dias_bfa . "'
                                         where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
 }
 
@@ -4043,7 +4134,7 @@ if ($ejecutar == "consultarTotalesGeneralesPrestaciones") {
     $adelantos_prestaciones_anuales = 0;
     $adelantos_intereses_anuales    = 0;
 
-    $sql_consulta                                = mysql_query("select * from tabla_prestaciones where idtrabajador = '" . $idtrabajador . "' order by anio, mes");
+    $sql_consulta = mysql_query("select * from tabla_prestaciones where idtrabajador = '" . $idtrabajador . "' order by anio, mes");
     list($anioIngreso, $mesIngreso, $diaIngreso) = explode("-", $fecha_ingreso);
 
     //BUCLE PARA IR REVISANDO CADA AÑO Y MES DE LA TABLA DE PRESTACIONES
@@ -4051,7 +4142,7 @@ if ($ejecutar == "consultarTotalesGeneralesPrestaciones") {
         $dias_prestaciones = 0;
         $dias_adicionales  = 0;
 
-        $resultado_fecha                                = diferenciaEntreDosFechas($fecha_ingreso, $bus_consulta["anio"] . "-" . $bus_consulta["mes"] . "-01");
+        $resultado_fecha = diferenciaEntreDosFechas($fecha_ingreso, $bus_consulta["anio"] . "-" . $bus_consulta["mes"] . "-01");
         list($anioRegistro, $mesRegistro, $diaRegistro) = explode("|.|", $resultado_fecha);
         //CONTADOR DE LOS MESES QUE VAN TRANSCURRIENDO, LO UTILIZO PARA CONTROLAR SI LA APLICACION
         //DE LA LEY ES MENSUAL, TRIMESTRAL O ANUAL
@@ -4069,6 +4160,7 @@ if ($ejecutar == "consultarTotalesGeneralesPrestaciones") {
             $mes_desde  = $bus_leyes["mes_desde"];
             $anio_hasta = $bus_leyes["anio_hasta"];
             $mes_hasta  = $bus_leyes["mes_hasta"];
+            $capitaliza_intereses = $bus_leyes["capitaliza_intereses"];
 
             //$mes_inicio_prentaciones = $bus_leyes["mes_inicial_abono"];
             //ECHO " AÑO desde: ".$anio_desde." AÑO TABLA: ".$bus_consulta["anio"].'<BR>';
@@ -4215,24 +4307,51 @@ if ($ejecutar == "consultarTotalesGeneralesPrestaciones") {
             $num_adelanto = mysql_num_rows($sql_adelanto);
             $bus_adelanto = mysql_fetch_array($sql_adelanto);
 
-            $ingreso_mensual = $bus_consulta["sueldo"] + $bus_consulta["otros_complementos"] + $bus_consulta["bono_vacacional"] + $bus_consulta["bono_fin_anio"];
+
+            //ALICUOTA BONO VACACIONAL
+            $alicuota_bv = 0;
+            if ($bus_consulta["dias_bono_vacacional"] > 0){
+                $mensual_bono_vacacional = ((($bus_consulta["sueldo"] + $bus_consulta["otros_complementos"]) / 30) *
+                                                $bus_consulta["dias_bono_vacacional"] / 360) * 30;
+                $alicuota_bv = $mensual_bono_vacacional;
+            }else{
+                $mensual_bono_vacacional = $bus_consulta["bono_vacacional"];
+            }
+
+            //ALICUOTA AGUINALDO
+            if ($bus_consulta["dias_bono_fin_anio"] > 0){
+                $mensual_bono_fin_anio = (((($bus_consulta["sueldo"] + $bus_consulta["otros_complementos"]) / 30)
+                                                + ($alicuota_bv / 30))
+                                                * $bus_consulta["dias_bono_fin_anio"] / 360) * 30;
+            }else{
+                $mensual_bono_fin_anio = $bus_consulta["bono_fin_anio"];
+            }
+
+            $ingreso_mensual = $bus_consulta["sueldo"] + $bus_consulta["otros_complementos"]
+                                + $mensual_bono_vacacional + $mensual_bono_fin_anio;
+
 
             $prestaciones_del_mes = (($ingreso_mensual / 30) * ($dias_prestaciones + $dias_adicionales));
             $prestaciones_acumuladas += $prestaciones_del_mes;
 
-            $interes_prestaciones_del_mes = (($prestaciones_del_mes * $bus_tasas["interes"]) / 100) / 12;
+            if ($capitaliza_intereses == 'Si'){
+                //CALCULO CAPITALIZANDO LOS INTERESES
+                if($prestacion_interes_acumulado > 0){
+                    $interes_prestaciones = ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_prestaciones_del_mes = ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_acumulado += ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
+                }else{
+                    $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_prestaciones_del_mes = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_acumulado += (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                }
+            }else{
+                //CALCULO SIN CAPITALIZAR LOS INTERESES
+                $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                $interes_acumulado += (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+            }
 
-            $prestacion_interes_acumulado = ($prestaciones_del_mes + $prestacion_interes_acumulado + $interes_prestaciones);
-
-            $prestacion_interes_acumulado = $prestacion_interes_acumulado - ($adelanto_interes + $adelanto_prestaciones);
-
-            /*$interes_prestaciones = ($prestacion_interes_acumulado*30*$bus_tasas["interes"])/36000;
-            $interes_acumulado += ($prestacion_interes_acumulado*30*$bus_tasas["interes"])/36000;
-             */
-
-            //CALCULO SIN CAPITALIZAR LOS INTERESES
-            $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
-            $interes_acumulado += (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+            $prestacion_interes_acumulado = ($prestaciones_acumuladas + $interes_acumulado);
 
         } else {
             $k++;
@@ -4283,5 +4402,57 @@ if ($ejecutar == "consultarTotalesGeneralesPrestaciones") {
     number_format($total_a_pagar, 2, ",", ".");
 
 }
+
+
+if ($ejecutar == "importarPrestaciones") {
+    echo $archivo_importar;
+    $nombre = $_FILES['archivo_excel']['name'];
+    $nombre_temp = $_FILES['archivo_excel']['tmp_name'];
+    if (move_uploaded_file($nombre_temp, "servidor/archivos/".$nombre)){
+        require_once 'Excel/reader.php';
+        $data = new Spreadsheet_Excel_Reader();
+        $data->setOutputEncoding('CP1251');
+        $data->read('servidor/archivos/'.$nombre);
+        error_reporting(E_ALL ^ E_NOTICE);
+    }
+}
+
+
+if ($ejecutar == "cargarImportar") {
+    $tipo = substr($_FILES['archivo_importar_prestaciones']['type'], 0, 5);
+    $dir  = '../importar/';
+    if ($tipo == 'image') {
+        $nombre_importar = $_FILES['archivo_importar_prestaciones']['name'];
+        while (file_exists($dir . $nombre_importar)) {
+            $partes_importar = explode(".", $nombre_importar);
+            $nombre_importar = $partes_importar[0] . rand(0, 1000000) . "." . $partes_importar[1];
+        }
+        if (!copy($_FILES['archivo_importar_prestaciones']['tmp_name'], $dir . $nombre_importar)) {
+            ?>
+                <?
+        } else {
+            $ruta = 'modulos/rrhh/importar/' . $nombre_importar;
+        }
+
+        ?>
+
+            <script>
+            parent.document.getElementById('nombre_importar').value = '<?=$nombre_importar?>';
+            </script>
+            <?
+
+    } else {
+        /*
+        ?>
+            <script>
+            parent.document.getElementById('mostrarImagen').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* Disculpe el archivo que intenta subir NO es una Imagen</td></tr></table>";
+            </script>
+
+            <?
+        */
+    }
+
+}
+
 
 ?>
