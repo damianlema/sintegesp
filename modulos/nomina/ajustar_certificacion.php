@@ -3,9 +3,9 @@
 <h4 align=center>Ajustar Certificacion de Compromisos</h4>
 	<h2 class="sqlmVersion"></h2>
  <br>
- 
+
  <!-- TABLA DE DATOS -->
- 
+
  <input type="hidden" id="id_orden_compra" name="id_orden_compra">
  <table width="987" border="0" align="center" cellpadding="0" cellspacing="5">
    <tr>
@@ -17,7 +17,7 @@
      <td colspan="7">
        <textarea name="justificacion" cols="100" rows="3" id="justificacion"></textarea>     </td>
    </tr>
-   
+
    <tr>
      <td align="right" class='viewPropTitle'>Ordenado Por</td>
      <td width="120"><input name="ordenado_por" type="text" id="ordenado_por" size="20"></td>
@@ -38,14 +38,14 @@
                                 });
                             </script>     </td>
    </tr>
-   
+
    <tr>
-     <td colspan="8" align="center"><input type="submit" 
-     										name="actualizar" 
-                                            id="actualizar" 
-                                            value="Actualizar" 
+     <td colspan="8" align="center"><input type="submit"
+     										name="actualizar"
+                                            id="actualizar"
+                                            value="Actualizar"
                                             class="button"
-                                            onClick="actualizarDatos(document.getElementById('id_orden_compra').value, 
+                                            onClick="actualizarDatos(document.getElementById('id_orden_compra').value,
                                             document.getElementById('justificacion').value,
                                             document.getElementById('ordenado_por').value,
                                             document.getElementById('cedula_ordenado').value,
@@ -53,18 +53,18 @@
                                             document.getElementById('fecha_requisicion').value)"></td>
    </tr>
  </table>
- 
- 
+
+
 <br />
 <br />
 
 
 <div id="mostrarPartidas" name="motrarPartidas" style="display:none"></div>
- 
- 
+
+
  <br>
  <br>
- 
+
  <!-- TABLA BUSCAR ORDENES -->
  <table align="center" cellpadding="0" cellspacing="0">
 	<tr>
@@ -77,17 +77,17 @@
 
 
 
-<div id="divMensaje" 
-		align="center" 
-        style="color:#FF0000; 
-        		font-family:Verdana, Arial, Helvetica, sans-serif; 
-                font-size:12px; 
+<div id="divMensaje"
+		align="center"
+        style="color:#FF0000;
+        		font-family:Verdana, Arial, Helvetica, sans-serif;
+                font-size:12px;
                 font-weight:bold">
 </div>
-    
-<br /> 
 
-<!-- DIV LISTA DE ORDENES -->   
-<div id="listaOrdenes">   
-    
+<br />
+
+<!-- DIV LISTA DE ORDENES -->
+<div id="listaOrdenes">
+
 </div>

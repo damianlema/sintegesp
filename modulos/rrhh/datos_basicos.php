@@ -167,9 +167,6 @@ function exportarPrestaciones() {
 }
 
 
-
-
-
 // end hiding from old browsers -->
 </SCRIPT>
 
@@ -633,12 +630,11 @@ while ($bus_centro_costo = mysql_fetch_array($sql_centro_costo)) {
               <td>
                 <form method="post" id="formImagen" name="formImagen" enctype="multipart/form-data" action="modulos/rrhh/lib/datos_basicos_ajax.php" target="iframeUpload">
                   <input type="file" name="foto_registroFotografico" id="foto_registroFotografico" size="20" align="left" onChange="document.getElementById('formImagen').submit()">
-                  <!--<input type="submit" name="boton_subir" id="boton_subir" value="Subir">-->
                   <input type="hidden" id="ejecutar" name="ejecutar" value="cargarImagen">
-              </form>
-              <iframe id="iframeUpload" name="iframeUpload" style="display:none"></iframe>
-              <input type="hidden" id="nombre_imagen" name="nombre_imagen">
-                </td>
+                </form>
+                <iframe id="iframeUpload" name="iframeUpload" style="display:none"></iframe>
+                <input type="hidden" id="nombre_imagen" name="nombre_imagen">
+              </td>
             </tr>
             <tr>
             <td>Descripcion: </td>
@@ -1878,31 +1874,41 @@ function abrirCerrarAguinaldos(){
     <tr>
       <td style="color:#FFF">Antiguedad m&aacute;s Intereses</td>
       <td align="right" onClick="abrirCerrarAntiguedadIntereses()" style="cursor:pointer; color:#FFF" id="td_signo_mas_antiguedad">+</td>
-    </tr>
-</table>
+    </tr
+    </table>
 
 
 <div id="id_interes_mas_antiguedad" style="display:none">
-    <form name="formulario_prestaciones" method="post" action="" id="formulario_prestaciones">
-        <input name="fecha_ingreso_prestaciones" type="hidden" id="fecha_ingreso_prestaciones">
-        <table align="center" width="90%">
-            <tr>
-                <td align="left">Importar desde excel: <input name="archivo_excel" type="file" id="archivo_excel" size="50" />
-                  <input type="button" class="button" name="botonOrdenar" value="Importar" onClick="importarPrestaciones();" />
-                </td>
-                <td colspan="2" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </td>
-                <td colspan="2" align="right">Exportar a Excel: <input type="text" name="archivo" id="archivo"/>
-                  <input type="button" class="button" name="botonOrdenar" value="Exportar" onClick="exportarPrestaciones();" />
-                </td>
-            </tr>
-        </table>
-    </form>
+    <input name="fecha_ingreso_prestaciones" type="hidden" id="fecha_ingreso_prestaciones">
+    <table align="center" width="90%">
+      <tr>
+        <td>
+          <form method="post" id="formImportar" name="formImportar" enctype="multipart/form-data"
+                action="modulos/rrhh/lib/datos_basicos_ajax.php" target="iframeUploadImportar">
+            <input  type="file" name="archivo_importar_prestaciones" id="archivo_importar_prestaciones" size="20" align="left"
+                    onChange="document.getElementById('formImportar').submit()">
+            <input type="hidden" id="ejecutar" name="ejecutar" value="cargarImportar">
+          </form>
+          <iframe id="iframeUploadImportar" name="iframeUploadImportar" style="display:none"></iframe>
+          <input type="text" id="nombre_importar" name="nombre_importar">
 
+          <input type="button" class="button" name="botonOrdenar" value="Importar" onClick="importarPrestaciones();" />
+        </td>
+      </tr>
+    </table>
     <a href="modulos/rrhh/documentos/carga_prestaciones.xls">Descargar modelo de archivo carga masiva</a>
     <br>
     <a href="modulos/rrhh/documentos/instrucciones_prestaciones.pdf">Descargar instrucciones para carga masiva</a>
-
+    <br>
+     <table align="center" width="90%">
+        <tr>
+            <td colspan="2" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+            <td colspan="2" align="right">Exportar a Excel: <input type="text" name="archivo" id="archivo"/>
+              <input type="button" class="button" name="botonOrdenar" value="Exportar" onClick="exportarPrestaciones();" />
+            </td>
+        </tr>
+    </table>
     <div id="lista_prestaciones"></div>
     </div>
 

@@ -3,7 +3,7 @@
 function limpiarFormulario(){
 
 	window.location.href='principal.php?accion=1202&modulo=1';
-	
+
 }
 
 
@@ -23,14 +23,15 @@ function registrarLeyesPrestaciones(){
 	var anio_inicio_aplica	= document.getElementById('anio_inicio_aplica').value;
 	var mes_fin_aplica		= document.getElementById('mes_fin_aplica').value;
 	var anio_fin_aplica		= document.getElementById('anio_fin_aplica').value;
+	var capitaliza_intereses = document.getElementById('capitaliza_intereses').value;
 
-	if (anio_fin_aplica < anio_inicio_aplica){ 
+	if (anio_fin_aplica < anio_inicio_aplica){
 		alert("El año final a aplicar Ley no puede ser menor al año inicial de aplicación de la misma");
-	}else{ 
+	}else{
 		var ajax=nuevoAjax();
-		ajax.open("POST", "modulos/rrhh/lib/leyes_prestaciones_ajax.php", true);	
+		ajax.open("POST", "modulos/rrhh/lib/leyes_prestaciones_ajax.php", true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-		ajax.onreadystatechange=function() { 
+		ajax.onreadystatechange=function() {
 			if(ajax.readyState == 1){
 				document.getElementById("divCargando").style.display = "block";
 				}
@@ -41,7 +42,7 @@ function registrarLeyesPrestaciones(){
 					limpiarFormulario();
 				}
 				document.getElementById("divCargando").style.display = "none";
-			} 
+			}
 		}
 		ajax.send("denominacion="+denominacion
 				+"&siglas="+siglas
@@ -56,6 +57,7 @@ function registrarLeyesPrestaciones(){
 				+"&anio_inicio_aplica="+anio_inicio_aplica
 				+"&mes_fin_aplica="+mes_fin_aplica
 				+"&anio_fin_aplica="+anio_fin_aplica
+				+"&capitaliza_intereses="+capitaliza_intereses
 				+"&ejecutar=registrarLeyesPrestaciones");
 	}
 }
@@ -65,18 +67,18 @@ function registrarLeyesPrestaciones(){
 
 function consultarLeyesPrestaciones(){
 	var ajax=nuevoAjax();
-	ajax.open("POST", "modulos/rrhh/lib/leyes_prestaciones_ajax.php", true);	
+	ajax.open("POST", "modulos/rrhh/lib/leyes_prestaciones_ajax.php", true);
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	ajax.onreadystatechange=function() { 
+	ajax.onreadystatechange=function() {
 		if(ajax.readyState == 1){
 			document.getElementById("divCargando").style.display = "block";
 			}
 		if (ajax.readyState==4){
 			document.getElementById('listaLeyesPrestaciones').innerHTML = ajax.responseText;
 			document.getElementById("divCargando").style.display = "none";
-		} 
+		}
 	}
-	ajax.send("ejecutar=consultarLeyesPrestaciones");	
+	ajax.send("ejecutar=consultarLeyesPrestaciones");
 }
 
 
@@ -86,25 +88,39 @@ function consultarLeyesPrestaciones(){
 function eliminarLeyesPrestaciones(idleyes_prestaciones){
 	if(confirm("Realmente desea eliminar esta Ley de Prestaciones?")){
 		var ajax=nuevoAjax();
-		ajax.open("POST", "modulos/rrhh/lib/leyes_prestaciones_ajax.php", true);	
+		ajax.open("POST", "modulos/rrhh/lib/leyes_prestaciones_ajax.php", true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-		ajax.onreadystatechange=function() { 
+		ajax.onreadystatechange=function() {
 			if(ajax.readyState == 1){
 				document.getElementById("divCargando").style.display = "block";
 				}
 			if (ajax.readyState==4){
 				window.location.href='principal.php?accion=1202&modulo=1';
 				document.getElementById("divCargando").style.display = "none";
-			} 
+			}
 		}
-		ajax.send("idleyes_prestaciones="+idleyes_prestaciones+"&ejecutar=eliminarLeyesPrestaciones");	
+		ajax.send("idleyes_prestaciones="+idleyes_prestaciones+"&ejecutar=eliminarLeyesPrestaciones");
 	}
 }
 
 
 
 
-function mostrarParaModificar(idleyes_prestaciones, denominacion, siglas, calcula, tipo_abono, mes_inicio_abono, valor_abono, valor_abono_adicional, tipo_abono_adicional, valor_tope_adicional, mes_inicio_aplica, anio_inicio_aplica, mes_fin_aplica, anio_fin_aplica){
+function mostrarParaModificar(	idleyes_prestaciones,
+								denominacion,
+								siglas,
+								calcula,
+								tipo_abono,
+								mes_inicio_abono,
+								valor_abono,
+								valor_abono_adicional,
+								tipo_abono_adicional,
+								valor_tope_adicional,
+								mes_inicio_aplica,
+								anio_inicio_aplica,
+								mes_fin_aplica,
+								anio_fin_aplica,
+								capitaliza_intereses){
 	document.getElementById('denominacion').value = denominacion;
 	document.getElementById('idleyes_prestaciones').value = idleyes_prestaciones;
 	document.getElementById('siglas').value = siglas;
@@ -119,6 +135,7 @@ function mostrarParaModificar(idleyes_prestaciones, denominacion, siglas, calcul
 	document.getElementById('anio_inicio_aplica').value = anio_inicio_aplica;
 	document.getElementById('mes_fin_aplica').value = mes_fin_aplica;
 	document.getElementById('anio_fin_aplica').value = anio_fin_aplica;
+	document.getElementById('capitaliza_intereses').value = capitaliza_intereses;
 	document.getElementById('ingresar').style.display = 'none';
 	document.getElementById('modificar').style.display = 'block';
 }
@@ -142,14 +159,15 @@ function modificarLeyesPrestaciones(){
 	var anio_inicio_aplica	= document.getElementById('anio_inicio_aplica').value;
 	var mes_fin_aplica		= document.getElementById('mes_fin_aplica').value;
 	var anio_fin_aplica		= document.getElementById('anio_fin_aplica').value;
+	var capitaliza_intereses = document.getElementById('capitaliza_intereses').value;
 
-	if (anio_fin_aplica < anio_inicio_aplica){ 
+	if (anio_fin_aplica < anio_inicio_aplica){
 		alert("El año final a aplicar Ley no puede ser menor al año inicial de aplicación de la misma");
-	}else{ 
+	}else{
 		var ajax=nuevoAjax();
 		ajax.open("POST", "modulos/rrhh/lib/leyes_prestaciones_ajax.php", true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-		ajax.onreadystatechange=function() { 
+		ajax.onreadystatechange=function() {
 			if(ajax.readyState == 1){
 				document.getElementById("divCargando").style.display = "block";
 				}
@@ -162,7 +180,7 @@ function modificarLeyesPrestaciones(){
 					document.getElementById('ingresar').style.display = 'block';
 				}
 				document.getElementById("divCargando").style.display = "none";
-			} 
+			}
 		}
 		ajax.send("denominacion="+denominacion
 				+"&siglas="+siglas
@@ -177,6 +195,7 @@ function modificarLeyesPrestaciones(){
 				+"&anio_inicio_aplica="+anio_inicio_aplica
 				+"&mes_fin_aplica="+mes_fin_aplica
 				+"&anio_fin_aplica="+anio_fin_aplica
+				+"&capitaliza_intereses="+capitaliza_intereses
 				+"&idleyes_prestaciones="+idleyes_prestaciones
 				+"&ejecutar=modificarLeyesPrestaciones");
 	}

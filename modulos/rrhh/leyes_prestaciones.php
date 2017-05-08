@@ -58,7 +58,7 @@
         	<td align='right' class='viewPropTitle'>Valor abono: </td>
             <td><input name="valor_abono" type="text" id="valor_abono" size="4" maxlength="3"></td>
         </tr>
-       
+
         <tr>
         	<td align='right' class='viewPropTitle'>Abono Adicional: </td>
             <td>
@@ -101,7 +101,7 @@
                     for($i=1930; $i<=(date("Y")+30);$i++){
                         ?>
                         <option value="<?=$i?>"><?=$i?></option>
-                        <?	
+                        <?
                     }
                     ?>
 		         </select>
@@ -131,11 +131,26 @@
                     for($i=1930; $i<=(date("Y")+30);$i++){
                         ?>
                         <option value="<?=$i?>"><?=$i?></option>
-                        <?	
+                        <?
                     }
                     ?>
-		         </select> 
+		         </select>
             </td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+        </tr>
+        <tr>
+            <td align='right' class='viewPropTitle'>Capitaliza intereses: </td>
+            <td>
+                <select id="capitaliza_intereses" name="capitaliza_intereses">
+                    <option value = 'No'>No</option>
+                    <option value = 'Si'>Si</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
         </tr>
         <tr>
             <td colspan="2" align="center">
@@ -144,9 +159,9 @@
         	<input type="button" name="limpiar" value="Limpiar" id="limpiar" onClick="limpiarFormulario()" class="button"></td>
         </tr>
     </table>
-    
-    
-    
+
+
+
     <br>
 <br>
 
@@ -171,21 +186,22 @@
 				<td align='left' class='Browse'><?=$bus_leyes_prestaciones["siglas"]?></td>
                 <td align='left' class='Browse'><?=$bus_leyes_prestaciones["denominacion"]?></td>
 				<td align='center' class='Browse' width='7%'>
-                    	<img src='imagenes/modificar.png' border='0' alt='Modificar' title='Modificar' 
-                    	onClick="mostrarParaModificar('<?=$bus_leyes_prestaciones["idleyes_prestaciones"]?>', 
-                    										'<?=$bus_leyes_prestaciones["denominacion"]?>', 
+                    	<img src='imagenes/modificar.png' border='0' alt='Modificar' title='Modificar'
+                    	onClick="mostrarParaModificar('<?=$bus_leyes_prestaciones["idleyes_prestaciones"]?>',
+                    										'<?=$bus_leyes_prestaciones["denominacion"]?>',
                     										'<?=$bus_leyes_prestaciones["siglas"]?>',
                     										'<?=$bus_leyes_prestaciones["calcula"]?>',
-                    										'<?=$bus_leyes_prestaciones["tipo_abono"]?>', 
+                    										'<?=$bus_leyes_prestaciones["tipo_abono"]?>',
                     										'<?=$bus_leyes_prestaciones["mes_inicial_abono"]?>',
-                    										'<?=$bus_leyes_prestaciones["valor_abono"]?>', 
+                    										'<?=$bus_leyes_prestaciones["valor_abono"]?>',
                     										'<?=$bus_leyes_prestaciones["valor_abono_adicional"]?>',
-                    										'<?=$bus_leyes_prestaciones["tipo_abono_adicional"]?>', 
+                    										'<?=$bus_leyes_prestaciones["tipo_abono_adicional"]?>',
                     										'<?=$bus_leyes_prestaciones["valor_tope_adicional"]?>',
-                    										'<?=$bus_leyes_prestaciones["mes_desde"]?>', 
+                    										'<?=$bus_leyes_prestaciones["mes_desde"]?>',
                     										'<?=$bus_leyes_prestaciones["anio_desde"]?>',
-                    										'<?=$bus_leyes_prestaciones["mes_hasta"]?>', 
-                    										'<?=$bus_leyes_prestaciones["anio_hasta"]?>'
+                    										'<?=$bus_leyes_prestaciones["mes_hasta"]?>',
+                    										'<?=$bus_leyes_prestaciones["anio_hasta"]?>',
+                                                            '<?=$bus_leyes_prestaciones["capitaliza_intereses"]?>'
                     										)" style="cursor:pointer">
                 </td>
 				<td align='center' class='Browse' width='7%'>

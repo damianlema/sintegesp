@@ -22,7 +22,8 @@ if($ejecutar == "registrarLeyesPrestaciones"){
 																				mes_desde,
 																				anio_desde,
 																				mes_hasta,
-																				anio_hasta)values(
+																				anio_hasta,
+																				capitaliza_intereses)values(
 																									'".$denominacion."',
 																									'".$siglas."',
 																									'".$calcula."',
@@ -35,8 +36,9 @@ if($ejecutar == "registrarLeyesPrestaciones"){
 																									'".$mes_inicio_aplica."',
 																									'".$anio_inicio_aplica."',
 																									'".$mes_fin_aplica."',
-																									'".$anio_fin_aplica."')");
-																							
+																									'".$anio_fin_aplica."',
+																									'".$capitaliza_intereses."')");
+
 	if($sql_insert_movimientos){
 		echo "exito";
 		registra_transaccion("Registro Leyes Prestaciones (".$denominacion.")",$login,$fh,$pc,'leyes_prestaciones');
@@ -73,21 +75,22 @@ if($ejecutar == "consultarLeyesPrestaciones"){
 				<td align='left' class='Browse'><?=$bus_leyes_prestaciones["siglas"]?></td>
                 <td align='left' class='Browse'><?=$bus_leyes_prestaciones["denominacion"]?></td>
 				<td align='center' class='Browse' width='7%'>
-                    	<img src='imagenes/modificar.png' border='0' alt='Modificar' title='Modificar' 
-                    		onClick="mostrarParaModificar('<?=$bus_leyes_prestaciones["idleyes_prestaciones"]?>', 
-                    										'<?=$bus_leyes_prestaciones["denominacion"]?>', 
+                    	<img src='imagenes/modificar.png' border='0' alt='Modificar' title='Modificar'
+                    		onClick="mostrarParaModificar('<?=$bus_leyes_prestaciones["idleyes_prestaciones"]?>',
+                    										'<?=$bus_leyes_prestaciones["denominacion"]?>',
                     										'<?=$bus_leyes_prestaciones["siglas"]?>',
                     										'<?=$bus_leyes_prestaciones["calcula"]?>',
-                    										'<?=$bus_leyes_prestaciones["tipo_abono"]?>', 
+                    										'<?=$bus_leyes_prestaciones["tipo_abono"]?>',
                     										'<?=$bus_leyes_prestaciones["mes_inicial_abono"]?>',
-                    										'<?=$bus_leyes_prestaciones["valor_abono"]?>', 
+                    										'<?=$bus_leyes_prestaciones["valor_abono"]?>',
                     										'<?=$bus_leyes_prestaciones["valor_abono_adicional"]?>',
-                    										'<?=$bus_leyes_prestaciones["tipo_abono_adicional"]?>', 
+                    										'<?=$bus_leyes_prestaciones["tipo_abono_adicional"]?>',
                     										'<?=$bus_leyes_prestaciones["valor_tope_adicional"]?>',
-                    										'<?=$bus_leyes_prestaciones["mes_desde"]?>', 
+                    										'<?=$bus_leyes_prestaciones["mes_desde"]?>',
                     										'<?=$bus_leyes_prestaciones["anio_desde"]?>',
-                    										'<?=$bus_leyes_prestaciones["mes_hasta"]?>', 
-                    										'<?=$bus_leyes_prestaciones["anio_hasta"]?>'
+                    										'<?=$bus_leyes_prestaciones["mes_hasta"]?>',
+                    										'<?=$bus_leyes_prestaciones["anio_hasta"]?>',
+                    										'<?=$bus_leyes_prestaciones["capitaliza_intereses"]?>'
                     										)" style="cursor:pointer">
                 </td>
 				<td align='center' class='Browse' width='7%'>
@@ -111,7 +114,7 @@ if($ejecutar == "consultarLeyesPrestaciones"){
 
 
 if($ejecutar == "eliminarLeyesPrestaciones"){
-	
+
 	$sql_eliminar_leyes_prestaciones = mysql_query("delete from leyes_prestaciones where idleyes_prestaciones = '".$idleyes_prestaciones."'")or die(mysql_error());
 	if($sql_eliminar_leyes_prestaciones){
 			echo "exito";
@@ -120,7 +123,7 @@ if($ejecutar == "eliminarLeyesPrestaciones"){
 			registra_transaccion("Eliminar Leyes Prestaciones ERROR(".$idleyes_prestaciones.")",$login,$fh,$pc,'leyes_prestaciones');
 			echo "fallo";
 	}
-	
+
 }
 
 
@@ -130,7 +133,7 @@ if($ejecutar == "eliminarLeyesPrestaciones"){
 
 
 if($ejecutar == "modificarLeyesPrestaciones"){
-	$sql_update_Leyes_prestaciones = mysql_query("update leyes_prestaciones set 
+	$sql_update_Leyes_prestaciones = mysql_query("update leyes_prestaciones set
 																			denominacion = '".$denominacion."',
 																			siglas = '".$siglas."',
 																			calcula = '".$calcula."',
@@ -143,7 +146,8 @@ if($ejecutar == "modificarLeyesPrestaciones"){
 																			mes_desde = '".$mes_inicio_aplica."',
 																			anio_desde = '".$anio_inicio_aplica."',
 																			mes_hasta = '".$mes_fin_aplica."',
-																			anio_hasta = '".$anio_fin_aplica."'
+																			anio_hasta = '".$anio_fin_aplica."',
+																			capitaliza_intereses = '".$capitaliza_intereses."'
 																			where idleyes_prestaciones = '".$idleyes_prestaciones."'");
 	if($sql_update_Leyes_prestaciones){
 		echo "exito";

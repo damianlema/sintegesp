@@ -5,3 +5,4 @@ INSERT INTO `accion` (`id_accion`, `nombre_accion`, `id_modulo`, `url`, `mostrar
 ALTER TABLE `tabla_prestaciones` ADD `dias_bono_vacacional` INT(4) NOT NULL AFTER `sueldo`;
 ALTER TABLE `tabla_prestaciones` ADD `dias_bono_fin_anio` INT(4) NOT NULL AFTER `bono_vacacional`;
 
+ALTER TABLE `leyes_prestaciones` ADD `capitaliza_intereses` VARCHAR(2) NOT NULL AFTER `anio_hasta`;
