@@ -1867,18 +1867,16 @@ function abrirCerrarAguinaldos(){
           </tr>
         </table>
       </div>
-    <br>
 
-
-<table align="center" width="100%" style="color:#FFF; background-color:#09F;font-weight:bold">
+  <table align="center" width="100%" style="color:#FFF; background-color:#09F;font-weight:bold">
     <tr>
       <td style="color:#FFF">Antiguedad m&aacute;s Intereses</td>
       <td align="right" onClick="abrirCerrarAntiguedadIntereses()" style="cursor:pointer; color:#FFF" id="td_signo_mas_antiguedad">+</td>
-    </tr
-    </table>
+    </tr>
+  </table>
 
 
-<div id="id_interes_mas_antiguedad" style="display:none">
+  <div id="id_interes_mas_antiguedad" style="display:none">
     <input name="fecha_ingreso_prestaciones" type="hidden" id="fecha_ingreso_prestaciones">
     <table align="center" width="90%">
       <tr>
@@ -1890,27 +1888,23 @@ function abrirCerrarAguinaldos(){
             <input type="hidden" id="ejecutar" name="ejecutar" value="cargarImportar">
           </form>
           <iframe id="iframeUploadImportar" name="iframeUploadImportar" style="display:none"></iframe>
-          <input type="text" id="nombre_importar" name="nombre_importar">
-
+          <input type="hidden" id="nombre_importar" name="nombre_importar">
+          <input type="hidden" id="tipo_importar" name="tipo_importar">
+        </td>
+        <td>
           <input type="button" class="button" name="botonOrdenar" value="Importar" onClick="importarPrestaciones();" />
+        </td>
+        <td colspan="2" align="right">Exportar a Excel: <input type="text" name="archivo" id="archivo"/>
+          <input type="button" class="button" name="botonOrdenar" value="Exportar" onClick="exportarPrestaciones();" />
         </td>
       </tr>
     </table>
+    <div id='error_tipo' style="display: none;"></div>
     <a href="modulos/rrhh/documentos/carga_prestaciones.xls">Descargar modelo de archivo carga masiva</a>
     <br>
     <a href="modulos/rrhh/documentos/instrucciones_prestaciones.pdf">Descargar instrucciones para carga masiva</a>
-    <br>
-     <table align="center" width="90%">
-        <tr>
-            <td colspan="2" align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </td>
-            <td colspan="2" align="right">Exportar a Excel: <input type="text" name="archivo" id="archivo"/>
-              <input type="button" class="button" name="botonOrdenar" value="Exportar" onClick="exportarPrestaciones();" />
-            </td>
-        </tr>
-    </table>
     <div id="lista_prestaciones"></div>
-    </div>
+  </div>
 
     <br>
 
@@ -1943,12 +1937,12 @@ function abrirCerrarAguinaldos(){
             <select name="periodo_vacaciones_vencidas" id="periodo_vacaciones_vencidas">
                <option value="0">.:: Seleccione ::.</option>
         <?
-for ($i = 1997; $i < date("Y"); $i++) {
+  for ($i = 1997; $i < date("Y"); $i++) {
     ?>
             <option><?=$i . "-" . ($i + 1)?></option>
           <?
-}
-?>
+  }
+  ?>
 
             </select>
 

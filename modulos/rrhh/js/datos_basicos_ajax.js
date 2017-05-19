@@ -3111,25 +3111,36 @@ function consultarTotalesGeneralesPrestaciones() {
 
 function importarPrestaciones() {
 
-  var archivo_importar = document.getElementById("archivo_excel_importar").value;
-  alert(archivo_importar);
-
+  var archivo_importar = document.getElementById('nombre_importar').value;
+  var tipo_importar = document.getElementById('tipo_importar').value;
   var idtrabajador = document.getElementById("idtrabajador").value;
   if (archivo_importar=="") alert("¡Debe seleccionar un archivo a importar!");
   else {
-      var ajax=nuevoAjax();
-      ajax.open("POST", "lib/reportes/recursos_humanos/datos_basicos_ajax.php", true);
-      ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-      ajax.onreadystatechange=function() {
+    var ajax=nuevoAjax();
+    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+    ajax.onreadystatechange=function() {
         if(ajax.readyState == 1){
-          document.getElementById("divCargando").style.display = "block";
-          }
+            document.getElementById("divCargando").style.display = "block";
+            document.getElementById('error_tipo').style.display='block';
+            document.getElementById('error_tipo').innerHTML = "<table><tr><td style='color:#0000FF; font-weight:bold'>PROCESANDO <img src='imagenes/cargando.gif'></td></tr></table>";
+        }
         if (ajax.readyState==4) {
             alert(ajax.responseText);
-          document.getElementById("divCargando").style.display = "none";
+            if(ajax.responseText == 'error_cedula'){
+                document.getElementById('error_tipo').style.display='block';
+                document.getElementById('error_tipo').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* La Cedula registrada en el archivo a importar no corresponde con el trabajador activo</td></tr></table>";
+            }else{
+                document.getElementById("divCargando").style.display = "none";
+                document.getElementById('error_tipo').style.display='block';
+                document.getElementById('error_tipo').innerHTML = "<table><tr><td style='color:#27A000; font-weight:bold'>PROCESADO CON EXITO</td></tr></table>";
+                consultarPrestaciones();
+                consultarTotalesGeneralesPrestaciones();
+            }
+
         }
-      }
-      ajax.send("archivo_importar="+archivo_importar+"&idtrabajador="+idtrabajador+ "&ejecutar=importarPrestaciones");
+    }
+    ajax.send("archivo_importar="+archivo_importar+"&tipo_importar="+tipo_importar+"&idtrabajador="+idtrabajador+ "&ejecutar=importarPrestaciones");
   }
 }
 

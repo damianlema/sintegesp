@@ -4405,23 +4405,254 @@ if ($ejecutar == "consultarTotalesGeneralesPrestaciones") {
 
 
 if ($ejecutar == "importarPrestaciones") {
-    echo $archivo_importar;
-    $nombre = $_FILES['archivo_excel']['name'];
-    $nombre_temp = $_FILES['archivo_excel']['tmp_name'];
-    if (move_uploaded_file($nombre_temp, "servidor/archivos/".$nombre)){
-        require_once 'Excel/reader.php';
-        $data = new Spreadsheet_Excel_Reader();
-        $data->setOutputEncoding('CP1251');
-        $data->read('servidor/archivos/'.$nombre);
-        error_reporting(E_ALL ^ E_NOTICE);
+    $nombreArchivo = $archivo_importar;
+    switch ($tipo_importar) {
+        case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+            require_once 'PHPExcel/Classes/PHPExcel.php';
+            require_once('PHPExcel/Classes/PHPExcel/Reader/Excel2007.php');
+
+            $objReader = new PHPExcel_Reader_Excel2007();
+            $objReader->setReadDataOnly(true);
+            $objPHPExcel = $objReader->load($nombreArchivo);
+            $filas=$objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
+            //echo "filas: ".$objPHPExcel->getActiveSheet()->getCell('J'.'2')->getCalculatedValue();
+            $sql_trabajador = mysql_query("select * from trabajador where   idtrabajador = '".$idtrabajador."'
+                                                                            and cedula = '" . $objPHPExcel->getActiveSheet()->getCell('A2') . "'");
+            $bus_trabajador = mysql_fetch_array($sql_trabajador);
+            $num_trabajador = mysql_num_rows($sql_trabajador);
+
+            if ($num_trabajador > 0) {
+                for ($i = 2; $i <= ($filas); $i++) {
+                     $sql_cuenta_trabajador = mysql_query("select * from tabla_prestaciones
+                                     where idtrabajador = '" . $bus_trabajador["idtrabajador"] . "'
+                                     and anio = '" . $objPHPExcel->getActiveSheet()->getCell('B'.$i) . "'
+                                     and mes = '" . $objPHPExcel->getActiveSheet()->getCell('C'.$i) . "'") or die(mysql_error());
+                    $bus_cuenta_trabajador = mysql_fetch_array($sql_cuenta_trabajador);
+                    $num_cuenta_trabajador = mysql_num_rows($sql_cuenta_trabajador);
+
+                    $sueldo                = $objPHPExcel->getActiveSheet()->getCell('D'.$i)->getCalculatedValue();
+                    $otros_complementos    = $objPHPExcel->getActiveSheet()->getCell('E'.$i)->getCalculatedValue();
+                    $dias_vacacional       = $objPHPExcel->getActiveSheet()->getCell('F'.$i)->getCalculatedValue();
+                    $bono_vacacional       = $objPHPExcel->getActiveSheet()->getCell('G'.$i)->getCalculatedValue();
+                    $dias_fin_anio         = $objPHPExcel->getActiveSheet()->getCell('H'.$i)->getCalculatedValue();
+                    $bono_fin_anio         = $objPHPExcel->getActiveSheet()->getCell('I'.$i)->getCalculatedValue();
+                    $adelanto_prestaciones = $objPHPExcel->getActiveSheet()->getCell('J'.$i)->getCalculatedValue();
+                    $adelanto_intereses    = $objPHPExcel->getActiveSheet()->getCell('K'.$i)->getCalculatedValue();
+                    if ($num_cuenta_trabajador <= 0) {
+                        $alicuota_bv = 0;
+                        if($dias_vacacional > 0){
+                            $mensual_bono_vacacional = ((($sueldo + $otros_complementos) / 30) * $dias_vacacional / 360) * 30;
+                            $alicuota_bv = $mensual_bono_vacacional;
+                        }else{
+                            $mensual_bono_vacacional = $bono_vacacional;
+                        }
+                        if($dias_fin_anio > 0){
+                            $alicuota_bfa = (((($sueldo + $otros_complementos) / 30) + ($alicuota_bv / 30)) * $dias_fin_anio / 360) * 30;
+                        }else{
+                            $alicuota_bfa = $bono_fin_anio;
+                        }
+                        $sql_cuenta = mysql_query("insert into tabla_prestaciones(
+                                                                idtrabajador,
+                                                                anio,
+                                                                mes,
+                                                                sueldo,
+                                                                dias_bono_vacacional,
+                                                                bono_vacacional,
+                                                                dias_bono_fin_anio,
+                                                                bono_fin_anio,
+                                                                otros_complementos)VALUES(
+                                                                '" . $bus_trabajador["idtrabajador"] . "',
+                                                                '" . $objPHPExcel->getActiveSheet()->getCell('B'.$i) . "',
+                                                                '" . $objPHPExcel->getActiveSheet()->getCell('C'.$i) . "',
+                                                                '" . $sueldo . "',
+                                                                '" . $dias_vacacional . "',
+                                                                '" . $mensual_bono_vacacional . "',
+                                                                '" . $dias_fin_anio . "',
+                                                                '" . $alicuota_bfa . "',
+                                                                '" . $otros_complementos . "')") or die(mysql_error());
+                        $idtabla_prestaciones = mysql_insert_id();
+                    } else {
+
+                        $alicuota_bv = 0;
+                        if($dias_vacacional > 0){
+                            $mensual_bono_vacacional = ((($sueldo + $otros_complementos) / 30) * $dias_vacacional / 360) * 30;
+                            $alicuota_bv = $mensual_bono_vacacional;
+                        }else{
+                            $mensual_bono_vacacional = $bono_vacacional;
+                        }
+                        if($dias_fin_anio > 0){
+                            $alicuota_bfa = (((($sueldo + $otros_complementos) / 30) + ($alicuota_bv / 30)) * $dias_fin_anio / 360) * 30;
+                        }else{
+                            $alicuota_bfa = $bono_fin_anio;
+                        }
+                        $idtabla_prestaciones = $bus_cuenta_trabajador["idtabla_prestaciones"];
+                        $sql_actualiza        = mysql_query("update tabla_prestaciones set
+                                                                            sueldo = '" . $sueldo . "',
+                                                                            otros_complementos = '" . $otros_complementos . "',
+                                                                            bono_vacacional = '" . $mensual_bono_vacacional . "',
+                                                                            bono_fin_anio = '" . $alicuota_bfa . "',
+                                                                            dias_bono_vacacional = '" . $dias_vacacional . "',
+                                                                            dias_bono_fin_anio = '" . $dias_fin_anio . "'
+                                                    where idtabla_prestaciones = '" . $idtabla_prestaciones . "'") or die(mysql_error());
+                    }
+                    //Adelantos de prestaciones e intereses
+                    if ($objPHPExcel->getActiveSheet()->getCell('J'.$i) > 0 or $objPHPExcel->getActiveSheet()->getCell('K'.$i) > 0) {
+                        $sql_adelanto_trabajador = mysql_query("select * from tabla_adelantos
+                                                 where idtabla_prestaciones = '" . $idtabla_prestaciones . "'") or die(mysql_error());
+                        $bus_adelanto_trabajador = mysql_fetch_array($sql_adelanto_trabajador);
+                        $num_adelanto_trabajador = mysql_num_rows($sql_adelanto_trabajador);
+
+                        if ($num_adelanto_trabajador <= 0) {
+                            $insertar_adelanto = mysql_query("insert into tabla_adelantos(idtabla_prestaciones,
+                                                                                        monto_prestaciones,
+                                                                                        monto_interes)VALUES(
+                                                                                        '" . $idtabla_prestaciones . "',
+                                                                                        '" . $adelanto_prestaciones . "',
+                                                                                        '" . $adelanto_intereses . "')") or die(mysql_error());
+                        } else {
+                            $actualizar_adelanto = mysql_query("update tabla_adelantos set
+                                                                    monto_prestaciones = '" . $adelanto_prestaciones . "',
+                                                                    monto_interes = '" . $adelanto_intereses . "'
+                                                                    where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
+                        }
+
+                    }
+                }
+            }else{
+                echo 'error_cedula';
+            }
+            break;
+
+        case 'application/vnd.ms-excel':
+            require_once 'Excel/reader.php';
+            $data = new Spreadsheet_Excel_Reader();
+            $data->setOutputEncoding('CP1251');
+            $data->read($nombreArchivo);
+            $filas=$data->sheets[0]['numRows'];
+            //echo "xls ".$data->sheets[0]['numRows']." ".$data->sheets[0]['numCols'];
+
+            $sql_trabajador = mysql_query("select * from trabajador where   idtrabajador = '".$idtrabajador."'
+                                                                            and cedula = '" . $data->sheets[0]['cells'][2][1] . "'");
+            $bus_trabajador = mysql_fetch_array($sql_trabajador);
+            $num_trabajador = mysql_num_rows($sql_trabajador);
+
+            if ($num_trabajador > 0) {
+                for ($i = 2; $i <= ($filas); $i++) {
+                    $sql_cuenta_trabajador = mysql_query("select * from tabla_prestaciones
+                                     where idtrabajador = '" . $bus_trabajador["idtrabajador"] . "'
+                                     and anio = '" . $data->sheets[0]['cells'][$i][2] . "'
+                                     and mes = '" . $data->sheets[0]['cells'][$i][3] . "'") or die(mysql_error());
+                    $bus_cuenta_trabajador = mysql_fetch_array($sql_cuenta_trabajador);
+                    $num_cuenta_trabajador = mysql_num_rows($sql_cuenta_trabajador);
+
+                    $sueldo                = $data->sheets[0]['cells'][$i][4];
+                    $otros_complementos    = $data->sheets[0]['cells'][$i][5];
+                    $dias_vacacional       = $data->sheets[0]['cells'][$i][6];
+                    $bono_vacacional       = $data->sheets[0]['cells'][$i][7];
+                    $dias_fin_anio         = $data->sheets[0]['cells'][$i][8];
+                    $bono_fin_anio         = $data->sheets[0]['cells'][$i][9];
+                    $adelanto_prestaciones = $data->sheets[0]['cells'][$i][10];
+                    $adelanto_intereses    = $data->sheets[0]['cells'][$i][11];
+
+                    if ($num_cuenta_trabajador <= 0) {
+                        $alicuota_bv = 0;
+                        if($dias_vacacional > 0){
+                            $mensual_bono_vacacional = ((($sueldo + $otros_complementos) / 30) * $dias_vacacional / 360) * 30;
+                            $alicuota_bv = $mensual_bono_vacacional;
+                        }else{
+                            $mensual_bono_vacacional = $bono_vacacional;
+                        }
+                        if($dias_fin_anio > 0){
+                            $alicuota_bfa = (((($sueldo + $otros_complementos) / 30) + ($alicuota_bv / 30)) * $dias_fin_anio / 360) * 30;
+                        }else{
+                            $alicuota_bfa = $bono_fin_anio;
+                        }
+
+                        $sql_cuenta = mysql_query("insert into tabla_prestaciones(
+                                                                idtrabajador,
+                                                                anio,
+                                                                mes,
+                                                                sueldo,
+                                                                dias_bono_vacacional,
+                                                                bono_vacacional,
+                                                                dias_bono_fin_anio,
+                                                                bono_fin_anio,
+                                                                otros_complementos)VALUES(
+                                                                '" . $bus_trabajador["idtrabajador"] . "',
+                                                                '" . $data->sheets[0]['cells'][$i][2] . "',
+                                                                '" . $data->sheets[0]['cells'][$i][3] . "',
+                                                                '" . $sueldo . "',
+                                                                '" . $dias_vacacional . "',
+                                                                '" . $mensual_bono_vacacional . "',
+                                                                '" . $dias_fin_anio . "',
+                                                                '" . $alicuota_bfa . "',
+                                                                '" . $otros_complementos . "')") or die(mysql_error());
+                        $idtabla_prestaciones = mysql_insert_id();
+                    } else {
+
+                        $alicuota_bv = 0;
+                        if($dias_vacacional > 0){
+                            $mensual_bono_vacacional = ((($sueldo + $otros_complementos) / 30) * $dias_vacacional / 360) * 30;
+                            $alicuota_bv = $mensual_bono_vacacional;
+                        }else{
+                            $mensual_bono_vacacional = $bono_vacacional;
+                        }
+                        if($dias_fin_anio > 0){
+                            $alicuota_bfa = (((($sueldo + $otros_complementos) / 30) + ($alicuota_bv / 30)) * $dias_fin_anio / 360) * 30;
+                        }else{
+                            $alicuota_bfa = $bono_fin_anio;
+                        }
+
+                        $idtabla_prestaciones = $bus_cuenta_trabajador["idtabla_prestaciones"];
+                        $sql_actualiza        = mysql_query("update tabla_prestaciones set
+                                                                            sueldo = '" . $sueldo . "',
+                                                                            otros_complementos = '" . $otros_complementos . "',
+                                                                            bono_vacacional = '" . $mensual_bono_vacacional . "',
+                                                                            bono_fin_anio = '" . $alicuota_bfa . "',
+                                                                            dias_bono_vacacional = '" . $dias_vacacional . "',
+                                                                            dias_bono_fin_anio = '" . $dias_fin_anio . "'
+                                                    where idtabla_prestaciones = '" . $idtabla_prestaciones . "'") or die(mysql_error());
+                    }
+                    //Adelantos de prestaciones e intereses
+                    if ($data->sheets[0]['cells'][$i][10] > 0 or $data->sheets[0]['cells'][$i][11] > 0) {
+                        $sql_adelanto_trabajador = mysql_query("select * from tabla_adelantos
+                                                 where idtabla_prestaciones = '" . $idtabla_prestaciones . "'") or die(mysql_error());
+                        $bus_adelanto_trabajador = mysql_fetch_array($sql_adelanto_trabajador);
+                        $num_adelanto_trabajador = mysql_num_rows($sql_adelanto_trabajador);
+
+                        if ($num_adelanto_trabajador <= 0) {
+                            $insertar_adelanto = mysql_query("insert into tabla_adelantos(idtabla_prestaciones,
+                                                                                        monto_prestaciones,
+                                                                                        monto_interes)VALUES(
+                                                                                        '" . $idtabla_prestaciones . "',
+                                                                                        '" . $adelanto_prestaciones . "',
+                                                                                        '" . $adelanto_intereses . "')") or die(mysql_error());
+                        } else {
+                            $actualizar_adelanto = mysql_query("update tabla_adelantos set
+                                                                    monto_prestaciones = '" . $adelanto_prestaciones . "',
+                                                                    monto_interes = '" . $adelanto_intereses . "'
+                                                                    where idtabla_prestaciones = '" . $idtabla_prestaciones . "'");
+                        }
+
+                    }
+
+                }
+            }else{
+                echo 'error_cedula';
+            }
+            break;
     }
+    unlink($nombreArchivo);
+    error_reporting(E_ALL ^ E_NOTICE);
+    ini_set('display_errors', '1');
+
 }
 
 
 if ($ejecutar == "cargarImportar") {
-    $tipo = substr($_FILES['archivo_importar_prestaciones']['type'], 0, 5);
+    $tipo = $_FILES['archivo_importar_prestaciones']['type'];
     $dir  = '../importar/';
-    if ($tipo == 'image') {
+    if ($tipo == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' or $tipo == 'application/vnd.ms-excel') {
         $nombre_importar = $_FILES['archivo_importar_prestaciones']['name'];
         while (file_exists($dir . $nombre_importar)) {
             $partes_importar = explode(".", $nombre_importar);
@@ -4431,25 +4662,26 @@ if ($ejecutar == "cargarImportar") {
             ?>
                 <?
         } else {
-            $ruta = 'modulos/rrhh/importar/' . $nombre_importar;
+            $ruta = '../importar/' . $nombre_importar;
         }
 
         ?>
 
             <script>
-            parent.document.getElementById('nombre_importar').value = '<?=$nombre_importar?>';
+            parent.document.getElementById('nombre_importar').value = '<?=$ruta?>';
+            parent.document.getElementById('tipo_importar').value = '<?=$tipo?>';
+            parent.document.getElementById('error_tipo').style.display='none';
             </script>
             <?
 
     } else {
-        /*
         ?>
             <script>
-            parent.document.getElementById('mostrarImagen').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* Disculpe el archivo que intenta subir NO es una Imagen</td></tr></table>";
+            parent.document.getElementById('error_tipo').style.display='block';
+            parent.document.getElementById('error_tipo').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* Disculpe el archivo que intenta subir NO es de tipo Excel 1997/2003 (.xls)</td></tr></table>";
             </script>
 
             <?
-        */
     }
 
 }
