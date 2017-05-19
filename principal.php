@@ -57,7 +57,7 @@
 
 <div id="divCargando" style="background-color:#CCCCCC; width:250px; height:100px;
                             position: absolute; left: 50%; top: 50%; margin-top: -100px; margin-left: -100px;
-                            border: 1px solid black; display:none; z-index:2000">
+                            border: 1px solid black; display:none; z-index:3000">
     <center><h1>Procesando...</h1><br><img src='imagenes/cargando.gif'><br></center>
 </div>
 

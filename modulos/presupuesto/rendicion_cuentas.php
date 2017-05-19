@@ -14,7 +14,7 @@
     <h2 class="sqlmVersion"></h2>
 	<br><br /><br />
  <?
-   $sql_configuracion=mysql_query("select * from configuracion 
+   $sql_configuracion=mysql_query("select * from configuracion
 											where status='a'"
 												,$conexion_db);
 $registro_configuracion=mysql_fetch_assoc($sql_configuracion);
@@ -22,23 +22,41 @@ $registro_configuracion=mysql_fetch_assoc($sql_configuracion);
 $anio_fijo=$registro_configuracion["anio_fiscal"];
 $idtipo_presupuesto_fijo=$registro_configuracion["idtipo_presupuesto"];
 $idfuente_financiamiento_fijo=$registro_configuracion["idfuente_financiamiento"];
-include "../../../funciones/funciones.php";
- ?>   
+//include "../../../funciones/funciones.php";
+ ?>
 
 <table width="90%" border="0" cellspacing="0" cellpadding="4" align="center">
   <tr>
     <td colspan="6" align='center'>
     	<img src="imagenes/nuevo.png" width="16" height="16" onclick="window.location.href='principal.php?accion=661&modulo=2'" style="cursor:pointer"/>
-    	
+
         <img src="imagenes/imprimir.png" title="Imprimir Orden de Pago"  onClick="document.getElementById('pdf').src='lib/<?=$_SESSION["rutaReportes"]?>/presupuesto.php?nombre=reporte_rendicion_cuentas&idrendicion_cuentas='+document.getElementById('idrendicion_cuentas').value; document.getElementById('pdf').style.display='block'; document.getElementById('divImprimir').style.display='block';" style="cursor:pointer" />
     </td>
   </tr>
   <tr>
     <td align='right' class='viewPropTitle'>Año</td>
     <td><label>
-      <select name="anio" id="anio" disabled="disabled">
-                        <?
-anio_fiscal();
+      <select name="anio" id="anio">
+        <option value="2008" <?php if ($_SESSION["anio_fiscal"] == "2008") { echo ' selected';}?>>2008</option>
+        <option value="2009" <?php if ($_SESSION["anio_fiscal"] == "2009") { echo ' selected';}?>>2009</option>
+        <option value="2010" <?php if ($_SESSION["anio_fiscal"] == "2010") { echo ' selected';}?>>2010</option>
+        <option value="2011" <?php if ($_SESSION["anio_fiscal"] == "2011") { echo ' selected';}?>>2011</option>
+        <option value="2012" <?php if ($_SESSION["anio_fiscal"] == "2012") { echo ' selected';}?>>2012</option>
+        <option value="2013" <?php if ($_SESSION["anio_fiscal"] == "2013") { echo ' selected';}?>>2013</option>
+        <option value="2014" <?php if ($_SESSION["anio_fiscal"] == "2014") { echo ' selected';}?>>2014</option>
+        <option value="2015" <?php if ($_SESSION["anio_fiscal"] == "2015") { echo ' selected';}?>>2015</option>
+        <option value="2016" <?php if ($_SESSION["anio_fiscal"] == "2016") { echo ' selected';}?>>2016</option>
+        <option value="2017" <?php if ($_SESSION["anio_fiscal"] == "2017") { echo ' selected';}?>>2017</option>
+        <option value="2018" <?php if ($_SESSION["anio_fiscal"] == "2018") { echo ' selected';}?>>2018</option>
+        <option value="2019" <?php if ($_SESSION["anio_fiscal"] == "2019") { echo ' selected';}?>>2019</option>
+        <option value="2020" <?php if ($_SESSION["anio_fiscal"] == "2020") { echo ' selected';}?>>2020</option>
+        <option value="2021" <?php if ($_SESSION["anio_fiscal"] == "2021") { echo ' selected';}?>>2021</option>
+        <option value="2022" <?php if ($_SESSION["anio_fiscal"] == "2022") { echo ' selected';}?>>2022</option>
+        <option value="2023" <?php if ($_SESSION["anio_fiscal"] == "2023") { echo ' selected';}?>>2023</option>
+        <option value="2024" <?php if ($_SESSION["anio_fiscal"] == "2024") { echo ' selected';}?>>2024</option>
+        <option value="2025" <?php if ($_SESSION["anio_fiscal"] == "2025") { echo ' selected';}?>>2025</option>
+        <?
+//anio_fiscal();
 ?>
       </select>
     </label></td>
@@ -70,12 +88,12 @@ anio_fiscal();
     <td align='right' class='viewPropTitle'>Categoria Programatica</td>
     <td colspan="5">
       <input name="categoria_programatica" type="text" id="categoria_programatica" size="80">
-      <img src="imagenes/search0.png" 
-                    title="Buscar Categoria Programatica" 
-                    id="buscarCategoriaProgramatica" 
+      <img src="imagenes/search0.png"
+                    title="Buscar Categoria Programatica"
+                    id="buscarCategoriaProgramatica"
                     name="buscarCategoriaProgramatica"
                     style="visibility:visible"
-                    onclick="window.open('lib/listas/lista_categorias_programaticas.php?destino=rendicion_cuentas','categoria_programatica','resizable = no, scrollbars=yes, width=900, height = 500')" 
+                    onclick="window.open('lib/listas/lista_categorias_programaticas.php?destino=rendicion_cuentas','categoria_programatica','resizable = no, scrollbars=yes, width=900, height = 500')"
                                                  />
       <input name="id_categoria_programatica" type="hidden" id="id_categoria_programatica">    </td>
   </tr>
@@ -85,13 +103,13 @@ anio_fiscal();
     <select name="tipo_presupuesto" id="tipo_presupuesto">
               <option>.:: Seleccione ::.</option>
               <?php
-					$sql_tipo_presupuesto=mysql_query("select * from tipo_presupuesto 
+					$sql_tipo_presupuesto=mysql_query("select * from tipo_presupuesto
 											where status='a'"
 												,$conexion_db);
-						while($rowtipo_presupuesto = mysql_fetch_array($sql_tipo_presupuesto)) 
-							{ 
+						while($rowtipo_presupuesto = mysql_fetch_array($sql_tipo_presupuesto))
+							{
 								?>
-              <option <?php echo 'value="'.$rowtipo_presupuesto["idtipo_presupuesto"].'"'; 
+              <option <?php echo 'value="'.$rowtipo_presupuesto["idtipo_presupuesto"].'"';
 											if ($rowtipo_presupuesto["idtipo_presupuesto"]==$idtipo_presupuesto_fijo){echo ' selected';}?>> <?php echo $rowtipo_presupuesto["denominacion"];?> </option>
               <?php
 							}
@@ -102,13 +120,13 @@ anio_fiscal();
     <select name="fuente_financiamiento" id="fuente_financiamiento">
               <option>.:: Seleccione ::.</option>
               <?php
-					$sql_fuente_financiamiento=mysql_query("select * from fuente_financiamiento 
+					$sql_fuente_financiamiento=mysql_query("select * from fuente_financiamiento
 												where status='a'"
 													,$conexion_db);
-						while($rowfuente_financiamiento = mysql_fetch_array($sql_fuente_financiamiento)) 
-							{ 
+						while($rowfuente_financiamiento = mysql_fetch_array($sql_fuente_financiamiento))
+							{
 								?>
-              <option <?php echo 'value="'.$rowfuente_financiamiento["idfuente_financiamiento"].'"'; 
+              <option <?php echo 'value="'.$rowfuente_financiamiento["idfuente_financiamiento"].'"';
 													if ($rowfuente_financiamiento["idfuente_financiamiento"]==$idfuente_financiamiento_fijo) {echo ' selected';}?>> <?php echo $rowfuente_financiamiento["denominacion"];?> </option>
               <?php
 							}
@@ -116,7 +134,7 @@ anio_fiscal();
             </select>    </td>
     <td align='right' class='viewPropTitle'>Ordinal</td>
     <td>
-    
+
     <?
           $sql_ordinal = mysql_query("select * from ordinal where codigo = '0000'");
 		  $bus_ordinal = mysql_fetch_array($sql_ordinal);
@@ -124,11 +142,11 @@ anio_fiscal();
                     <input type="text" name="descripcion_ordinal" id="descripcion_ordinal" size="30" readonly="readonly" value="(<?=$bus_ordinal["codigo"]?>) <?=$bus_ordinal["denominacion"]?>"/>
                     <input type="hidden" name="ordinal" id="ordinal" value="<?=$bus_ordinal["idordinal"]?>"/>                </td>
                 <td><img style="display:block"
-                                        src="imagenes/search0.png" 
-                                        title="Buscar Ordinal" 
-                                        id="buscarOrdinal" 
+                                        src="imagenes/search0.png"
+                                        title="Buscar Ordinal"
+                                        id="buscarOrdinal"
                                         name="buscarOrdinal"
-                                        onclick="window.open('lib/listas/lista_ordinal.php?destino=rendicion_cuentas','','resizable = no, scrollbars=yes, width=600, height=400')" 
+                                        onclick="window.open('lib/listas/lista_ordinal.php?destino=rendicion_cuentas','','resizable = no, scrollbars=yes, width=600, height=400')"
                                          />    </td>
   </tr>
   <tr>
