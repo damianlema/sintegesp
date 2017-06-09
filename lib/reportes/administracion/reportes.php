@@ -692,7 +692,28 @@ switch ($nombre) {
 						$sum_bruto += $field['total'];
 						$sum_deducciones += $field['total_retenido'];
 						$sum_total += $field['total_a_pagar'];
-
+					}
+				}else{
+					if ($field['exento']==0 and $field['sub_total']==0){
+						$bruto = $field['total'];
+						$deducciones = 0;
+						$total = $field['total_a_pagar'];
+					}elseif ($field['exento']==0 and $field['sub_total']!=0){
+						$bruto = $field['total'];
+						$deducciones = $field['total_retenido'];
+						$total = $field['total_a_pagar'];
+					}elseif ($field['exento']!=0 and $field['sub_total']!=0 and $field['total_retenido']==0){
+						$bruto = $field['sub_total'];
+						$deducciones = $field['exento'];
+						$total = $field['total_a_pagar'];
+					}elseif ($field['exento']!=0 and $field['sub_total']==0){
+						$bruto = $field['exento'];
+						$deducciones = 0;
+						$total = $field['total_a_pagar'];
+					}elseif ($field['exento']!=0 and $field['sub_total']!=0 and $field['total_retenido']!=0){
+						$bruto = $field['total'];
+						$deducciones = $field['total_retenido'];
+						$total = $field['total_a_pagar'];
 					}
 				}
 
@@ -702,15 +723,24 @@ switch ($nombre) {
 
 				//$pdf->SetDrawColor(0, 0, 0); $pdf->SetFillColor(255, 255, 255);
 				//$pdf->SetTextColor(0, 0, 0); $pdf->SetFont('Arial', '', 6);
-					$pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255);
-					$pdf->SetTextColor(0, 0, 0); $pdf->SetFont('Arial', '', 6);
+				$pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255);
+				$pdf->SetTextColor(0, 0, 0); $pdf->SetFont('Arial', '', 6);
 				$pdf->Ln(1);
 				$pdf->SetAligns(array('L', 'C', 'L', 'R', 'R', 'R'));
 				$pdf->SetWidths(array(25, 15, 95, 25, 25, 25));
-				$pdf->Row(array($field['numero_orden'], $fecha, utf8_decode($field['nombre']),
+				if ($field['estado'] != "anulado") {
+					$pdf->Row(array($field['numero_orden'], $fecha, utf8_decode($field['nombre']),
 									number_format($bruto, 2, ',', '.'),
 									number_format($deducciones, 2, ',', '.'),
 									number_format($total, 2, ',', '.')));
+				}else{
+					$pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255);
+					$pdf->SetTextColor(165, 165, 165); $pdf->SetFont('Arial', '', 6);
+					$pdf->Row(array($field['numero_orden'], $fecha, utf8_decode($field['nombre']." (ANULADO)"),
+									number_format($bruto, 2, ',', '.'),
+									number_format($deducciones, 2, ',', '.'),
+									number_format($total, 2, ',', '.')));
+				}
 				$nro_ordenes++;
 
 				if ($mostrarConcepto == 'si'){
@@ -863,6 +893,28 @@ switch ($nombre) {
 						$sum_total += $field['total_a_pagar'];
 
 					}
+				}else{
+					if ($field['exento']==0 and $field['sub_total']==0){
+						$bruto = $field['total'];
+						$deducciones = 0;
+						$total = $field['total_a_pagar'];
+					}elseif ($field['exento']==0 and $field['sub_total']!=0){
+						$bruto = $field['total'];
+						$deducciones = $field['total_retenido'];
+						$total = $field['total_a_pagar'];
+					}elseif ($field['exento']!=0 and $field['sub_total']!=0 and $field['total_retenido']==0){
+						$bruto = $field['sub_total'];
+						$deducciones = $field['exento'];
+						$total = $field['total_a_pagar'];
+					}elseif ($field['exento']!=0 and $field['sub_total']==0){
+						$bruto = $field['exento'];
+						$deducciones = 0;
+						$total = $field['total_a_pagar'];
+					}elseif ($field['exento']!=0 and $field['sub_total']!=0 and $field['total_retenido']!=0){
+						$bruto = $field['total'];
+						$deducciones = $field['total_retenido'];
+						$total = $field['total_a_pagar'];
+					}
 				}
 
 
@@ -876,10 +928,19 @@ switch ($nombre) {
 				$pdf->Ln(1);
 				$pdf->SetAligns(array('L', 'C', 'L', 'C', 'R', 'R', 'R'));
 				$pdf->SetWidths(array(25, 15, 75, 20, 25, 25, 25));
-				$pdf->Row(array($field['numero_orden'], $fecha, utf8_decode($field['nombre']), $field['numero_cheque'],
+				if ($field['estado'] != "anulado") {
+					$pdf->Row(array($field['numero_orden'], $fecha, utf8_decode($field['nombre']), $field['numero_cheque'],
 									number_format($bruto, 2, ',', '.'),
 									number_format($deducciones, 2, ',', '.'),
 									number_format($total, 2, ',', '.')));
+				}else{
+					$pdf->SetDrawColor(255, 255, 255); $pdf->SetFillColor(255, 255, 255);
+					$pdf->SetTextColor(165, 165, 165); $pdf->SetFont('Arial', '', 6);
+					$pdf->Row(array($field['numero_orden'], $fecha, utf8_decode($field['nombre']." (ANULADA)"), $field['numero_cheque'],
+									number_format($bruto, 2, ',', '.'),
+									number_format($deducciones, 2, ',', '.'),
+									number_format($total, 2, ',', '.')));
+				}
 				$nro_ordenes++;
 
 				if ($mostrarConcepto == 'si'){

@@ -5,7 +5,7 @@ class Conexion extends mysqli {
 	private static $db_host = 'localhost';
 	private static $db_user = 'root';
 	private static $db_pass = '';
-	private static $db_name = 'gestion_barrancas_2016';
+	private static $db_name = 'gestion_mariguitar_2017abr2017';
 
 	public function __construct(){
 		parent::__construct(self::$db_host,self::$db_user,self::$db_pass,self::$db_name);

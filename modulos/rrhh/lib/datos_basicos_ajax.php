@@ -2,7 +2,8 @@
 session_start();
 include "../../../conf/conex.php";
 include "../../../funciones/funciones.php";
-
+$root_server = $_SERVER['DOCUMENT_ROOT'].$_SESSION["directorio_root"];
+require($root_server."/conf/class.Conexion.php");
 $conexion = Conectarse();
 extract($_POST);
 extract($_SESSION);
@@ -4403,41 +4404,54 @@ if ($ejecutar == "consultarTotalesGeneralesPrestaciones") {
 
 }
 
-
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 if ($ejecutar == "importarPrestaciones") {
     $nombreArchivo = $archivo_importar;
     switch ($tipo_importar) {
+
         case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
             require_once 'PHPExcel/Classes/PHPExcel.php';
             require_once('PHPExcel/Classes/PHPExcel/Reader/Excel2007.php');
+
+            $db = new conexion();
+            $stmt = $db->stmt_init();
 
             $objReader = new PHPExcel_Reader_Excel2007();
             $objReader->setReadDataOnly(true);
             $objPHPExcel = $objReader->load($nombreArchivo);
             $filas=$objPHPExcel->setActiveSheetIndex(0)->getHighestRow();
-            //echo "filas: ".$objPHPExcel->getActiveSheet()->getCell('J'.'2')->getCalculatedValue();
+            $cedula = mysql_real_escape_string(htmlspecialchars($objPHPExcel->getActiveSheet()->getCell('A2')));
             $sql_trabajador = mysql_query("select * from trabajador where   idtrabajador = '".$idtrabajador."'
-                                                                            and cedula = '" . $objPHPExcel->getActiveSheet()->getCell('A2') . "'");
+                                                                            and cedula = '" . $cedula . "'");
             $bus_trabajador = mysql_fetch_array($sql_trabajador);
             $num_trabajador = mysql_num_rows($sql_trabajador);
 
             if ($num_trabajador > 0) {
+
                 for ($i = 2; $i <= ($filas); $i++) {
-                     $sql_cuenta_trabajador = mysql_query("select * from tabla_prestaciones
+
+                    $idtrabajador = $bus_trabajador["idtrabajador"];
+                    $anio = mysql_real_escape_string(htmlspecialchars($objPHPExcel->getActiveSheet()->getCell('B'.$i)));
+                    $mes  = mysql_real_escape_string(htmlspecialchars($objPHPExcel->getActiveSheet()->getCell('C'.$i)));
+
+                    $sql_cuenta_trabajador = mysql_query("select * from tabla_prestaciones
                                      where idtrabajador = '" . $bus_trabajador["idtrabajador"] . "'
-                                     and anio = '" . $objPHPExcel->getActiveSheet()->getCell('B'.$i) . "'
-                                     and mes = '" . $objPHPExcel->getActiveSheet()->getCell('C'.$i) . "'") or die(mysql_error());
+                                     and anio = '" . $anio . "'
+                                     and mes = '" . $mes . "'") or die(mysql_error());
+
                     $bus_cuenta_trabajador = mysql_fetch_array($sql_cuenta_trabajador);
                     $num_cuenta_trabajador = mysql_num_rows($sql_cuenta_trabajador);
 
-                    $sueldo                = $objPHPExcel->getActiveSheet()->getCell('D'.$i)->getCalculatedValue();
-                    $otros_complementos    = $objPHPExcel->getActiveSheet()->getCell('E'.$i)->getCalculatedValue();
-                    $dias_vacacional       = $objPHPExcel->getActiveSheet()->getCell('F'.$i)->getCalculatedValue();
-                    $bono_vacacional       = $objPHPExcel->getActiveSheet()->getCell('G'.$i)->getCalculatedValue();
-                    $dias_fin_anio         = $objPHPExcel->getActiveSheet()->getCell('H'.$i)->getCalculatedValue();
-                    $bono_fin_anio         = $objPHPExcel->getActiveSheet()->getCell('I'.$i)->getCalculatedValue();
-                    $adelanto_prestaciones = $objPHPExcel->getActiveSheet()->getCell('J'.$i)->getCalculatedValue();
-                    $adelanto_intereses    = $objPHPExcel->getActiveSheet()->getCell('K'.$i)->getCalculatedValue();
+                    $sueldo                = mysql_real_escape_string(htmlspecialchars($objPHPExcel->getActiveSheet()->getCell('D'.$i)->getCalculatedValue()));
+                    $otros_complementos    = mysql_real_escape_string(htmlspecialchars($objPHPExcel->getActiveSheet()->getCell('E'.$i)->getCalculatedValue()));
+                    $dias_vacacional       = mysql_real_escape_string(htmlspecialchars($objPHPExcel->getActiveSheet()->getCell('F'.$i)->getCalculatedValue()));
+                    $bono_vacacional       = mysql_real_escape_string(htmlspecialchars($objPHPExcel->getActiveSheet()->getCell('G'.$i)->getCalculatedValue()));
+                    $dias_fin_anio         = mysql_real_escape_string(htmlspecialchars($objPHPExcel->getActiveSheet()->getCell('H'.$i)->getCalculatedValue()));
+                    $bono_fin_anio         = mysql_real_escape_string(htmlspecialchars($objPHPExcel->getActiveSheet()->getCell('I'.$i)->getCalculatedValue()));
+                    $adelanto_prestaciones = mysql_real_escape_string(htmlspecialchars($objPHPExcel->getActiveSheet()->getCell('J'.$i)->getCalculatedValue()));
+                    $adelanto_intereses    = mysql_real_escape_string(htmlspecialchars($objPHPExcel->getActiveSheet()->getCell('K'.$i)->getCalculatedValue()));
+
                     if ($num_cuenta_trabajador <= 0) {
                         $alicuota_bv = 0;
                         if($dias_vacacional > 0){
@@ -4462,8 +4476,8 @@ if ($ejecutar == "importarPrestaciones") {
                                                                 bono_fin_anio,
                                                                 otros_complementos)VALUES(
                                                                 '" . $bus_trabajador["idtrabajador"] . "',
-                                                                '" . $objPHPExcel->getActiveSheet()->getCell('B'.$i) . "',
-                                                                '" . $objPHPExcel->getActiveSheet()->getCell('C'.$i) . "',
+                                                                '" . $anio . "',
+                                                                '" . $mes . "',
                                                                 '" . $sueldo . "',
                                                                 '" . $dias_vacacional . "',
                                                                 '" . $mensual_bono_vacacional . "',
@@ -4496,7 +4510,7 @@ if ($ejecutar == "importarPrestaciones") {
                                                     where idtabla_prestaciones = '" . $idtabla_prestaciones . "'") or die(mysql_error());
                     }
                     //Adelantos de prestaciones e intereses
-                    if ($objPHPExcel->getActiveSheet()->getCell('J'.$i) > 0 or $objPHPExcel->getActiveSheet()->getCell('K'.$i) > 0) {
+                    if ($adelanto_prestaciones > 0 or $adelanto_intereses > 0) {
                         $sql_adelanto_trabajador = mysql_query("select * from tabla_adelantos
                                                  where idtabla_prestaciones = '" . $idtabla_prestaciones . "'") or die(mysql_error());
                         $bus_adelanto_trabajador = mysql_fetch_array($sql_adelanto_trabajador);
@@ -4529,30 +4543,31 @@ if ($ejecutar == "importarPrestaciones") {
             $data->setOutputEncoding('CP1251');
             $data->read($nombreArchivo);
             $filas=$data->sheets[0]['numRows'];
-            //echo "xls ".$data->sheets[0]['numRows']." ".$data->sheets[0]['numCols'];
-
+            $cedula = mysql_real_escape_string(htmlspecialchars($data->sheets[0]['cells'][2][1]));
             $sql_trabajador = mysql_query("select * from trabajador where   idtrabajador = '".$idtrabajador."'
-                                                                            and cedula = '" . $data->sheets[0]['cells'][2][1] . "'");
+                                                                            and cedula = '" . $cedula . "'");
             $bus_trabajador = mysql_fetch_array($sql_trabajador);
             $num_trabajador = mysql_num_rows($sql_trabajador);
 
             if ($num_trabajador > 0) {
                 for ($i = 2; $i <= ($filas); $i++) {
+                    $anio = mysql_real_escape_string(htmlspecialchars($data->sheets[0]['cells'][$i][2]));
+                    $mes  = mysql_real_escape_string(htmlspecialchars($data->sheets[0]['cells'][$i][3]));
                     $sql_cuenta_trabajador = mysql_query("select * from tabla_prestaciones
                                      where idtrabajador = '" . $bus_trabajador["idtrabajador"] . "'
-                                     and anio = '" . $data->sheets[0]['cells'][$i][2] . "'
-                                     and mes = '" . $data->sheets[0]['cells'][$i][3] . "'") or die(mysql_error());
+                                     and anio = '" . $anio . "'
+                                     and mes = '" . $mes . "'") or die(mysql_error());
                     $bus_cuenta_trabajador = mysql_fetch_array($sql_cuenta_trabajador);
                     $num_cuenta_trabajador = mysql_num_rows($sql_cuenta_trabajador);
 
-                    $sueldo                = $data->sheets[0]['cells'][$i][4];
-                    $otros_complementos    = $data->sheets[0]['cells'][$i][5];
-                    $dias_vacacional       = $data->sheets[0]['cells'][$i][6];
-                    $bono_vacacional       = $data->sheets[0]['cells'][$i][7];
-                    $dias_fin_anio         = $data->sheets[0]['cells'][$i][8];
-                    $bono_fin_anio         = $data->sheets[0]['cells'][$i][9];
-                    $adelanto_prestaciones = $data->sheets[0]['cells'][$i][10];
-                    $adelanto_intereses    = $data->sheets[0]['cells'][$i][11];
+                    $sueldo                = mysql_real_escape_string(htmlspecialchars($data->sheets[0]['cells'][$i][4]));
+                    $otros_complementos    = mysql_real_escape_string(htmlspecialchars($data->sheets[0]['cells'][$i][5]));
+                    $dias_vacacional       = mysql_real_escape_string(htmlspecialchars($data->sheets[0]['cells'][$i][6]));
+                    $bono_vacacional       = mysql_real_escape_string(htmlspecialchars($data->sheets[0]['cells'][$i][7]));
+                    $dias_fin_anio         = mysql_real_escape_string(htmlspecialchars($data->sheets[0]['cells'][$i][8]));
+                    $bono_fin_anio         = mysql_real_escape_string(htmlspecialchars($data->sheets[0]['cells'][$i][9]));
+                    $adelanto_prestaciones = mysql_real_escape_string(htmlspecialchars($data->sheets[0]['cells'][$i][10]));
+                    $adelanto_intereses    = mysql_real_escape_string(htmlspecialchars($data->sheets[0]['cells'][$i][11]));
 
                     if ($num_cuenta_trabajador <= 0) {
                         $alicuota_bv = 0;
@@ -4579,8 +4594,8 @@ if ($ejecutar == "importarPrestaciones") {
                                                                 bono_fin_anio,
                                                                 otros_complementos)VALUES(
                                                                 '" . $bus_trabajador["idtrabajador"] . "',
-                                                                '" . $data->sheets[0]['cells'][$i][2] . "',
-                                                                '" . $data->sheets[0]['cells'][$i][3] . "',
+                                                                '" . $anio . "',
+                                                                '" . $mes . "',
                                                                 '" . $sueldo . "',
                                                                 '" . $dias_vacacional . "',
                                                                 '" . $mensual_bono_vacacional . "',
@@ -4614,7 +4629,7 @@ if ($ejecutar == "importarPrestaciones") {
                                                     where idtabla_prestaciones = '" . $idtabla_prestaciones . "'") or die(mysql_error());
                     }
                     //Adelantos de prestaciones e intereses
-                    if ($data->sheets[0]['cells'][$i][10] > 0 or $data->sheets[0]['cells'][$i][11] > 0) {
+                    if ($adelanto_prestaciones > 0 or $adelanto_intereses > 0) {
                         $sql_adelanto_trabajador = mysql_query("select * from tabla_adelantos
                                                  where idtabla_prestaciones = '" . $idtabla_prestaciones . "'") or die(mysql_error());
                         $bus_adelanto_trabajador = mysql_fetch_array($sql_adelanto_trabajador);
@@ -4641,6 +4656,7 @@ if ($ejecutar == "importarPrestaciones") {
                 echo 'error_cedula';
             }
             break;
+
     }
     unlink($nombreArchivo);
     error_reporting(E_ALL ^ E_NOTICE);

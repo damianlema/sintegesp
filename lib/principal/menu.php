@@ -6,7 +6,7 @@ session_start();
 <?
 include ("../../conf/conex.php");
 $conexion_db=conectarse();
-$buscar=mysql_query("select * from usuarios 
+$buscar=mysql_query("select * from usuarios
 								where cedula=".$_SESSION['cedula_usuario']
 								,$conexion_db);
 $registro_usuario=mysql_fetch_assoc($buscar);
@@ -71,7 +71,7 @@ img {
         padding: 8px 0 0 15px;
         }
 
-#menu11 li a:hover, #menu11 li #current { 
+#menu11 li a:hover, #menu11 li #current {
         color: #242424;
         background:  url(imagenes/menu11.gif) 0 -32px;
         padding: 8px 0 0 15px;
@@ -94,7 +94,7 @@ text-decoration:underline;
 -->
         </style>
         <script>
-		function nuevoAjax(){ 
+		function nuevoAjax(){
 				var xmlhttp=false;
 				try{
 					xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");
@@ -105,15 +105,15 @@ text-decoration:underline;
 						if (!xmlhttp && typeof XMLHttpRequest!='undefined') xmlhttp=new XMLHttpRequest();
 					}
 				}
-				return xmlhttp; 
+				return xmlhttp;
 			}
 
 		ClosingVar =true
 		window.onbeforeunload = ExitCheck;
-		function ExitCheck(){  
+		function ExitCheck(){
 		///control de cerrar la ventana///
 		var num = document.getElementById('num_validacion_cerrar').value;
-		 if(ClosingVar == true){ 
+		 if(ClosingVar == true){
 			document.getElementById('num_validacion_cerrar').value = parseInt(document.getElementById('num_validacion_cerrar').value) + 1;
 			if(parseInt(document.getElementById('num_validacion_cerrar').value) == 2){
 				ExitCheck = false;
@@ -136,30 +136,30 @@ text-decoration:underline;
 
 		function revisarNuevosConectados(){
 				var ajax		= nuevoAjax();
-				ajax.open("POST", "../../modulos/chat/lib/ventanaChat_ajax.php", true);	
+				ajax.open("POST", "../../modulos/chat/lib/ventanaChat_ajax.php", true);
 				ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-				ajax.onreadystatechange=function() { 
+				ajax.onreadystatechange=function() {
 					if(ajax.readyState == 1){}
 					if (ajax.readyState==4){
 					//alert(ajax.responseText);
 							document.getElementById('contenido_lista_contactos').innerHTML = ajax.responseText;
-					} 
+					}
 				}
 				ajax.send("ejecutar=revisarNuevosConectados");
 		}
 
 		function revisarNuevasConversaciones(login){
 				var ajax		= nuevoAjax();
-				ajax.open("POST", "../../modulos/chat/lib/ventanaChat_ajax.php", true);	
+				ajax.open("POST", "../../modulos/chat/lib/ventanaChat_ajax.php", true);
 				ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-				ajax.onreadystatechange=function() { 
+				ajax.onreadystatechange=function() {
 					if(ajax.readyState == 1){}
 					if (ajax.readyState==4){
 					//alert(ajax.responseText);
 							if(ajax.responseText != 0){
 								popUP = window.open('../../modulos/chat/ventanaChat.php?ua='+ajax.responseText+'&ur=<?=$_SESSION["login"]?>', 'venta_chat_'+ajax.responseText+"", 'width=350, height=350, scrollbars=no, resizable=no,location=no,menubar=no');
 							}
-					} 
+					}
 				}
 				ajax.send("lo="+login+"&ejecutar=revisarNuevasConversaciones");
 		}
@@ -190,7 +190,7 @@ text-decoration:underline;
                     <li style="padding:3px; cursor:pointer" id="nombre_contacto_<?=$bus_contactos["cedula"]?>" onMouseOver="this.style.color='#0066FF', this.style.textDecoration='underline'; this.style.backgroundColor= '#EAEAEA'" onMouseOut="this.style.color='#000', this.style.textDecoration='none', this.style.backgroundColor= '#FFF'" onClick="window.open('../../modulos/chat/ventanaChat.php?ua=<?=$login?>&ur=<?=$bus_contactos["login"]?>', 'venta_chat_<?=$bus_contactos["login"]?>', 'width=350, height=350, scrollbars=no, resizable=no')">
                     -<?=substr($bus_contactos["apellidos"]." ".$bus_contactos["nombres"],0,20)?>
                     </li>
-					
+
 					<?
 				}
 				}else{

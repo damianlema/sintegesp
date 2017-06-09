@@ -2,7 +2,6 @@
 session_start();
 $cedula = $_SESSION['cedula_usuario'];
 ?><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-
 <style type="text/css">
 <!--
     body {
@@ -73,6 +72,7 @@ h2 {
         }
 -->
 </style>
+
 <div id="tabsF">
   <ul>
     <?php
@@ -92,16 +92,19 @@ while ($bus = mysql_fetch_array($sql)) {
         ?>
         <li>
         <?php
-if ($bus["url"] == "") {
-            echo "<a href='?id_accion=" . $bus["id_accion"] . "&modulo=" . $modulo . "&id_padre=" . $bus["id_accion"] . "'>";
+        if ($bus["url"] == "") {
+          ?>
+          <a href='<?="?id_accion=" . $bus["id_accion"] . "&modulo=" . $modulo . "&id_padre=" . $bus["id_accion"] . ""?>'
+            onmouseover = "window.status='aa'; return true">
+          <?php
         } else {
-            echo "<a href='../../principal.php?accion=" . $bus["id_accion"] . "&modulo=" . $modulo . "' target = 'main'>";
+          echo "<a href='../../principal.php?accion=" . $bus["id_accion"] . "&modulo=" . $modulo . "' target = 'main'>";
         }
         ?>
 
         <span><?php echo $bus["nombre_accion"]; ?></span></a></li>
-    <?php
-}
+        <?php
+    }
 }
 if ($_GET["id_padre"] == 0) {
     ?>
