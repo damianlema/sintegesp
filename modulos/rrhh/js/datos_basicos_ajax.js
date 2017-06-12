@@ -13,7 +13,7 @@ function consultarFicha(nomenclatura_ficha) {
         ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
+                if (ajax.readyState == 4) {
                 //alert(ajax.responseText);
                 document.getElementById('nro_ficha').innerHTML = ajax.responseText;
             }
@@ -131,12 +131,13 @@ function ingresarTrabajador() {
         mostrarMensajes("error", "Disculpe debe Indicar la FECHA DE INGRESO del Trabajador");
         document.getElementById("fecha_ingreso_datosEmpleo0").focus();
     } else {
+        setTimeout("document.getElementById('divCargando').style.display = 'block'",300);
         var ajax = nuevoAjax();
         ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
         ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {
-                document.getElementById("divCargando").style.display = "block";
+                //document.getElementById("divCargando").style.display = "block";
             }
             if (ajax.readyState == 4) {
                 var partes = ajax.responseText.split("|.|");
@@ -188,12 +189,13 @@ function modificarTrabajador() {
     } else if (nro_ficha == "") {
         mostrarMensajes("error", "Disculpe debe ingresar el numero de ficha del trabajador");
     } else {
+        setTimeout("document.getElementById('divCargando').style.display = 'block'",300);
         var ajax = nuevoAjax();
         ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
         ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {
-                document.getElementById("divCargando").style.display = "block";
+                //document.getElementById("divCargando").style.display = "block";
             }
             if (ajax.readyState == 4) {
                 //alert(ajax.responseText);
@@ -243,25 +245,26 @@ function consultarId() {
     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "no_existe") {
-                mostrarMensajes("error", "Disculpe este numero de cedula no esta asignado a ningun trabajador");
-            } else {
-                consultarTrabajador(ajax.responseText);
+            if (ajax.readyState == 4) {
+                if (ajax.responseText == "no_existe") {
+                    mostrarMensajes("error", "Disculpe este numero de cedula no esta asignado a ningun trabajador");
+                } else {
+                    consultarTrabajador(ajax.responseText);
+                }
             }
         }
+        ajax.send("cedula=" + cedula + "&ejecutar=consultarId");
     }
-    ajax.send("cedula=" + cedula + "&ejecutar=consultarId");
-}
 
-function consultarTrabajador(idtrabajador) {
+    function consultarTrabajador(idtrabajador) {
     //alert(idtrabajador);
+    setTimeout("document.getElementById('divCargando').style.display = 'block'",300);
     var ajax = nuevoAjax();
     ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {
-            document.getElementById("divCargando").style.display = "block";
+            //document.getElementById("divCargando").style.display = "block";
         }
         if (ajax.readyState == 4) {
             //alert(ajax.responseText);
@@ -390,9 +393,10 @@ function consultarTrabajador(idtrabajador) {
             listarPeriodosCesantes();
             mostrarPestanas();
             consultarPrestaciones();
-            consultarVacaciones();
-            consultarAguinaldos();
-            consultarDeducciones();
+            //consultarVacaciones();
+            //consultarAguinaldos();
+            //consultarDeducciones();
+            cargarSelectNominas();
         }
     }
     ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarTrabajador");
@@ -404,7 +408,7 @@ function mostrarPestanas() {
     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
+            if (ajax.readyState == 4) {
             //alert(ajax.responseText);
             document.getElementById('tabsF').innerHTML = ajax.responseText;
         }
@@ -466,7 +470,7 @@ function mostrarPestanas() {
     	if(typeof document.getElementById("li_informacionGeneral")!=="undefined"){
     		document.getElementById('li_informacionGeneral').style.display 	= 'block';
     	}*/
-}
+    }
 //******************************************************************************************************************************
 //******************************************************************************************************************************
 // ****************************************************** REGISTRO FOTOGRAFICO ********************************************
@@ -481,57 +485,57 @@ function subirRegistroFotografico() {
     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('mostrarImagen').innerHTML = '';
-            document.getElementById('foto_registroFotografico').value = '';
-            document.getElementById('descripcion_foto').value = '';
-            consultar_registroFotografico(idtrabajador);
+            if (ajax.readyState == 4) {
+                document.getElementById('mostrarImagen').innerHTML = '';
+                document.getElementById('foto_registroFotografico').value = '';
+                document.getElementById('descripcion_foto').value = '';
+                consultar_registroFotografico(idtrabajador);
+            }
         }
+        ajax.send("descripcion=" + descripcion + "&idtrabajador=" + idtrabajador + "&nombre_imagen=" + nombre_imagen + "&ejecutar=subirRegistroFotografico");
     }
-    ajax.send("descripcion=" + descripcion + "&idtrabajador=" + idtrabajador + "&nombre_imagen=" + nombre_imagen + "&ejecutar=subirRegistroFotografico");
-}
 
-function consultar_registroFotografico(idtrabajador) {
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('lista_registroFotografico').innerHTML = ajax.responseText;
-        }
-    }
-    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultar_registroFotografico");
-}
-
-function eliminar_registroFotografico(idregistro_fotografico) {
-    if (confirm("Seguro desea Eliminar esta imagen?")) {
+    function consultar_registroFotografico(idtrabajador) {
         var ajax = nuevoAjax();
         ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
         ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
-                consultar_registroFotografico(document.getElementById('idtrabajador').value);
+                if (ajax.readyState == 4) {
+                    document.getElementById('lista_registroFotografico').innerHTML = ajax.responseText;
+                }
             }
+            ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultar_registroFotografico");
         }
-        ajax.send("idregistro_fotografico=" + idregistro_fotografico + "&ejecutar=eliminar_registroFotografico");
-    }
-}
 
-function principal_registroFotografico(idregistro_fotografico_trabajador) {
-    var idtrabajador = document.getElementById('idtrabajador').value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            consultarTrabajador(document.getElementById('idtrabajador').value);
-        }
-    }
-    ajax.send("idtrabajador=" + idtrabajador + "&idregistro_fotografico_trabajador=" + idregistro_fotografico_trabajador + "&ejecutar=principal_registroFotografico");
-}
+        function eliminar_registroFotografico(idregistro_fotografico) {
+            if (confirm("Seguro desea Eliminar esta imagen?")) {
+                var ajax = nuevoAjax();
+                ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState == 1) {}
+                        if (ajax.readyState == 4) {
+                            consultar_registroFotografico(document.getElementById('idtrabajador').value);
+                        }
+                    }
+                    ajax.send("idregistro_fotografico=" + idregistro_fotografico + "&ejecutar=eliminar_registroFotografico");
+                }
+            }
+
+            function principal_registroFotografico(idregistro_fotografico_trabajador) {
+                var idtrabajador = document.getElementById('idtrabajador').value;
+                var ajax = nuevoAjax();
+                ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState == 1) {}
+                        if (ajax.readyState == 4) {
+                            consultarTrabajador(document.getElementById('idtrabajador').value);
+                        }
+                    }
+                    ajax.send("idtrabajador=" + idtrabajador + "&idregistro_fotografico_trabajador=" + idregistro_fotografico_trabajador + "&ejecutar=principal_registroFotografico");
+                }
 //******************************************************************************************************************************
 //******************************************************************************************************************************
 // ************************************************** DATOS DE EMPLEO ***************************************************
@@ -561,7 +565,7 @@ function modificarDatosEmpleo() {
     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
+            if (ajax.readyState == 4) {
             //alert(ajax.responseText);
             consultarTrabajador(idtrabajador);
         }
@@ -579,72 +583,72 @@ function consultarCargaFamiliar(idtrabajador) {
     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('lista_cargaFamiliar').innerHTML = ajax.responseText;
+            if (ajax.readyState == 4) {
+                document.getElementById('lista_cargaFamiliar').innerHTML = ajax.responseText;
+            }
         }
+        ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarCargaFamiliar");
     }
-    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarCargaFamiliar");
-}
 
-function ingresarCargaFamiliar() {
-    var idtrabajador = document.getElementById('idtrabajador').value;
-    var apellido = document.getElementById('apellidos_cargaFamiliar').value;
-    var nombre = document.getElementById('nombres_cargaFamiliar').value;
-    var idnacionalidad = document.getElementById('idnacionalidad_cargaFamiliar').value;
-    var cedula = document.getElementById('cedula_cargaFamiliar').value;
-    var fecha_nacimiento = document.getElementById('fecha_nacimiento_cargaFamiliar').value;
-    var sexo = document.getElementById('sexo_cargaFamiliar').value;
-    var idparentezco = document.getElementById('idparentezco_cargaFamiliar').value;
-    if (document.getElementById('constancia_cargaFamiliar').checked == true) {
-        var constancia = "si";
-    } else {
-        var constancia = "no";
-    }
-    var direccion = document.getElementById('direccion_cargaFamiliar').value;
-    var telefono = document.getElementById('telefono_cargaFamiliar').value;
-    var ocupacion = document.getElementById('ocupacion_cargaFamiliar').value;
-    var nombre_foto = document.getElementById('nombre_foto_cargaFamiliar').value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            consultarCargaFamiliar(idtrabajador);
-            document.formulario_cargaFamiliar.reset();
-            document.getElementById('foto_cargaFamiliar').value = '';
-            document.getElementById('nombre_foto_cargaFamiliar').value = '';
-            mostrarMensajes("exito", "Se Ingresaron los datos con exito");
+    function ingresarCargaFamiliar() {
+        var idtrabajador = document.getElementById('idtrabajador').value;
+        var apellido = document.getElementById('apellidos_cargaFamiliar').value;
+        var nombre = document.getElementById('nombres_cargaFamiliar').value;
+        var idnacionalidad = document.getElementById('idnacionalidad_cargaFamiliar').value;
+        var cedula = document.getElementById('cedula_cargaFamiliar').value;
+        var fecha_nacimiento = document.getElementById('fecha_nacimiento_cargaFamiliar').value;
+        var sexo = document.getElementById('sexo_cargaFamiliar').value;
+        var idparentezco = document.getElementById('idparentezco_cargaFamiliar').value;
+        if (document.getElementById('constancia_cargaFamiliar').checked == true) {
+            var constancia = "si";
+        } else {
+            var constancia = "no";
         }
-    }
-    ajax.send("idtrabajador=" + idtrabajador + "&apellido=" + apellido + "&nombre=" + nombre + "&idnacionalidad=" + idnacionalidad + "&cedula=" + cedula + "&fecha_nacimiento=" + fecha_nacimiento + "&sexo=" + sexo + "&idparentezco=" + idparentezco + "&constancia=" + constancia + "&direccion=" + direccion + "&telefono=" + telefono + "&ocupacion=" + ocupacion + "&nombre_foto=" + nombre_foto + "&ejecutar=ingresarCargaFamiliar");
-}
+        var direccion = document.getElementById('direccion_cargaFamiliar').value;
+        var telefono = document.getElementById('telefono_cargaFamiliar').value;
+        var ocupacion = document.getElementById('ocupacion_cargaFamiliar').value;
+        var nombre_foto = document.getElementById('nombre_foto_cargaFamiliar').value;
+        var ajax = nuevoAjax();
+        ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+        ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 1) {}
+                if (ajax.readyState == 4) {
+                    consultarCargaFamiliar(idtrabajador);
+                    document.formulario_cargaFamiliar.reset();
+                    document.getElementById('foto_cargaFamiliar').value = '';
+                    document.getElementById('nombre_foto_cargaFamiliar').value = '';
+                    mostrarMensajes("exito", "Se Ingresaron los datos con exito");
+                }
+            }
+            ajax.send("idtrabajador=" + idtrabajador + "&apellido=" + apellido + "&nombre=" + nombre + "&idnacionalidad=" + idnacionalidad + "&cedula=" + cedula + "&fecha_nacimiento=" + fecha_nacimiento + "&sexo=" + sexo + "&idparentezco=" + idparentezco + "&constancia=" + constancia + "&direccion=" + direccion + "&telefono=" + telefono + "&ocupacion=" + ocupacion + "&nombre_foto=" + nombre_foto + "&ejecutar=ingresarCargaFamiliar");
+        }
 
-function modificarCargaFamiliar() {
-    var idtrabajador = document.getElementById('idtrabajador').value;
-    var idcarga_familiar = document.getElementById('idcarga_familiar').value;
-    var apellido = document.getElementById('apellidos_cargaFamiliar').value;
-    var nombre = document.getElementById('nombres_cargaFamiliar').value;
-    var idnacionalidad = document.getElementById('idnacionalidad_cargaFamiliar').value;
-    var cedula = document.getElementById('cedula_cargaFamiliar').value;
-    var fecha_nacimiento = document.getElementById('fecha_nacimiento_cargaFamiliar').value;
-    var sexo = document.getElementById('sexo_cargaFamiliar').value;
-    var idparentezco = document.getElementById('idparentezco_cargaFamiliar').value;
-    if (document.getElementById('constancia_cargaFamiliar').checked == true) {
-        var constancia = "si";
-    } else {
-        var constancia = "no";
-    }
-    var direccion = document.getElementById('direccion_cargaFamiliar').value;
-    var telefono = document.getElementById('telefono_cargaFamiliar').value;
-    var ocupacion = document.getElementById('ocupacion_cargaFamiliar').value;
-    var nombre_foto = document.getElementById('nombre_foto_cargaFamiliar').value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
+        function modificarCargaFamiliar() {
+            var idtrabajador = document.getElementById('idtrabajador').value;
+            var idcarga_familiar = document.getElementById('idcarga_familiar').value;
+            var apellido = document.getElementById('apellidos_cargaFamiliar').value;
+            var nombre = document.getElementById('nombres_cargaFamiliar').value;
+            var idnacionalidad = document.getElementById('idnacionalidad_cargaFamiliar').value;
+            var cedula = document.getElementById('cedula_cargaFamiliar').value;
+            var fecha_nacimiento = document.getElementById('fecha_nacimiento_cargaFamiliar').value;
+            var sexo = document.getElementById('sexo_cargaFamiliar').value;
+            var idparentezco = document.getElementById('idparentezco_cargaFamiliar').value;
+            if (document.getElementById('constancia_cargaFamiliar').checked == true) {
+                var constancia = "si";
+            } else {
+                var constancia = "no";
+            }
+            var direccion = document.getElementById('direccion_cargaFamiliar').value;
+            var telefono = document.getElementById('telefono_cargaFamiliar').value;
+            var ocupacion = document.getElementById('ocupacion_cargaFamiliar').value;
+            var nombre_foto = document.getElementById('nombre_foto_cargaFamiliar').value;
+            var ajax = nuevoAjax();
+            ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+            ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 1) {}
+                    if (ajax.readyState == 4) {
             //alert(ajax.responseText);
             consultarCargaFamiliar(idtrabajador);
             document.formulario_cargaFamiliar.reset();
@@ -687,13 +691,13 @@ function eliminarCargaFamiliar(idcarga_familiar) {
         ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
-                consultarCargaFamiliar(document.getElementById('idtrabajador').value);
+                if (ajax.readyState == 4) {
+                    consultarCargaFamiliar(document.getElementById('idtrabajador').value);
+                }
             }
+            ajax.send("idcarga_familiar=" + idcarga_familiar + "&ejecutar=eliminarCargaFamiliar");
         }
-        ajax.send("idcarga_familiar=" + idcarga_familiar + "&ejecutar=eliminarCargaFamiliar");
     }
-}
 //******************************************************************************************************************************
 //******************************************************************************************************************************
 // ********************************************************** INSTRUCCION ACADEMICA ********************************************
@@ -723,125 +727,125 @@ function ingresarInstruccionAcademica() {
     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "exito") {
-                mostrarMensajes("exito", "Sus datos han sido registrados con exito");
-            } else {
-                mostrarMensajes("error", "Disculpe los datos no se han podido registrar (" + ajax.responseText + ")");
+            if (ajax.readyState == 4) {
+                if (ajax.responseText == "exito") {
+                    mostrarMensajes("exito", "Sus datos han sido registrados con exito");
+                } else {
+                    mostrarMensajes("error", "Disculpe los datos no se han podido registrar (" + ajax.responseText + ")");
+                }
+                consultarInstruccionAcademica(idtrabajador);
+                limpiar_campos_instruccionAcademica();
             }
-            consultarInstruccionAcademica(idtrabajador);
-            limpiar_campos_instruccionAcademica();
         }
+        ajax.send("idnivel_estudios=" + idnivel_estudios + "&idprofesion=" + idprofesion + "&idmension=" + idmension + "&institucion=" + institucion + "&anio_egreso=" + anio_egreso + "&constancia=" + constancia + "&profesion_actual=" + profesion_actual + "&idtrabajador=" + idtrabajador + "&nombre_foto=" + nombre_foto + "&observaciones=" + observaciones + "&ejecutar=ingresarInstruccionAcademica");
     }
-    ajax.send("idnivel_estudios=" + idnivel_estudios + "&idprofesion=" + idprofesion + "&idmension=" + idmension + "&institucion=" + institucion + "&anio_egreso=" + anio_egreso + "&constancia=" + constancia + "&profesion_actual=" + profesion_actual + "&idtrabajador=" + idtrabajador + "&nombre_foto=" + nombre_foto + "&observaciones=" + observaciones + "&ejecutar=ingresarInstruccionAcademica");
-}
 
-function modificarInstruccionAcademica() {
-    var idinstruccion_academica = document.getElementById('idinstruccion_academica').value;
-    var idnivel_estudios = document.getElementById('idnivel_estudio').value;
-    var idprofesion = document.getElementById('idprofesion').value;
-    var idmension = document.getElementById('idmension').value;
-    var institucion = document.getElementById('institucion').value;
-    var anio_egreso = document.getElementById('anio_egreso').value;
-    var nombre_foto = document.getElementById('nombre_foto_instruccionAcademica').value;
-    var observaciones = document.getElementById('observaciones').value;
-    if (document.getElementById('constancia').checked == true) {
-        var constancia = "si";
-    } else {
-        var constancia = "no";
-    }
-    if (document.getElementById('profesion_actual').checked == true) {
-        var profesion_actual = "si";
-    } else {
-        var profesion_actual = "no";
-    }
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "exito") {
-                mostrarMensajes("exito", "Sus datos han sido Modificados con exito");
-            } else {
-                mostrarMensajes("error", "Disculpe los datos no se han podido Modificar");
-            }
-            consultarInstruccionAcademica(document.getElementById('idtrabajador').value);
-            limpiar_campos_instruccionAcademica();
+    function modificarInstruccionAcademica() {
+        var idinstruccion_academica = document.getElementById('idinstruccion_academica').value;
+        var idnivel_estudios = document.getElementById('idnivel_estudio').value;
+        var idprofesion = document.getElementById('idprofesion').value;
+        var idmension = document.getElementById('idmension').value;
+        var institucion = document.getElementById('institucion').value;
+        var anio_egreso = document.getElementById('anio_egreso').value;
+        var nombre_foto = document.getElementById('nombre_foto_instruccionAcademica').value;
+        var observaciones = document.getElementById('observaciones').value;
+        if (document.getElementById('constancia').checked == true) {
+            var constancia = "si";
+        } else {
+            var constancia = "no";
         }
-    }
-    ajax.send("observaciones=" + observaciones + "&idnivel_estudios=" + idnivel_estudios + "&idprofesion=" + idprofesion + "&idmension=" + idmension + "&institucion=" + institucion + "&anio_egreso=" + anio_egreso + "&constancia=" + constancia + "&profesion_actual=" + profesion_actual + "&idinstruccion_academica=" + idinstruccion_academica + "&nombre_foto=" + nombre_foto + "&ejecutar=modificarInstruccionAcademica");
-}
-
-function eliminarInstruccionAcademica(idinstruccion_academica) {
-    if (confirm("Seguro desea eliminar la Instruccion Academica seleccionada?")) {
+        if (document.getElementById('profesion_actual').checked == true) {
+            var profesion_actual = "si";
+        } else {
+            var profesion_actual = "no";
+        }
         var ajax = nuevoAjax();
         ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
         ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
-                if (ajax.responseText == "exito") {
-                    mostrarMensajes("exito", "Se elimino el registro con exito");
-                } else {
-                    mostrarMensajes("error", "Disculpe el Registro no se pudo eliminar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+                if (ajax.readyState == 4) {
+                    if (ajax.responseText == "exito") {
+                        mostrarMensajes("exito", "Sus datos han sido Modificados con exito");
+                    } else {
+                        mostrarMensajes("error", "Disculpe los datos no se han podido Modificar");
+                    }
+                    consultarInstruccionAcademica(document.getElementById('idtrabajador').value);
+                    limpiar_campos_instruccionAcademica();
                 }
-                consultarInstruccionAcademica(document.getElementById('idtrabajador').value);
             }
+            ajax.send("observaciones=" + observaciones + "&idnivel_estudios=" + idnivel_estudios + "&idprofesion=" + idprofesion + "&idmension=" + idmension + "&institucion=" + institucion + "&anio_egreso=" + anio_egreso + "&constancia=" + constancia + "&profesion_actual=" + profesion_actual + "&idinstruccion_academica=" + idinstruccion_academica + "&nombre_foto=" + nombre_foto + "&ejecutar=modificarInstruccionAcademica");
         }
-        ajax.send("idinstruccion_academica=" + idinstruccion_academica + "&ejecutar=eliminarInstruccionAcademica");
-    }
-}
 
-function consultarInstruccionAcademica(idtrabajador) {
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('lista_instruccionAcademica').innerHTML = ajax.responseText;
-        }
-    }
-    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarInstruccionAcademica");
-}
+        function eliminarInstruccionAcademica(idinstruccion_academica) {
+            if (confirm("Seguro desea eliminar la Instruccion Academica seleccionada?")) {
+                var ajax = nuevoAjax();
+                ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState == 1) {}
+                        if (ajax.readyState == 4) {
+                            if (ajax.responseText == "exito") {
+                                mostrarMensajes("exito", "Se elimino el registro con exito");
+                            } else {
+                                mostrarMensajes("error", "Disculpe el Registro no se pudo eliminar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+                            }
+                            consultarInstruccionAcademica(document.getElementById('idtrabajador').value);
+                        }
+                    }
+                    ajax.send("idinstruccion_academica=" + idinstruccion_academica + "&ejecutar=eliminarInstruccionAcademica");
+                }
+            }
 
-function limpiar_campos_instruccionAcademica() {
-    var idnivel_estudios = document.getElementById('idnivel_estudio').value = 0;
-    var idprofesion = document.getElementById('idprofesion').value = 0;
-    var idmension = document.getElementById('idmension').value = 0;
-    var institucion = document.getElementById('institucion').value = "";
-    var anio_egreso = document.getElementById('anio_egreso').value = "";
-    var nombre_foto = document.getElementById('nombre_foto_instruccionAcademica').value = "";
-    var observaciones = document.getElementById('observaciones').value = "";
-    document.getElementById('constancia').checked = false;
-    document.getElementById('profesion_actual').checked = false;
-    document.getElementById('foto_instruccionAcademica').value = '';
-    document.getElementById('boton_ingresar_instruccionAcademica').style.display = "block";
-    document.getElementById('boton_modificar_instruccionAcademica').style.display = "none";
-}
+            function consultarInstruccionAcademica(idtrabajador) {
+                var ajax = nuevoAjax();
+                ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState == 1) {}
+                        if (ajax.readyState == 4) {
+                            document.getElementById('lista_instruccionAcademica').innerHTML = ajax.responseText;
+                        }
+                    }
+                    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarInstruccionAcademica");
+                }
 
-function seleccionar_instruccionAcademica(idnivel_estudios, idprofesion, idmension, institucion, anio_egreso, observaciones, constancia, profesion_actual, idinstruccion_academica) {
-    document.getElementById('idnivel_estudio').value = idnivel_estudios;
-    document.getElementById('idprofesion').value = idprofesion;
-    document.getElementById('idmension').value = idmension;
-    document.getElementById('institucion').value = institucion;
-    document.getElementById('anio_egreso').value = anio_egreso;
-    document.getElementById('observaciones').value = observaciones;
-    if (constancia == "s") {
-        document.getElementById('constancia').checked = true;
-    } else {
-        document.getElementById('constancia').checked = false;
-    }
-    if (profesion_actual == "s") {
-        document.getElementById('profesion_actual').checked = true;
-    } else {
-        document.getElementById('profesion_actual').checked = false;
-    }
-    document.getElementById('boton_ingresar_instruccionAcademica').style.display = "none";
-    document.getElementById('boton_modificar_instruccionAcademica').style.display = "block";
-    document.getElementById('idinstruccion_academica').value = idinstruccion_academica;
-}
+                function limpiar_campos_instruccionAcademica() {
+                    var idnivel_estudios = document.getElementById('idnivel_estudio').value = 0;
+                    var idprofesion = document.getElementById('idprofesion').value = 0;
+                    var idmension = document.getElementById('idmension').value = 0;
+                    var institucion = document.getElementById('institucion').value = "";
+                    var anio_egreso = document.getElementById('anio_egreso').value = "";
+                    var nombre_foto = document.getElementById('nombre_foto_instruccionAcademica').value = "";
+                    var observaciones = document.getElementById('observaciones').value = "";
+                    document.getElementById('constancia').checked = false;
+                    document.getElementById('profesion_actual').checked = false;
+                    document.getElementById('foto_instruccionAcademica').value = '';
+                    document.getElementById('boton_ingresar_instruccionAcademica').style.display = "block";
+                    document.getElementById('boton_modificar_instruccionAcademica').style.display = "none";
+                }
+
+                function seleccionar_instruccionAcademica(idnivel_estudios, idprofesion, idmension, institucion, anio_egreso, observaciones, constancia, profesion_actual, idinstruccion_academica) {
+                    document.getElementById('idnivel_estudio').value = idnivel_estudios;
+                    document.getElementById('idprofesion').value = idprofesion;
+                    document.getElementById('idmension').value = idmension;
+                    document.getElementById('institucion').value = institucion;
+                    document.getElementById('anio_egreso').value = anio_egreso;
+                    document.getElementById('observaciones').value = observaciones;
+                    if (constancia == "s") {
+                        document.getElementById('constancia').checked = true;
+                    } else {
+                        document.getElementById('constancia').checked = false;
+                    }
+                    if (profesion_actual == "s") {
+                        document.getElementById('profesion_actual').checked = true;
+                    } else {
+                        document.getElementById('profesion_actual').checked = false;
+                    }
+                    document.getElementById('boton_ingresar_instruccionAcademica').style.display = "none";
+                    document.getElementById('boton_modificar_instruccionAcademica').style.display = "block";
+                    document.getElementById('idinstruccion_academica').value = idinstruccion_academica;
+                }
 //******************************************************************************************************************************
 //******************************************************************************************************************************
 //*************************************************** EXPERIENCIA LABORAL ******************************************************
@@ -864,101 +868,101 @@ function ingresarExperienciaLaboral() {
     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "exito") {
-                mostrarMensajes("exito", "El registro se ah ingresado con exito");
-            } else {
-                mostrarMensajes("error", "Disculpe el Registro no pudo ser ingresado, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+            if (ajax.readyState == 4) {
+                if (ajax.responseText == "exito") {
+                    mostrarMensajes("exito", "El registro se ah ingresado con exito");
+                } else {
+                    mostrarMensajes("error", "Disculpe el Registro no pudo ser ingresado, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+                }
+                consultarExperienciaLaboral(idtrabajador);
+                limpiarExperienciaLaboral();
             }
-            consultarExperienciaLaboral(idtrabajador);
-            limpiarExperienciaLaboral();
         }
+        ajax.send("nombre_foto=" + nombre_foto + "&idtrabajador=" + idtrabajador + "&empresa=" + empresa + "&desde_exp=" + desde_exp + "&hasta_exp=" + hasta_exp + "&tiempo_srv=" + tiempo_srv + "&motivo=" + motivo + "&ultimo_cargo=" + ultimo_cargo + "&direccion_empresa=" + direccion_empresa + "&telefono=" + telefono + "&observaciones=" + observaciones + "&ejecutar=ingresarExperienciaLaboral");
     }
-    ajax.send("nombre_foto=" + nombre_foto + "&idtrabajador=" + idtrabajador + "&empresa=" + empresa + "&desde_exp=" + desde_exp + "&hasta_exp=" + hasta_exp + "&tiempo_srv=" + tiempo_srv + "&motivo=" + motivo + "&ultimo_cargo=" + ultimo_cargo + "&direccion_empresa=" + direccion_empresa + "&telefono=" + telefono + "&observaciones=" + observaciones + "&ejecutar=ingresarExperienciaLaboral");
-}
 
-function modificarExperienciaLaboral() {
-    var idexperiencia_laboral = document.getElementById('idexperiencia_laboral').value;
-    var empresa = document.getElementById('empresa').value;
-    var desde_exp = document.getElementById('desde_exp').value;
-    var hasta_exp = document.getElementById('hasta_exp').value;
-    var tiempo_srv = document.getElementById('tiempo_srv').value;
-    var motivo = document.getElementById('motivo').value;
-    var ultimo_cargo = document.getElementById('ultimo_cargo').value;
-    var direccion_empresa = document.getElementById('direccion_empresa').value;
-    var telefono = document.getElementById('telefono').value;
-    var observaciones = document.getElementById('observaciones').value;
-    var nombre_foto = document.getElementById('nombre_foto_experienciaLaboral').value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            consultarExperienciaLaboral(document.getElementById("idtrabajador").value);
-            limpiarExperienciaLaboral();
-        }
-    }
-    ajax.send("nombre_foto=" + nombre_foto + "&idexperiencia_laboral=" + idexperiencia_laboral + "&empresa=" + empresa + "&desde_exp=" + desde_exp + "&hasta_exp=" + hasta_exp + "&tiempo_srv=" + tiempo_srv + "&motivo=" + motivo + "&ultimo_cargo=" + ultimo_cargo + "&direccion_empresa=" + direccion_empresa + "&telefono=" + telefono + "&observaciones=" + observaciones + "&ejecutar=modificarExperienciaLaboral");
-}
-
-function eliminarExperienciaLaboral(idexperiencia_laboral) {
-    if (confirm("Seguro desea eliminar la experiencia laboral seleccionada?")) {
+    function modificarExperienciaLaboral() {
+        var idexperiencia_laboral = document.getElementById('idexperiencia_laboral').value;
+        var empresa = document.getElementById('empresa').value;
+        var desde_exp = document.getElementById('desde_exp').value;
+        var hasta_exp = document.getElementById('hasta_exp').value;
+        var tiempo_srv = document.getElementById('tiempo_srv').value;
+        var motivo = document.getElementById('motivo').value;
+        var ultimo_cargo = document.getElementById('ultimo_cargo').value;
+        var direccion_empresa = document.getElementById('direccion_empresa').value;
+        var telefono = document.getElementById('telefono').value;
+        var observaciones = document.getElementById('observaciones').value;
+        var nombre_foto = document.getElementById('nombre_foto_experienciaLaboral').value;
         var ajax = nuevoAjax();
         ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
         ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
-                consultarExperienciaLaboral(document.getElementById('idtrabajador').value);
+                if (ajax.readyState == 4) {
+                    consultarExperienciaLaboral(document.getElementById("idtrabajador").value);
+                    limpiarExperienciaLaboral();
+                }
             }
+            ajax.send("nombre_foto=" + nombre_foto + "&idexperiencia_laboral=" + idexperiencia_laboral + "&empresa=" + empresa + "&desde_exp=" + desde_exp + "&hasta_exp=" + hasta_exp + "&tiempo_srv=" + tiempo_srv + "&motivo=" + motivo + "&ultimo_cargo=" + ultimo_cargo + "&direccion_empresa=" + direccion_empresa + "&telefono=" + telefono + "&observaciones=" + observaciones + "&ejecutar=modificarExperienciaLaboral");
         }
-        ajax.send("idexperiencia_laboral=" + idexperiencia_laboral + "&ejecutar=eliminarExperienciaLaboral");
-    }
-}
 
-function consultarExperienciaLaboral(idtrabajador) {
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('lista_experienciaLaboral').innerHTML = ajax.responseText;
-        }
-    }
-    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarExperienciaLaboral");
-}
+        function eliminarExperienciaLaboral(idexperiencia_laboral) {
+            if (confirm("Seguro desea eliminar la experiencia laboral seleccionada?")) {
+                var ajax = nuevoAjax();
+                ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState == 1) {}
+                        if (ajax.readyState == 4) {
+                            consultarExperienciaLaboral(document.getElementById('idtrabajador').value);
+                        }
+                    }
+                    ajax.send("idexperiencia_laboral=" + idexperiencia_laboral + "&ejecutar=eliminarExperienciaLaboral");
+                }
+            }
 
-function seleccionar_experienciaLaboral(idexperiencia_laboral, empresa, desde, hasta, tiempo_servicio, motivo_salida, ultimo_cargo, direccion_empresa, telefono_empresa, observaciones) {
-    document.getElementById('idexperiencia_laboral').value = idexperiencia_laboral;
-    document.getElementById('empresa').value = empresa;
-    document.getElementById('desde_exp').value = desde;
-    document.getElementById('hasta_exp').value = hasta;
-    document.getElementById('tiempo_srv').value = tiempo_servicio;
-    document.getElementById('motivo').value = motivo_salida;
-    document.getElementById('ultimo_cargo').value = ultimo_cargo;
-    document.getElementById('direccion_empresa').value = direccion_empresa;
-    document.getElementById('telefono').value = telefono_empresa;
-    document.getElementById('observaciones').value = observaciones;
-    document.getElementById('boton_ingresar_experienciaLaboral').style.display = 'none';
-    document.getElementById('boton_modificar_experienciaLaboral').style.display = 'block';
-}
+            function consultarExperienciaLaboral(idtrabajador) {
+                var ajax = nuevoAjax();
+                ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState == 1) {}
+                        if (ajax.readyState == 4) {
+                            document.getElementById('lista_experienciaLaboral').innerHTML = ajax.responseText;
+                        }
+                    }
+                    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarExperienciaLaboral");
+                }
 
-function limpiarExperienciaLaboral() {
-    document.getElementById('idexperiencia_laboral').value = "";
-    document.getElementById('empresa').value = "";
-    document.getElementById('desde_exp').value = "";
-    document.getElementById('hasta_exp').value = "";
-    document.getElementById('tiempo_srv').value = "";
-    document.getElementById('motivo').value = "";
-    document.getElementById('ultimo_cargo').value = "";
-    document.getElementById('direccion_empresa').value = "";
-    document.getElementById('telefono').value = "";
-    document.getElementById('observaciones').value = "";
-    document.getElementById('boton_ingresar_experienciaLaboral').style.display = 'block';
-    document.getElementById('boton_modificar_experienciaLaboral').style.display = 'none';
-}
+                function seleccionar_experienciaLaboral(idexperiencia_laboral, empresa, desde, hasta, tiempo_servicio, motivo_salida, ultimo_cargo, direccion_empresa, telefono_empresa, observaciones) {
+                    document.getElementById('idexperiencia_laboral').value = idexperiencia_laboral;
+                    document.getElementById('empresa').value = empresa;
+                    document.getElementById('desde_exp').value = desde;
+                    document.getElementById('hasta_exp').value = hasta;
+                    document.getElementById('tiempo_srv').value = tiempo_servicio;
+                    document.getElementById('motivo').value = motivo_salida;
+                    document.getElementById('ultimo_cargo').value = ultimo_cargo;
+                    document.getElementById('direccion_empresa').value = direccion_empresa;
+                    document.getElementById('telefono').value = telefono_empresa;
+                    document.getElementById('observaciones').value = observaciones;
+                    document.getElementById('boton_ingresar_experienciaLaboral').style.display = 'none';
+                    document.getElementById('boton_modificar_experienciaLaboral').style.display = 'block';
+                }
+
+                function limpiarExperienciaLaboral() {
+                    document.getElementById('idexperiencia_laboral').value = "";
+                    document.getElementById('empresa').value = "";
+                    document.getElementById('desde_exp').value = "";
+                    document.getElementById('hasta_exp').value = "";
+                    document.getElementById('tiempo_srv').value = "";
+                    document.getElementById('motivo').value = "";
+                    document.getElementById('ultimo_cargo').value = "";
+                    document.getElementById('direccion_empresa').value = "";
+                    document.getElementById('telefono').value = "";
+                    document.getElementById('observaciones').value = "";
+                    document.getElementById('boton_ingresar_experienciaLaboral').style.display = 'block';
+                    document.getElementById('boton_modificar_experienciaLaboral').style.display = 'none';
+                }
 //***************************************************************************************************************************
 //***************************************************************************************************************************
 //***************************************************** MOVIMIENTOS ********************************************************
@@ -991,46 +995,46 @@ function consultarFichaMovimientos(nomenclatura_ficha) {
         ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
-                document.getElementById('nro_ficha_movimientos').innerHTML = ajax.responseText;
-                document.getElementById('campo_nro_ficha_movimientos').value = ajax.responseText;
-            }
-        }
-        ajax.send("nomenclatura_ficha=" + nomenclatura_ficha + "&ejecutar=consultarFichaMovimientos");
-    }
-}
-
-function ingresarMovimiento() {
-    if (confirm("Seguro desea realizar este movimiento? recuerde que si es un movimiento de EGRESO el que intenta registrar, automaticamente esta persona saldra de todas las nominas donde este asociado")) {
-        var idtrabajador = document.getElementById('idtrabajador').value;
-        var fecha_movimiento = document.getElementById('fecha_movimiento_movimientos').value;
-        var tipo_movimiento = document.getElementById('tipo_movimiento_movimientos').value;
-        var justificacion = document.getElementById('justificacion_movimientos').value;
-        var fecha_egreso = document.getElementById('fecha_egreso_movimientos').value;
-        var causal = document.getElementById('causal_movimientos').value;
-        var idnuevo_cargo = document.getElementById('nuevo_cargo_movimientos').value;
-        var idubicacion_nueva = document.getElementById("nueva_ubicacion_funcional_movimientos").value;
-        var fecha_reingreso = document.getElementById('fecha_reingreso_movimientos').value;
-        var fecha_ingreso = document.getElementById('fecha_ingreso_datosEmpleo0').value;
-        var desde = document.getElementById('desde_movimientos').value;
-        var hasta = document.getElementById('hasta_movimientos').value;
-        var centro_costo = document.getElementById('centro_costo_movimientos').value;
-        if (document.getElementById('ficha_movimientos').value != "-") {
-            var ficha = document.getElementById('ficha_movimientos').value + document.getElementById('campo_nro_ficha_movimientos').value;
-        } else {
-            var ficha = "";
-        }
-        var ajax = nuevoAjax();
-        if (justificacion == "") {
-            mostrarMensajes("error", "Disculpe debe ingresar la justificacion del movimiento");
-        } else {
-            ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-            ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            ajax.onreadystatechange = function() {
-                if (ajax.readyState == 1) {
-                    document.getElementById("divCargando").style.display = "block";
-                }
                 if (ajax.readyState == 4) {
+                    document.getElementById('nro_ficha_movimientos').innerHTML = ajax.responseText;
+                    document.getElementById('campo_nro_ficha_movimientos').value = ajax.responseText;
+                }
+            }
+            ajax.send("nomenclatura_ficha=" + nomenclatura_ficha + "&ejecutar=consultarFichaMovimientos");
+        }
+    }
+
+    function ingresarMovimiento() {
+        if (confirm("Seguro desea realizar este movimiento? recuerde que si es un movimiento de EGRESO el que intenta registrar, automaticamente esta persona saldra de todas las nominas donde este asociado")) {
+            var idtrabajador = document.getElementById('idtrabajador').value;
+            var fecha_movimiento = document.getElementById('fecha_movimiento_movimientos').value;
+            var tipo_movimiento = document.getElementById('tipo_movimiento_movimientos').value;
+            var justificacion = document.getElementById('justificacion_movimientos').value;
+            var fecha_egreso = document.getElementById('fecha_egreso_movimientos').value;
+            var causal = document.getElementById('causal_movimientos').value;
+            var idnuevo_cargo = document.getElementById('nuevo_cargo_movimientos').value;
+            var idubicacion_nueva = document.getElementById("nueva_ubicacion_funcional_movimientos").value;
+            var fecha_reingreso = document.getElementById('fecha_reingreso_movimientos').value;
+            var fecha_ingreso = document.getElementById('fecha_ingreso_datosEmpleo0').value;
+            var desde = document.getElementById('desde_movimientos').value;
+            var hasta = document.getElementById('hasta_movimientos').value;
+            var centro_costo = document.getElementById('centro_costo_movimientos').value;
+            if (document.getElementById('ficha_movimientos').value != "-") {
+                var ficha = document.getElementById('ficha_movimientos').value + document.getElementById('campo_nro_ficha_movimientos').value;
+            } else {
+                var ficha = "";
+            }
+            var ajax = nuevoAjax();
+            if (justificacion == "") {
+                mostrarMensajes("error", "Disculpe debe ingresar la justificacion del movimiento");
+            } else {
+                ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState == 1) {
+                        document.getElementById("divCargando").style.display = "block";
+                    }
+                    if (ajax.readyState == 4) {
                     //alert(ajax.responseText);
                     buscarMovimientosTrabajador(idtrabajador);
                     limpiarDatos();
@@ -1265,26 +1269,26 @@ function validarHoras(str_hora) {
     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == 0) {
-                document.getElementById('hr_inicio_historico').style.background = "#fec092";
-                document.getElementById('hr_culminacion_historico').style.background = "#fec092";
-            } else {
-                document.getElementById('hr_inicio_historico').style.background = "#ffffff";
-                document.getElementById('hr_culminacion_historico').style.background = "#ffffff";
+            if (ajax.readyState == 4) {
+                if (ajax.responseText == 0) {
+                    document.getElementById('hr_inicio_historico').style.background = "#fec092";
+                    document.getElementById('hr_culminacion_historico').style.background = "#fec092";
+                } else {
+                    document.getElementById('hr_inicio_historico').style.background = "#ffffff";
+                    document.getElementById('hr_culminacion_historico').style.background = "#ffffff";
+                }
             }
         }
+        ajax.send("hr_inicio=" + str_hora + "&ejecutar=validarHoras");
     }
-    ajax.send("hr_inicio=" + str_hora + "&ejecutar=validarHoras");
-}
 
-function checkbox(valor) {
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
+    function checkbox(valor) {
+        var ajax = nuevoAjax();
+        ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+        ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 1) {}
+                if (ajax.readyState == 4) {
             //document.getElementById('grilla').innerHTML = ajax.responseText;
         }
     }
@@ -1297,170 +1301,170 @@ function buscarPermisos(idtrabajador) {
     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('grilla_historico').innerHTML = ajax.responseText;
-        }
-    }
-    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=llenargrilla");
-}
-
-function validarFechas(desde, hasta) {
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('tiempo_historico').value = ajax.responseText;
-            if (ajax.responseText == "La fecha de inicio ha de ser anterior a la fecha Actual") {
-                document.getElementById('boton_ingresar_permiso').disabled = true;
-                document.getElementById('boton_ingresar_permiso').value = "Seleccione Fechas Validas";
-                document.getElementById('boton_ingresar_permiso').disabled = true;
-                document.getElementById('boton_ingresar_permiso').value = "Seleccione Fechas Validas";
-            } else {
-                document.getElementById('boton_ingresar_permiso').disabled = false;
-                document.getElementById('boton_ingresar_permiso').value = "Ingresar";
-                document.getElementById('boton_ingresar_permiso').disabled = false;
-                document.getElementById('boton_ingresar_permiso').value = "Ingresar";
-            }
-            totalHoras(document.getElementById('tiempo_historico').value, document.getElementById('hr_inicio_historico').value, document.getElementById('hr_culminacion_historico').value);
-        }
-    }
-    ajax.send("hasta=" + hasta + "&desde=" + desde + "&ejecutar=validarFechas");
-}
-
-function totalHoras(total_dias, hr_inicio, hr_culminacion) {
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('tiempo_horas_historico').value = ajax.responseText;
-            if (ajax.responseText == "Selecione horas validas") {
-                document.getElementById('boton_ingresar_permiso').disabled = true;
-                document.getElementById('boton_ingresar_permiso').value = "Selecione horas validas";
-                document.getElementById('boton_ingresar_permiso').disabled = true;
-                document.getElementById('boton_ingresar_permiso').value = "Selecione horas validas";
-            } else {
-                document.getElementById('boton_ingresar_permiso').disabled = false;
-                document.getElementById('boton_ingresar_permiso').value = "Ingresar";
-                document.getElementById('boton_ingresar_permiso').disabled = false;
-                document.getElementById('boton_ingresar_permiso').value = "Ingresar";
+            if (ajax.readyState == 4) {
+                document.getElementById('grilla_historico').innerHTML = ajax.responseText;
             }
         }
+        ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=llenargrilla");
     }
-    ajax.send("hr_inicio=" + hr_inicio + "&hr_culminacion=" + hr_culminacion + "&total_dias=" + total_dias + "&ejecutar=total_Horas");
-}
 
-function ingresarHistorico() {
-    var idtrabajador = document.getElementById('idtrabajador').value;
-    var fecha_solicitud_historico = document.getElementById('fecha_solicitud_historico').value;
-    var fecha_inicio = document.getElementById('fecha_inicio_historico').value;
-    var hora_inicio = document.getElementById('hr_inicio_historico').value;
-    var fecha_culminacion = document.getElementById('fecha_culminacion_historico').value;
-    var hora_culminacion = document.getElementById('hr_culminacion_historico').value;
-    var fecha_solicitud = document.getElementById('fecha_solicitud_historico').value;
-    var tiempo_total = document.getElementById('tiempo_historico').value;
-    if (document.getElementById('desc_bono_historico').checked == true) {
-        var descuenta_bono_alimentacion = "si";
-    } else {
-        var descuenta_bono_alimentacion = "no";
-    }
-    if (document.getElementById('motivo_historico').checked == true) {
-        var motivo = "si";
-    } else {
-        var motivo = "no";
-    }
-    if (document.getElementById('justificado1_historico').checked == true) {
-        var justificado = "si";
-    } else {
-        var justificado = "no";
-    }
-    if (document.getElementById('remunerado1_historico').checked == true) {
-        var remunerado = "si";
-    } else {
-        var remunerado = "no";
-    }
-    var aprobado_por = document.getElementById('aprobado_por_historico').value;
-    var ci_aprobado = document.getElementById('ci_aprobado_historico').value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "exito") {
-                mostrarMensajes("exito", "El permiso ah sido registrado con exito");
-            } else {
-                mostrarMensajes("error", "Disculpe el permiso no se pudo registrar, por favor intente de nuevo mas tarde... (" + ajax.responseText + ")");
+    function validarFechas(desde, hasta) {
+        var ajax = nuevoAjax();
+        ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+        ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 1) {}
+                if (ajax.readyState == 4) {
+                    document.getElementById('tiempo_historico').value = ajax.responseText;
+                    if (ajax.responseText == "La fecha de inicio ha de ser anterior a la fecha Actual") {
+                        document.getElementById('boton_ingresar_permiso').disabled = true;
+                        document.getElementById('boton_ingresar_permiso').value = "Seleccione Fechas Validas";
+                        document.getElementById('boton_ingresar_permiso').disabled = true;
+                        document.getElementById('boton_ingresar_permiso').value = "Seleccione Fechas Validas";
+                    } else {
+                        document.getElementById('boton_ingresar_permiso').disabled = false;
+                        document.getElementById('boton_ingresar_permiso').value = "Ingresar";
+                        document.getElementById('boton_ingresar_permiso').disabled = false;
+                        document.getElementById('boton_ingresar_permiso').value = "Ingresar";
+                    }
+                    totalHoras(document.getElementById('tiempo_historico').value, document.getElementById('hr_inicio_historico').value, document.getElementById('hr_culminacion_historico').value);
+                }
             }
-            consultarHistoricoPermisos(idtrabajador);
+            ajax.send("hasta=" + hasta + "&desde=" + desde + "&ejecutar=validarFechas");
         }
-    }
-    ajax.send("idtrabajador=" + idtrabajador + "&fecha_solicitud_historico=" + fecha_solicitud_historico + "&fecha_inicio=" + fecha_inicio + "&hora_inicio=" + hora_inicio + "&fecha_culminacion=" + fecha_culminacion + "&hora_culminacion=" + hora_culminacion + "&fecha_solicitud=" + fecha_solicitud + "&tiempo_total=" + tiempo_total + "&descuenta_bono_alimentacion=" + descuenta_bono_alimentacion + "&motivo=" + motivo + "&justificado=" + justificado + "&remunerado=" + remunerado + "&aprobado_por=" + aprobado_por + "&ci_aprobado=" + ci_aprobado + "&ejecutar=ingresarHistorico");
-}
 
-function abreVentana() {
-    miPopup = window.open("lib/listas/lista_trabajador.php?frm=historico_permisos", "historico_permisos", "width=600,height=400,scrollbars=yes")
-    miPopup.focus()
-}
+        function totalHoras(total_dias, hr_inicio, hr_culminacion) {
+            var ajax = nuevoAjax();
+            ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+            ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 1) {}
+                    if (ajax.readyState == 4) {
+                        document.getElementById('tiempo_horas_historico').value = ajax.responseText;
+                        if (ajax.responseText == "Selecione horas validas") {
+                            document.getElementById('boton_ingresar_permiso').disabled = true;
+                            document.getElementById('boton_ingresar_permiso').value = "Selecione horas validas";
+                            document.getElementById('boton_ingresar_permiso').disabled = true;
+                            document.getElementById('boton_ingresar_permiso').value = "Selecione horas validas";
+                        } else {
+                            document.getElementById('boton_ingresar_permiso').disabled = false;
+                            document.getElementById('boton_ingresar_permiso').value = "Ingresar";
+                            document.getElementById('boton_ingresar_permiso').disabled = false;
+                            document.getElementById('boton_ingresar_permiso').value = "Ingresar";
+                        }
+                    }
+                }
+                ajax.send("hr_inicio=" + hr_inicio + "&hr_culminacion=" + hr_culminacion + "&total_dias=" + total_dias + "&ejecutar=total_Horas");
+            }
 
-function habilitaDeshabilita() {
-    if (document.getElementById('desc_bono_historico').checked == true) {
-        document.getElementById('motivo_historico').disabled = false;
-    }
-    if (document.getElementById('desc_bono_historico').checked == false) {
-        document.getElementById('motivo_historico').disabled = true;
-    }
-}
+            function ingresarHistorico() {
+                var idtrabajador = document.getElementById('idtrabajador').value;
+                var fecha_solicitud_historico = document.getElementById('fecha_solicitud_historico').value;
+                var fecha_inicio = document.getElementById('fecha_inicio_historico').value;
+                var hora_inicio = document.getElementById('hr_inicio_historico').value;
+                var fecha_culminacion = document.getElementById('fecha_culminacion_historico').value;
+                var hora_culminacion = document.getElementById('hr_culminacion_historico').value;
+                var fecha_solicitud = document.getElementById('fecha_solicitud_historico').value;
+                var tiempo_total = document.getElementById('tiempo_historico').value;
+                if (document.getElementById('desc_bono_historico').checked == true) {
+                    var descuenta_bono_alimentacion = "si";
+                } else {
+                    var descuenta_bono_alimentacion = "no";
+                }
+                if (document.getElementById('motivo_historico').checked == true) {
+                    var motivo = "si";
+                } else {
+                    var motivo = "no";
+                }
+                if (document.getElementById('justificado1_historico').checked == true) {
+                    var justificado = "si";
+                } else {
+                    var justificado = "no";
+                }
+                if (document.getElementById('remunerado1_historico').checked == true) {
+                    var remunerado = "si";
+                } else {
+                    var remunerado = "no";
+                }
+                var aprobado_por = document.getElementById('aprobado_por_historico').value;
+                var ci_aprobado = document.getElementById('ci_aprobado_historico').value;
+                var ajax = nuevoAjax();
+                ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState == 1) {}
+                        if (ajax.readyState == 4) {
+                            if (ajax.responseText == "exito") {
+                                mostrarMensajes("exito", "El permiso ah sido registrado con exito");
+                            } else {
+                                mostrarMensajes("error", "Disculpe el permiso no se pudo registrar, por favor intente de nuevo mas tarde... (" + ajax.responseText + ")");
+                            }
+                            consultarHistoricoPermisos(idtrabajador);
+                        }
+                    }
+                    ajax.send("idtrabajador=" + idtrabajador + "&fecha_solicitud_historico=" + fecha_solicitud_historico + "&fecha_inicio=" + fecha_inicio + "&hora_inicio=" + hora_inicio + "&fecha_culminacion=" + fecha_culminacion + "&hora_culminacion=" + hora_culminacion + "&fecha_solicitud=" + fecha_solicitud + "&tiempo_total=" + tiempo_total + "&descuenta_bono_alimentacion=" + descuenta_bono_alimentacion + "&motivo=" + motivo + "&justificado=" + justificado + "&remunerado=" + remunerado + "&aprobado_por=" + aprobado_por + "&ci_aprobado=" + ci_aprobado + "&ejecutar=ingresarHistorico");
+                }
 
-function consultarHistoricoPermisos(idtrabajador) {
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('grilla_historico').innerHTML = ajax.responseText;
-        }
-    }
-    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarHistoricoPermisos");
-}
+                function abreVentana() {
+                    miPopup = window.open("lib/listas/lista_trabajador.php?frm=historico_permisos", "historico_permisos", "width=600,height=400,scrollbars=yes")
+                    miPopup.focus()
+                }
 
-function seleccionarModificar(idhistorico_permisos, fecha_inicio, hora_inicio, fecha_culminacion, hora_culminacion, fecha_solicitud, tiempo_total, descuenta_bono_alimentacion, motivo, justificado, remunerado, aprobado_por, ci_aprobado) {
-    document.getElementById('idhistorico_permisos').value = idhistorico_permisos;
-    document.getElementById('fecha_solicitud_historico').value = fecha_solicitud;
-    document.getElementById('fecha_inicio_historico').value = fecha_inicio;
-    document.getElementById('hr_inicio_historico').value = hora_inicio;
-    document.getElementById('fecha_culminacion_historico').value = fecha_culminacion;
-    document.getElementById('hr_culminacion_historico').value = hora_culminacion;
-    document.getElementById('tiempo_historico').value = tiempo_total;
-    if (descuenta_bono_alimentacion = "si") {
-        document.getElementById('desc_bono_historico').checked = true;
-    } else {
-        document.getElementById('desc_bono_historico').checked = false;
-    }
-    if (motivo = "si") {
-        document.getElementById('motivo_historico').checked = true;
-    } else {
-        document.getElementById('motivo_historico').checked = false;
-    }
-    if (justificado = "si") {
-        document.getElementById('justificado1_historico').checked = true;
-    } else {
-        document.getElementById('justificado1_historico').checked = false;
-    }
-    if (remunerado = "si") {
-        document.getElementById('remunerado1_historico').checked = true;
-    } else {
-        document.getElementById('remunerado1_historico').checked = false;
-    }
-    document.getElementById('aprobado_por_historico').value = aprobado_por;
-    document.getElementById('ci_aprobado_historico').value = ci_aprobado;
-    document.getElementById('boton_ingresar_permiso').style.display = 'none';
-    document.getElementById('boton_modificar_permiso').style.display = 'block';
-}
+                function habilitaDeshabilita() {
+                    if (document.getElementById('desc_bono_historico').checked == true) {
+                        document.getElementById('motivo_historico').disabled = false;
+                    }
+                    if (document.getElementById('desc_bono_historico').checked == false) {
+                        document.getElementById('motivo_historico').disabled = true;
+                    }
+                }
+
+                function consultarHistoricoPermisos(idtrabajador) {
+                    var ajax = nuevoAjax();
+                    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    ajax.onreadystatechange = function() {
+                        if (ajax.readyState == 1) {}
+                            if (ajax.readyState == 4) {
+                                document.getElementById('grilla_historico').innerHTML = ajax.responseText;
+                            }
+                        }
+                        ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarHistoricoPermisos");
+                    }
+
+                    function seleccionarModificar(idhistorico_permisos, fecha_inicio, hora_inicio, fecha_culminacion, hora_culminacion, fecha_solicitud, tiempo_total, descuenta_bono_alimentacion, motivo, justificado, remunerado, aprobado_por, ci_aprobado) {
+                        document.getElementById('idhistorico_permisos').value = idhistorico_permisos;
+                        document.getElementById('fecha_solicitud_historico').value = fecha_solicitud;
+                        document.getElementById('fecha_inicio_historico').value = fecha_inicio;
+                        document.getElementById('hr_inicio_historico').value = hora_inicio;
+                        document.getElementById('fecha_culminacion_historico').value = fecha_culminacion;
+                        document.getElementById('hr_culminacion_historico').value = hora_culminacion;
+                        document.getElementById('tiempo_historico').value = tiempo_total;
+                        if (descuenta_bono_alimentacion = "si") {
+                            document.getElementById('desc_bono_historico').checked = true;
+                        } else {
+                            document.getElementById('desc_bono_historico').checked = false;
+                        }
+                        if (motivo = "si") {
+                            document.getElementById('motivo_historico').checked = true;
+                        } else {
+                            document.getElementById('motivo_historico').checked = false;
+                        }
+                        if (justificado = "si") {
+                            document.getElementById('justificado1_historico').checked = true;
+                        } else {
+                            document.getElementById('justificado1_historico').checked = false;
+                        }
+                        if (remunerado = "si") {
+                            document.getElementById('remunerado1_historico').checked = true;
+                        } else {
+                            document.getElementById('remunerado1_historico').checked = false;
+                        }
+                        document.getElementById('aprobado_por_historico').value = aprobado_por;
+                        document.getElementById('ci_aprobado_historico').value = ci_aprobado;
+                        document.getElementById('boton_ingresar_permiso').style.display = 'none';
+                        document.getElementById('boton_modificar_permiso').style.display = 'block';
+                    }
 // **************************************************************************************************************************
 // **************************************************************************************************************************
 // *************************************************** RECONOCIMIENTOS ******************************************************
@@ -1485,63 +1489,63 @@ function ingresarReconocimientos() {
     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "exito") {
-                mostrarMensajes("exito", "El reconocimiento fue ingresado con Exito");
-            } else {
-                mostrarMensajes("error", "Disculpe el reconocimiento no se pudo ingresar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+            if (ajax.readyState == 4) {
+                if (ajax.responseText == "exito") {
+                    mostrarMensajes("exito", "El reconocimiento fue ingresado con Exito");
+                } else {
+                    mostrarMensajes("error", "Disculpe el reconocimiento no se pudo ingresar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+                }
+                limpiarReconocimientos();
+                consultarReconocimientos(idtrabajador);
             }
-            limpiarReconocimientos();
-            consultarReconocimientos(idtrabajador);
         }
+        ajax.send("idtrabajador=" + idtrabajador + "&tipo=" + tipo + "&motivo=" + motivo + "&fecha=" + fecha + "&numero_documentos=" + numero_documentos + "&fecha_entrega=" + fecha_entrega + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&observaciones=" + observaciones + "&ejecutar=ingresarReconocimientos");
     }
-    ajax.send("idtrabajador=" + idtrabajador + "&tipo=" + tipo + "&motivo=" + motivo + "&fecha=" + fecha + "&numero_documentos=" + numero_documentos + "&fecha_entrega=" + fecha_entrega + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&observaciones=" + observaciones + "&ejecutar=ingresarReconocimientos");
-}
 
-function modificarReconocimientos() {
-    var idreconocimientos = document.getElementById('idreconocimientos').value;
-    var tipo = document.getElementById('tipo_reconocimientos').value;
-    var motivo = document.getElementById('motivo_reconocimientos').value;
-    var fecha = document.getElementById('fecha_reconocimientos').value;
-    var numero_documentos = document.getElementById('numero_documentos_reconocimientos').value;
-    var fecha_entrega = document.getElementById('fecha_entrega_reconocimientos').value;
-    if (document.getElementById('constancia_anexa_reconocimientos').checked == true) {
-        var constancia_anexa = "si";
-    } else {
-        var constancia_anexa = "no";
-    }
-    var nombre_imagen = document.getElementById('nombre_imagen_reconocimientos').value;
-    var observaciones = document.getElementById('observaciones_reconocimientos').value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "exito") {
-                mostrarMensajes("exito", "El reconocimiento fue Modificado con Exito");
-            } else {
-                mostrarMensajes("error", "Disculpe el reconocimiento no se pudo Modificar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+    function modificarReconocimientos() {
+        var idreconocimientos = document.getElementById('idreconocimientos').value;
+        var tipo = document.getElementById('tipo_reconocimientos').value;
+        var motivo = document.getElementById('motivo_reconocimientos').value;
+        var fecha = document.getElementById('fecha_reconocimientos').value;
+        var numero_documentos = document.getElementById('numero_documentos_reconocimientos').value;
+        var fecha_entrega = document.getElementById('fecha_entrega_reconocimientos').value;
+        if (document.getElementById('constancia_anexa_reconocimientos').checked == true) {
+            var constancia_anexa = "si";
+        } else {
+            var constancia_anexa = "no";
+        }
+        var nombre_imagen = document.getElementById('nombre_imagen_reconocimientos').value;
+        var observaciones = document.getElementById('observaciones_reconocimientos').value;
+        var ajax = nuevoAjax();
+        ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+        ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 1) {}
+                if (ajax.readyState == 4) {
+                    if (ajax.responseText == "exito") {
+                        mostrarMensajes("exito", "El reconocimiento fue Modificado con Exito");
+                    } else {
+                        mostrarMensajes("error", "Disculpe el reconocimiento no se pudo Modificar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+                    }
+                    limpiarReconocimientos();
+                    consultarReconocimientos(document.getElementById('idtrabajador').value);
+                }
             }
-            limpiarReconocimientos();
-            consultarReconocimientos(document.getElementById('idtrabajador').value);
+            ajax.send("idreconocimientos=" + idreconocimientos + "&tipo=" + tipo + "&motivo=" + motivo + "&fecha=" + fecha + "&numero_documentos=" + numero_documentos + "&fecha_entrega=" + fecha_entrega + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&observaciones=" + observaciones + "&ejecutar=modificarReconocimientos");
         }
-    }
-    ajax.send("idreconocimientos=" + idreconocimientos + "&tipo=" + tipo + "&motivo=" + motivo + "&fecha=" + fecha + "&numero_documentos=" + numero_documentos + "&fecha_entrega=" + fecha_entrega + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&observaciones=" + observaciones + "&ejecutar=modificarReconocimientos");
-}
 
-function seleccionarReconocimientos(idreconocimientos, tipo, motivo, fecha, numero_documentos, fecha_entrega, constancia_anexa, nombre_imagen, observaciones) {
-    document.getElementById('idreconocimientos').value = idreconocimientos;
-    document.getElementById('tipo_reconocimientos').value = tipo;
-    document.getElementById('motivo_reconocimientos').value = motivo;
-    document.getElementById('fecha_reconocimientos').value = fecha;
-    document.getElementById('numero_documentos_reconocimientos').value = numero_documentos;
-    document.getElementById('fecha_entrega_reconocimientos').value = fecha_entrega;
-    if (constancia_anexa == "si") {
-        document.getElementById('constancia_anexa_reconocimientos').checked = true;
-    } else {
-        document.getElementById('constancia_anexa_reconocimientos').checked = false;
-    }
+        function seleccionarReconocimientos(idreconocimientos, tipo, motivo, fecha, numero_documentos, fecha_entrega, constancia_anexa, nombre_imagen, observaciones) {
+            document.getElementById('idreconocimientos').value = idreconocimientos;
+            document.getElementById('tipo_reconocimientos').value = tipo;
+            document.getElementById('motivo_reconocimientos').value = motivo;
+            document.getElementById('fecha_reconocimientos').value = fecha;
+            document.getElementById('numero_documentos_reconocimientos').value = numero_documentos;
+            document.getElementById('fecha_entrega_reconocimientos').value = fecha_entrega;
+            if (constancia_anexa == "si") {
+                document.getElementById('constancia_anexa_reconocimientos').checked = true;
+            } else {
+                document.getElementById('constancia_anexa_reconocimientos').checked = false;
+            }
     //document.getElementById('nombre_imagen_reconocimientos').value 			= nombre_imagen;
     document.getElementById('observaciones_reconocimientos').value = observaciones;
     document.getElementById('boton_ingresar_reconocimientos').style.display = "none";
@@ -1555,41 +1559,41 @@ function eliminarReconocimiento(idreconocimientos) {
         ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
-                alert(ajax.responseText);
-                consultarReconocimientos(document.getElementById('idtrabajador').value);
+                if (ajax.readyState == 4) {
+                    alert(ajax.responseText);
+                    consultarReconocimientos(document.getElementById('idtrabajador').value);
+                }
             }
-        }
-        ajax.send("idreconocimientos=" + idreconocimientos + "&ejecutar=eliminarReconocimiento");
-    }
-}
-
-function consultarReconocimientos(idtrabajador) {
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('listaReconocimientos').innerHTML = ajax.responseText;
+            ajax.send("idreconocimientos=" + idreconocimientos + "&ejecutar=eliminarReconocimiento");
         }
     }
-    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarReconocimientos");
-}
 
-function limpiarReconocimientos() {
-    document.getElementById('idreconocimientos').value = "";
-    document.getElementById('tipo_reconocimientos').value = "";
-    document.getElementById('motivo_reconocimientos').value = "";
-    document.getElementById('fecha_reconocimientos').value = "";
-    document.getElementById('numero_documentos_reconocimientos').value = "";
-    document.getElementById('fecha_entrega_reconocimientos').value = "";
-    document.getElementById('constancia_anexa_reconocimientos').checked = false;
-    document.getElementById('nombre_imagen_reconocimientos').value = "";
-    document.getElementById('observaciones_reconocimientos').value = "";
-    document.getElementById('boton_ingresar_reconocimientos').style.display = "block";
-    document.getElementById('boton_modificar_reconocimientos').style.display = "none";
-}
+    function consultarReconocimientos(idtrabajador) {
+        var ajax = nuevoAjax();
+        ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+        ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 1) {}
+                if (ajax.readyState == 4) {
+                    document.getElementById('listaReconocimientos').innerHTML = ajax.responseText;
+                }
+            }
+            ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarReconocimientos");
+        }
+
+        function limpiarReconocimientos() {
+            document.getElementById('idreconocimientos').value = "";
+            document.getElementById('tipo_reconocimientos').value = "";
+            document.getElementById('motivo_reconocimientos').value = "";
+            document.getElementById('fecha_reconocimientos').value = "";
+            document.getElementById('numero_documentos_reconocimientos').value = "";
+            document.getElementById('fecha_entrega_reconocimientos').value = "";
+            document.getElementById('constancia_anexa_reconocimientos').checked = false;
+            document.getElementById('nombre_imagen_reconocimientos').value = "";
+            document.getElementById('observaciones_reconocimientos').value = "";
+            document.getElementById('boton_ingresar_reconocimientos').style.display = "block";
+            document.getElementById('boton_modificar_reconocimientos').style.display = "none";
+        }
 // **************************************************************************************************************************
 // **************************************************************************************************************************
 // *************************************************** SANCIONES ******************************************************
@@ -1614,63 +1618,63 @@ function ingresarsanciones() {
     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "exito") {
-                mostrarMensajes("exito", "La Sancion fue ingresado con Exito");
-            } else {
-                mostrarMensajes("error", "Disculpe la Sancion no se pudo ingresar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+            if (ajax.readyState == 4) {
+                if (ajax.responseText == "exito") {
+                    mostrarMensajes("exito", "La Sancion fue ingresado con Exito");
+                } else {
+                    mostrarMensajes("error", "Disculpe la Sancion no se pudo ingresar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+                }
+                limpiarsanciones();
+                consultarsanciones(idtrabajador);
             }
-            limpiarsanciones();
-            consultarsanciones(idtrabajador);
         }
+        ajax.send("idtrabajador=" + idtrabajador + "&tipo=" + tipo + "&motivo=" + motivo + "&fecha=" + fecha + "&numero_documentos=" + numero_documentos + "&fecha_entrega=" + fecha_entrega + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&observaciones=" + observaciones + "&ejecutar=ingresarsanciones");
     }
-    ajax.send("idtrabajador=" + idtrabajador + "&tipo=" + tipo + "&motivo=" + motivo + "&fecha=" + fecha + "&numero_documentos=" + numero_documentos + "&fecha_entrega=" + fecha_entrega + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&observaciones=" + observaciones + "&ejecutar=ingresarsanciones");
-}
 
-function modificarsanciones() {
-    var idsanciones = document.getElementById('idsanciones').value;
-    var tipo = document.getElementById('tipo_sanciones').value;
-    var motivo = document.getElementById('motivo_sanciones').value;
-    var fecha = document.getElementById('fecha_sanciones').value;
-    var numero_documentos = document.getElementById('numero_documentos_sanciones').value;
-    var fecha_entrega = document.getElementById('fecha_entrega_sanciones').value;
-    if (document.getElementById('constancia_anexa_sanciones').checked == true) {
-        var constancia_anexa = "si";
-    } else {
-        var constancia_anexa = "no";
-    }
-    var nombre_imagen = document.getElementById('nombre_imagen_sanciones').value;
-    var observaciones = document.getElementById('observaciones_sanciones').value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "exito") {
-                mostrarMensajes("exito", "El sancion fue Modificado con Exito");
-            } else {
-                mostrarMensajes("error", "Disculpe el sancion no se pudo Modificar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+    function modificarsanciones() {
+        var idsanciones = document.getElementById('idsanciones').value;
+        var tipo = document.getElementById('tipo_sanciones').value;
+        var motivo = document.getElementById('motivo_sanciones').value;
+        var fecha = document.getElementById('fecha_sanciones').value;
+        var numero_documentos = document.getElementById('numero_documentos_sanciones').value;
+        var fecha_entrega = document.getElementById('fecha_entrega_sanciones').value;
+        if (document.getElementById('constancia_anexa_sanciones').checked == true) {
+            var constancia_anexa = "si";
+        } else {
+            var constancia_anexa = "no";
+        }
+        var nombre_imagen = document.getElementById('nombre_imagen_sanciones').value;
+        var observaciones = document.getElementById('observaciones_sanciones').value;
+        var ajax = nuevoAjax();
+        ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+        ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 1) {}
+                if (ajax.readyState == 4) {
+                    if (ajax.responseText == "exito") {
+                        mostrarMensajes("exito", "El sancion fue Modificado con Exito");
+                    } else {
+                        mostrarMensajes("error", "Disculpe el sancion no se pudo Modificar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+                    }
+                    limpiarsanciones();
+                    consultarsanciones(document.getElementById('idtrabajador').value);
+                }
             }
-            limpiarsanciones();
-            consultarsanciones(document.getElementById('idtrabajador').value);
+            ajax.send("idsanciones=" + idsanciones + "&tipo=" + tipo + "&motivo=" + motivo + "&fecha=" + fecha + "&numero_documentos=" + numero_documentos + "&fecha_entrega=" + fecha_entrega + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&observaciones=" + observaciones + "&ejecutar=modificarsanciones");
         }
-    }
-    ajax.send("idsanciones=" + idsanciones + "&tipo=" + tipo + "&motivo=" + motivo + "&fecha=" + fecha + "&numero_documentos=" + numero_documentos + "&fecha_entrega=" + fecha_entrega + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&observaciones=" + observaciones + "&ejecutar=modificarsanciones");
-}
 
-function seleccionarsanciones(idsanciones, tipo, motivo, fecha, numero_documentos, fecha_entrega, constancia_anexa, nombre_imagen, observaciones) {
-    document.getElementById('idsanciones').value = idsanciones;
-    document.getElementById('tipo_sanciones').value = tipo;
-    document.getElementById('motivo_sanciones').value = motivo;
-    document.getElementById('fecha_sanciones').value = fecha;
-    document.getElementById('numero_documentos_sanciones').value = numero_documentos;
-    document.getElementById('fecha_entrega_sanciones').value = fecha_entrega;
-    if (constancia_anexa == "si") {
-        document.getElementById('constancia_anexa_sanciones').checked = true;
-    } else {
-        document.getElementById('constancia_anexa_sanciones').checked = false;
-    }
+        function seleccionarsanciones(idsanciones, tipo, motivo, fecha, numero_documentos, fecha_entrega, constancia_anexa, nombre_imagen, observaciones) {
+            document.getElementById('idsanciones').value = idsanciones;
+            document.getElementById('tipo_sanciones').value = tipo;
+            document.getElementById('motivo_sanciones').value = motivo;
+            document.getElementById('fecha_sanciones').value = fecha;
+            document.getElementById('numero_documentos_sanciones').value = numero_documentos;
+            document.getElementById('fecha_entrega_sanciones').value = fecha_entrega;
+            if (constancia_anexa == "si") {
+                document.getElementById('constancia_anexa_sanciones').checked = true;
+            } else {
+                document.getElementById('constancia_anexa_sanciones').checked = false;
+            }
     //document.getElementById('nombre_imagen_sanciones').value 				= nombre_imagen;
     document.getElementById('observaciones_sanciones').value = observaciones;
     document.getElementById('boton_ingresar_sanciones').style.display = "none";
@@ -1684,41 +1688,41 @@ function eliminarsancion(idsanciones) {
         ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
-                alert(ajax.responseText);
-                consultarsanciones(document.getElementById('idtrabajador').value);
+                if (ajax.readyState == 4) {
+                    alert(ajax.responseText);
+                    consultarsanciones(document.getElementById('idtrabajador').value);
+                }
             }
-        }
-        ajax.send("idsanciones=" + idsanciones + "&ejecutar=eliminarsancion");
-    }
-}
-
-function consultarsanciones(idtrabajador) {
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('listasanciones').innerHTML = ajax.responseText;
+            ajax.send("idsanciones=" + idsanciones + "&ejecutar=eliminarsancion");
         }
     }
-    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarsanciones");
-}
 
-function limpiarsanciones() {
-    document.getElementById('idsanciones').value = "";
-    document.getElementById('tipo_sanciones').value = "";
-    document.getElementById('motivo_sanciones').value = "";
-    document.getElementById('fecha_sanciones').value = "";
-    document.getElementById('numero_documentos_sanciones').value = "";
-    document.getElementById('fecha_entrega_sanciones').value = "";
-    document.getElementById('constancia_anexa_sanciones').checked = false;
-    document.getElementById('nombre_imagen_sanciones').value = "";
-    document.getElementById('observaciones_sanciones').value = "";
-    document.getElementById('boton_ingresar_sanciones').style.display = "block";
-    document.getElementById('boton_modificar_sanciones').style.display = "none";
-}
+    function consultarsanciones(idtrabajador) {
+        var ajax = nuevoAjax();
+        ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+        ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 1) {}
+                if (ajax.readyState == 4) {
+                    document.getElementById('listasanciones').innerHTML = ajax.responseText;
+                }
+            }
+            ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarsanciones");
+        }
+
+        function limpiarsanciones() {
+            document.getElementById('idsanciones').value = "";
+            document.getElementById('tipo_sanciones').value = "";
+            document.getElementById('motivo_sanciones').value = "";
+            document.getElementById('fecha_sanciones').value = "";
+            document.getElementById('numero_documentos_sanciones').value = "";
+            document.getElementById('fecha_entrega_sanciones').value = "";
+            document.getElementById('constancia_anexa_sanciones').checked = false;
+            document.getElementById('nombre_imagen_sanciones').value = "";
+            document.getElementById('observaciones_sanciones').value = "";
+            document.getElementById('boton_ingresar_sanciones').style.display = "block";
+            document.getElementById('boton_modificar_sanciones').style.display = "none";
+        }
 // **************************************************************************************************************************
 // **************************************************************************************************************************
 // *************************************************** DECLARACION JURADA ******************************************************
@@ -1741,59 +1745,59 @@ function ingresardeclaracion_jurada() {
     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "exito") {
-                mostrarMensajes("exito", "La Sancion fue ingresado con Exito");
-            } else {
-                mostrarMensajes("error", "Disculpe la Sancion no se pudo ingresar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+            if (ajax.readyState == 4) {
+                if (ajax.responseText == "exito") {
+                    mostrarMensajes("exito", "La Sancion fue ingresado con Exito");
+                } else {
+                    mostrarMensajes("error", "Disculpe la Sancion no se pudo ingresar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+                }
+                limpiardeclaracion_jurada();
+                consultardeclaracion_jurada(idtrabajador);
             }
-            limpiardeclaracion_jurada();
-            consultardeclaracion_jurada(idtrabajador);
         }
+        ajax.send("idtrabajador=" + idtrabajador + "&tipo=" + tipo + "&fecha_declaracion=" + fecha_declaracion + "&fecha_entrega=" + fecha_entrega + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&observaciones=" + observaciones + "&ejecutar=ingresardeclaracion_jurada");
     }
-    ajax.send("idtrabajador=" + idtrabajador + "&tipo=" + tipo + "&fecha_declaracion=" + fecha_declaracion + "&fecha_entrega=" + fecha_entrega + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&observaciones=" + observaciones + "&ejecutar=ingresardeclaracion_jurada");
-}
 
-function modificardeclaracion_jurada() {
-    var iddeclaracion_jurada = document.getElementById('iddeclaracion_jurada').value;
-    var tipo = document.getElementById('tipo_declaracion_jurada').value;
-    var fecha_declaracion = document.getElementById('fecha_declaracion_jurada').value;
-    var fecha_entrega = document.getElementById('fecha_entrega_declaracion_jurada').value;
-    if (document.getElementById('constancia_anexa_declaracion_jurada').checked == true) {
-        var constancia_anexa = "si";
-    } else {
-        var constancia_anexa = "no";
-    }
-    var nombre_imagen = document.getElementById('nombre_imagen_declaracion_jurada').value;
-    var observaciones = document.getElementById('observaciones_declaracion_jurada').value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "exito") {
-                mostrarMensajes("exito", "El sancion fue Modificado con Exito");
-            } else {
-                mostrarMensajes("error", "Disculpe el sancion no se pudo Modificar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+    function modificardeclaracion_jurada() {
+        var iddeclaracion_jurada = document.getElementById('iddeclaracion_jurada').value;
+        var tipo = document.getElementById('tipo_declaracion_jurada').value;
+        var fecha_declaracion = document.getElementById('fecha_declaracion_jurada').value;
+        var fecha_entrega = document.getElementById('fecha_entrega_declaracion_jurada').value;
+        if (document.getElementById('constancia_anexa_declaracion_jurada').checked == true) {
+            var constancia_anexa = "si";
+        } else {
+            var constancia_anexa = "no";
+        }
+        var nombre_imagen = document.getElementById('nombre_imagen_declaracion_jurada').value;
+        var observaciones = document.getElementById('observaciones_declaracion_jurada').value;
+        var ajax = nuevoAjax();
+        ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+        ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 1) {}
+                if (ajax.readyState == 4) {
+                    if (ajax.responseText == "exito") {
+                        mostrarMensajes("exito", "El sancion fue Modificado con Exito");
+                    } else {
+                        mostrarMensajes("error", "Disculpe el sancion no se pudo Modificar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+                    }
+                    limpiardeclaracion_jurada();
+                    consultardeclaracion_jurada(document.getElementById('idtrabajador').value);
+                }
             }
-            limpiardeclaracion_jurada();
-            consultardeclaracion_jurada(document.getElementById('idtrabajador').value);
+            ajax.send("iddeclaracion_jurada=" + iddeclaracion_jurada + "&tipo=" + tipo + "&fecha_declaracion=" + fecha_declaracion + "&fecha_entrega=" + fecha_entrega + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&observaciones=" + observaciones + "&ejecutar=modificardeclaracion_jurada");
         }
-    }
-    ajax.send("iddeclaracion_jurada=" + iddeclaracion_jurada + "&tipo=" + tipo + "&fecha_declaracion=" + fecha_declaracion + "&fecha_entrega=" + fecha_entrega + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&observaciones=" + observaciones + "&ejecutar=modificardeclaracion_jurada");
-}
 
-function seleccionardeclaracion_jurada(iddeclaracion_jurada, tipo, fecha_declaracion, fecha_entrega, constancia_anexa, nombre_imagen, observaciones) {
-    document.getElementById('iddeclaracion_jurada').value = iddeclaracion_jurada;
-    document.getElementById('tipo_declaracion_jurada').value = tipo;
-    document.getElementById('fecha_declaracion_jurada').value = fecha_declaracion;
-    document.getElementById('fecha_entrega_declaracion_jurada').value = fecha_entrega;
-    if (constancia_anexa == "si") {
-        document.getElementById('constancia_anexa_declaracion_jurada').checked = true;
-    } else {
-        document.getElementById('constancia_anexa_declaracion_jurada').checked = false;
-    }
+        function seleccionardeclaracion_jurada(iddeclaracion_jurada, tipo, fecha_declaracion, fecha_entrega, constancia_anexa, nombre_imagen, observaciones) {
+            document.getElementById('iddeclaracion_jurada').value = iddeclaracion_jurada;
+            document.getElementById('tipo_declaracion_jurada').value = tipo;
+            document.getElementById('fecha_declaracion_jurada').value = fecha_declaracion;
+            document.getElementById('fecha_entrega_declaracion_jurada').value = fecha_entrega;
+            if (constancia_anexa == "si") {
+                document.getElementById('constancia_anexa_declaracion_jurada').checked = true;
+            } else {
+                document.getElementById('constancia_anexa_declaracion_jurada').checked = false;
+            }
     //document.getElementById('nombre_imagen_declaracion_jurada').value 				= nombre_imagen;
     document.getElementById('observaciones_declaracion_jurada').value = observaciones;
     document.getElementById('boton_ingresar_declaracion_jurada').style.display = "none";
@@ -1807,7 +1811,7 @@ function eliminarDeclaracion_jurada(iddeclaracion_jurada) {
         ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
+                if (ajax.readyState == 4) {
                 //alert(ajax.responseText);
                 consultardeclaracion_jurada(document.getElementById('idtrabajador').value);
             }
@@ -1822,24 +1826,24 @@ function consultardeclaracion_jurada(idtrabajador) {
     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('listadeclaracion_jurada').innerHTML = ajax.responseText;
+            if (ajax.readyState == 4) {
+                document.getElementById('listadeclaracion_jurada').innerHTML = ajax.responseText;
+            }
         }
+        ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultardeclaracion_jurada");
     }
-    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultardeclaracion_jurada");
-}
 
-function limpiardeclaracion_jurada() {
-    document.getElementById('iddeclaracion_jurada').value = "";
-    document.getElementById('tipo_declaracion_jurada').value = "";
-    document.getElementById('fecha_declaracion_jurada').value = "";
-    document.getElementById('fecha_entrega_declaracion_jurada').value = "";
-    document.getElementById('constancia_anexa_declaracion_jurada').checked = false;
-    document.getElementById('nombre_imagen_declaracion_jurada').value = "";
-    document.getElementById('observaciones_declaracion_jurada').value = "";
-    document.getElementById('boton_ingresar_declaracion_jurada').style.display = "block";
-    document.getElementById('boton_modificar_declaracion_jurada').style.display = "none";
-}
+    function limpiardeclaracion_jurada() {
+        document.getElementById('iddeclaracion_jurada').value = "";
+        document.getElementById('tipo_declaracion_jurada').value = "";
+        document.getElementById('fecha_declaracion_jurada').value = "";
+        document.getElementById('fecha_entrega_declaracion_jurada').value = "";
+        document.getElementById('constancia_anexa_declaracion_jurada').checked = false;
+        document.getElementById('nombre_imagen_declaracion_jurada').value = "";
+        document.getElementById('observaciones_declaracion_jurada').value = "";
+        document.getElementById('boton_ingresar_declaracion_jurada').style.display = "block";
+        document.getElementById('boton_modificar_declaracion_jurada').style.display = "none";
+    }
 // **************************************************************************************************************************
 // **************************************************************************************************************************
 // *************************************************** CURSOS REALIZADOS ******************************************************
@@ -1867,83 +1871,83 @@ function ingresarCursos() {
     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "exito") {
-                mostrarMensajes("exito", "El Curso fue ingresado con Exito");
-            } else {
-                mostrarMensajes("error", "Disculpe el curso no se pudo ingresar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+            if (ajax.readyState == 4) {
+                if (ajax.responseText == "exito") {
+                    mostrarMensajes("exito", "El Curso fue ingresado con Exito");
+                } else {
+                    mostrarMensajes("error", "Disculpe el curso no se pudo ingresar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+                }
+                limpiarCursos();
+                consultarCursos(idtrabajador);
             }
-            limpiarCursos();
-            consultarCursos(idtrabajador);
         }
+        ajax.send("tipo_duracion=" + tipo_duracion + "&idtrabajador=" + idtrabajador + "&denominacion=" + denominacion + "&detalle_contenido=" + detalle_contenido + "&desde=" + desde + "&hasta=" + hasta + "&duracion=" + duracion + "&institucion=" + institucion + "&telefonos=" + telefonos + "&realizado_por=" + realizado_por + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&ejecutar=ingresarCursos");
     }
-    ajax.send("tipo_duracion=" + tipo_duracion + "&idtrabajador=" + idtrabajador + "&denominacion=" + denominacion + "&detalle_contenido=" + detalle_contenido + "&desde=" + desde + "&hasta=" + hasta + "&duracion=" + duracion + "&institucion=" + institucion + "&telefonos=" + telefonos + "&realizado_por=" + realizado_por + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&ejecutar=ingresarCursos");
-}
 
-function modificarCursos() {
-    var idcursos = document.getElementById('idcurso').value;
-    var idtrabajador = document.getElementById('idtrabajador').value;
-    var denominacion = document.getElementById('denominacion_cursos').value;
-    var detalle_contenido = document.getElementById('detalle_contenido_cursos').value;
-    var desde = document.getElementById('fecha_desde_cursos').value;
-    var hasta = document.getElementById('fecha_hasta_cursos').value;
-    var duracion = document.getElementById('duracion_cursos').value;
-    var institucion = document.getElementById('institucion_cursos').value;
-    var telefonos = document.getElementById('telefonos_cursos').value;
-    var realizado_por = document.getElementById('realizado_por').value;
-    var tipo_duracion = document.getElementById('tipo_duracion').value;
-    if (document.getElementById('constancia_anexa_cursos').checked == true) {
-        var constancia_anexa = "si";
-    } else {
-        var constancia_anexa = "no";
-    }
-    var nombre_imagen = document.getElementById('nombre_imagen_cursos').value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "exito") {
-                mostrarMensajes("exito", "El Curso fue Modificado con Exito");
-            } else {
-                mostrarMensajes("error", "Disculpe el curso no se pudo Modificar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
-            }
-            limpiarCursos();
-            consultarCursos(document.getElementById('idtrabajador').value);
+    function modificarCursos() {
+        var idcursos = document.getElementById('idcurso').value;
+        var idtrabajador = document.getElementById('idtrabajador').value;
+        var denominacion = document.getElementById('denominacion_cursos').value;
+        var detalle_contenido = document.getElementById('detalle_contenido_cursos').value;
+        var desde = document.getElementById('fecha_desde_cursos').value;
+        var hasta = document.getElementById('fecha_hasta_cursos').value;
+        var duracion = document.getElementById('duracion_cursos').value;
+        var institucion = document.getElementById('institucion_cursos').value;
+        var telefonos = document.getElementById('telefonos_cursos').value;
+        var realizado_por = document.getElementById('realizado_por').value;
+        var tipo_duracion = document.getElementById('tipo_duracion').value;
+        if (document.getElementById('constancia_anexa_cursos').checked == true) {
+            var constancia_anexa = "si";
+        } else {
+            var constancia_anexa = "no";
         }
-    }
-    ajax.send("tipo_duracion=" + tipo_duracion + "&idcursos=" + idcursos + "&denominacion=" + denominacion + "&detalle_contenido=" + detalle_contenido + "&desde=" + desde + "&hasta=" + hasta + "&duracion=" + duracion + "&institucion=" + institucion + "&telefonos=" + telefonos + "&realizado_por=" + realizado_por + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&ejecutar=modificarCursos");
-}
-
-function seleccionarCursos(idcurso, denominacion, detalle_contenido, fecha_desde, fecha_hasta, duracion, institucion, telefonos, realizado_por, constancia_anexa, tipo_duracion) {
-    document.getElementById('idcurso').value = idcurso;
-    document.getElementById('denominacion_cursos').value = denominacion;
-    document.getElementById('detalle_contenido_cursos').value = detalle_contenido;
-    document.getElementById('fecha_desde_cursos').value = fecha_desde;
-    document.getElementById('fecha_hasta_cursos').value = fecha_hasta;
-    document.getElementById('duracion_cursos').value = duracion;
-    document.getElementById('institucion_cursos').value = institucion;
-    document.getElementById('telefonos_cursos').value = telefonos;
-    document.getElementById('realizado_por').value = realizado_por;
-    document.getElementById('tipo_duracion').value = tipo_duracion;
-    if (constancia_anexa == "si") {
-        document.getElementById('constancia_anexa_cursos').checked = true;
-    } else {
-        document.getElementById('constancia_anexa_cursos').checked = false;
-    }
-    document.getElementById('boton_ingresar_cursos').style.display = "none";
-    document.getElementById('boton_modificar_cursos').style.display = "block";
-}
-
-function eliminarCursos(idcursos) {
-    if (confirm("Seguro desea eliminar el Curso seleccionado?")) {
+        var nombre_imagen = document.getElementById('nombre_imagen_cursos').value;
         var ajax = nuevoAjax();
         ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
         ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
+                if (ajax.readyState == 4) {
+                    if (ajax.responseText == "exito") {
+                        mostrarMensajes("exito", "El Curso fue Modificado con Exito");
+                    } else {
+                        mostrarMensajes("error", "Disculpe el curso no se pudo Modificar, por favor intente de nuevo mas tarde (" + ajax.responseText + ")");
+                    }
+                    limpiarCursos();
+                    consultarCursos(document.getElementById('idtrabajador').value);
+                }
+            }
+            ajax.send("tipo_duracion=" + tipo_duracion + "&idcursos=" + idcursos + "&denominacion=" + denominacion + "&detalle_contenido=" + detalle_contenido + "&desde=" + desde + "&hasta=" + hasta + "&duracion=" + duracion + "&institucion=" + institucion + "&telefonos=" + telefonos + "&realizado_por=" + realizado_por + "&constancia_anexa=" + constancia_anexa + "&nombre_imagen=" + nombre_imagen + "&ejecutar=modificarCursos");
+        }
+
+        function seleccionarCursos(idcurso, denominacion, detalle_contenido, fecha_desde, fecha_hasta, duracion, institucion, telefonos, realizado_por, constancia_anexa, tipo_duracion) {
+            document.getElementById('idcurso').value = idcurso;
+            document.getElementById('denominacion_cursos').value = denominacion;
+            document.getElementById('detalle_contenido_cursos').value = detalle_contenido;
+            document.getElementById('fecha_desde_cursos').value = fecha_desde;
+            document.getElementById('fecha_hasta_cursos').value = fecha_hasta;
+            document.getElementById('duracion_cursos').value = duracion;
+            document.getElementById('institucion_cursos').value = institucion;
+            document.getElementById('telefonos_cursos').value = telefonos;
+            document.getElementById('realizado_por').value = realizado_por;
+            document.getElementById('tipo_duracion').value = tipo_duracion;
+            if (constancia_anexa == "si") {
+                document.getElementById('constancia_anexa_cursos').checked = true;
+            } else {
+                document.getElementById('constancia_anexa_cursos').checked = false;
+            }
+            document.getElementById('boton_ingresar_cursos').style.display = "none";
+            document.getElementById('boton_modificar_cursos').style.display = "block";
+        }
+
+        function eliminarCursos(idcursos) {
+            if (confirm("Seguro desea eliminar el Curso seleccionado?")) {
+                var ajax = nuevoAjax();
+                ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState == 1) {}
+                        if (ajax.readyState == 4) {
                 //alert(ajax.responseText);
                 consultarCursos(document.getElementById('idtrabajador').value);
             }
@@ -1958,27 +1962,27 @@ function consultarCursos(idtrabajador) {
     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('lista_cursos').innerHTML = ajax.responseText;
+            if (ajax.readyState == 4) {
+                document.getElementById('lista_cursos').innerHTML = ajax.responseText;
+            }
         }
+        ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarCursos");
     }
-    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarCursos");
-}
 
-function limpiarCursos() {
-    document.getElementById('denominacion_cursos').value = "";
-    document.getElementById('detalle_contenido_cursos').value = "";
-    document.getElementById('fecha_desde_cursos').value = "";
-    document.getElementById('fecha_hasta_cursos').value = "";
-    document.getElementById('duracion_cursos').value = "";
-    document.getElementById('institucion_cursos').value = "";
-    document.getElementById('telefonos_cursos').value = "";
-    document.getElementById('realizado_por').value = '';
-    document.getElementById('tipo_duracion').value = '';
-    document.getElementById('constancia_anexa_cursos').checked = false;
-    document.getElementById('boton_ingresar_cursos').style.display = "block";
-    document.getElementById('boton_modificar_cursos').style.display = "none";
-}
+    function limpiarCursos() {
+        document.getElementById('denominacion_cursos').value = "";
+        document.getElementById('detalle_contenido_cursos').value = "";
+        document.getElementById('fecha_desde_cursos').value = "";
+        document.getElementById('fecha_hasta_cursos').value = "";
+        document.getElementById('duracion_cursos').value = "";
+        document.getElementById('institucion_cursos').value = "";
+        document.getElementById('telefonos_cursos').value = "";
+        document.getElementById('realizado_por').value = '';
+        document.getElementById('tipo_duracion').value = '';
+        document.getElementById('constancia_anexa_cursos').checked = false;
+        document.getElementById('boton_ingresar_cursos').style.display = "block";
+        document.getElementById('boton_modificar_cursos').style.display = "none";
+    }
 // **************************************************************************************************************************
 // **************************************************************************************************************************
 // ***************************************************** HISTORICO DE VACACIONES ********************************************
@@ -1999,54 +2003,54 @@ function ajustarFechas() {
     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            tiempo_disfrute_vacaciones = ajax.responseText;
-            var ajax2 = nuevoAjax();
-            ajax2.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-            ajax2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            ajax2.onreadystatechange = function() {
-                if (ajax2.readyState == 1) {}
-                if (ajax2.readyState == 4) {
-                    tiempo_disfrute = ajax2.responseText;
-                    var total_restante_disfrute = (parseInt(tiempo_disfrute_vacaciones) - parseInt(tiempo_disfrute));
-                    var ajax3 = nuevoAjax();
-                    ajax3.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-                    ajax3.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                    ajax3.onreadystatechange = function() {
-                        if (ajax3.readyState == 1) {}
-                        if (ajax3.readyState == 4) {
-                            total_fecha_ajustada = ajax3.responseText;
-                            var total_ajustado = parseInt(tiempo_disfrute_vacaciones) - parseInt(total_fecha_ajustada);
-                            var total = parseInt(total_restante_disfrute) + parseInt(total_ajustado) + parseInt(cantidad_dias_feriados);
-                            setTimeout("document.getElementById('tiempo_disfrute_vacaciones').value = " + parseInt(tiempo_disfrute_vacaciones), 100);
-                            if (document.getElementById('fecha_reincorporacion_ajustada_vacaciones').value != '') {
-                                setTimeout("document.getElementById('tiempo_pendiente_disfrute_vacaciones').value = " + total, 100);
-                                var total_pendiente = parseInt(document.getElementById('tiempo_pendiente_acumulado_oculto').value) + parseInt(total);
-                                setTimeout("document.getElementById('tiempo_pendiente_acumulado').value = " + total_pendiente, 300);
+            if (ajax.readyState == 4) {
+                tiempo_disfrute_vacaciones = ajax.responseText;
+                var ajax2 = nuevoAjax();
+                ajax2.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                ajax2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                ajax2.onreadystatechange = function() {
+                    if (ajax2.readyState == 1) {}
+                        if (ajax2.readyState == 4) {
+                            tiempo_disfrute = ajax2.responseText;
+                            var total_restante_disfrute = (parseInt(tiempo_disfrute_vacaciones) - parseInt(tiempo_disfrute));
+                            var ajax3 = nuevoAjax();
+                            ajax3.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                            ajax3.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                            ajax3.onreadystatechange = function() {
+                                if (ajax3.readyState == 1) {}
+                                    if (ajax3.readyState == 4) {
+                                        total_fecha_ajustada = ajax3.responseText;
+                                        var total_ajustado = parseInt(tiempo_disfrute_vacaciones) - parseInt(total_fecha_ajustada);
+                                        var total = parseInt(total_restante_disfrute) + parseInt(total_ajustado) + parseInt(cantidad_dias_feriados);
+                                        setTimeout("document.getElementById('tiempo_disfrute_vacaciones').value = " + parseInt(tiempo_disfrute_vacaciones), 100);
+                                        if (document.getElementById('fecha_reincorporacion_ajustada_vacaciones').value != '') {
+                                            setTimeout("document.getElementById('tiempo_pendiente_disfrute_vacaciones').value = " + total, 100);
+                                            var total_pendiente = parseInt(document.getElementById('tiempo_pendiente_acumulado_oculto').value) + parseInt(total);
+                                            setTimeout("document.getElementById('tiempo_pendiente_acumulado').value = " + total_pendiente, 300);
+                                        }
+                                    }
+                                }
+                                ajax3.send("fecha_inicio=" + fecha_inicio_vacacion + "&fecha_culminacion=" + fecha_culminacion_ajustada + "&ejecutar=validarFechas_vacaciones");
                             }
                         }
+                        ajax2.send("fecha_inicio=" + fecha_inicio_disfrute + "&fecha_culminacion=" + fecha_culminacion_disfrute + "&ejecutar=validarFechas_vacaciones");
                     }
-                    ajax3.send("fecha_inicio=" + fecha_inicio_vacacion + "&fecha_culminacion=" + fecha_culminacion_ajustada + "&ejecutar=validarFechas_vacaciones");
                 }
+                ajax.send("fecha_inicio=" + fecha_inicio_vacacion + "&fecha_culminacion=" + fecha_culminacion_vacacion + "&ejecutar=validarFechas_vacaciones");
             }
-            ajax2.send("fecha_inicio=" + fecha_inicio_disfrute + "&fecha_culminacion=" + fecha_culminacion_disfrute + "&ejecutar=validarFechas_vacaciones");
-        }
-    }
-    ajax.send("fecha_inicio=" + fecha_inicio_vacacion + "&fecha_culminacion=" + fecha_culminacion_vacacion + "&ejecutar=validarFechas_vacaciones");
-}
 
-function consultarVacacionesPendientes(idtrabajador) {
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('tiempo_pendiente_acumulado_oculto').value = ajax.responseText;
-        }
-    }
-    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarVacacionesPendientes");
-}
+            function consultarVacacionesPendientes(idtrabajador) {
+                var ajax = nuevoAjax();
+                ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState == 1) {}
+                        if (ajax.readyState == 4) {
+                            document.getElementById('tiempo_pendiente_acumulado_oculto').value = ajax.responseText;
+                        }
+                    }
+                    ajax.send("idtrabajador=" + idtrabajador + "&ejecutar=consultarVacacionesPendientes");
+                }
 /*
 function verificarFecha_historicoVacaciones(fecha_inicio, fecha_culminacion){
 	var ajax=nuevoAjax();
@@ -2264,7 +2268,7 @@ function llenargrilla_vacaciones(idtrabajador) {
     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
+            if (ajax.readyState == 4) {
             //alert(ajax.responseText);
             document.getElementById('grilla_vacaciones').innerHTML = ajax.responseText;
             //document.getElementById('accion_vacaciones').value 	= "Guardar";
@@ -2279,7 +2283,7 @@ function llenaroculto_vacaciones(valor) {
     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
+            if (ajax.readyState == 4) {
             //document.getElementById('grilla').innerHTML = ajax.responseText;
         }
     }
@@ -2315,27 +2319,27 @@ function accion_vacaciones(accion) {
     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            var sms = ajax.responseText;
-            if (sms == 0) {
-                mostrarMensajes("error", "Seleccione Trabajador");
-            } else {
-                if (sms == 1) {
-                    mostrarMensajes("error", "Campos vacios");
+            if (ajax.readyState == 4) {
+                var sms = ajax.responseText;
+                if (sms == 0) {
+                    mostrarMensajes("error", "Seleccione Trabajador");
                 } else {
-                    if (sms == 2) {
-                        mostrarMensajes("exito", "Registro Exitoso");
-                        llenargrilla_vacaciones(idtrabajador);
-                        limpiarCampos_vacaciones();
+                    if (sms == 1) {
+                        mostrarMensajes("error", "Campos vacios");
                     } else {
-                        if (sms == 5) {
-                            mostrarMensajes("error", "Disculpe el perioro de vacaciones que intenta ingresar ya esta registrado")
+                        if (sms == 2) {
+                            mostrarMensajes("exito", "Registro Exitoso");
+                            llenargrilla_vacaciones(idtrabajador);
+                            limpiarCampos_vacaciones();
                         } else {
-                            mostrarMensajes("error", "Error Agregar Historico Vacacional: " + ajax.responseText);
+                            if (sms == 5) {
+                                mostrarMensajes("error", "Disculpe el perioro de vacaciones que intenta ingresar ya esta registrado")
+                            } else {
+                                mostrarMensajes("error", "Error Agregar Historico Vacacional: " + ajax.responseText);
+                            }
                         }
                     }
                 }
-            }
             //boton(ajax.responseText);
             //document.getElementById('grilla').innerHTML = ajax.responseText;
             consultarVacacionesPendientes(idtrabajador);
@@ -2376,8 +2380,8 @@ function llenarFormulario_vacaciones(id_historico_vacacion) {
     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('datos_vacaciones').innerHTML = ajax.responseText;
+            if (ajax.readyState == 4) {
+                document.getElementById('datos_vacaciones').innerHTML = ajax.responseText;
             // creacion de variables por id
             var idhistorico_vacaciones = document.getElementById('idhistorico_vacaciones_encontrado_vacaciones').value;
             //var idtrabajador = document.getElementById('idtrabajador_encontrado').value;
@@ -2440,13 +2444,13 @@ function eliminar_vacaciones(idhistorico_vacaciones) {
         ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
-                llenargrilla_vacaciones(document.getElementById('idtrabajador').value);
+                if (ajax.readyState == 4) {
+                    llenargrilla_vacaciones(document.getElementById('idtrabajador').value);
+                }
             }
+            ajax.send("idhistorico_vacaciones=" + idhistorico_vacaciones + "&ejecutar=eliminar_vacaciones");
         }
-        ajax.send("idhistorico_vacaciones=" + idhistorico_vacaciones + "&ejecutar=eliminar_vacaciones");
     }
-}
 // **************************************************************************************************************************
 // **************************************************************************************************************************
 // ***************************************************** CUENTAS BANCARIAS ********************************************
@@ -2658,13 +2662,13 @@ function calcularTiempoPeriodosCedentes() {
         ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
-                document.getElementById('tiempo_continuidad').value = ajax.responseText;
+                if (ajax.readyState == 4) {
+                    document.getElementById('tiempo_continuidad').value = ajax.responseText;
+                }
             }
+            ajax.send("desde=" + desde + "&hasta=" + hasta + "&ejecutar=calcularTiempoPeriodosCedentes");
         }
-        ajax.send("desde=" + desde + "&hasta=" + hasta + "&ejecutar=calcularTiempoPeriodosCedentes");
     }
-}
 // ********************************************************************************************************************
 // ********************************************************************************************************************
 // ********************************************************************************************************************
@@ -2681,42 +2685,42 @@ function ingresarPrestaciones() {
     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            if (ajax.responseText == "existe") {
-                mostrarMensajes("error", "Disculpe el periodo que intenta ingresar para este trabajador ya fue registrado, por favor verifique");
+            if (ajax.readyState == 4) {
+                if (ajax.responseText == "existe") {
+                    mostrarMensajes("error", "Disculpe el periodo que intenta ingresar para este trabajador ya fue registrado, por favor verifique");
+                }
+                document.getElementById('mes_prestaciones').value = 0;
+                document.getElementById('sueldo_prestaciones').value = '';
+                consultarPrestaciones();
             }
-            document.getElementById('mes_prestaciones').value = 0;
-            document.getElementById('sueldo_prestaciones').value = '';
-            consultarPrestaciones();
         }
+        ajax.send("idtrabajador=" + idtrabajador + "&anio=" + anio + "&mes=" + mes + "&sueldo=" + sueldo + "&ejecutar=ingresarPrestaciones");
     }
-    ajax.send("idtrabajador=" + idtrabajador + "&anio=" + anio + "&mes=" + mes + "&sueldo=" + sueldo + "&ejecutar=ingresarPrestaciones");
-}
 
-function consultarPrestaciones() {
-    var idtrabajador = document.getElementById('idtrabajador').value;
-    var fecha_ingreso = document.getElementById('fecha_ingreso_prestaciones').value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            document.getElementById('lista_prestaciones').innerHTML = ajax.responseText;
-            consultarTotalesGeneralesPrestaciones();
+    function consultarPrestaciones() {
+        var idtrabajador = document.getElementById('idtrabajador').value;
+        var fecha_ingreso = document.getElementById('fecha_ingreso_prestaciones').value;
+        var ajax = nuevoAjax();
+        ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+        ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 1) {}
+                if (ajax.readyState == 4) {
+                    document.getElementById('lista_prestaciones').innerHTML = ajax.responseText;
+                    consultarTotalesGeneralesPrestaciones();
+                }
+            }
+            ajax.send("fecha_ingreso=" + fecha_ingreso + "&idtrabajador=" + idtrabajador + "&ejecutar=consultarPrestaciones");
         }
-    }
-    ajax.send("fecha_ingreso=" + fecha_ingreso + "&idtrabajador=" + idtrabajador + "&ejecutar=consultarPrestaciones");
-}
 
-function consultarSelectAniosPrestaciones(anio, mes) {
-    var idtrabajador = document.getElementById('idtrabajador').value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
+        function consultarSelectAniosPrestaciones(anio, mes) {
+            var idtrabajador = document.getElementById('idtrabajador').value;
+            var ajax = nuevoAjax();
+            ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+            ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 1) {}
+                    if (ajax.readyState == 4) {
             //document.getElementById('div_anios_prestaciones').innerHTML = ajax.responseText;
             consultarPrestaciones();
         }
@@ -2731,137 +2735,137 @@ function eliminarPrestaciones(idtabla_prestaciones) {
         ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
-                consultarPrestaciones();
+                if (ajax.readyState == 4) {
+                    consultarPrestaciones();
+                }
             }
-        }
-        ajax.send("idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=eliminarPrestaciones");
-    }
-}
-
-function actualizarSueldoPrestaciones(sueldo_prestaciones_modificar_idtabla_prestaciones, complementos_prestaciones_modificar_idtabla_prestaciones, bono_vacacional_prestaciones_modificar_idtabla_prestaciones, bono_fin_anio_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones) {
-    var sueldo = document.getElementById("" + sueldo_prestaciones_modificar_idtabla_prestaciones + "").value;
-    var otros = document.getElementById("" + complementos_prestaciones_modificar_idtabla_prestaciones + "").value;
-    var bono_vacacional = document.getElementById("" + bono_vacacional_prestaciones_modificar_idtabla_prestaciones + "").value;
-    var bono_fin_anio = document.getElementById("" + bono_fin_anio_prestaciones_modificar_idtabla_prestaciones + "").value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            consultarPrestaciones();
+            ajax.send("idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=eliminarPrestaciones");
         }
     }
-    ajax.send("sueldo=" + sueldo + "&otros=" + otros + "&bono_vacacional=" + bono_vacacional + "&bono_fin_anio=" + bono_fin_anio + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=actualizarSueldoPrestaciones");
-}
 
-function guardarValorSueldo(sueldo_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
-    var sueldo = document.getElementById("" + sueldo_prestaciones_modificar_idtabla_prestaciones + "").value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            consultarPrestaciones();
-        }
-    }
-    ajax.send("sueldo=" + sueldo + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorSueldo");
-}
-
-function guardarValorOtros(complementos_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
-    var otros = document.getElementById("" + complementos_prestaciones_modificar_idtabla_prestaciones + "").value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            consultarPrestaciones();
-        }
-    }
-    ajax.send("otros=" + otros + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorOtros");
-}
-
-function guardarValorDiasBonoVacacional(dias_bono_vacacional_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
-    var dias_bv = document.getElementById("" + dias_bono_vacacional_prestaciones_modificar_idtabla_prestaciones + "").value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            consultarPrestaciones();
-        }
-    }
-    ajax.send("dias_bv=" + dias_bv + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorDiasBonoVacacional");
-}
-
-function guardarValorBonoVacacional(bono_vacacional_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
-    var bono_vacacional = document.getElementById("" + bono_vacacional_prestaciones_modificar_idtabla_prestaciones + "").value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            consultarPrestaciones();
-        }
-    }
-    ajax.send("bono_vacacional=" + bono_vacacional + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorBonoVacacional");
-}
-
-function guardarValorDiasBonoFinAnio(dias_bono_fin_anio_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
-    var dias_bfa = document.getElementById("" + dias_bono_fin_anio_prestaciones_modificar_idtabla_prestaciones + "").value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            consultarPrestaciones();
-        }
-    }
-    ajax.send("dias_bfa=" + dias_bfa + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorDiasBonoFinAnio");
-}
-
-function guardarValorBonoFinAnio(bono_fin_anio_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
-    var bono_fin_anio = document.getElementById("" + bono_fin_anio_prestaciones_modificar_idtabla_prestaciones + "").value;
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            consultarPrestaciones();
-        }
-    }
-    ajax.send("bono_fin_anio=" + bono_fin_anio + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorBonoFinAnio");
-}
-
-function ingresarAdelanto(idtabla_prestaciones, adelanto_prestaciones, adelanto_interes) {
-    var ajax = nuevoAjax();
-    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            consultarPrestaciones();
-        }
-    }
-    ajax.send("idtabla_prestaciones=" + idtabla_prestaciones + "&adelanto_prestaciones=" + adelanto_prestaciones + "&adelanto_interes=" + adelanto_interes + "&ejecutar=ingresarAdelanto");
-}
-
-function eliminarAdelanto(idtabla_adelanto) {
-    if (confirm("Seguro desea eliminar el ADELANTO DE PRESTACIONES seleccionado?")) {
+    function actualizarSueldoPrestaciones(sueldo_prestaciones_modificar_idtabla_prestaciones, complementos_prestaciones_modificar_idtabla_prestaciones, bono_vacacional_prestaciones_modificar_idtabla_prestaciones, bono_fin_anio_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones) {
+        var sueldo = document.getElementById("" + sueldo_prestaciones_modificar_idtabla_prestaciones + "").value;
+        var otros = document.getElementById("" + complementos_prestaciones_modificar_idtabla_prestaciones + "").value;
+        var bono_vacacional = document.getElementById("" + bono_vacacional_prestaciones_modificar_idtabla_prestaciones + "").value;
+        var bono_fin_anio = document.getElementById("" + bono_fin_anio_prestaciones_modificar_idtabla_prestaciones + "").value;
         var ajax = nuevoAjax();
         ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
         ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 1) {}
-            if (ajax.readyState == 4) {
-                consultarPrestaciones();
+                if (ajax.readyState == 4) {
+                    consultarPrestaciones();
+                }
+            }
+            ajax.send("sueldo=" + sueldo + "&otros=" + otros + "&bono_vacacional=" + bono_vacacional + "&bono_fin_anio=" + bono_fin_anio + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=actualizarSueldoPrestaciones");
+        }
+
+        function guardarValorSueldo(sueldo_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
+            var sueldo = document.getElementById("" + sueldo_prestaciones_modificar_idtabla_prestaciones + "").value;
+            var ajax = nuevoAjax();
+            ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+            ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 1) {}
+                    if (ajax.readyState == 4) {
+                        consultarPrestaciones();
+                    }
+                }
+                ajax.send("sueldo=" + sueldo + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorSueldo");
+            }
+
+            function guardarValorOtros(complementos_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
+                var otros = document.getElementById("" + complementos_prestaciones_modificar_idtabla_prestaciones + "").value;
+                var ajax = nuevoAjax();
+                ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState == 1) {}
+                        if (ajax.readyState == 4) {
+                            consultarPrestaciones();
+                        }
+                    }
+                    ajax.send("otros=" + otros + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorOtros");
+                }
+
+                function guardarValorDiasBonoVacacional(dias_bono_vacacional_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
+                    var dias_bv = document.getElementById("" + dias_bono_vacacional_prestaciones_modificar_idtabla_prestaciones + "").value;
+                    var ajax = nuevoAjax();
+                    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+                    ajax.onreadystatechange = function() {
+                        if (ajax.readyState == 1) {}
+                            if (ajax.readyState == 4) {
+                                consultarPrestaciones();
+                            }
+                        }
+                        ajax.send("dias_bv=" + dias_bv + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorDiasBonoVacacional");
+                    }
+
+                    function guardarValorBonoVacacional(bono_vacacional_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
+                        var bono_vacacional = document.getElementById("" + bono_vacacional_prestaciones_modificar_idtabla_prestaciones + "").value;
+                        var ajax = nuevoAjax();
+                        ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                        ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+                        ajax.onreadystatechange = function() {
+                            if (ajax.readyState == 1) {}
+                                if (ajax.readyState == 4) {
+                                    consultarPrestaciones();
+                                }
+                            }
+                            ajax.send("bono_vacacional=" + bono_vacacional + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorBonoVacacional");
+                        }
+
+                        function guardarValorDiasBonoFinAnio(dias_bono_fin_anio_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
+                            var dias_bfa = document.getElementById("" + dias_bono_fin_anio_prestaciones_modificar_idtabla_prestaciones + "").value;
+                            var ajax = nuevoAjax();
+                            ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                            ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+                            ajax.onreadystatechange = function() {
+                                if (ajax.readyState == 1) {}
+                                    if (ajax.readyState == 4) {
+                                        consultarPrestaciones();
+                                    }
+                                }
+                                ajax.send("dias_bfa=" + dias_bfa + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorDiasBonoFinAnio");
+                            }
+
+                            function guardarValorBonoFinAnio(bono_fin_anio_prestaciones_modificar_idtabla_prestaciones, idtabla_prestaciones, valor) {
+                                var bono_fin_anio = document.getElementById("" + bono_fin_anio_prestaciones_modificar_idtabla_prestaciones + "").value;
+                                var ajax = nuevoAjax();
+                                ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                                ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+                                ajax.onreadystatechange = function() {
+                                    if (ajax.readyState == 1) {}
+                                        if (ajax.readyState == 4) {
+                                            consultarPrestaciones();
+                                        }
+                                    }
+                                    ajax.send("bono_fin_anio=" + bono_fin_anio + "&idtabla_prestaciones=" + idtabla_prestaciones + "&ejecutar=guardarValorBonoFinAnio");
+                                }
+
+                                function ingresarAdelanto(idtabla_prestaciones, adelanto_prestaciones, adelanto_interes) {
+                                    var ajax = nuevoAjax();
+                                    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                                    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+                                    ajax.onreadystatechange = function() {
+                                        if (ajax.readyState == 1) {}
+                                            if (ajax.readyState == 4) {
+                                                consultarPrestaciones();
+                                            }
+                                        }
+                                        ajax.send("idtabla_prestaciones=" + idtabla_prestaciones + "&adelanto_prestaciones=" + adelanto_prestaciones + "&adelanto_interes=" + adelanto_interes + "&ejecutar=ingresarAdelanto");
+                                    }
+
+                                    function eliminarAdelanto(idtabla_adelanto) {
+                                        if (confirm("Seguro desea eliminar el ADELANTO DE PRESTACIONES seleccionado?")) {
+                                            var ajax = nuevoAjax();
+                                            ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+                                            ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+                                            ajax.onreadystatechange = function() {
+                                                if (ajax.readyState == 1) {}
+                                                    if (ajax.readyState == 4) {
+                                                        consultarPrestaciones();
                 //alert(ajax.responseText);
             }
         }
@@ -2874,7 +2878,7 @@ function eliminarAdelanto(idtabla_adelanto) {
 // ************************************************** VACACIONES ****************************************************
 // ********************************************************************************************************************
 // ********************************************************************************************************************
-function ingresarVacacionesVencidas() {
+/*function ingresarVacacionesVencidas() {
     var tipo = document.getElementById('tipo_vacaciones_vencidas').value;
     var periodo = document.getElementById('periodo_vacaciones_vencidas').value;
     var dias = document.getElementById('dias_vacaciones_vencidas').value;
@@ -3085,6 +3089,7 @@ function eliminarDeducciones(iddeducciones) {
         ajax.send("iddeducciones=" + iddeducciones + "&ejecutar=eliminarDeducciones");
     }
 }
+*/
 // CONSULTAR TOTALES
 function consultarTotalesGeneralesPrestaciones() {
     var idtrabajador = document.getElementById("idtrabajador").value;
@@ -3094,11 +3099,11 @@ function consultarTotalesGeneralesPrestaciones() {
     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
     ajax.onreadystatechange = function() {
         if (ajax.readyState == 1) {}
-        if (ajax.readyState == 4) {
-            var partes = ajax.responseText.split("|.|");
-            document.getElementById('total_prestaciones_acumuladas').innerHTML = partes[0];
-            document.getElementById('total_interes_acumulado').innerHTML = partes[1];
-            document.getElementById('total_prestaciones_interes_acumulado').innerHTML = partes[2];
+            if (ajax.readyState == 4) {
+                var partes = ajax.responseText.split("|.|");
+                document.getElementById('total_prestaciones_acumuladas').innerHTML = partes[0];
+                document.getElementById('total_interes_acumulado').innerHTML = partes[1];
+                document.getElementById('total_prestaciones_interes_acumulado').innerHTML = partes[2];
             //document.getElementById('total_vacaciones_acumuladas').innerHTML = partes[3];
             //document.getElementById('total_aguinaldos_acumulados').innerHTML = partes[4];
             //document.getElementById('total_deducciones').innerHTML = partes[5];
@@ -3116,17 +3121,17 @@ function importarPrestaciones() {
   var idtrabajador = document.getElementById("idtrabajador").value;
   if (archivo_importar=="") alert("¡Debe seleccionar un archivo a importar!");
   else {
+    setTimeout("document.getElementById('divCargando').style.display = 'block'",300);
     var ajax=nuevoAjax();
     ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
     ajax.onreadystatechange=function() {
         if(ajax.readyState == 1){
-            document.getElementById("divCargando").style.display = "block";
+
             document.getElementById('error_tipo').style.display='block';
             document.getElementById('error_tipo').innerHTML = "<table><tr><td style='color:#0000FF; font-weight:bold'>PROCESANDO <img src='imagenes/cargando.gif'></td></tr></table>";
         }
         if (ajax.readyState==4) {
-            alert(ajax.responseText);
             if(ajax.responseText == 'error_cedula'){
                 document.getElementById('error_tipo').style.display='block';
                 document.getElementById('error_tipo').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* La Cedula registrada en el archivo a importar no corresponde con el trabajador activo</td></tr></table>";
@@ -3141,7 +3146,88 @@ function importarPrestaciones() {
         }
     }
     ajax.send("archivo_importar="+archivo_importar+"&tipo_importar="+tipo_importar+"&idtrabajador="+idtrabajador+ "&ejecutar=importarPrestaciones");
-  }
+}
+}
+
+function importarPrestacionesAnios() {
+
+    var anio_importar = document.getElementById('anios_importar').value;
+    var idtrabajador = document.getElementById("idtrabajador").value;
+    setTimeout("document.getElementById('divCargando').style.display = 'block'",300);
+    var ajax=nuevoAjax();
+    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+    ajax.onreadystatechange=function() {
+        if(ajax.readyState == 1){
+            document.getElementById('error_tipo_anio').style.display='block';
+            document.getElementById('error_tipo_anio').innerHTML = "<table><tr><td style='color:#0000FF; font-weight:bold'>PROCESANDO <img src='imagenes/cargando.gif'></td></tr></table>";
+        }
+        if (ajax.readyState==4) {
+            document.getElementById("divCargando").style.display = "none";
+            document.getElementById('error_tipo_anio').style.display='block';
+            document.getElementById('error_tipo_anio').innerHTML = "<table><tr><td style='color:#27A000; font-weight:bold'>PROCESADO CON EXITO</td></tr></table>";
+            consultarPrestaciones();
+            consultarTotalesGeneralesPrestaciones();
+        }
+    }
+    ajax.send("anio_importar="+anio_importar+"&idtrabajador="+idtrabajador+ "&ejecutar=importarPrestacionesAnios");
+}
+
+
+function cargarSelectNominas(){
+    var idtrabajador = document.getElementById("idtrabajador").value;
+    var ajax=nuevoAjax();
+    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+    ajax.onreadystatechange=function() {
+        if (ajax.readyState==4) {
+            document.getElementById('select_tipo_nomina').innerHTML = ajax.responseText;
+        }
+    }
+    ajax.send("idtrabajador="+idtrabajador+ "&ejecutar=cargarSelectNominas");
+}
+
+function cargarSelectPeriodos(){
+    var idtrabajador  = document.getElementById("idtrabajador").value;
+    var idtipo_nomina = document.getElementById("select_tipo_nomina").value;
+    var ajax=nuevoAjax();
+    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+    ajax.onreadystatechange=function() {
+        if (ajax.readyState==4) {
+            document.getElementById('select_periodo_nomina').innerHTML = ajax.responseText;
+        }
+    }
+    ajax.send("idtrabajador="+idtrabajador+"&idtipo_nomina="+idtipo_nomina+ "&ejecutar=cargarSelectPeriodos");
+}
+
+
+function importarPrestacionesNomina() {
+    partes = document.getElementById('select_periodo_nomina').value.split("|.|");
+
+    var idtipo_nomina    = document.getElementById('select_tipo_nomina').value;
+    var idperiodo_nomina = partes[0];
+    var desde            = partes[1];
+    var idtrabajador     = document.getElementById("idtrabajador").value;
+    //setTimeout("document.getElementById('divCargando').style.display = 'block'",300);
+    var ajax=nuevoAjax();
+    ajax.open("POST", "modulos/rrhh/lib/datos_basicos_ajax.php", true);
+    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+    ajax.onreadystatechange=function() {
+        if(ajax.readyState == 1){
+            document.getElementById('error_tipo_nomina').style.display='block';
+            document.getElementById('error_tipo_nomina').innerHTML = "<table><tr><td style='color:#0000FF; font-weight:bold'>PROCESANDO <img src='imagenes/cargando.gif'></td></tr></table>";
+        }
+        if (ajax.readyState==4) {
+            //document.getElementById("divCargando").style.display = "none";
+            document.getElementById('error_tipo_nomina').style.display='block';
+            document.getElementById('error_tipo_nomina').innerHTML = "<table><tr><td style='color:#27A000; font-weight:bold'>PROCESADO CON EXITO</td></tr></table>";
+            consultarPrestaciones();
+            consultarTotalesGeneralesPrestaciones();
+        }
+    }
+    ajax.send("idtipo_nomina="+idtipo_nomina+"&idperiodo_nomina="+idperiodo_nomina+"&desde="+desde+"&idtrabajador="+idtrabajador+ "&ejecutar=importarPrestacionesNomina");
+
 }
 
 function handleFiles(archivo){

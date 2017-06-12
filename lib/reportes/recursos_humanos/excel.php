@@ -196,7 +196,9 @@ switch ($nombre) {
 					<td width='60' align='center'  style="font-size:10px; font-weight:bold">MES</td>
 					<td width='120' align='center'  style="font-size:10px; font-weight:bold">SUELDO DEL MES</td>
 					<td width='120' align='center'  style="font-size:10px; font-weight:bold">OTROS COMPLEMENTOS</td>
+                    <td width='120' align='center'  style="font-size:10px; font-weight:bold">DIAS BONO VACACIONA</td>
 					<td width='120' align='center'  style="font-size:10px; font-weight:bold">BONO VACACIONA</td>
+                    <td width='120' align='center'  style="font-size:10px; font-weight:bold">DIAS BONO FIN A&Ntilde;O</td>
 					<td width='120' align='center'  style="font-size:10px; font-weight:bold">BONO FIN A&Ntilde;O</td>
 					<td width='120' align='center'  style="font-size:10px; font-weight:bold">INGRESOS DEL MES</td>
 					<td width='60' align='center'  style="font-size:10px; font-weight:bold">A&Ntilde;OS</td>
@@ -259,7 +261,7 @@ switch ($nombre) {
             $dias_prestaciones = 0;
             $dias_adicionales  = 0;
 
-            $resultado_fecha                                = diferenciaEntreDosFechas($fecha_ingreso, $bus_consulta["anio"] . "-" . $bus_consulta["mes"] . "-01");
+            $resultado_fecha  = diferenciaEntreDosFechas($fecha_ingreso, $bus_consulta["anio"] . "-" . $bus_consulta["mes"] . "-01");
             list($anioRegistro, $mesRegistro, $diaRegistro) = explode("|.|", $resultado_fecha);
             //CONTADOR DE LOS MESES QUE VAN TRANSCURRIENDO, LO UTILIZO PARA CONTROLAR SI LA APLICACION
             //DE LA LEY ES MENSUAL, TRIMESTRAL O ANUAL
@@ -278,12 +280,6 @@ switch ($nombre) {
                 $anio_hasta = $bus_leyes["anio_hasta"];
                 $mes_hasta  = $bus_leyes["mes_hasta"];
 
-                //$mes_inicio_prentaciones = $bus_leyes["mes_inicial_abono"];
-                //ECHO " AÑO desde: ".$anio_desde." AÑO TABLA: ".$bus_consulta["anio"].'<BR>';
-                //ECHO " MES desde: ".$mes_desde." MES TABLA: ".$bus_consulta["mes"].'<BR>';
-
-                //echo $cuenta_meses."   ";
-                //ECHO " MES REGISTRO ".$mesRegistro. " MES INICIA ABONO ".$bus_leyes["mes_inicial_abono"].'<BR>';
 
                 //SI EL AÑO DE LA TABLA PRESTACIONES ESTA ENTRE LOS DOS RANGOS A ESTABLECIDOS EN LA LEY
                 if ($anio_desde < $bus_consulta["anio"] and $anio_hasta > $bus_consulta["anio"]) {
@@ -407,7 +403,7 @@ switch ($nombre) {
 
                 ?>
 				<tr  bordercolor="#000000" bgcolor='#A9D0F5'>
-	                <td align="right" class="Browse" colspan='11'>TOTALES DEL AÑO: <?=$anio_totalizar?></td>
+	                <td align="right" class="Browse" colspan='13'>TOTALES DEL AÑO: <?=$anio_totalizar?></td>
 	                <td align="right" class="Browse"><?=number_format($prestaciones_anuales, 2, ",", ".")?></td>
 					<?
                 if ($entroAdelantoPrestaciones > 0 and $entroAdelanto > 0) {
@@ -495,24 +491,41 @@ switch ($nombre) {
                 $num_adelanto = mysql_num_rows($sql_adelanto);
                 $bus_adelanto = mysql_fetch_array($sql_adelanto);
 
-                $ingreso_mensual = $bus_consulta["sueldo"] + $bus_consulta["otros_complementos"] + $bus_consulta["bono_vacacional"] + $bus_consulta["bono_fin_anio"];
+
+                //ALICUOTA AGUINALDO
+                if ($bus_consulta["dias_bono_fin_anio"] > 0){
+                    $mensual_bono_fin_anio = (((($bus_consulta["sueldo"] + $bus_consulta["otros_complementos"]) / 30)
+                                                    + ($alicuota_bv / 30))
+                                                    * $bus_consulta["dias_bono_fin_anio"] / 360) * 30;
+                }else{
+                    $mensual_bono_fin_anio = $bus_consulta["bono_fin_anio"];
+                }
+
+                $ingreso_mensual = $bus_consulta["sueldo"] + $bus_consulta["otros_complementos"]
+                                    + $mensual_bono_vacacional + $mensual_bono_fin_anio;
+
 
                 $prestaciones_del_mes = (($ingreso_mensual / 30) * ($dias_prestaciones + $dias_adicionales));
                 $prestaciones_acumuladas += $prestaciones_del_mes;
 
-                $interes_prestaciones_del_mes = (($prestaciones_del_mes * $bus_tasas["interes"]) / 100);
-
-                /*$interes_prestaciones = ($prestacion_interes_acumulado*30*$bus_tasas["interes"])/36000;
-                $interes_acumulado += ($prestacion_interes_acumulado*30*$bus_tasas["interes"])/36000;
-                 */
-
-                //CALCULO SIN CAPITALIZAR LOS INTERESES
-                $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
-                $interes_acumulado += (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                if ($capitaliza_intereses == 'Si'){
+                    //CALCULO CAPITALIZANDO LOS INTERESES
+                    if($prestacion_interes_acumulado > 0){
+                        $interes_prestaciones = ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
+                        $interes_prestaciones_del_mes = ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
+                        $interes_acumulado += ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
+                    }else{
+                        $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                        $interes_prestaciones_del_mes = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                        $interes_acumulado += (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                    }
+                }else{
+                    //CALCULO SIN CAPITALIZAR LOS INTERESES
+                    $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_acumulado += (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                }
 
                 $prestacion_interes_acumulado = ($prestaciones_acumuladas + $interes_acumulado);
-
-                $prestacion_interes_acumulado = $prestacion_interes_acumulado - ($adelanto_interes + $adelanto_prestaciones);
 
             } else {
                 $k++;
@@ -525,7 +538,9 @@ switch ($nombre) {
                 <td align="left" class="Browse"><?="(" . $bus_consulta["mes"] . ")&nbsp;" . $meses[$bus_consulta["mes"]]?></td>
                 <td align="right" class="Browse"><?=number_format($bus_consulta["sueldo"], 2, ",", ".")?></td>
                 <td align="right" class="Browse"><?=number_format($bus_consulta["otros_complementos"], 2, ",", ".")?></td>
+                <td align="right" class="Browse"><?=number_format($bus_consulta["dias_bono_vacacional"], 2, ",", ".")?></td>
                 <td align="right" class="Browse"><?=number_format($bus_consulta["bono_vacacional"], 2, ",", ".")?></td>
+                <td align="right" class="Browse"><?=number_format($bus_consulta["dias_bono_fin_anio"], 2, ",", ".")?></td>
                 <td align="right" class="Browse"><?=number_format($bus_consulta["bono_fin_anio"], 2, ",", ".")?></td>
                 <td align="right" class="Browse"><?=number_format($ingreso_mensual, 2, ",", ".")?></td>
                 <td align="center" class="Browse"><?if ($anioRegistro == '') {echo '0';} else {echo $anioRegistro;}?></td>
@@ -534,7 +549,7 @@ switch ($nombre) {
                 <td align="center" class="Browse"><?if ($mostrar == true) {echo $dias_prestaciones;} else {echo "0";}?></td>
                 <td align="center" class="Browse"><?if ($mostrar == true) {echo $dias_adicionales;} else {echo "0";}?></td>
                 <td align="center" class="Browse"><?if ($mostrar == true) {echo $dias_prestaciones + $dias_adicionales;} else {echo "0";}?></td>
-                <td align="right" class="Browse"><?="+g" . $fila . "/30*k" . $fila?></td>
+                <td align="right" class="Browse"><?="+i" . $fila . "/30*o" . $fila?></td>
                 <?/*
             <td align="right" class="Browse"><?=number_format($prestaciones_del_mes,2,",",".")?></td>
 
@@ -552,7 +567,7 @@ switch ($nombre) {
                     $imprimiot = 1;
                     $imprimioa = 1;
                     ?>
-                			<td align="right" class="Browse"><?="+m" . ($fila - $restar) . "+l" . $fila?></td>
+                			<td align="right" class="Browse"><?="+q" . ($fila - $restar) . "+p" . $fila?></td>
                 		<?
                 }
                 if ($entroTotales > 0 and $entroAdelanto > 0) {
@@ -560,28 +575,28 @@ switch ($nombre) {
                     $imprimiot = 1;
                     $imprimioa = 1;
                     ?>
-                			<td align="right" class="Browse"><?="+m" . ($fila - $restar) . "+l" . $fila . "-m" . ($fila - ($restar - 1))?></td>
+                			<td align="right" class="Browse"><?="+q" . ($fila - $restar) . "+p" . $fila . "-m" . ($fila - ($restar - 1))?></td>
                 		<?
                 }
                 if ($imprimiot == 0 and $entroTotales > 0) {
                     $restar += 1;
                     //$entroTotales=0;
                     ?>
-                			<td align="right" class="Browse"><?="+m" . ($fila - $restar) . "+l" . $fila?></td>
+                			<td align="right" class="Browse"><?="+q" . ($fila - $restar) . "+p" . $fila?></td>
                 		<?
                 }
                 if ($imprimioa == 0 and $entroAdelanto > 0) {
                     $restar += 1;
                     //$entroAdelanto=0;
                     ?>
-                			<td align="right" class="Browse"><?="+m" . ($fila - $restar) . "+l" . $fila . "-m" . ($fila - ($restar - 1))?></td>
+                			<td align="right" class="Browse"><?="+q" . ($fila - $restar) . "+p" . $fila . "-m" . ($fila - ($restar - 1))?></td>
                 		<?
                 }
 
             }
             ?>
                 <td align="right" class="Browse"><?=number_format($bus_tasas["interes"], 2, ",", ".")?> %</td>
-                <td align="right" class="Browse"><?="+m" . $fila . "*n" . $fila . "/12"?></td>
+                <td align="right" class="Browse"><?="+q" . $fila . "*r" . $fila . "/12"?></td>
                 <?
             if ($fila == 11) {
                 ?>
@@ -591,7 +606,7 @@ switch ($nombre) {
                 $restar = 1;
                 if ($entroTotales == 0 and $entroAdelanto == 0) {
                     ?>
-                			<td align="right" class="Browse"><?="+p" . ($fila - $restar) . "+o" . $fila?></td>
+                			<td align="right" class="Browse"><?="+t" . ($fila - $restar) . "+s" . $fila?></td>
                 		<?
                 }
                 if ($entroTotales > 0 and $entroAdelanto > 0) {
@@ -599,21 +614,21 @@ switch ($nombre) {
                     $entroTotales  = 0;
                     $entroAdelanto = 0;
                     ?>
-                			<td align="right" class="Browse"><?="+p" . ($fila - $restar) . "+o" . $fila . "-p" . ($fila - ($restar - 1))?></td>
+                			<td align="right" class="Browse"><?="+t" . ($fila - $restar) . "+s" . $fila . "-t" . ($fila - ($restar - 1))?></td>
                 		<?
                 }
                 if ($entroTotales > 0) {
                     $restar += 1;
                     $entroTotales = 0;
                     ?>
-                			<td align="right" class="Browse"><?="+p" . ($fila - $restar) . "+o" . $fila?></td>
+                			<td align="right" class="Browse"><?="+t" . ($fila - $restar) . "+s" . $fila?></td>
                 		<?
                 }
                 if ($entroAdelanto > 0) {
                     $restar += 1;
                     $entroAdelanto = 0;
                     ?>
-                			<td align="right" class="Browse"><?="+p" . ($fila - $restar) . "+o" . $fila . "-p" . ($fila - ($restar - 1))?></td>
+                			<td align="right" class="Browse"><?="+t" . ($fila - $restar) . "+s" . $fila . "-t" . ($fila - ($restar - 1))?></td>
                 		<?
                 }
 
@@ -626,7 +641,7 @@ switch ($nombre) {
             <td align="right" class="Browse"><?=number_format($interes_acumulado,2,",",".")?></td>
              */?>
 
-                <td align="right" class="Browse"><?="+m" . $fila . "+p" . $fila?></td>
+                <td align="right" class="Browse"><?="+q" . $fila . "+t" . $fila?></td>
 
             </tr>
 
@@ -636,7 +651,7 @@ switch ($nombre) {
 
                 ?>
                 <tr bordercolor="#000000" bgcolor='#FFFFCC' onMouseOver="setRowColor(this, 0, 'over', '#FFFFCC', '#EAFFEA', '#FFFFAA')" onMouseOut="setRowColor(this, 0, 'out', '#FFFFCC', '#EAFFEA', '#FFFFAA')" id="tr_adelanto_<?=$bus_consulta["idtabla_prestaciones"]?>" style="font-weight:bold">
-                    <td align="right" class="Browse" colspan="12" style="font-size:14px; font-weight:bold">ADELANTO</td>
+                    <td align="right" class="Browse" colspan="16" style="font-size:14px; font-weight:bold">ADELANTO</td>
                     <td align="right" class="Browse" style="color:#F00"><?=number_format($bus_adelanto["monto_prestaciones"], 2, ",", ".")?></td>
                     <td align="right" class="Browse" colspan='2'>&nbsp;</td>
                     <td align="right" class="Browse" style="color:#F00"><?=number_format($bus_adelanto["monto_interes"], 2, ",", ".")?></td>
