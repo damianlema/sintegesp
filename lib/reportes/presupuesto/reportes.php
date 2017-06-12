@@ -345,7 +345,7 @@ function busca_rango_tiempo($desde,$hasta,$mes_inicial,$mes_final,$filtro,$anio_
 					  ordinal.codigo AS codordinal,
 					  ordinal.denominacion AS nomordinal
 				FROM
-					  maestro_presupuesto
+					  maestro_presupuesto|
 					  INNER JOIN categoria_programatica ON (maestro_presupuesto.idcategoria_programatica=categoria_programatica.idcategoria_programatica)
 					  INNER JOIN unidad_ejecutora ON (categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora)
 					  INNER JOIN clasificador_presupuestario ON (maestro_presupuesto.idclasificador_presupuestario=clasificador_presupuestario.idclasificador_presupuestario)
