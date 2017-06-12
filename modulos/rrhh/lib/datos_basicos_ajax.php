@@ -4747,8 +4747,8 @@ if ($ejecutar == "cargarImportar") {
 
 
 if ($ejecutar == "importarPrestacionesAnios") {
-    $bd_anio_importar = 'gestion_mariguitar_'.$anio_importar.'abr2017';
-    $bd_anio_trabajo = 'gestion_mariguitar_'.$_SESSION['anio_fiscal'].'abr2017';
+    $bd_anio_importar = 'gestion_'.$anio_importar;
+    $bd_anio_trabajo = 'gestion_'.$_SESSION['anio_fiscal'];
 
     //ACTUALIZAR PRESTACIONES
 
