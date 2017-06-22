@@ -49,7 +49,7 @@ include("../../funciones/funciones.php");
             </div>
           <div class="col-md-2">
             <label class="texto_busqueda-label" for="inputSmall">Buscar</label>
-              <input type="text" class="form-control input-sm" size="20" placeholder="Ingrese texto a buscar" 
+              <input type="text" class="form-control input-sm" size="20" placeholder="Ingrese texto a buscar"
                       name="texto_busqueda" id="texto_busqueda">
           </div>
 
@@ -104,7 +104,7 @@ include("../../funciones/funciones.php");
               <?
               while($bus_ordenes = mysql_fetch_array($sql_ordenes)){
       		    ?>
-                <tr style="cursor:pointer" onclick="window.onUnload = window.opener.consultarOrdenPago(<?=$bus_ordenes['idorden_pago']?>),  
+                <tr style="cursor:pointer" onclick="window.onUnload = window.opener.consultarOrdenPago(<?=$bus_ordenes['idorden_pago']?>),
                                                     window.close()">
                   <td align='left'><h6><?=$bus_ordenes["numero_orden"]?></h6></td>
                   <td align='left'><h6><?=$bus_ordenes["nombre"]?></h6></td>

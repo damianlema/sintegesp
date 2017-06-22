@@ -65,33 +65,42 @@ include('templates/header.php');
 		      		<table>
 		      			<tr>
 		      				<td>
-					        	<button type="reset" class="btn btn-default btn-xs">Nuevo</button>
+					        	<button type="reset" class="btn btn-block btn-default btn-xs">Nuevo</button>
 					        </td>
 					        <td>
-					        	<button type="button" class="btn btn-primary btn-xs" id="btnContinuar"
-					        			onclick="ingresarDatosBasicos();"
+					        	<button type="button" class="btn btn-block btn-primary btn-xs" id="btnContinuar"
 					        			style="display:block;">Continuar</button>
 					        </td>
 					        <td>
 					        	<button type="button" class="btn btn-primary btn-xs" id="btnActualizar"
-					        			onclick="actualizarDatosBasicos();"
 					        			style="display:none;">Actualizar Encabezado</button>
+					        </td>
+					        <td>
+					        	<button type="button" class="btn btn-success btn-xs" id="btnProcesar"
+					        			style="display:none;">Procesar</button>
+					        </td>
+					        <td>
+					        	<button type="button" class="btn btn-danger btn-xs" id="btnAnular"
+					        			style="display:none;">Anular</button>
+					        </td>
+					        <td>
+					        	<button type="button" class="btn btn-info btn-xs" id="btnDuplicar"
+					        			style="display:none;">Duplicar</button>
 					        </td>
 					    </tr>
 			        </table>
 		      	</div>
 		      	<div class="ajax col-md-1" align="center">
-		      		<a 	href="lib/listas/lista_traslados_presupuestarios.php" target="popup"
-		      			onClick="window.open(this.href, this.target, 'width=1300,height=650,scrollbars=yes'); return false;">
-                    	<button type="button" class="btn btn-default btn-circle" title="Buscar Traslados Presupuestarios">
-                    		<i class="glyphicon glyphicon-search"></i>
-                    	</button>
-					</a>
+
+		      		<button type="button" class="btn btn-default btn-circle"
+                    		title="Buscar Traslados Presupuestarios"
+                    		data-toggle="modal" data-target="#miModalTraslado" onClick="window.open('lib/listas/listar_ordenes_pago.php?destino=ordenes_pago','orden_pago','resisable = no, scrollbars = yes, width=1300, height = 755')">
+							<i class="glyphicon glyphicon-search"></i>
+					</button>
 
 					<button type="button" class="btn btn-default btn-circle" title="Imprimir Traslados Presupuestarios">
 						<i class="glyphicon glyphicon-print"></i>
 					</button>
-
 		      	</div>
 		    </div>
 		  </fieldset>
@@ -118,8 +127,10 @@ include('templates/header.php');
 						<input type="hidden" id="idmaestro_presupuesto_disminuir">
 						<fieldset>
 							<div class="form-group" style="width: 3%;" align="center">
-								<button type="button" class="btn btn-default btn-circle" title="Buscar Partida Presupuestaria a Disminuir">
-									<i class="glyphicon glyphicon-search"></i>
+								<button type="button" class="btn btn-default btn-circle"
+			                    		title="Buscar Partida Presupuestaria a Disminuir"
+			                    		data-toggle="modal" data-target="#miModalPresupuesto">
+										<i class="glyphicon glyphicon-search"></i>
 								</button>
 							</div>
 							<div class="form-group" style="width: 15%; margin-right: -2px;">
@@ -272,11 +283,16 @@ include('templates/header.php');
 
 <?php
 
+REQUIRE($root_server.'/lib/listas/controlador/listaTrasladoPresupuestarioController.php');
+REQUIRE($root_server.'/lib/listas/lista_presupuesto_modal.php');
+
 include('templates/footer.php');
+
 
 ?>
 
 <script src="modulos/presupuesto/js/trasladoPresupuesto.Ajax.js" type="text/javascript" language="javascript"></script>
+<script src="lib/listas/js/listaTrasladoPresupuesto.js" type="text/javascript" language="javascript"></script>
 
 <script type="text/javascript">
   TablaPaginada('tabla_disminuir');

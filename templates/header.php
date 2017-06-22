@@ -12,10 +12,10 @@
     <title>SINTEGESP - Sistema Integrado de Gestión Pública</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" >
-    <link href="css/datatables.min.css" rel="stylesheet" type="text/css" >
-    <link href="css/ajustes.css" rel="stylesheet" type="text/css">
-    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css">
-    <link href="css/bootstrapValidator.css" rel="stylesheet" type="text/css">
-    <link href="css/bootstrap-modal.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="css/ajustes.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrapValidator.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-modal.css">
   </head>

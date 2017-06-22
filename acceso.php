@@ -178,7 +178,7 @@ if (!$_POST) {
         $nivel             = $resultado["nivel"];
         $login             = $resultado["login"];
 
-        $_SESSION["directorio_root"] = '/gestion_desarrollo'; //.$bus_configuracion["anio_fiscal"];
+        $_SESSION["directorio_root"] = '/gestion_git'; //.$bus_configuracion["anio_fiscal"];
         $_SESSION["nivel"]           = $resultado["nivel"];
         $_SESSION["login"]           = $login;
         $_SESSION["fh"]              = $fh;

@@ -32,11 +32,13 @@ class TrasladoPresupuesto
 				$this->numero_solicitud  = $db->real_escape_string($_POST['numero_solicitud']);
 				$this->fecha_solicitud   = date('Y-m-d', strtotime($_POST['fecha_solicitud']));
 				$this->numero_resolucion = $db->real_escape_string($_POST['numero_resolucion']);
+
 				if(empty($_POST['fecha_resolucion']) or $_POST['fecha_resolucion'] != ''){
 					$this->fecha_resolucion  = date('Y-m-d', strtotime($_POST['fecha_resolucion']));
 				}else{
 					$this->fecha_resolucion = '0000-00-00';
 				}
+
 				$this->concepto          = $db->real_escape_string($_POST['concepto']);
 
 				$sql = $db->query("SELECT * FROM traslados_presupuestarios WHERE nro_solicitud = '$this->numero_solicitud'");
@@ -83,11 +85,13 @@ class TrasladoPresupuesto
 				$this->idtraslado_presupuestario   = $_POST['idtraslado_presupuestario'];
 				$this->fecha_solicitud   = date('Y-m-d', strtotime($_POST['fecha_solicitud']));
 				$this->numero_resolucion = $db->real_escape_string($_POST['numero_resolucion']);
+
 				if(empty($_POST['fecha_resolucion']) or $_POST['fecha_resolucion'] != ''){
 					$this->fecha_resolucion  = date('Y-m-d', strtotime($_POST['fecha_resolucion']));
 				}else{
 					$this->fecha_resolucion = '0000-00-00';
 				}
+
 				$this->concepto          = $db->real_escape_string($_POST['concepto']);
 
 				$sql = $db->query("UPDATE traslados_presupuestarios

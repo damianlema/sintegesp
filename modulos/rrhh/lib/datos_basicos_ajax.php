@@ -3463,7 +3463,9 @@ if ($ejecutar == "consultarPrestaciones") {
                     <td align="right" class="Browse">&nbsp;</td>
                     <td align="right" class="Browse"><?=number_format($intereses_anuales, 2, ",", ".")?></td>
                     <td align="right" class="Browse" style="color:#F00"><?=number_format($adelantos_intereses_anuales, 2, ",", ".")?></td>
-                    <td align="right" class="Browse"><?=number_format(($prestaciones_anuales + $intereses_anuales - $adelantos_prestaciones_anuales - $adelantos_intereses_anuales), 2, ",", ".")?></td>
+                    <td align="right" class="Browse">&nbsp;
+
+                    <?php //=number_format(($prestaciones_anuales + $intereses_anuales - $adelantos_prestaciones_anuales - $adelantos_intereses_anuales), 2, ",", ".")?></td>
                     <td width="4%" align="center" class="Browse">&nbsp;</td>
                 </tr>
 
@@ -3523,9 +3525,9 @@ if ($ejecutar == "consultarPrestaciones") {
             if ($capitaliza_intereses == 'Si'){
                 //CALCULO CAPITALIZANDO LOS INTERESES
                 if($prestacion_interes_acumulado > 0){
-                    $interes_prestaciones = ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
-                    $interes_prestaciones_del_mes = ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
-                    $interes_acumulado += ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_prestaciones = ((($prestaciones_acumuladas + $interes_acumulado) * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_prestaciones_del_mes = ((($prestaciones_acumuladas + $interes_acumulado) * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_acumulado += ((($prestaciones_acumuladas + $interes_acumulado) * $bus_tasas["interes"]) / 100) / 12;
                 }else{
                     $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
                     $interes_prestaciones_del_mes = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
@@ -4381,9 +4383,9 @@ if ($ejecutar == "consultarTotalesGeneralesPrestaciones") {
             if ($capitaliza_intereses == 'Si'){
                 //CALCULO CAPITALIZANDO LOS INTERESES
                 if($prestacion_interes_acumulado > 0){
-                    $interes_prestaciones = ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
-                    $interes_prestaciones_del_mes = ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
-                    $interes_acumulado += ((($prestacion_interes_acumulado + $prestaciones_acumuladas) * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_prestaciones = ((($prestaciones_acumuladas + $interes_acumulado) * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_prestaciones_del_mes = ((($prestaciones_acumuladas + $interes_acumulado) * $bus_tasas["interes"]) / 100) / 12;
+                    $interes_acumulado += ((($prestaciones_acumuladas + $interes_acumulado) * $bus_tasas["interes"]) / 100) / 12;
                 }else{
                     $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
                     $interes_prestaciones_del_mes = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
@@ -4394,7 +4396,6 @@ if ($ejecutar == "consultarTotalesGeneralesPrestaciones") {
                 $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
                 $interes_acumulado += (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
             }
-
             $prestacion_interes_acumulado = ($prestaciones_acumuladas + $interes_acumulado);
 
         } else {
@@ -4839,7 +4840,7 @@ if ($ejecutar == "cargarSelectNominas") {
                                 AND relacion_tipo_nomina_trabajador.activa = '1'")or die(mysql_error());
     while($reg_nominas = mysql_fetch_array($sql_nominas)){
       ?>
-      <option value="<?=$reg_nominas['idtipo_nomina']?>" onclick="cargarSelectPeriodos();"><?=substr($reg_nominas["titulo_nomina"],0,40)?></option>
+      <option value="<?=$reg_nominas['idtipo_nomina']?>" onclick="cargarSelectPeriodos();"><?=substr($reg_nominas["titulo_nomina"],0,37)?></option>
       <?php
     }
 

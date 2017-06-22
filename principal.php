@@ -65,8 +65,8 @@
 <?
 include "conf/conex.php";
 include "funciones/funciones.php";
-$root_server = $_SERVER['DOCUMENT_ROOT'].$_SESSION["directorio_root"];
-require($root_server."/conf/class.Conexion.php");
+//$root_server = $_SERVER['DOCUMENT_ROOT'].$_SESSION["directorio_root"];
+//require($root_server."/conf/class.Conexion.php");
 $conexion_db = conectarse();
 
 //$login=$_SESSION['login'];  // IDENTIFICA EL USUARIO ACTIVO

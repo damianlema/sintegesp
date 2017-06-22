@@ -279,7 +279,7 @@ switch ($nombre) {
                 $mes_desde  = $bus_leyes["mes_desde"];
                 $anio_hasta = $bus_leyes["anio_hasta"];
                 $mes_hasta  = $bus_leyes["mes_hasta"];
-
+                $capitaliza_intereses = $bus_leyes["capitaliza_intereses"];
 
                 //SI EL AÑO DE LA TABLA PRESTACIONES ESTA ENTRE LOS DOS RANGOS A ESTABLECIDOS EN LA LEY
                 if ($anio_desde < $bus_consulta["anio"] and $anio_hasta > $bus_consulta["anio"]) {
@@ -399,11 +399,11 @@ switch ($nombre) {
             }
             $restar = 1;
 
-            if ($bus_consulta["anio"] != $anio_totalizar and $anioRegistro > 0 and $mesRegistro == 0) {
+            if ($bus_consulta["anio"] != $anio_totalizar and $anio_totalizar > 0 and $anioRegistro >= 0 and $mesRegistro >= 0) {
 
                 ?>
 				<tr  bordercolor="#000000" bgcolor='#A9D0F5'>
-	                <td align="right" class="Browse" colspan='13'>TOTALES DEL AÑO: <?=$anio_totalizar?></td>
+	                <td align="right" class="Browse" colspan='15'>TOTALES DEL AÑO: <?=$anio_totalizar?></td>
 	                <td align="right" class="Browse"><?=number_format($prestaciones_anuales, 2, ",", ".")?></td>
 					<?
                 if ($entroAdelantoPrestaciones > 0 and $entroAdelanto > 0) {
@@ -459,7 +459,8 @@ switch ($nombre) {
                 <td align="right" class="Browse"><?=number_format(($prestaciones_anuales+$intereses_anuales-$adelantos_prestaciones_anuales-$adelantos_intereses_anuales),2,",",".")?></td>
                  */?>
 
-	                <td align="right" class="Browse"><?="+m" . ($fila) . "+p" . ($fila)?></td>
+	                <td align="right" class="Browse">&nbsp;</td>
+                    <?php //"+p" . ($fila) . "+s" . ($fila)?>
 
 	            </tr>
 
@@ -491,6 +492,15 @@ switch ($nombre) {
                 $num_adelanto = mysql_num_rows($sql_adelanto);
                 $bus_adelanto = mysql_fetch_array($sql_adelanto);
 
+                //ALICUOTA BONO VACACIONAL
+                $alicuota_bv = 0;
+                if ($bus_consulta["dias_bono_vacacional"] > 0){
+                    $mensual_bono_vacacional = ((($bus_consulta["sueldo"] + $bus_consulta["otros_complementos"]) / 30) *
+                                                    $bus_consulta["dias_bono_vacacional"] / 360) * 30;
+                    $alicuota_bv = $mensual_bono_vacacional;
+                }else{
+                    $mensual_bono_vacacional = $bus_consulta["bono_vacacional"];
+                }
 
                 //ALICUOTA AGUINALDO
                 if ($bus_consulta["dias_bono_fin_anio"] > 0){
@@ -575,7 +585,7 @@ switch ($nombre) {
                     $imprimiot = 1;
                     $imprimioa = 1;
                     ?>
-                			<td align="right" class="Browse"><?="+q" . ($fila - $restar) . "+p" . $fila . "-m" . ($fila - ($restar - 1))?></td>
+                			<td align="right" class="Browse"><?="+q" . ($fila - $restar) . "+p" . $fila . "-q" . ($fila - ($restar - 1))?></td>
                 		<?
                 }
                 if ($imprimiot == 0 and $entroTotales > 0) {
@@ -589,15 +599,55 @@ switch ($nombre) {
                     $restar += 1;
                     //$entroAdelanto=0;
                     ?>
-                			<td align="right" class="Browse"><?="+q" . ($fila - $restar) . "+p" . $fila . "-m" . ($fila - ($restar - 1))?></td>
+                			<td align="right" class="Browse"><?="+q" . ($fila - $restar) . "+p" . $fila . "-q" . ($fila - ($restar - 1))?></td>
                 		<?
                 }
 
             }
             ?>
                 <td align="right" class="Browse"><?=number_format($bus_tasas["interes"], 2, ",", ".")?> %</td>
+            <?php
+            if ($capitaliza_intereses == 'Si'){
+                if ($fila == 11) {
+                ?>
+                    <td align="right" class="Browse"><?=0?></td>
+                    <?
+                } else {
+                    if ($entroTotales == 0 and $entroAdelanto == 0) {
+                        $imprimiot = 1;
+                        $imprimioa = 1;
+                        ?>
+                            <td align="right" class="Browse"><?="+(q" . $fila . "+t". ($fila - $restar) .")*r" . $fila . "/12"?></td>
+                            <?
+                    }
+                    if ($entroTotales > 0 and $entroAdelanto > 0) {
+                        $restar += 2;
+                        $imprimiot = 1;
+                        $imprimioa = 1;
+                        ?>
+                            <td align="right" class="Browse"><?="+(q" . ($fila) . "+t". ($fila - $restar + 2) ."-t". ($fila - $restar + 3) .")*r" . $fila . "/12"?></td>
+                            <?
+                    }
+                    if ($imprimiot == 0 and $entroTotales > 0) {
+                        $restar += 1;
+                        //$entroTotales=0;
+                        ?>
+                            <td align="right" class="Browse"><?="+(q" . $fila . "+t". ($fila - $restar + 1) .")*r" . $fila . "/12"?></td>
+                            <?
+                    }
+                    if ($imprimioa == 0 and $entroAdelanto > 0) {
+                        $restar += 1;
+                        //$entroAdelanto=0;
+                        ?>
+                            <td align="right" class="Browse"><?="+(q" . ($fila) . "+t". ($fila - $restar + 1) ."-t". ($fila - $restar + 2) .")*r" . $fila . "/12"?></td>
+                            <?
+                    }
+                }
+            }else{
+            ?>
                 <td align="right" class="Browse"><?="+q" . $fila . "*r" . $fila . "/12"?></td>
-                <?
+            <?php
+            }
             if ($fila == 11) {
                 ?>
                 	<td align="right" class="Browse"><?=0?></td>
@@ -655,7 +705,9 @@ switch ($nombre) {
                     <td align="right" class="Browse" style="color:#F00"><?=number_format($bus_adelanto["monto_prestaciones"], 2, ",", ".")?></td>
                     <td align="right" class="Browse" colspan='2'>&nbsp;</td>
                     <td align="right" class="Browse" style="color:#F00"><?=number_format($bus_adelanto["monto_interes"], 2, ",", ".")?></td>
-                    <td align="right" class="Browse" style="color:#F00"><?=number_format(($bus_adelanto["monto_prestaciones"] + $bus_adelanto["monto_interes"]), 2, ",", ".")?></td>
+                    <td align="right" class="Browse" style="color:#F00">&nbsp;</td>
+
+                    <?php //number_format(($bus_adelanto["monto_prestaciones"] + $bus_adelanto["monto_interes"]), 2, ",", ".")?>
 
                 </tr>
 				<?
@@ -831,15 +883,8 @@ switch ($nombre) {
                 $dias_adicionales  = 0;
                 $entra             = 'no';
 
-                //VALIDO QUE SE EJECUTE HASTA EL AÑO Y MES SELECCIONADO
-                /*if($bus_consulta["anio"] < $anio_prestaciones ){
-                $entra = 'si';
-                }elseif($bus_consulta["anio"] == $anio_prestaciones && $bus_consulta["mes"] <= $mes_prestaciones){
-                $entra = 'si';
-                }
 
-                if($entra == 'si'){*/
-                $resultado_fecha                                = diferenciaEntreDosFechas($fecha_ingreso, $bus_consulta["anio"] . "-" . $bus_consulta["mes"] . "-01");
+                $resultado_fecha  = diferenciaEntreDosFechas($fecha_ingreso, $bus_consulta["anio"] . "-" . $bus_consulta["mes"] . "-01");
                 list($anioRegistro, $mesRegistro, $diaRegistro) = explode("|.|", $resultado_fecha);
                 //CONTADOR DE LOS MESES QUE VAN TRANSCURRIENDO, LO UTILIZO PARA CONTROLAR SI LA APLICACION
                 //DE LA LEY ES MENSUAL, TRIMESTRAL O ANUAL
@@ -857,13 +902,8 @@ switch ($nombre) {
                     $mes_desde  = $bus_leyes["mes_desde"];
                     $anio_hasta = $bus_leyes["anio_hasta"];
                     $mes_hasta  = $bus_leyes["mes_hasta"];
+                    $capitaliza_intereses = $bus_leyes["capitaliza_intereses"];
 
-                    //$mes_inicio_prentaciones = $bus_leyes["mes_inicial_abono"];
-                    //ECHO " AÑO desde: ".$anio_desde." AÑO TABLA: ".$bus_consulta["anio"].'<BR>';
-                    //ECHO " MES desde: ".$mes_desde." MES TABLA: ".$bus_consulta["mes"].'<BR>';
-
-                    //echo $cuenta_meses."   ";
-                    //ECHO " MES REGISTRO ".$mesRegistro. " MES INICIA ABONO ".$bus_leyes["mes_inicial_abono"].'<BR>';
 
                     //SI EL AÑO DE LA TABLA PRESTACIONES ESTA ENTRE LOS DOS RANGOS A ESTABLECIDOS EN LA LEY
                     if ($anio_desde < $bus_consulta["anio"] and $anio_hasta > $bus_consulta["anio"]) {
@@ -953,9 +993,7 @@ switch ($nombre) {
                     }
 
                     if ($anio_desde == $bus_consulta["anio"] and $mes_desde <= $bus_consulta["mes"]) {
-                        //ECHO " AÑO desde: ".$anio_desde." AÑO TABLA: ".$bus_consulta["anio"].'<BR>';
-                        //ECHO " MES desde: ".$mes_desde." MES TABLA: ".$bus_consulta["mes"].'<BR>';
-                        //ECHO " MES REGISTRO ".$mesRegistro. " MES INICIA ABONO ".$bus_leyes["mes_inicial_abono"].'<BR>';
+
                         $ley = $bus_leyes["siglas"];
                         if (($anioIngreso >= $anio_desde and ($mesRegistro > (int) $bus_leyes["mes_inicial_abono"] and $anioRegistro == 0)) or ($anioRegistro > 0)) {
                             if ($bus_leyes["tipo_abono"] == 'mensual' and $cuenta_meses == 1) {
@@ -997,28 +1035,55 @@ switch ($nombre) {
                     $sql_tasas    = mysql_query("select * from tabla_intereses where mes = '" . $bus_consulta["mes"] . "' and anio = '" . $bus_consulta["anio"] . "'");
                     $bus_tasas    = mysql_fetch_array($sql_tasas);
                     $sql_adelanto = mysql_query("select * from tabla_adelantos
-															where
-																idtabla_prestaciones = '" . $bus_consulta["idtabla_prestaciones"] . "'");
+                                                        where
+                                                            idtabla_prestaciones = '" . $bus_consulta["idtabla_prestaciones"] . "'");
                     $num_adelanto = mysql_num_rows($sql_adelanto);
                     $bus_adelanto = mysql_fetch_array($sql_adelanto);
 
-                    $ingreso_mensual = $bus_consulta["sueldo"] + $bus_consulta["otros_complementos"] + $bus_consulta["bono_vacacional"] + $bus_consulta["bono_fin_anio"];
+
+                    //ALICUOTA BONO VACACIONAL
+                    $alicuota_bv = 0;
+                    if ($bus_consulta["dias_bono_vacacional"] > 0){
+                        $mensual_bono_vacacional = ((($bus_consulta["sueldo"] + $bus_consulta["otros_complementos"]) / 30) *
+                                                        $bus_consulta["dias_bono_vacacional"] / 360) * 30;
+                        $alicuota_bv = $mensual_bono_vacacional;
+                    }else{
+                        $mensual_bono_vacacional = $bus_consulta["bono_vacacional"];
+                    }
+
+                    //ALICUOTA AGUINALDO
+                    if ($bus_consulta["dias_bono_fin_anio"] > 0){
+                        $mensual_bono_fin_anio = (((($bus_consulta["sueldo"] + $bus_consulta["otros_complementos"]) / 30)
+                                                        + ($alicuota_bv / 30))
+                                                        * $bus_consulta["dias_bono_fin_anio"] / 360) * 30;
+                    }else{
+                        $mensual_bono_fin_anio = $bus_consulta["bono_fin_anio"];
+                    }
+
+                    $ingreso_mensual = $bus_consulta["sueldo"] + $bus_consulta["otros_complementos"]
+                                        + $mensual_bono_vacacional + $mensual_bono_fin_anio;
+
 
                     $prestaciones_del_mes = (($ingreso_mensual / 30) * ($dias_prestaciones + $dias_adicionales));
                     $prestaciones_acumuladas += $prestaciones_del_mes;
 
-                    $interes_prestaciones_del_mes = (($prestaciones_del_mes * $bus_tasas["interes"]) / 100) / 12;
-
-                    $prestacion_interes_acumulado = ($prestaciones_del_mes + $prestacion_interes_acumulado + $interes_prestaciones);
-
-                    $prestacion_interes_acumulado = $prestacion_interes_acumulado - ($adelanto_interes + $adelanto_prestaciones);
-
-                    //$interes_prestaciones = ($prestacion_interes_acumulado*30*$bus_tasas["interes"])/36000;
-                    //$interes_acumulado += ($prestacion_interes_acumulado*30*$bus_tasas["interes"])/36000;
-
-                    //CALCULO SIN CAPITALIZAR LOS INTERESES
-                    $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
-                    $interes_acumulado += (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                    if ($capitaliza_intereses == 'Si'){
+                        //CALCULO CAPITALIZANDO LOS INTERESES
+                        if($prestacion_interes_acumulado > 0){
+                            $interes_prestaciones = ((($prestaciones_acumuladas + $interes_acumulado) * $bus_tasas["interes"]) / 100) / 12;
+                            $interes_prestaciones_del_mes = ((($prestaciones_acumuladas + $interes_acumulado) * $bus_tasas["interes"]) / 100) / 12;
+                            $interes_acumulado += ((($prestaciones_acumuladas + $interes_acumulado) * $bus_tasas["interes"]) / 100) / 12;
+                        }else{
+                            $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                            $interes_prestaciones_del_mes = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                            $interes_acumulado += (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                        }
+                    }else{
+                        //CALCULO SIN CAPITALIZAR LOS INTERESES
+                        $interes_prestaciones = (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                        $interes_acumulado += (($prestaciones_acumuladas * $bus_tasas["interes"]) / 100) / 12;
+                    }
+                    $prestacion_interes_acumulado = ($prestaciones_acumuladas + $interes_acumulado);
 
                 } else {
                     $k++;
