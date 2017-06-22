@@ -28,12 +28,12 @@
     <tr>
         <td id="detalle_configuracion_reportes" colspan="2"></td>
     </tr>
-    <tr>    
+    <tr>
         <td colspan="2" align="center">
-          <input type="submit" 
-          			name="botonCambiarReportes" 
-                    id="botonCambiarReportes" 
-                    value="Guardar Datos" 
+          <input type="submit"
+          			name="botonCambiarReportes"
+                    id="botonCambiarReportes"
+                    value="Guardar Datos"
                     onClick="procesarConfiguracion()"
                     class="button"/>        </td>
     </tr>

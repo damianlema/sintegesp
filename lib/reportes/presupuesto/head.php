@@ -1895,14 +1895,14 @@ function mensual_onapre($pdf, $anio_fiscal, $nom_fuente_financiamiento, $nom_tip
 
 	if ($mes == "01"){
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
-		$pdf->SetWidths(array(20, 128, 25, 25, 25, 25, 25, 25, 25, 25));
+		$pdf->SetWidths(array(20, 88, 30, 30, 30, 30, 30, 30, 30, 30));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTO INICIAL','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
 	}
 	else {
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
-		$pdf->SetWidths(array(20, 103, 25, 25, 25, 25, 25, 25, 25, 25, 25));
+		$pdf->SetWidths(array(20, 58, 30, 30, 30, 30, 30, 30, 30, 30, 30));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTARIA ANTERIOR','FINANCIERA ANTERIOR','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
@@ -1947,14 +1947,14 @@ function trimestral_onapre($pdf, $anio_fiscal, $nom_fuente_financiamiento, $nom_
 
 	if ($mes == "01"){
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
-		$pdf->SetWidths(array(20, 128, 25, 25, 25, 25, 25, 25, 25, 25));
+		$pdf->SetWidths(array(20, 112, 27, 27, 27, 27, 27, 27, 27, 27));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTO INICIAL','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
 	}
 	else {
 		$pdf->SetAligns(array('C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C', 'C'));
-		$pdf->SetWidths(array(20, 103, 25, 25, 25, 25, 25, 25, 25, 25, 25));
+		$pdf->SetWidths(array(20, 85, 27, 27, 27, 27, 27, 27, 27, 27, 27));
 		$pdf->Row(array('PARTIDA','DENOMINACION','PRESUPUESTARIA ANTERIOR','FINANCIERA ANTERIOR','MODIFICACION','PRESUPUESTO AJUSTADO','COMPROMETIDO', 'CAUSADO', 'DISPONIBILIDAD PRESUPUESTARIA','PAGADO','DISPONIBILIDAD FINANCIERA'));
 		$pdf->SetAligns(array('C', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'));
 		$pdf->SetHeight(array(4));
