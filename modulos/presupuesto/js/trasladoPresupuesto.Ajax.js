@@ -15,9 +15,6 @@ $(document).ready(function() {
 
 	$("#btnContinuar").click(function() {
 
-
-//console.log("aa "+concepto);
-
 		//Obtenemos el valor de los campos
 
 		var numero_solicitud  = $("input#numeroSolicitud").val();

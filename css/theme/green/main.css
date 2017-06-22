@@ -1,4 +1,4 @@
-* { 
+* {
 	font-family: Verdana, Tahoma, Arial, Helvetica, geneva, sans-serif;
 	color: black;
 }
@@ -8,7 +8,7 @@ body {
 	font-size: 10px;
 	margin:0px;
 	overflow:auto;
-	
+
 }
 
 
@@ -18,8 +18,8 @@ body {
 h4.serverinfo {
   padding: 2px;
   padding-left: 5px;
-  border: 0; 
-  border-bottom: 1px groove; 
+  border: 0;
+  border-bottom: 1px groove;
   font-weight : normal;
   margin-bottom : 20px;
 }
@@ -29,7 +29,7 @@ table.home, table.Insert, table.Index {
   background: #DDDDDD;
   text-align: center;
 }
-table.home { 
+table.home {
   /*width: 50%;*/
 }
 
@@ -43,7 +43,7 @@ td.BrowseSelect {
 table.home, table.Browse, table.Insert, table.Index, table.PrivGroupe, table.PrivUser, table.menu {
 	background: #EFEFFB;
 	border:1px solid gray;
- 	
+
 }
 table.PrivGroupe, table.PrivUser {
   margin : 5px;
@@ -54,9 +54,9 @@ thead td.PrivUser {
 caption a.Browse { font-size: 12px; padding-top: 5px; }
 div.Rights { padding:5px; border:0; }
 div.Rights div {
-  font-size: 13px;   
+  font-size: 13px;
 }
-table.query { 
+table.query {
   border:1px solid gray;
   border-bottom:1px solid white;
   border-right:1px solid white;
@@ -90,16 +90,16 @@ table.BrowseOption {
   width: 72%;
   text-align: left;
 }
-div.TableOptions { 
+div.TableOptions {
   width: 100%;
-  text-align: center; 
+  text-align: center;
 }
-div.Indexes { 
-  width: 60%; 
-  margin: 5px; 
-  border: 0; 
-  text-align: center; 
-  
+div.Indexes {
+  width: 60%;
+  margin: 5px;
+  border: 0;
+  text-align: center;
+
 }
 
 td.DisplayQuery {
@@ -112,7 +112,7 @@ td {
 td.Entrada {
 	border:1px solid gray;
 	border:1px solid gray;
- 	/*filter:progid:DXImageTransform.Microsoft.Shadow(color=#BDC3BD, Direction=135, Strength=2); 
+ 	/*filter:progid:DXImageTransform.Microsoft.Shadow(color=#BDC3BD, Direction=135, Strength=2);
 	/*border-bottom:1px solid gray;
 	border-right:1px solid gray; */
 	font-size: 13px;
@@ -120,32 +120,32 @@ td.Entrada {
 h2 {
 	background-color: #DBEEE0;
 	background-image: url(pics/bg_title.png); background-repeat: repeat-x;
-	border-bottom: 1px solid #505550; 
+	border-bottom: 1px solid #505550;
 	padding: 4px;
-	 
+
 	font-family: Verdana, Tahoma, sans-serif, Helvetica, Arial;
 	font-size: 13px;
 	margin: 0;
 }
-td.boxtitlespace { 
+td.boxtitlespace {
 	background: #7FC08F;
-	background-image: url(pics/bg_th.png); 
+	background-image: url(pics/bg_th.png);
 	background-repeat: repeat-x;
   /*width: 2;*/
 }
 td.space {
   /*width: 2;*/
-  border-right: 1px solid #FAFFFA; 
+  border-right: 1px solid #FAFFFA;
 }
 h4 {
-	 
+
 	font-family: Verdana, Tahoma, sans-serif, Helvetica, Arial;
 	font-size: 13px;
 	margin: 0;
 	margin-bottom: 5px;
 }
 h3 {
-	 
+
 	font-family: Verdana, Tahoma, sans-serif, Helvetica, Arial;
 	font-size: 16px;
 	margin: 0;
@@ -154,28 +154,28 @@ h3 {
 thead, .tabproptitle, td.boxtitle {
 	color:#FFFFFF;
 	font-weight:bold;
-	font-size: 12px; 
-	  
+	font-size: 12px;
+
 	height: 20px;
 	padding: 2px;
 	padding-left: 4px;
 	background: #7FC08F;
-	background-image: url(pics/bg_th.PNG); 
+	background-image: url(pics/bg_th.PNG);
 	background-repeat: repeat-x;
 }
 tfoot {
 	color: #2F4F3F;
-	 
-	border-left: 1px solid #DFE7DF; border-right: 1px solid #446644; 
+
+	border-left: 1px solid #DFE7DF; border-right: 1px solid #446644;
 	background: #7FC08F;
 }
 td.Browse, td.PrivUser, td.PrivGroupe  {
 	font-size: 11px;
-	border-bottom: 1px solid #505550; border-right: 1px solid #556655; 
+	border-bottom: 1px solid #505550; border-right: 1px solid #556655;
 	padding-left: 3px; padding-right: 3px;
 }
 td.tabproptitle, td.tabprop {
-	border-bottom: 1px solid #505550; border-right: 1px solid #556655; 
+	border-bottom: 1px solid #505550; border-right: 1px solid #556655;
 }
 div.Browseimagenes {
   margin-top:1px;
@@ -184,7 +184,7 @@ tr.navbarre {
 	color:#2F4F3F;
 	height:20px;
 	background: #7FC08F;
-	background-image: url(pics/bg_th.png); 
+	background-image: url(pics/bg_th.png);
 	background-repeat: repeat-x;
 }
 tr.navbarre>td {
@@ -193,13 +193,13 @@ tr.navbarre>td {
 fieldset {
 	border-style: groove;
 	font-size: 12px;
-	padding: 10px; 
+	padding: 10px;
 }
 fieldset>table {
 	margin-bottom: 10px;
 }
 legend {
-	 
+
 	font-size: 12px;
 }
 input.button {
@@ -231,7 +231,7 @@ input.text, input.file, input.password {
   font-size:10px;
   border: #999999 1px solid;
   /*border-top:  #668066 1px solid;
-  border-left: #668066 1px solid;  
+  border-left: #668066 1px solid;
   background-image: url(pics/input.png); background-repeat : repeat-x;
   background-position: top left;*/
 }
@@ -247,7 +247,7 @@ input[type="text"] {
   font-size:10px;
   border: #999999 1px solid;
   /*border-top:  #668066 1px solid;
-  border-left: #668066 1px solid; 
+  border-left: #668066 1px solid;
   background-image: url(pics/input.png); background-repeat : repeat-x;
   background-position: top left; */
 }
@@ -257,7 +257,7 @@ input[type="password"] {
   font-size:10px;
   border: #999999 1px solid;
   /*border-top:  #668066 1px solid;
-  border-left: #668066 1px solid; 
+  border-left: #668066 1px solid;
   background-image: url(pics/input.png); background-repeat : repeat-x;
   background-position: top left; */
 }
@@ -267,7 +267,7 @@ textarea {
   font-size:11px;
   border: #999999 1px solid;
   /*border-top:  #668066 1px solid;
-  border-left: #668066 1px solid;  
+  border-left: #668066 1px solid;
   background-image: url(pics/input.png); background-repeat : repeat-x;
   background-position: top left;*/
 }
@@ -278,7 +278,7 @@ select {
 table.sql {
   background-color: #DDEEDD;
 }
-table.viewProp { 
+table.viewProp {
   background-color: #DDEEDD;
 }
 td.viewPropTitle {
@@ -306,7 +306,7 @@ table.Tip {
 th.TipTitle {
  	font-size : 11px;
 	background-image: url(pics/bg_title.png); background-repeat: repeat-x;
-	background-color:#9CEBAE; 	
+	background-color:#9CEBAE;
 }
 td.TipBody {
  	font-size : 10px;
@@ -400,9 +400,9 @@ img {
         background:  url(menu11.gif) 0 -32px;
         padding: 8px 0 0 27px;
         }
-		
-		
-		
+
+
+
 
 
 

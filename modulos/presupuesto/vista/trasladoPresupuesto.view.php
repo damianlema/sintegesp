@@ -94,7 +94,7 @@ include('templates/header.php');
 
 		      		<button type="button" class="btn btn-default btn-circle"
                     		title="Buscar Traslados Presupuestarios"
-                    		data-toggle="modal" data-target="#miModalTraslado" onClick="window.open('lib/listas/listar_ordenes_pago.php?destino=ordenes_pago','orden_pago','resisable = no, scrollbars = yes, width=1300, height = 755')">
+                    		data-toggle="modal" data-target="#miModalTraslado">
 							<i class="glyphicon glyphicon-search"></i>
 					</button>
 
@@ -107,7 +107,7 @@ include('templates/header.php');
 		</form>
 	</div>
 </div>
-<div class="container-fluid" id="divTablas" style="display: none">
+<div class="container-fluid" id="divTablas" style="display: block">
 	<ul class="nav nav-tabs" style="margin-top: -14px">
 	  <li class="active">
 	  	<a href="#disminuir" data-toggle="tab" aria-expanded="true">Disminuir</a>
@@ -283,7 +283,7 @@ include('templates/header.php');
 
 <?php
 
-REQUIRE($root_server.'/lib/listas/controlador/listaTrasladoPresupuestarioController.php');
+REQUIRE($root_server.'/lib/listas/controlador/listaTrasladoPresupuestario.Controller.php');
 REQUIRE($root_server.'/lib/listas/lista_presupuesto_modal.php');
 
 include('templates/footer.php');
@@ -297,6 +297,7 @@ include('templates/footer.php');
 <script type="text/javascript">
   TablaPaginada('tabla_disminuir');
   TablaPaginada('tabla_aumentar');
+  TablaPaginada('modal_traslados_presupuestarios');
 </script>
 
 <script type="text/javascript">
