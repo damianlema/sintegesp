@@ -60,32 +60,32 @@ include('templates/header.php');
 		    </div>
 		    <div class="row">
 		      	<div class="col-md-1" align="center">
+		      		<label class="control-label" style="margin-top: 10px; margin-bottom: -3px;">
+						<small><strong id="estado" >En Elaboración</strong></small>
+					</label>
 		      	</div>
 		      	<div class="col-md-10" align="center">
 		      		<table>
 		      			<tr>
 		      				<td>
-					        	<button type="reset" class="btn btn-block btn-default btn-xs">Nuevo</button>
-					        </td>
-					        <td>
 					        	<button type="button" class="btn btn-block btn-primary btn-xs" id="btnContinuar"
-					        			style="display:block;">Continuar</button>
+					        			style="display:block; width: 160px;">Continuar</button>
 					        </td>
 					        <td>
-					        	<button type="button" class="btn btn-primary btn-xs" id="btnActualizar"
-					        			style="display:none;">Actualizar Encabezado</button>
+					        	<button type="button" class="btn btn-block btn-primary btn-xs" id="btnActualizar"
+					        			style="display:none; width: 160px;">Actualizar Encabezado</button>
 					        </td>
 					        <td>
-					        	<button type="button" class="btn btn-success btn-xs" id="btnProcesar"
-					        			style="display:none;">Procesar</button>
+					        	<button type="button" class="btn btn-block btn-success btn-xs" id="btnProcesar"
+					        			style="display:none; width: 160px;">Procesar</button>
 					        </td>
 					        <td>
-					        	<button type="button" class="btn btn-danger btn-xs" id="btnAnular"
-					        			style="display:none;">Anular</button>
+					        	<button type="button" class="btn btn-block btn-danger btn-xs" id="btnAnular"
+					        			style="display:none; width: 160px;">Anular</button>
 					        </td>
 					        <td>
-					        	<button type="button" class="btn btn-info btn-xs" id="btnDuplicar"
-					        			style="display:none;">Duplicar</button>
+					        	<button type="button" class="btn btn-block btn-info btn-xs" id="btnDuplicar"
+					        			style="display:none; width: 160px;">Duplicar</button>
 					        </td>
 					    </tr>
 			        </table>
@@ -127,9 +127,10 @@ include('templates/header.php');
 						<input type="hidden" id="idmaestro_presupuesto_disminuir">
 						<fieldset>
 							<div class="form-group" style="width: 3%;" align="center">
-								<button type="button" class="btn btn-default btn-circle"
+								<button type="button" class="btn btn-default btn-circle" id="btnBuscarPartidaDisminuir"
 			                    		title="Buscar Partida Presupuestaria a Disminuir"
-			                    		data-toggle="modal" data-target="#miModalPresupuesto">
+			                    		style="display: block;"
+			                    		onClick="window.open('lib/listas/vista/listaPresupuesto.php?destino=disminucion_traslado','creditos_adicionales','resisable = no, scrollbars = yes, width=1200, height = 600')">
 										<i class="glyphicon glyphicon-search"></i>
 								</button>
 							</div>
@@ -156,7 +157,8 @@ include('templates/header.php');
 									onblur="formatoNumero('monto_disminuir','monto_disminuir_oculto');">
 							</div>
 							<div class="form-group" style="width: 2%;">
-								<button type="button" class="btn btn-default btn-circle" title="Registrar Partida a Disminuir">
+								<button type="button" class="btn btn-default btn-circle" id="btnCargarPartidaDisminuir"
+										title="Registrar Partida a Disminuir" style="display: block;">
 									<i class="glyphicon glyphicon-ok"></i>
 								</button>
 							</div>
@@ -208,7 +210,8 @@ include('templates/header.php');
 						<input type="hidden" id="idmaestro_presupuesto_aumentar">
 						<fieldset>
 							<div class="form-group" style="width: 3%;" align="center">
-								<button type="button" class="btn btn-default btn-circle" title="Buscar Partida Presupuestaria a Aumentar">
+								<button type="button" class="btn btn-default btn-circle" id="btnBuscarPartidaAumentar"
+										title="Buscar Partida Presupuestaria a Aumentar" style="display: block;">
 									<i class="glyphicon glyphicon-search"></i>
 								</button>
 							</div>
@@ -235,7 +238,8 @@ include('templates/header.php');
 									onblur="formatoNumero('monto_aumentar','monto_aumentar_oculto');">
 							</div>
 							<div class="form-group" style="width: 2%;">
-								<button type="button" class="btn btn-default btn-circle" title="Registrar Partida a Aumentar">
+								<button type="button" class="btn btn-default btn-circle" id="btnCargarPartidaAumentar"
+										title="Registrar Partida a Aumentar" style="display: block;">
 									<i class="glyphicon glyphicon-ok"></i>
 								</button>
 							</div>
@@ -283,75 +287,20 @@ include('templates/header.php');
 
 <?php
 
-REQUIRE($root_server.'/lib/listas/controlador/listaTrasladoPresupuestario.Controller.php');
-REQUIRE($root_server.'/lib/listas/lista_presupuesto_modal.php');
 
+
+REQUIRE(root_path.'/modulos/presupuesto/vista/listas/listaTrasladoPresupuestoModal.php');
+//REQUIRE(root_path.'/modulos/presupuesto/vista/listas/listaPresupuestoModal.php');
 include('templates/footer.php');
 
 
 ?>
 
 <script src="modulos/presupuesto/js/trasladoPresupuesto.Ajax.js" type="text/javascript" language="javascript"></script>
-<script src="lib/listas/js/listaTrasladoPresupuesto.js" type="text/javascript" language="javascript"></script>
 
 <script type="text/javascript">
   TablaPaginada('tabla_disminuir');
   TablaPaginada('tabla_aumentar');
-  TablaPaginada('modal_traslados_presupuestarios');
-</script>
-
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker({
-        	viewMode: 'days',
-            format: 'DD-MM-YYYY',
-            locale: 'es'
-        })
-    });
-    $(function () {
-        $('#datetimepicker2').datetimepicker({
-        	viewMode: 'days',
-            format: 'DD-MM-YYYY',
-            locale: 'es'
-        });
-    });
-
-
-    $(document).ready(function() {
-        $('#formCabecera').bootstrapValidator({
-			icon: {
-	            valid: 'glyphicon glyphicon-ok',
-	            invalid: 'glyphicon glyphicon-remove',
-	            validating: 'glyphicon glyphicon-refresh'
-	        },
-
-			 fields: {
-				 numeroSolicitud: {
-					 validators: {
-						 notEmpty: {
-							 message: 'El Numero de Solicitud es requerido'
-						 }
-					 }
-				 },
-
-				 datetimepicker1: {
-					 validators: {
-						 notEmpty: {
-							message: 'La Fecha de Solicitud es requerida'
-						 },
-					 }
-				 },
-
-				  concepto: {
-					 validators: {
-						 notEmpty: {
-							 message: 'El Concepto es requerido'
-						 }
-					 }
-				 }
-			}
-		});
-	});
 </script>
 
 </body>

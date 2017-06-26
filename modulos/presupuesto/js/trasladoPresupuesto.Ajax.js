@@ -10,13 +10,88 @@
 ******************************************************************************/
 
 
-
+//Al cargar el documento se ejecutan las siguientes funciones
+//
 $(document).ready(function() {
 
+	//Formato de los datatime
+	//
+	$(function () {
+        $('#datetimepicker1').datetimepicker({
+        	viewMode: 'days',
+            format: 'DD-MM-YYYY',
+            locale: 'es'
+        })
+    });
+    $(function () {
+        $('#datetimepicker2').datetimepicker({
+        	viewMode: 'days',
+            format: 'DD-MM-YYYY',
+            locale: 'es'
+        });
+    });
+
+
+    //Validaciones de los campos del formulario
+    //
+	$('#formCabecera').bootstrapValidator({
+		icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+
+		 fields: {
+			 numeroSolicitud: {
+				 validators: {
+					 notEmpty: {
+						 message: 'El Numero de Solicitud es requerido'
+					 }
+				 }
+			 },
+
+			 datetimepicker1: {
+				 validators: {
+					 notEmpty: {
+						message: 'La Fecha de Solicitud es requerida'
+					 },
+				 }
+			 },
+
+			  concepto: {
+				 validators: {
+					 notEmpty: {
+						 message: 'El Concepto es requerido'
+					 }
+				 }
+			 }
+		}
+	});
+
+
+
+	//Al cargar el documento se llena la lista de la ventana modal de Traslados de Presupuestos para consultarlos
+	//
+	$.ajax({
+		type: "POST",
+		url: "modulos/presupuesto/controlador/trasladoPresupuesto.controller.php",
+		data: 'ejecutar=listar_traslados_presupuestarios',
+		success: function(response) {
+
+			$("#cuerpoModalTrasladosPresupuestario").html(response);
+			TablaPaginada('modal_traslados_presupuestarios');
+
+		}
+	});
+
+});
+
+
+//Al hacer click en el boton Continuar se valida y registra la cabecera del traslado
+//
 	$("#btnContinuar").click(function() {
 
 		//Obtenemos el valor de los campos
-
 		var numero_solicitud  = $("input#numeroSolicitud").val();
 
 		//Validamos el campo Numero de Solicitud, simplemente miramos que no esté vacío
@@ -69,10 +144,8 @@ $(document).ready(function() {
 					$("#_MENSAJE_SUCCESS_").html('<strong>¡Continue!</strong>    Registro de datos exitoso, continue con la carga de las partidas....');
 					$("#_MENSAJE_SUCCESS_").delay(4500).slideUp(2000);
 
-					$("#divTablas").css("display","block");
-					$("#btnContinuar").css("display","none");
-					$("#btnActualizar").css("display","block");
-					$("#numeroSolicitud").prop('disabled',true);
+					mostrarDiv();
+					actualizarBotones();
 
 				}else if(respuesta[0] == 2){
 
@@ -94,6 +167,9 @@ $(document).ready(function() {
 
 	});
 
+
+//Al hacer click en el boton actulizar se entra a validar y actualizar datos de la cabecera del traslado
+//
 	$("#btnActualizar").click(function() {
 		//console.log("actualizar ");
 		//
@@ -155,6 +231,76 @@ $(document).ready(function() {
 
 	});
 
-});
 
+//Funcion para cargar los datos consultados en el modal
+function consultarTrasladoPresupuestario(idtraslado_presupuestario)
+{
+	//console.log(idtraslado_presupuestario);
+	var dataString = 	'idtraslado_presupuestario=' + idtraslado_presupuestario +
+						'&ejecutar=consultar_traslado_presupuestario';
+	$.ajax({
+		type: "POST",
+		url: "modulos/presupuesto/controlador/trasladoPresupuesto.controller.php",
+		data: dataString,
+		success: function(response) {
 
+			respuesta = response.split("|.|");
+			fecha = respuesta[2].split("-");
+			fecha_solicitud = fecha[2]+"-"+fecha[1]+"-"+fecha[0];
+			fecha = respuesta[4].split("-");
+			fecha_resolucion = fecha[2]+"-"+fecha[1]+"-"+fecha[0];
+
+			$('input#idTrasladoPresupuestario').val(idtraslado_presupuestario);
+			$("input#numeroSolicitud").val(respuesta[1]);
+			$('input#datetimepicker1').val(fecha_solicitud);
+			$('input#numeroResolucion').val(respuesta[3]);
+			$('input#datetimepicker2').val(fecha_resolucion);
+			$('#concepto').val(respuesta[5]);
+			$('#estado').html(respuesta[6]);
+			mostrarDiv();
+			actualizarBotones();
+		}
+	});
+
+}
+
+function mostrarDiv()
+{
+	$("#divTablas").css("display","block");
+}
+
+function actualizarBotones()
+{
+	var estado = $('#estado').html();
+
+	switch(estado){
+
+		case 'En elaboración':
+			$("#btnContinuar").css("display","none");
+			$("#btnActualizar").css("display","block");
+			$("#btnProcesar").css("display","block");
+			$("#btnAnular").css("display","none");
+			$("#btnDuplicar").css("display","none");
+			$("#btnBuscarPartidaDisminuir").css("display","block");
+			$("#btnCargarPartidaDisminuir").css("display","block");
+			$("#btnBuscarPartidaAumentar").css("display","block");
+			$("#btnCargarPartidaAumentar").css("display","block");
+			$("#numeroSolicitud").prop('disabled',true);
+		break;
+
+		case 'Procesado':
+			$("#btnContinuar").css("display","none");
+			$("#btnActualizar").css("display","block");
+			$("#btnProcesar").css("display","none");
+			$("#btnAnular").css("display","block");
+			$("#btnDuplicar").css("display","block");
+			$("#btnBuscarPartidaDisminuir").css("display","none");
+			$("#btnCargarPartidaDisminuir").css("display","none");
+			$("#btnBuscarPartidaAumentar").css("display","none");
+			$("#btnCargarPartidaAumentar").css("display","none");
+			$("#numeroSolicitud").prop('disabled',true);
+		break;
+
+	}
+
+}

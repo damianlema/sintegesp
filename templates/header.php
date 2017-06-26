@@ -18,4 +18,5 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrapValidator.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-modal.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
   </head>

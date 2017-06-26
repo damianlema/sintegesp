@@ -10,7 +10,7 @@
 * @descripcion
 ******************************************************************************/
 session_start();
-error_reporting(E_ALL);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 ini_set('display_errors', '1');
 
 
@@ -31,11 +31,13 @@ switch($ejecutar){
 		$actualizar_datos_cabecera = new TrasladoPresupuesto();
 		$actualizar_datos_cabecera->actualizarDatosBasicos();
 	break;
-	case '2':
-		echo '2';
+	case 'listar_traslados_presupuestarios':
+		$listar_traslados_presupuestarios = new  TrasladoPresupuesto();
+		$listar_traslados_presupuestarios->listarTrasladosPresupuestarios();
 	break;
-	case '3':
-		echo '3';
+	case 'consultar_traslado_presupuestario':
+		$consultar_traslados_presupuestarios = new  TrasladoPresupuesto();
+		$consultar_traslados_presupuestarios->consultarTrasladosPresupuestarios();
 	break;
 	default:
 		REQUIRE($root_server.'/modulos/presupuesto/vista/trasladoPresupuesto.view.php');

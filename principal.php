@@ -65,7 +65,9 @@
 <?
 include "conf/conex.php";
 include "funciones/funciones.php";
-//$root_server = $_SERVER['DOCUMENT_ROOT'].$_SESSION["directorio_root"];
+
+DEFINE('root_path',$_SERVER['DOCUMENT_ROOT'].$_SESSION["directorio_root"]);
+
 //require($root_server."/conf/class.Conexion.php");
 $conexion_db = conectarse();
 

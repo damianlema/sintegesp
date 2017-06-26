@@ -56,7 +56,7 @@ class TrasladoPresupuesto
 														'$this->numero_resolucion',
 														'$this->fecha_resolucion',
 														'$this->concepto',
-														'elaboracion',
+														'En elaboración',
 														'a')");
 					echo '1|.|'.$db->insert_id;
 				}else{
@@ -113,6 +113,87 @@ class TrasladoPresupuesto
 			echo $registroCatch->getMessage();
 		}
 	}
+
+	public function listarTrasladosPresupuestarios()
+	{
+		$db = new Conexion();
+		$sql = $db->query("SELECT * FROM traslados_presupuestarios ORDER BY nro_solicitud");
+		?>
+		<table data-page-length='5' align="center" id="modal_traslados_presupuestarios"
+				class="table table-striped table=hover display" width="100%">
+          	<thead>
+                <tr class="info">
+                	<th style="width: 10%; height: 5px; padding: 0px;">
+                		<h6 align="left"><small><strong>Nro. Solicitud</strong></small></h6>
+                	</th>
+                  	<th style="width: 10%; height: 5px; padding: 0px;">
+                  		<h6 align="left"><small><strong>Fecha Solicitud</strong></small></h6>
+                  	</th>
+                  	<th style="width: 67%; height: 5px; padding: 0px;">
+                  		<h6 align="left"><small><strong>Concepto</strong></small></h6>
+                  	</th>
+                  	<th style="width: 7%; height: 5px; padding: 0px;">
+                  		<h6 align="left"><small><strong>Estado</strong></small></h6>
+                  	</th>
+                  	<!--
+                  	<th style="width: 4%; height: 5px; padding: 0px;">
+                  		<h6 align="left"><small><strong>&nbsp;</strong></small></h6>
+                  	</th>
+                  	-->
+                </tr>
+          	</thead>
+          	<tbody>
+				<?php
+              	while($registros = $db->recorrer($sql)){
+              		$fecha = explode("-",$registros["fecha_solicitud"]);
+              		$fecha_solicitud = $fecha[2]."-".$fecha[1]."-".$fecha[0];
+      		    ?>
+	                <tr style="cursor:pointer" data-toggle="modal" data-target="#miModalTraslado"
+	                	onclick="consultarTrasladoPresupuestario(<?=$registros['idtraslados_presupuestarios']?>);">
+	                  	<td style="width: 10%; height: 5px; padding: 0px;" align='left'>
+	                  		<h6><?=$registros["nro_solicitud"]?></h6></td>
+	                  	<td style="width: 10%; height: 5px; padding: 0px;" align='center'>
+	                  		<h6><?=$fecha_solicitud?></h6></td>
+	                  	<td style="width: 67%; height: 5px; padding: 0px;" align='left'>
+	                  		<h6><?=$registros["justificacion"]?></h6></td>
+	                  	<td style="width: 7%; height: 5px; padding: 0px;" align='left'>
+	                  		<h6><?=$registros["estado"]?></h6></td>
+	                  	<!--
+	                 	<td style="width: 4%; height: 5px; padding: 0px;" align="center">
+	                        <button type="button" class="btn btn-default"
+		                    		title="Consultar Traslado Presupuestario"
+		                    		data-toggle="modal" data-target="#miModalTraslado"
+		                    		onclick="consultarTrasladoPresupuestario(<?=$registros['idtraslados_presupuestarios']?>)">
+									<i class="fa fa-arrow-circle-right"></i>
+							</button>
+						</td>
+						-->
+	                </tr>
+	            <?
+	            }
+        		?>
+        	</tbody>
+		</table>
+		<?php
+	}
+
+	public function consultarTrasladosPresupuestarios()
+	{
+		$idtraslado_presupuestario = $_POST['idtraslado_presupuestario'];
+		$db = new Conexion();
+		$sql = $db->query("SELECT * FROM traslados_presupuestarios
+									WHERE idtraslados_presupuestarios = '".$idtraslado_presupuestario."'
+									ORDER BY nro_solicitud");
+		$registro = $db->recorrer($sql);
+		echo 	$registro["idtraslados_presupuestarios"]."|.|".
+				$registro["nro_solicitud"]."|.|".
+				$registro["fecha_solicitud"]."|.|".
+				$registro["nro_resolucion"]."|.|".
+				$registro["fecha_resolucion"]."|.|".
+				$registro["justificacion"]."|.|".
+				$registro["estado"];
+	}
+
 }
 
 ?>
