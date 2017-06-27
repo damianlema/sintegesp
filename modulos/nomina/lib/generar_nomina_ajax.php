@@ -633,8 +633,8 @@ function call_concepto($idconcepto, $idtrabajador, $destino, $idgenerar_nomina, 
 												$sql_consulta_relacion= mysql_query("select * from relacion_concepto_trabajador
 																							where tabla = 'constantes_nomina'
 																							and idconcepto = '".$partes[1]."'
-																							and idtrabajador = '".$idtrabajador."'");
-																	//and idtipo_nomina = '".$idtipo_nomina."'
+																							and idtrabajador = '".$idtrabajador."'
+																							and idtipo_nomina = '".$idtipo_nomina."'");
 												$bus_consulta_relacion = mysql_fetch_array($sql_consulta_relacion);
 												$monto = $bus_consulta_relacion["valor"];
 											}else{
@@ -1091,8 +1091,8 @@ if($ejecutar == "generarNomina") {
 										$sql_consulta_relacion= mysql_query("select * from relacion_concepto_trabajador
 																					where tabla = 'constantes_nomina'
 																					and idconcepto = '".$partes[1]."'
-																					and idtrabajador = '".$idtrabajador."'");
-															//and idtipo_nomina = '".$idtipo_nomina."'
+																					and idtrabajador = '".$idtrabajador."'
+																					and idtipo_nomina = '".$idtipo_nomina."'");
 										$bus_consulta_relacion = mysql_fetch_array($sql_consulta_relacion);
 										$monto = $bus_consulta_relacion["valor"];
 									}else{
