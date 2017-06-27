@@ -232,7 +232,8 @@ $(document).ready(function() {
 	});
 
 
-//Funcion para cargar los datos consultados en el modal
+//Funcion para cargar los datos seleccionados en el modal y mostrarlos en el formulario de traslados
+//
 function consultarTrasladoPresupuestario(idtraslado_presupuestario)
 {
 	//console.log(idtraslado_presupuestario);
@@ -257,18 +258,68 @@ function consultarTrasladoPresupuestario(idtraslado_presupuestario)
 			$('input#datetimepicker2').val(fecha_resolucion);
 			$('#concepto').val(respuesta[5]);
 			$('#estado').html(respuesta[6]);
+			$('input#disminucionesBs').val(formatNumber.new(respuesta[7]));
+			$('input#aumentosBs').val(formatNumber.new(respuesta[8]));
 			mostrarDiv();
+			mostrarPartidasDisminuidas(idtraslado_presupuestario);
+			mostrarPartidasAumentadas(idtraslado_presupuestario);
 			actualizarBotones();
 		}
 	});
 
 }
 
+
+//Funcion para cargar el datatable de las partidas disminuidas
+//
+function mostrarPartidasDisminuidas(idtraslado_presupuestario)
+{
+
+	var dataString = 	'idtraslado_presupuestario=' + idtraslado_presupuestario +
+						'&ejecutar=mostrar_partidas_disminuidas';
+	$.ajax({
+		type: "POST",
+		url: "modulos/presupuesto/controlador/trasladoPresupuesto.controller.php",
+		data: dataString,
+		success: function(response) {
+
+			$("#cuerpoPartidasDisminuidas").html(response);
+			TablaPaginada('tabla_disminuir');
+
+		}
+	});
+}
+
+
+//Funcion para cargar el datatable de las partidas aumentadas
+//
+function mostrarPartidasAumentadas(idtraslado_presupuestario)
+{
+
+	var dataString = 	'idtraslado_presupuestario=' + idtraslado_presupuestario +
+						'&ejecutar=mostrar_partidas_aumentadas';
+	$.ajax({
+		type: "POST",
+		url: "modulos/presupuesto/controlador/trasladoPresupuesto.controller.php",
+		data: dataString,
+		success: function(response) {
+
+			$("#cuerpoPartidasAumentadas").html(response);
+			TablaPaginada('tabla_aumentar');
+
+		}
+	});
+}
+
+//Funcion para mostrar y ocultar div en el formulario
+//
 function mostrarDiv()
 {
 	$("#divTablas").css("display","block");
 }
 
+//Funcion para actualizar los botones segun el estado del traslado
+//
 function actualizarBotones()
 {
 	var estado = $('#estado').html();
@@ -304,3 +355,7 @@ function actualizarBotones()
 	}
 
 }
+
+
+
+

@@ -39,6 +39,14 @@ switch($ejecutar){
 		$consultar_traslados_presupuestarios = new  TrasladoPresupuesto();
 		$consultar_traslados_presupuestarios->consultarTrasladosPresupuestarios();
 	break;
+	case 'mostrar_partidas_disminuidas':
+		$consultar_traslados_presupuestarios = new  TrasladoPresupuesto();
+		$consultar_traslados_presupuestarios->mostrarPartidasDisminuidas();
+	break;
+	case 'mostrar_partidas_aumentadas':
+		$consultar_traslados_presupuestarios = new  TrasladoPresupuesto();
+		$consultar_traslados_presupuestarios->mostrarPartidasAumentadas();
+	break;
 	default:
 		REQUIRE($root_server.'/modulos/presupuesto/vista/trasladoPresupuesto.view.php');
 	break;

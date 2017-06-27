@@ -7,6 +7,7 @@ require($root_server."/conf/class.Conexion.php");
 $conexion = Conectarse();
 extract($_POST);
 extract($_SESSION);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
 function diferenciaEntreFechas($fechaInicio, $fechaActual)
 {

@@ -1,4 +1,22 @@
-
+var formatNumber = {
+	separador: ".", // separador para los miles
+	sepDecimal: ',', // separador para los decimales
+	formatear:function (num){
+	  	num +='';
+	  	var splitStr = num.split('.');
+	  	var splitLeft = splitStr[0];
+	  	var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+	  	var regx = /(\d+)(\d{3})/;
+  		while (regx.test(splitLeft)) {
+  			splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+  		}
+  		return this.simbol + splitLeft  +splitRight;
+ 	},
+ 	new:function(num, simbol){
+  		this.simbol = simbol ||'';
+  		return this.formatear(num);
+ 	}
+}
 
 function nuevoAjax(){
 	var xmlhttp=false;
@@ -31,7 +49,7 @@ function seleccionarTipo(idmodulo){
 function mostrarMensajes(tipo, texto){
 	document.getElementById('cuadroMensajes').style.display = 'block';
 	if(tipo == "exito"){
-		document.getElementById('cuadroMensajes').innerHTML="<table align='center' style='margin-top:0px; background-color:#00CCFF; border:#003366 solid 2px; -moz-border-radius: 8px;'><tr><td><img src='imagenes/validar.png'></td><td style='color:#FFF; font-family:Arial, Helvetica, sans-serif; font-size:12px'>"+texto+"</td></tr></table>";	
+		document.getElementById('cuadroMensajes').innerHTML="<table align='center' style='margin-top:0px; background-color:#00CCFF; border:#003366 solid 2px; -moz-border-radius: 8px;'><tr><td><img src='imagenes/validar.png'></td><td style='color:#FFF; font-family:Arial, Helvetica, sans-serif; font-size:12px'>"+texto+"</td></tr></table>";
 	}else{
 		document.getElementById('cuadroMensajes').innerHTML="<table align='center' style='margin-top:0px; background-color:#FFFF66; border:#FFCC00 solid 2px; -moz-border-radius: 8px;'><tr><td><img src='imagenes/reject.gif'></td><td style='color:#000; font-family:Arial, Helvetica, sans-serif; font-size:12px'>"+texto+"</td></tr></table>";
 	}
@@ -43,7 +61,7 @@ function setCheckBox(form, name, value){
 	elts = document.forms[form].elements;
 	if(typeof(elts)!='undefined'){
 		for(var i=0 ; i < elts.length ; i++) {
-			if(elts[i].name.indexOf(name)!=-1) elts[i].checked = value; 
+			if(elts[i].name.indexOf(name)!=-1) elts[i].checked = value;
 		}
 	}
 }
@@ -52,7 +70,7 @@ function cleanNullField(form, name){
 	elts = document.forms[form].elements;
 	if(typeof(elts)!='undefined'){
 		for(var i=0 ; i < elts.length ; i++) {
-			if(elts[i].name.indexOf(name)!=-1) elts[i].value = ''; 
+			if(elts[i].name.indexOf(name)!=-1) elts[i].value = '';
 		}
 	}
 }
@@ -109,7 +127,7 @@ function setRowColor(RowObj, numRow, Action, OrigColor, OverColor, ClickColor, b
 		else if(Action == 'click') {
 			setColor = ClickColor;
 			tabRow.push(numRow);
-		}		
+		}
 	} else if(Action == 'click'){
 		tabIndex = in_array(numRow, tabRow);
 		if(tabIndex>0) {
@@ -119,11 +137,11 @@ function setRowColor(RowObj, numRow, Action, OrigColor, OverColor, ClickColor, b
 	} else return;
 	for(i=0 ; i<TheCells.length ; i++)
     if (bUseClassName) {
-      if (bUseClassName && TheCells[i].className != setColor) 
-        TheCells[i].className = setColor; 
+      if (bUseClassName && TheCells[i].className != setColor)
+        TheCells[i].className = setColor;
     } else
       if (TheCells[i].style.backgroundColor != setColor)
-        TheCells[i].style.backgroundColor = setColor; 
+        TheCells[i].style.backgroundColor = setColor;
 	return;
 }
 
@@ -131,7 +149,7 @@ function setRowColor(RowObj, numRow, Action, OrigColor, OverColor, ClickColor, b
 
 
 function in_array(needle, haystack){
-	for(i=0 ; i<haystack.length ; i++) 
+	for(i=0 ; i<haystack.length ; i++)
 		if(haystack[i] == needle) return (i+1);
 	return false;
 }
@@ -153,12 +171,12 @@ function insertColumn(){
 				stringOut = '';
 				first = false;
 			} else {
-				stringOut = ', ';			
+				stringOut = ', ';
 			}
 			stringToDisplay += stringOut+sourceSel.options[i].value;
 			sourceSel.options[i].selected = false;
-		}	
-		i--;		
+		}
+		i--;
 	}
 	if(document.selection){
 		destSQL.focus();
@@ -252,7 +270,7 @@ function cerrarSession(destino){
 /*	var ajax=nuevoAjax();
 	ajax.open("POST", "funciones/contador_ventanas_ajax.php?ejecutar=consultar", true);
 	ajax.onreadystatechange=function() {
-		if (ajax.readyState==2){	
+		if (ajax.readyState==2){
 			var cont = ajax.responseText;
 			if(cont != ""){
 				alert(ajax.responseText);
@@ -280,14 +298,14 @@ function validar_minutos_transcurridos(){
 	var ajax=nuevoAjax();
 	ajax.open("POST", "funciones/validar_minutos_transcurridos_ajax.php", true);
 	ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-	ajax.onreadystatechange=function() { 
+	ajax.onreadystatechange=function() {
 		if (ajax.readyState==4){
 			if(ajax.responseText == "mayor"){
 				cerrarSession('tiempo');return false
 			}
-		} 
+		}
 	}
-	ajax.send(null);	
+	ajax.send(null);
 }
 
 
@@ -312,17 +330,17 @@ function validarFecha(campo, e){
 	var checkOK = "0123456789-";
 	var linea = "";
 	var arrayMes = new Array();
-	arrayMes[1]=31; 
+	arrayMes[1]=31;
 	if (anio%4==0) arrayMes[2]=29; else arrayMes[2]=28;
-	arrayMes[3]=31; 
-	arrayMes[4]=30; 
-	arrayMes[5]=31; 
-	arrayMes[6]=30; 
-	arrayMes[7]=31; 
-	arrayMes[8]=31; 
-	arrayMes[9]=30; 
-	arrayMes[10]=31; 
-	arrayMes[11]=30; 
+	arrayMes[3]=31;
+	arrayMes[4]=30;
+	arrayMes[5]=31;
+	arrayMes[6]=30;
+	arrayMes[7]=31;
+	arrayMes[8]=31;
+	arrayMes[9]=30;
+	arrayMes[10]=31;
+	arrayMes[11]=30;
 	arrayMes[12]=31;
 		if(tcl != 8){
 			if ((tcl >= 48 && tcl <= 57) || (tcl >= 96 && tcl <= 105) || tcl == 8 || tcl == 0 || tcl == 109){
@@ -330,7 +348,7 @@ function validarFecha(campo, e){
 				if(tamanio == 4){
 					if(parseInt(bloques[0]) > anio){
 						alert("Disculpe el A&ntilde;O no puede mayor al actual");
-						var newStr  = valor.substring (0, valor.length-4);			
+						var newStr  = valor.substring (0, valor.length-4);
 						document.getElementById('fecha_factura'+campo).value = newStr;
 					}else{
 						document.getElementById('fecha_factura'+campo).value = valor+"-";
@@ -338,40 +356,40 @@ function validarFecha(campo, e){
 				}else if(tamanio == 7){
 					if(parseInt(bloques[0]) == anio && parseInt(bloques[1]) > mes){
 						alert("Disculpe el MES no puede ser mayor al actual");
-   						var newStr  = valor.substring (0, valor.length-2);			
+   						var newStr  = valor.substring (0, valor.length-2);
 						document.getElementById('fecha_factura'+campo).value = newStr;
 					}else{
-						document.getElementById('fecha_factura'+campo).value = valor+"-";	
+						document.getElementById('fecha_factura'+campo).value = valor+"-";
 					}
 				}else if(tamanio == 10){
 					if(parseInt(bloques[0]) == anio && parseInt(bloques[1]) == mes && parseInt(bloques[2]) > dia){
 						alert("Disculpe el DIA no puede ser mayor al actual");
-						var newStr  = valor.substring (0, valor.length-2);			
+						var newStr  = valor.substring (0, valor.length-2);
 						document.getElementById('fecha_factura'+campo).value = newStr;
 					}else{
 						var m = parseInt(bloques[1]);
 						var d = parseInt(bloques[2]);
 						if (d>arrayMes[m]){
 							alert("Disculpe el DIA es incorrecto");
-							var newStr  = valor.substring (0, valor.length-2);			
-							document.getElementById('fecha_factura'+campo).value = newStr;			  
-						}	
+							var newStr  = valor.substring (0, valor.length-2);
+							document.getElementById('fecha_factura'+campo).value = newStr;
+						}
 					}
-				}	
-				
+				}
+
 			}else{
 					//alert("no es numero");
 						if (valor.length!=0) {
-							for (i = 0; i < tamanio; i++) { 
-								ch = valor.charAt(i); 
-								for (j = 0; j < checkOK.length; j++) 
-									if (ch == checkOK.charAt(j)) linea = linea + ch; 
+							for (i = 0; i < tamanio; i++) {
+								ch = valor.charAt(i);
+								for (j = 0; j < checkOK.length; j++)
+									if (ch == checkOK.charAt(j)) linea = linea + ch;
 							}
-							document.getElementById('fecha_factura'+campo).value=linea; 
+							document.getElementById('fecha_factura'+campo).value=linea;
 						}
 
 			}
-		}	
+		}
 }
 
 
@@ -382,9 +400,9 @@ function validarFecha(campo, e){
 
 function formatoNumero(idcampo, campoOculto) {
 	//alert("campo: "+idcampo);
-var res =  document.getElementById(idcampo).value; 
-document.getElementById(campoOculto).value = res; 
-if (document.getElementById(idcampo).value >= 0 && document.getElementById(idcampo).value <= 99999999999)  { 
+var res =  document.getElementById(idcampo).value;
+document.getElementById(campoOculto).value = res;
+if (document.getElementById(idcampo).value >= 0 && document.getElementById(idcampo).value <= 99999999999)  {
 	resultado = parseFloat(res).toFixed(2).toString();
 	resultado = resultado.split(".");
 	var cadena = ""; cont = 1
@@ -393,12 +411,12 @@ if (document.getElementById(idcampo).value >= 0 && document.getElementById(idcam
 		cont%3 == 0 && m >0 ? cadena = "." + cadena : cadena = cadena
 		cont== 3 ? cont = 1 :cont++
 	}
-	document.getElementById(idcampo).value = cadena + "," + resultado[1]; 
-} else { 
-	document.getElementById(idcampo).value = "0"; 
+	document.getElementById(idcampo).value = cadena + "," + resultado[1];
+} else {
+	document.getElementById(idcampo).value = "0";
 	//alert ("Debes indicar valores n&uacute;mericos en el campo "+idcampo);
 	document.getElementById(idcampo).focus();
-} 
+}
 }
 
 
@@ -415,12 +433,12 @@ function addslashes(str){
 
 function mostrarLista(valor){
 	if(valor == ""){
-		document.getElementById('listaBeneficiarios').style.display = 'none';	
+		document.getElementById('listaBeneficiarios').style.display = 'none';
 	}else{
 		var ajax=nuevoAjax();
-		ajax.open("POST", "lib/funciones.php", true);	
+		ajax.open("POST", "lib/funciones.php", true);
 		ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-		ajax.onreadystatechange=function() { 
+		ajax.onreadystatechange=function() {
 			if(ajax.readyState == 1){
 					//document.getElementById("divCargando").style.display = "block";
 					}
@@ -431,9 +449,9 @@ function mostrarLista(valor){
 					document.getElementById('listaBeneficiarios').style.display = 'block';
 					document.getElementById("listaBeneficiarios").innerHTML = ajax.responseText;
 				}
-				
+
 				//document.getElementById("divCargando").style.display = "none";
-			} 
+			}
 		}
 		ajax.send("valor="+valor+"&ejecutar=mostrarLista");
 	}
@@ -442,12 +460,12 @@ function mostrarLista(valor){
 
 function mostrarListaMateriales(valor){
 	if(valor == ""){
-		document.getElementById('listaDeMateriales').style.display = 'none';	
+		document.getElementById('listaDeMateriales').style.display = 'none';
 	}else{
 		var ajax=nuevoAjax();
-		ajax.open("POST", "lib/funciones.php", true);	
+		ajax.open("POST", "lib/funciones.php", true);
 		ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-		ajax.onreadystatechange=function() { 
+		ajax.onreadystatechange=function() {
 			if(ajax.readyState == 1){
 					//document.getElementById("divCargando").style.display = "block";
 					}
@@ -458,9 +476,9 @@ function mostrarListaMateriales(valor){
 					document.getElementById('listaDeMateriales').style.display = 'block';
 					document.getElementById("listaDeMateriales").innerHTML = ajax.responseText;
 				}
-				
+
 				//document.getElementById("divCargando").style.display = "none";
-			} 
+			}
 		}
 		ajax.send("valor="+valor+"&ejecutar=mostrarListaMateriales");
 	}
@@ -471,7 +489,7 @@ function mostrarListaMateriales(valor){
 
 
 function consultarRif(rif)
-{		
+{
 //var formato = /^[JV]-\d{8}-\d$/;
 		var formato = /^[JVGgEejv]\d{9}$/;
 		if(!formato.test(rif)){
@@ -490,11 +508,11 @@ function consultarRif(rif)
 		var ajax=nuevoAjax();
 		ajax.open("POST", "modulos/administracion/lib/consultar_rif.php", true);
 		ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
-		ajax.onreadystatechange=function(){ 
+		ajax.onreadystatechange=function(){
 			if (ajax.readyState==1){}
 			if (ajax.readyState==4){
 				validarVacios('rif', document.getElementById('rif').value, 'form1');
-				
+
 				if(ajax.responseText != "vacio"){
 					if(ajax.responseText == "si"){
 						if(document.getElementById("guardar")){
@@ -521,8 +539,8 @@ function consultarRif(rif)
 								document.getElementById("modificar").value = "Ingresar";
 								document.getElementById("modificar").disabled = false;
 							}
-							
-							
+
+
 							document.getElementById("divMensaje").innerHTML = "Correcto!";
 							document.getElementById("divMensaje").style.border="#339966 1px solid";
 							document.getElementById("divMensaje").style.color="#339966";

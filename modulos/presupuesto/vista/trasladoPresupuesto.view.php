@@ -30,7 +30,8 @@ include('templates/header.php');
 			    </div>
 			    <div class="form-group col-md-5">
 			    	<label for="disminucionesBs" class="control-label col-md-7" style="font-weight: normal !important;"> Total Bs. Disminuciones</label>
-			    	<input type="text" class="form-control" id="disminucionesBs" disabled="" placeholder="Total Bs. Disminunidos">
+			    	<input 	type="text" class="form-control" id="disminucionesBs" disabled=""
+			    			placeholder="Total Bs. Disminunidos" style="text-align: right;">
 			    </div>
 			</div>
 			<div class="row">
@@ -46,7 +47,8 @@ include('templates/header.php');
 			    </div>
 			    <div class="form-group col-md-5">
 			    	<label for="aumentosBs" class="control-label col-md-7" style="font-weight: normal !important;">Total Bs. Aumentos</label>
-			    	<input type="text" class="form-control" id="aumentosBs" disabled="" placeholder="Total Bs. Aumentos">
+			    	<input 	type="text" class="form-control" id="aumentosBs" disabled=""
+			    			placeholder="Total Bs. Aumentos" style="text-align: right;">
 			    </div>
 			</div>
 		    <div class="row">
@@ -59,12 +61,12 @@ include('templates/header.php');
 		      	</div>
 		    </div>
 		    <div class="row">
-		      	<div class="col-md-1" align="center">
-		      		<label class="control-label" style="margin-top: 10px; margin-bottom: -3px;">
+		      	<div class="col-md-2" align="left">
+		      		<label class="control-label" style="margin-top: 8px; margin-bottom: -3px; margin-left: 6px;">
 						<small><strong id="estado" >En Elaboración</strong></small>
 					</label>
 		      	</div>
-		      	<div class="col-md-10" align="center">
+		      	<div class="col-md-8" align="center">
 		      		<table>
 		      			<tr>
 		      				<td>
@@ -90,15 +92,18 @@ include('templates/header.php');
 					    </tr>
 			        </table>
 		      	</div>
-		      	<div class="ajax col-md-1" align="center">
+		      	<div class="ajax col-md-2" align="right">
 
 		      		<button type="button" class="btn btn-default btn-circle"
                     		title="Buscar Traslados Presupuestarios"
-                    		data-toggle="modal" data-target="#miModalTraslado">
+                    		data-toggle="modal" data-target="#miModalTraslado"
+                    		style="margin-top: 4px; margin-right: 6px;">
 							<i class="glyphicon glyphicon-search"></i>
 					</button>
 
-					<button type="button" class="btn btn-default btn-circle" title="Imprimir Traslados Presupuestarios">
+					<button type="button" class="btn btn-default btn-circle"
+							title="Imprimir Traslados Presupuestarios"
+							style="margin-top: 4px; margin-right: 10px;">
 						<i class="glyphicon glyphicon-print"></i>
 					</button>
 		      	</div>
@@ -107,7 +112,7 @@ include('templates/header.php');
 		</form>
 	</div>
 </div>
-<div class="container-fluid" id="divTablas" style="display: block">
+<div class="container-fluid" id="divTablas" style="display: none">
 	<ul class="nav nav-tabs" style="margin-top: -14px">
 	  <li class="active">
 	  	<a href="#disminuir" data-toggle="tab" aria-expanded="true">Disminuir</a>
@@ -168,7 +173,7 @@ include('templates/header.php');
 			</div>
 			<div class="panel panel-primary" style="margin-top: -2px;">
 		      	<div class="panel-body">
-		        	<div class="col-lg-12">
+		        	<div class="col-lg-12" id="cuerpoPartidasDisminuidas">
 						<table data-page-length='5' align="center" id="tabla_disminuir" class="table table-striped table=hover display" width="100%">
 			              	<thead>
 			                	<tr class="info">
@@ -250,7 +255,7 @@ include('templates/header.php');
 
 			<div class="panel panel-primary" style="margin-top: -3px;">
 		      	<div class="panel-body">
-		        	<div class="col-lg-12">
+		        	<div class="col-lg-12" id="cuerpoPartidasAumentadas">
 						<table data-page-length='5' align="center" id="tabla_aumentar" class="table table-striped table=hover display" width="100%">
 			              	<thead>
 			                	<tr class="info">
@@ -299,8 +304,8 @@ include('templates/footer.php');
 <script src="modulos/presupuesto/js/trasladoPresupuesto.Ajax.js" type="text/javascript" language="javascript"></script>
 
 <script type="text/javascript">
-  TablaPaginada('tabla_disminuir');
-  TablaPaginada('tabla_aumentar');
+	TablaPaginada('tabla_disminuir');
+  	TablaPaginada('tabla_aumentar');
 </script>
 
 </body>

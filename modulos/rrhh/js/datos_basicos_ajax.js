@@ -3132,7 +3132,9 @@ function importarPrestaciones() {
             document.getElementById('error_tipo').innerHTML = "<table><tr><td style='color:#0000FF; font-weight:bold'>PROCESANDO <img src='imagenes/cargando.gif'></td></tr></table>";
         }
         if (ajax.readyState==4) {
+            //alert(ajax.responseText);
             if(ajax.responseText == 'error_cedula'){
+                setTimeout("document.getElementById('divCargando').style.display = 'none'",400);
                 document.getElementById('error_tipo').style.display='block';
                 document.getElementById('error_tipo').innerHTML = "<table><tr><td style='color:#990000; font-weight:bold'>* La Cedula registrada en el archivo a importar no corresponde con el trabajador activo</td></tr></table>";
             }else{
