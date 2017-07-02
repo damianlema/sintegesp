@@ -161,7 +161,7 @@ if (!$_POST) {
     $conexion_db = conectarse(); // llama a la funcion para conectar a la base de datos que esta en el archvio conex.php
     $valida      = mysql_query("select * from usuarios
 										where login = '" . $login . "'
-										and clave = '" . $clave . "'", $conexion_db)or die(mysql_error());
+										and clave = '" . $clave . "'", $conexion_db) or die(mysql_error());
 
     if (mysql_num_rows($valida) <= 0) {
 

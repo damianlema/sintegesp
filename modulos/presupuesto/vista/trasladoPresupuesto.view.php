@@ -1,12 +1,12 @@
 <?php
 
-include('templates/header.php');
+include 'templates/header.php';
 
 ?>
 
 <body>
 <?php
-    include('templates/mensajes.php');
+include 'templates/mensajes.php';
 ?>
 <input type="hidden" id="idTrasladoPresupuestario">
 <div class='container-fluid'>
@@ -305,12 +305,9 @@ include('templates/header.php');
 
 <?php
 
-
-
-REQUIRE(root_path.'/modulos/presupuesto/vista/listas/listaTrasladoPresupuestoModal.php');
+require root_path . '/modulos/presupuesto/vista/listas/listaTrasladoPresupuestoModal.php';
 //REQUIRE(root_path.'/modulos/presupuesto/vista/listas/listaPresupuestoModal.php');
-include('templates/footer.php');
-
+include 'templates/footer.php';
 
 ?>
 
