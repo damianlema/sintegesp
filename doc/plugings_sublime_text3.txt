@@ -22,6 +22,7 @@ CodeFormatter
 
 PHPCompanion (se utiliza para buscar las rutas de las clases o funciones)
 
+Trimmer (elimina espacios en blanco)
 
 SublimeLinter
 
