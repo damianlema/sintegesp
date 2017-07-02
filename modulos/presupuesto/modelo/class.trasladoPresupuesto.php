@@ -20,6 +20,11 @@ class TrasladoPresupuesto
 	private $fecha_resolucion;
 	private $concepto;
 
+
+	public function __construct()
+	{
+		parent::__construct();
+	}
 	//
 	//Metodo para registrar los datos basicos del Traslado Presupuestario
 	//
@@ -184,8 +189,8 @@ class TrasladoPresupuesto
 				$registro["fecha_resolucion"]."|.|".
 				$registro["justificacion"]."|.|".
 				$registro["estado"]."|.|".
-				$registro["total_credito"]."|.|".
-				$registro["total_debito"];
+				$registro["total_debito"]."|.|".
+				$registro["total_credito"];
 	}
 
 	//Metodo para cargar las partidas disminuidas en el traslado

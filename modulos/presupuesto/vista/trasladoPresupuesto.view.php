@@ -16,6 +16,15 @@ include('templates/header.php');
         </div>
 		<form class="form-inline" target="_blank" id="formCabecera">
 		  <fieldset>
+		  	<div class="row">
+		    	<div class="form-group col-md-4">
+			    	<label for="numeroSolicitud" class="control-label col-md-6" style="font-weight: normal !important;">Estado</label>
+			    	<input 	type="text" class="form-control" id="estado"
+			    			value="En Elaboración"
+			    			disabled=""
+			    			style="font-style: italic; font-weight: bold;">
+			    </div>
+			</div>
 		    <div class="row">
 		    	<div class="form-group col-md-4">
 			    	<label for="numeroSolicitud" class="control-label col-md-6" style="font-weight: normal !important;">Número de Solicitud</label>
@@ -63,7 +72,7 @@ include('templates/header.php');
 		    <div class="row">
 		      	<div class="col-md-2" align="left">
 		      		<label class="control-label" style="margin-top: 8px; margin-bottom: -3px; margin-left: 6px;">
-						<small><strong id="estado" >En Elaboración</strong></small>
+
 					</label>
 		      	</div>
 		      	<div class="col-md-8" align="center">
@@ -89,6 +98,10 @@ include('templates/header.php');
 					        	<button type="button" class="btn btn-block btn-info btn-xs" id="btnDuplicar"
 					        			style="display:none; width: 160px;">Duplicar</button>
 					        </td>
+					        <td>
+					        	<button type="button" class="btn btn-block btn-warning btn-xs" id="btnEliminar"
+					        			style="display:none; width: 160px;">ELIMINAR</button>
+					        </td>
 					    </tr>
 			        </table>
 		      	</div>
@@ -97,13 +110,13 @@ include('templates/header.php');
 		      		<button type="button" class="btn btn-default btn-circle"
                     		title="Buscar Traslados Presupuestarios"
                     		data-toggle="modal" data-target="#miModalTraslado"
-                    		style="margin-top: 4px; margin-right: 6px;">
+                    		style="margin-top: 1px; margin-right: 6px;">
 							<i class="glyphicon glyphicon-search"></i>
 					</button>
 
 					<button type="button" class="btn btn-default btn-circle"
 							title="Imprimir Traslados Presupuestarios"
-							style="margin-top: 4px; margin-right: 10px;">
+							style="margin-top: 1px; margin-right: 10px;">
 						<i class="glyphicon glyphicon-print"></i>
 					</button>
 		      	</div>

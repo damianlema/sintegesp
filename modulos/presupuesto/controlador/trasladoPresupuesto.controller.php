@@ -17,7 +17,7 @@ ini_set('display_errors', '1');
 $root_server = $_SERVER['DOCUMENT_ROOT'].$_SESSION["directorio_root"];
 require($root_server."/conf/class.Conexion.php");
 require($root_server."/modulos/presupuesto/modelo/class.TrasladoPresupuesto.php");
-
+//require($root_server."/modulos/presupuesto/modelo/class.ListasTrasladoPresupuesto.php");
 
 $ejecutar = isset($_POST['ejecutar']) ? $_POST['ejecutar'] : null;
 

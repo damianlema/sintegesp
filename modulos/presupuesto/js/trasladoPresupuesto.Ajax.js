@@ -257,7 +257,7 @@ function consultarTrasladoPresupuestario(idtraslado_presupuestario)
 			$('input#numeroResolucion').val(respuesta[3]);
 			$('input#datetimepicker2').val(fecha_resolucion);
 			$('#concepto').val(respuesta[5]);
-			$('#estado').html(respuesta[6]);
+			$('input#estado').val(respuesta[6]);
 			$('input#disminucionesBs').val(formatNumber.new(respuesta[7]));
 			$('input#aumentosBs').val(formatNumber.new(respuesta[8]));
 			mostrarDiv();
@@ -322,7 +322,7 @@ function mostrarDiv()
 //
 function actualizarBotones()
 {
-	var estado = $('#estado').html();
+	var estado = $('input#estado').val();
 
 	switch(estado){
 
@@ -332,6 +332,7 @@ function actualizarBotones()
 			$("#btnProcesar").css("display","block");
 			$("#btnAnular").css("display","none");
 			$("#btnDuplicar").css("display","none");
+			$("#btnEliminar").css("display","block");
 			$("#btnBuscarPartidaDisminuir").css("display","block");
 			$("#btnCargarPartidaDisminuir").css("display","block");
 			$("#btnBuscarPartidaAumentar").css("display","block");
@@ -345,6 +346,21 @@ function actualizarBotones()
 			$("#btnProcesar").css("display","none");
 			$("#btnAnular").css("display","block");
 			$("#btnDuplicar").css("display","block");
+			$("#btnEliminar").css("display","none");
+			$("#btnBuscarPartidaDisminuir").css("display","none");
+			$("#btnCargarPartidaDisminuir").css("display","none");
+			$("#btnBuscarPartidaAumentar").css("display","none");
+			$("#btnCargarPartidaAumentar").css("display","none");
+			$("#numeroSolicitud").prop('disabled',true);
+		break;
+
+		case 'Anulado':
+			$("#btnContinuar").css("display","none");
+			$("#btnActualizar").css("display","none");
+			$("#btnProcesar").css("display","none");
+			$("#btnAnular").css("display","none");
+			$("#btnDuplicar").css("display","block");
+			$("#btnEliminar").css("display","block");
 			$("#btnBuscarPartidaDisminuir").css("display","none");
 			$("#btnCargarPartidaDisminuir").css("display","none");
 			$("#btnBuscarPartidaAumentar").css("display","none");
