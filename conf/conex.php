@@ -19,7 +19,7 @@ function Conectarse()
         exit();
     }
 
-    if (!mysql_select_db("gestion_gobernacion_2017_08052017", $link)) {
+    if (!mysql_select_db("gestion_gobernacion_2017_mayo", $link)) {
 
         echo "Error conectando a la base de datos.";
         exit();
