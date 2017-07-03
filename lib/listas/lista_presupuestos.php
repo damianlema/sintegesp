@@ -7,6 +7,8 @@
  *    Autor: Hector Lema
  *
  */
+ 
+ 
 ob_start();
 session_start();
 include_once "../../conf/conex.php";
