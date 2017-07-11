@@ -19,9 +19,12 @@ include 'templates/mensajes.php';
 		  	<div class="row">
 		    	<div class="form-group col-md-4">
 			    	<label for="numeroSolicitud" class="control-label col-md-6" style="font-weight: normal !important;">Estado</label>
-			    	<input 	type="text" class="form-control" id="estado"
+			    	<input 	type="text" class="form-control" id="estado_mostrado"
 			    			value="En Elaboración"
 			    			disabled=""
+			    			style="font-style: italic; font-weight: bold; width: 180px;">
+			    	<input 	type="hidden" class="form-control" id="estado_oculto"
+			    			value="elaboracion"
 			    			style="font-style: italic; font-weight: bold;">
 			    </div>
 			</div>

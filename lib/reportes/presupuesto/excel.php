@@ -1240,7 +1240,7 @@ switch ($nombre) {
 
     //    Resumen Consolidado...
     case "consolidado":
-    	$trimestre = "00";
+        $trimestre = "00";
         //---------------------------------------------
 
         $tr1 = "background-color:#999999; font-size:12px;";
@@ -1577,47 +1577,47 @@ switch ($nombre) {
 						<tr><td colspan='10'>&nbsp;</td></tr>
 						<tr><td colspan='10'>&nbsp;</td></tr>
 					</table>";
-						echo "<table>
+                    echo "<table>
 							<tr>";
-				        echo "<th width='100' style='$titulo'>PARTIDA</th>";
-				        echo "<th width='500' style='$titulo'>DESCRIPCION</th>";
-				        if ($campos[0]) {
-				            echo "<th width='100' style='$titulo'>ASIG. INICIAL</th>";
-				        }
+                    echo "<th width='100' style='$titulo'>PARTIDA</th>";
+                    echo "<th width='500' style='$titulo'>DESCRIPCION</th>";
+                    if ($campos[0]) {
+                        echo "<th width='100' style='$titulo'>ASIG. INICIAL</th>";
+                    }
 
-				        if ($campos[1]) {
-				            echo "<th width='100' style='$titulo'>AUMENTO</th>";
-				        }
+                    if ($campos[1]) {
+                        echo "<th width='100' style='$titulo'>AUMENTO</th>";
+                    }
 
-				        if ($campos[2]) {
-				            echo "<th width='100' style='$titulo'>DISMINUCION</th>";
-				        }
+                    if ($campos[2]) {
+                        echo "<th width='100' style='$titulo'>DISMINUCION</th>";
+                    }
 
-				        if ($campos[3]) {
-				            echo "<th width='100' style='$titulo'>MODIFICACION</th>";
-				        }
+                    if ($campos[3]) {
+                        echo "<th width='100' style='$titulo'>MODIFICACION</th>";
+                    }
 
-				        if ($campos[4]) {
-				            echo "<th width='100' style='$titulo'>ASIG. AJUSTADA</th>";
-				        }
+                    if ($campos[4]) {
+                        echo "<th width='100' style='$titulo'>ASIG. AJUSTADA</th>";
+                    }
 
-				        if ($campos[5]) {
-				            echo "<th width='100' style='$titulo'>COMPROMISO</th>";
-				        }
+                    if ($campos[5]) {
+                        echo "<th width='100' style='$titulo'>COMPROMISO</th>";
+                    }
 
-				        if ($campos[6]) {
-				            echo "<th width='100' style='$titulo'>CAUSADO</th>";
-				        }
+                    if ($campos[6]) {
+                        echo "<th width='100' style='$titulo'>CAUSADO</th>";
+                    }
 
-				        if ($campos[7]) {
-				            echo "<th width='100' style='$titulo'>PAGADO</th>";
-				        }
+                    if ($campos[7]) {
+                        echo "<th width='100' style='$titulo'>PAGADO</th>";
+                    }
 
-				        if ($campos[8]) {
-				            echo "<th width='100' style='$titulo'>DISPONIBLE</th>";
-				        }
+                    if ($campos[8]) {
+                        echo "<th width='100' style='$titulo'>DISPONIBLE</th>";
+                    }
 
-				        echo "</tr>
+                    echo "</tr>
 				        </table>";
                 }
             }
@@ -1629,10 +1629,10 @@ switch ($nombre) {
             if ($trimestre == '00') {
                 $formulado             = $field['Formulado'];
                 $formulado_m           = number_format($field['Formulado'], 2, ',', '.');
-                $aumento             = $_AUMENTO[$par];
-                $aumento_m           = number_format($_AUMENTO[$par], 2, ',', '.');
-                $disminucion             = $_DISMINUCION[$par];
-                $disminucion_m           = number_format($_DISMINUCION[$par], 2, ',', '.');
+                $aumento               = $_AUMENTO[$par];
+                $aumento_m             = number_format($_AUMENTO[$par], 2, ',', '.');
+                $disminucion           = $_DISMINUCION[$par];
+                $disminucion_m         = number_format($_DISMINUCION[$par], 2, ',', '.');
                 $modificacion          = $_AUMENTO[$par] - $_DISMINUCION[$par];
                 $modificacion_m        = number_format($modificacion, 2, ',', '.');
                 $actual                = $field['Formulado'] + $modificacion;
@@ -1648,43 +1648,43 @@ switch ($nombre) {
 				<tr>
 					<td style='" . $estilo . "'>" . $clasificador . "</td>
 					<td style='" . $estilo . "'>" . utf8_decode($field["NomPartida"]) . "</td>";
-					if ($campos[0]) {
-						echo "
+                if ($campos[0]) {
+                    echo "
 						<td style='" . $estilo . "' align='right'>" . $formulado_m . "</td>";
-					}
-					if ($campos[1]) {
-						echo "
+                }
+                if ($campos[1]) {
+                    echo "
 						<td style='" . $estilo . "' align='right'>" . $aumento_m . "</td>";
-					}
-					if ($campos[2]) {
-						echo "
+                }
+                if ($campos[2]) {
+                    echo "
 						<td style='" . $estilo . "' align='right'>" . $disminucion_m . "</td>";
-					}
-					if ($campos[3]) {
-						echo "
+                }
+                if ($campos[3]) {
+                    echo "
 						<td style='" . $estilo . "' align='right'>" . $modificacion_m . "</td>";
-					}
-					if ($campos[4]) {
-						echo "
+                }
+                if ($campos[4]) {
+                    echo "
 						<td style='" . $estilo . "' align='right'>" . $actual_m . "</td>";
-					}
-					if ($campos[5]) {
-						echo "
+                }
+                if ($campos[5]) {
+                    echo "
 						<td style='" . $estilo . "' align='right'>" . $total_comprometidoI . "</td>";
-					}
-					if ($campos[6]) {
-						echo "
+                }
+                if ($campos[6]) {
+                    echo "
 						<td style='" . $estilo . "' align='right'>" . $total_causaI . "</td>";
-					}
-					if ($campos[7]) {
-						echo "
+                }
+                if ($campos[7]) {
+                    echo "
 						<td style='" . $estilo . "' align='right'>" . $total_pagadoI . "</td>";
-					}
-					if ($campos[8]) {
-						echo "
+                }
+                if ($campos[8]) {
+                    echo "
 						<td style='" . $estilo . "' align='right'>" . $disponible_compromiso . "</td>";
-					}
-				echo "
+                }
+                echo "
 					</tr>
 					</table>";
 
@@ -1710,49 +1710,48 @@ switch ($nombre) {
 				<tr>
 					<td style='$tr2'>&nbsp;</td>
 					<td style='$tr2'>TOTALES</td>";
-					if ($campos[0]) {
-						echo "
+            if ($campos[0]) {
+                echo "
 						<td style='$tr2' align='right'>" . number_format($sum_formulado, 2, ',', '.') . "</td>";
-					}
-					if ($campos[1]) {
-						echo "
+            }
+            if ($campos[1]) {
+                echo "
 						<td style='$tr2' align='right'>" . number_format($sum_aumento, 2, ',', '.') . "</td>";
-					}
-					if ($campos[2]) {
-						echo "
+            }
+            if ($campos[2]) {
+                echo "
 						<td style='$tr2' align='right'>" . number_format($sum_disminucion, 2, ',', '.') . "</td>";
-					}
-					if ($campos[3]) {
-						echo "
+            }
+            if ($campos[3]) {
+                echo "
 						<td style='$tr2' align='right'>" . number_format($sum_modificacion, 2, ',', '.') . "</td>";
-					}
-					if ($campos[4]) {
-						echo "
+            }
+            if ($campos[4]) {
+                echo "
 						<td style='$tr2' align='right'>" . number_format($sum_actual, 2, ',', '.') . "</td>";
-					}
-					if ($campos[5]) {
-						echo "
+            }
+            if ($campos[5]) {
+                echo "
 						<td style='$tr2' align='right'>" . number_format($sum_compromiso, 2, ',', '.') . "</td>";
-					}
-					if ($campos[6]) {
-						echo "
+            }
+            if ($campos[6]) {
+                echo "
 						<td style='$tr2' align='right'>" . number_format($sum_causado, 2, ',', '.') . "</td>";
-					}
-					if ($campos[7]) {
-						echo "
+            }
+            if ($campos[7]) {
+                echo "
 						<td style='$tr2' align='right'>" . number_format($sum_pagado, 2, ',', '.') . "</td>";
-					}
-					if ($campos[8]) {
-						echo "
+            }
+            if ($campos[8]) {
+                echo "
 						<td style='$tr2' align='right'>" . number_format(($sum_actual - $sum_compromiso), 2, ',', '.') . "</td>";
-					}
-				echo "
+            }
+            echo "
 					</tr>
 					</table>";
         }
 
-
-    break;
+        break;
 
     //    Consolidado por Categorias...
     case "porsector":
@@ -3143,7 +3142,7 @@ switch ($nombre) {
         echo "
 		<table border='1'>
 			<tr>
-				<th width='200' style='$tr1'>DOCUMENTO</th>
+				<th width='200' style='$tr1'>DOCUMENTOssssssss</th>
 				<th width='200' style='$tr1'>FECHA</th>
 				<th width='750' style='$tr1'>DESCRIPCION</th>
 				<th width='150' style='$tr1'>ASIG. INICIAL</th>
@@ -3651,6 +3650,8 @@ switch ($nombre) {
 								(orden_pago.idbeneficiarios=beneficiarios.idbeneficiarios))
 
 							ORDER BY OrdenLista, fecha_solicitud;";
+
+                    echo $sql;
                     $query_detalle = mysql_query($sql) or die($sql . mysql_error());
                     $rows_detalle  = mysql_num_rows($query_detalle);
                     for ($k = 0; $k < $rows_detalle; $k++) {
@@ -3698,14 +3699,16 @@ switch ($nombre) {
                             $disminucion = "";
                             $aumento     = "";
                             if ($detalle['Causa'] == "si") {
-                                $causado = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                    $causado                           = "($causado)";} else {
+                                $causado = $monto;if ($detalle['estado'] == "anulado") {
+                                    $anulado = "(ANULADO)";
+                                    $causado = "($causado)";} else {
                                     $anulado = "";
                                 }
                             }
                             if ($detalle['Compromete'] == "si") {
-                                $compromisos = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                    $compromisos                       = "($compromisos)";} else {
+                                $compromisos = $monto;if ($detalle['estado'] == "anulado") {
+                                    $anulado     = "(ANULADO)";
+                                    $compromisos = "($compromisos)";} else {
                                     $anulado = "";
                                 }
                             }
@@ -7421,16 +7424,18 @@ switch ($nombre) {
                         $disminucion = "";
                         $aumento     = "";
                         if ($detalle['Causa'] == "si") {
-                            $causado = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                $causado                           = "($causado)";
-                                $tr5                               = "font-size:12px; color:#FF0000;";} else {
+                            $causado = $monto;if ($detalle['estado'] == "anulado") {
+                                $anulado = "(ANULADO)";
+                                $causado = "($causado)";
+                                $tr5     = "font-size:12px; color:#FF0000;";} else {
                                 $anulado = "";
                             }
                         }
                         if ($detalle['Compromete'] == "si") {
-                            $compromisos = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                $compromisos                       = "($compromisos)";
-                                $tr5                               = "font-size:12px; color:#FF0000;";} else {
+                            $compromisos = $monto;if ($detalle['estado'] == "anulado") {
+                                $anulado     = "(ANULADO)";
+                                $compromisos = "($compromisos)";
+                                $tr5         = "font-size:12px; color:#FF0000;";} else {
                                 $anulado = "";
                             }
                         }
@@ -8088,16 +8093,18 @@ switch ($nombre) {
                             $disminucion = "";
                             $aumento     = "";
                             if ($detalle['Causa'] == "si") {
-                                $causado = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                    $causado                           = "($causado)";
-                                    $tr5                               = "font-size:12px; color:#FF0000;";} else {
+                                $causado = $monto;if ($detalle['estado'] == "anulado") {
+                                    $anulado = "(ANULADO)";
+                                    $causado = "($causado)";
+                                    $tr5     = "font-size:12px; color:#FF0000;";} else {
                                     $anulado = "";
                                 }
                             }
                             if ($detalle['Compromete'] == "si") {
-                                $compromisos = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                    $compromisos                       = "($compromisos)";
-                                    $tr5                               = "font-size:12px; color:#FF0000;";} else {
+                                $compromisos = $monto;if ($detalle['estado'] == "anulado") {
+                                    $anulado     = "(ANULADO)";
+                                    $compromisos = "($compromisos)";
+                                    $tr5         = "font-size:12px; color:#FF0000;";} else {
                                     $anulado = "";
                                 }
                             }

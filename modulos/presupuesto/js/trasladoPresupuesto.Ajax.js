@@ -207,6 +207,7 @@ $(document).ready(function() {
 
 				if(respuesta[0] == 1){
 
+					actualizarTotales(idtraslado_presupuestario);
 					$("#_MENSAJE_SUCCESS_").css("display", "block");
 					$("#_MENSAJE_SUCCESS_").html('<strong>¡Continue!</strong>    Actualización de datos exitoso, continue con la carga de las partidas....');
 					$("#_MENSAJE_SUCCESS_").delay(4500).slideUp(2000);
@@ -236,7 +237,7 @@ $(document).ready(function() {
 //
 function consultarTrasladoPresupuestario(idtraslado_presupuestario)
 {
-	//console.log(idtraslado_presupuestario);
+
 	var dataString = 	'idtraslado_presupuestario=' + idtraslado_presupuestario +
 						'&ejecutar=consultar_traslado_presupuestario';
 	$.ajax({
@@ -257,7 +258,22 @@ function consultarTrasladoPresupuestario(idtraslado_presupuestario)
 			$('input#numeroResolucion').val(respuesta[3]);
 			$('input#datetimepicker2').val(fecha_resolucion);
 			$('#concepto').val(respuesta[5]);
-			$('input#estado').val(respuesta[6]);
+			$('input#estado_oculto').val(respuesta[6]);
+			switch(respuesta[6]){
+
+				case 'elaboracion':
+					$('input#estado_mostrado').val('En elaboración');
+				break;
+
+				case 'procesado':
+					$('input#estado_mostrado').val('Procesado');
+				break;
+
+				case 'anulado':
+					$('input#estado_mostrado').val('Anulado');
+				break;
+
+			}
 			$('input#disminucionesBs').val(formatNumber.new(respuesta[7]));
 			$('input#aumentosBs').val(formatNumber.new(respuesta[8]));
 			mostrarDiv();
@@ -267,6 +283,28 @@ function consultarTrasladoPresupuestario(idtraslado_presupuestario)
 		}
 	});
 
+}
+
+
+//Funcion para Actualizar los totales Disminuidos y Aumentados
+//
+function actualizarTotales(idtraslado_presupuestario)
+{
+
+	var dataString = 	'idtraslado_presupuestario=' + idtraslado_presupuestario +
+						'&ejecutar=mostrar_totales';
+	$.ajax({
+		type: "POST",
+		url: "modulos/presupuesto/controlador/trasladoPresupuesto.controller.php",
+		data: dataString,
+		success: function(response) {
+
+			respuesta = response.split("|.|");
+			$('input#disminucionesBs').val(formatNumber.new(respuesta[0]));
+			$('input#aumentosBs').val(formatNumber.new(respuesta[1]));
+
+		}
+	});
 }
 
 
@@ -322,11 +360,11 @@ function mostrarDiv()
 //
 function actualizarBotones()
 {
-	var estado = $('input#estado').val();
+	var estado = $('input#estado_oculto').val();
 
 	switch(estado){
 
-		case 'En elaboración':
+		case 'elaboracion':
 			$("#btnContinuar").css("display","none");
 			$("#btnActualizar").css("display","block");
 			$("#btnProcesar").css("display","block");
@@ -340,7 +378,7 @@ function actualizarBotones()
 			$("#numeroSolicitud").prop('disabled',true);
 		break;
 
-		case 'Procesado':
+		case 'procesado':
 			$("#btnContinuar").css("display","none");
 			$("#btnActualizar").css("display","block");
 			$("#btnProcesar").css("display","none");
@@ -354,7 +392,7 @@ function actualizarBotones()
 			$("#numeroSolicitud").prop('disabled',true);
 		break;
 
-		case 'Anulado':
+		case 'anulado':
 			$("#btnContinuar").css("display","none");
 			$("#btnActualizar").css("display","none");
 			$("#btnProcesar").css("display","none");

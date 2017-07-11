@@ -7,3 +7,12 @@ ALTER TABLE `tabla_prestaciones` ADD `dias_bono_fin_anio` INT(4) NOT NULL AFTER 
 
 ALTER TABLE `leyes_prestaciones` ADD `capitaliza_intereses` VARCHAR(2) NOT NULL AFTER `anio_hasta`;
 UPDATE `leyes_prestaciones` SET `capitaliza_intereses` = 'no' WHERE `leyes_prestaciones`.`idleyes_prestaciones` = 3;
+
+
+ALTER TABLE `partidas_cedentes_traslado` ADD FOREIGN KEY (`idtraslados_presupuestarios`) REFERENCES `traslados_presupuestarios`(`idtraslados_presupuestarios`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+ALTER TABLE `partidas_cedentes_traslado` ADD FOREIGN KEY (`idmaestro_presupuesto`) REFERENCES `maestro_presupuesto`(`idRegistro`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `partidas_receptoras_traslado` ADD FOREIGN KEY (`idtraslados_presupuestarios`) REFERENCES `traslados_presupuestarios`(`idtraslados_presupuestarios`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+ALTER TABLE `partidas_receptoras_traslado` ADD FOREIGN KEY (`idmaestro_presupuesto`) REFERENCES `maestro_presupuesto`(`idRegistro`) ON DELETE RESTRICT ON UPDATE RESTRICT;

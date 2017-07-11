@@ -16,7 +16,7 @@ class Conexion extends mysqli
     private static $db_host = 'localhost';
     private static $db_user = 'root';
     private static $db_pass = '';
-    private static $db_name = 'gestion_gobernacion_2017_mayo';
+    private static $db_name = 'gestion_gobernacion_2017_06072017';
 
     public function __construct()
     {
