@@ -12,15 +12,15 @@
 session_start();
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 ini_set('display_errors', '1');
+extract($_POST);
 
 $root_server = $_SERVER['DOCUMENT_ROOT'] . $_SESSION["directorio_root"];
 require $root_server . "/conf/class.Conexion.php";
-include $root_server . "/funciones/funciones.php";
 require $root_server . "/lib/listas/modelo/class.listaPresupuesto.php";
 
-$ejecutar = isset($_POST['ejecutar']) ? $_POST['ejecutar'] : null;
+$ejecutar_lista = isset($_POST['ejecutar_lista']) ? $_POST['ejecutar_lista'] : null;
 
-switch ($ejecutar) {
+switch ($ejecutar_lista) {
     case 'llena_tipo_presupuesto':
         $llena_tipo_presupuesto = new ListaPresupuesto();
         $llena_tipo_presupuesto->llenaTipoPresupuesto();

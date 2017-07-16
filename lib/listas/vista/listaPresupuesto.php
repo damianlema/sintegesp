@@ -31,7 +31,6 @@ include '../../../templates/mensajes.php';
       <h3 class="panel-title">Presupuesto de gastos</h3>
     </div>
     <div class="panel-body">
-      <form action="" method="post">
         <div class="row">
           <div class="col-md-2">
               <label for="tipo_presupuesto" class="control-label">Tipo de Presupuesto</label><br>
@@ -59,36 +58,38 @@ include '../../../templates/mensajes.php';
 
             <div class="col-md-1">
               <label for="textoBuscar" class="col-lg-2 control-label">&nbsp;</label>
-                <input type="submit" name="btnBuscar" id="btnBuscar" value="Buscar" class="btn btn-primary input-sm">
+                <input type="submit" name="btnBuscarListaPpto" id="btnBuscarListaPpto" value="Buscar" class="btn btn-primary input-sm">
             </div>
         </div>
-      </form>
     </div>
   </div>
 
-  <div class="panel panel-primary" id="divResultado" style="display: block;">
+  <div class="panel panel-primary" id="divResultado" style="display: none;">
     <div class="panel-body">
       <div class="col-lg-12" id="mostrarResultados">
 
         <table data-page-length='5' align="center" id="lista_presupuesto" class="table table-striped table=hover display" width="98%">
           <thead>
             <tr>
-              <th style="width: 10%; height: 5px; padding: 0px;">
+              <th style="width: 8%; height: 5px; padding: 0px;">
                 <h5><small><strong>Tipo Ppto.</strong></small></h5>
               </th>
-              <th style="width: 20%; height: 5px; padding: 0px;">
+              <th style="width: 15%; height: 5px; padding: 0px;">
                 <h5><small><strong>Fuente de Financiamiento</strong></small></h5>
               </th>
               <th style="width: 10%; height: 5px; padding: 0px;">
                 <h5><small><strong>Categoría Prog.</strong></small></h5>
               </th>
-              <th style="width: 10%; height: 5px; padding: 0px;">
+              <th style="width: 12%; height: 5px; padding: 0px;">
                 <h5><small><strong>Partida</strong></small></h5>
               </th>
-              <th style="width: 50%; height: 5px; padding: 0px;">
+              <th style="width: 43%; height: 5px; padding: 0px;">
                 <h5><small><strong>Denominación</strong></small></h5>
               </th>
-              <th style="width: 10%; height: 5px; padding: 0px;">
+              <th style="width: 14%; height: 5px; padding: 0px;">
+                <h5><small><strong>Monto Actual Bs.</strong></small></h5>
+              </th>
+              <th style="width: 14%; height: 5px; padding: 0px;">
                 <h5><small><strong>Disponible Bs.</strong></small></h5>
               </th>
             </tr>

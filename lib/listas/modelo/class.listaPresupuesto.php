@@ -100,7 +100,8 @@ class ListaPresupuesto
     //
     public function buscarListaPresupuesto()
     {
-        $texto_buscar           = real_escape_string($_POST['texto_busqueda']);
+        $db                     = new Conexion();
+        $texto_buscar           = $db->real_escape_string($_POST['texto_busqueda']);
         $tipo_presupuesto       = $_POST["tipo_presupuesto"];
         $fuente_financiamiento  = $_POST["fuente_financiamiento"];
         $categoria_programatica = $_POST["categoria_programatica"];
@@ -115,423 +116,424 @@ class ListaPresupuesto
             $filtro .= " AND (maestro_presupuesto.idtipo_presupuesto = '" . $tipo_presupuesto . "')";
         }
 
-        if ($categoria_programatica != "") {
+        if ($categoria_programatica != "0") {
             $filtro .= " AND (maestro_presupuesto.idcategoria_programatica = '" . $categoria_programatica . "')";
         }
 
         if ($texto_buscar != "") {
             $filtro = $filtro . " and (clasificador_presupuestario.codigo_cuenta like '%" . $texto_buscar . "%'
-		or clasificador_presupuestario.denominacion like '%" . $texto_buscar . "%')";
+        or clasificador_presupuestario.denominacion like '%" . $texto_buscar . "%')";
         }
 
         $sql = "  (SELECT maestro_presupuesto.idcategoria_programatica AS IdCategoria,
-			maestro_presupuesto.idclasificador_presupuestario AS IdPartida,
-			categoria_programatica.codigo AS CodCategoria,
-			unidad_ejecutora.denominacion AS Unidad,
-			tipo_presupuesto.denominacion AS TipoPresupuesto,
-			fuente_financiamiento.denominacion AS FuenteFinanciamiento,
-			clasificador_presupuestario.partida AS Par,
-			clasificador_presupuestario.generica AS Gen,
-			clasificador_presupuestario.especifica AS Esp,
-			clasificador_presupuestario.sub_especifica AS Sesp,
-			clasificador_presupuestario.denominacion AS NomPartida,
-			clasificador_presupuestario.codigo_cuenta,
-			maestro_presupuesto.idRegistro AS IdPresupuesto,
-			SUM(maestro_presupuesto.monto_original) AS Formulado,
-			SUM(maestro_presupuesto.monto_actual) AS Actual,
-			SUM(maestro_presupuesto.total_causados) AS Causado,
-			SUM(maestro_presupuesto.total_pagados) AS Pagado,
-			SUM(maestro_presupuesto.total_compromisos) AS Compromiso,
-			SUM(maestro_presupuesto.pre_compromiso) AS PreCompromiso,
-			SUM(maestro_presupuesto.reservado_disminuir) AS ReservadoDisminuir,
-			SUM(maestro_presupuesto.total_aumento - maestro_presupuesto.total_disminucion) AS Modificacion,
-			'subespecifica' AS Tipo,
+        maestro_presupuesto.idclasificador_presupuestario AS IdPartida,
+        categoria_programatica.codigo AS CodCategoria,
+        unidad_ejecutora.denominacion AS Unidad,
+        tipo_presupuesto.denominacion AS TipoPresupuesto,
+        fuente_financiamiento.denominacion AS FuenteFinanciamiento,
+        clasificador_presupuestario.partida AS Par,
+        clasificador_presupuestario.generica AS Gen,
+        clasificador_presupuestario.especifica AS Esp,
+        clasificador_presupuestario.sub_especifica AS Sesp,
+        clasificador_presupuestario.denominacion AS NomPartida,
+        clasificador_presupuestario.codigo_cuenta,
+        maestro_presupuesto.idRegistro AS IdPresupuesto,
+        SUM(maestro_presupuesto.monto_original) AS Formulado,
+        SUM(maestro_presupuesto.monto_actual) AS Actual,
+        SUM(maestro_presupuesto.total_causados) AS Causado,
+        SUM(maestro_presupuesto.total_pagados) AS Pagado,
+        SUM(maestro_presupuesto.total_compromisos) AS Compromiso,
+        SUM(maestro_presupuesto.pre_compromiso) AS PreCompromiso,
+        SUM(maestro_presupuesto.reservado_disminuir) AS ReservadoDisminuir,
+        SUM(maestro_presupuesto.total_aumento - maestro_presupuesto.total_disminucion) AS Modificacion,
+        'subespecifica' AS Tipo,
 
-			(SELECT SUM(pcad.monto_acreditar)
-			FROM partidas_credito_adicional pcad
-			INNER JOIN creditos_adicionales cad ON (pcad.idcredito_adicional=cad.idcreditos_adicionales)
-			WHERE pcad.idmaestro_presupuesto=IdPresupuesto
-			AND cad.estado='procesado') AS MCredito1,
+        (SELECT SUM(pcad.monto_acreditar)
+        FROM partidas_credito_adicional pcad
+        INNER JOIN creditos_adicionales cad ON (pcad.idcredito_adicional=cad.idcreditos_adicionales)
+        WHERE pcad.idmaestro_presupuesto=IdPresupuesto
+        AND cad.estado='procesado') AS MCredito1,
 
-			(SELECT SUM(pdp.monto_debitar)
-			FROM partidas_disminucion_presupuesto pdp
-			INNER JOIN disminucion_presupuesto dip ON (pdp.iddisminucion_presupuesto=dip.iddisminucion_presupuesto)
-			WHERE pdp.idmaestro_presupuesto=IdPresupuesto
-			AND dip.estado='procesado') AS MDisminucion1,
+        (SELECT SUM(pdp.monto_debitar)
+        FROM partidas_disminucion_presupuesto pdp
+        INNER JOIN disminucion_presupuesto dip ON (pdp.iddisminucion_presupuesto=dip.iddisminucion_presupuesto)
+        WHERE pdp.idmaestro_presupuesto=IdPresupuesto
+        AND dip.estado='procesado') AS MDisminucion1,
 
-			(SELECT SUM(prt.monto_acreditar)
-			FROM partidas_receptoras_traslado prt
-			INNER JOIN traslados_presupuestarios trpa ON (prt.idtraslados_presupuestarios=trpa.idtraslados_presupuestarios)
-			WHERE prt.idmaestro_presupuesto=IdPresupuesto
-			AND trpa.estado='procesado') AS MReceptora1,
+        (SELECT SUM(prt.monto_acreditar)
+        FROM partidas_receptoras_traslado prt
+        INNER JOIN traslados_presupuestarios trpa ON (prt.idtraslados_presupuestarios=trpa.idtraslados_presupuestarios)
+        WHERE prt.idmaestro_presupuesto=IdPresupuesto
+        AND trpa.estado='procesado') AS MReceptora1,
 
-			(SELECT SUM(pct.monto_debitar)
-			FROM partidas_cedentes_traslado pct
-			INNER JOIN traslados_presupuestarios trpd ON (pct.idtraslados_presupuestarios=trpd.idtraslados_presupuestarios)
-			WHERE pct.idmaestro_presupuesto=IdPresupuesto
-			AND trpd.estado='procesado') AS MCedentes1,
+        (SELECT SUM(pct.monto_debitar)
+        FROM partidas_cedentes_traslado pct
+        INNER JOIN traslados_presupuestarios trpd ON (pct.idtraslados_presupuestarios=trpd.idtraslados_presupuestarios)
+        WHERE pct.idmaestro_presupuesto=IdPresupuesto
+        AND trpd.estado='procesado') AS MCedentes1,
 
-			(SELECT SUM(prr.monto_acreditar)
-			FROM partidas_receptoras_rectificacion prr
-			INNER JOIN rectificacion_presupuesto rpr ON (prr.idrectificacion_presupuesto=rpr.idrectificacion_presupuesto)
-			WHERE prr.idmaestro_presupuesto=IdPresupuesto
-			AND rpr.estado='procesado') AS MRectificacion1,
+        (SELECT SUM(prr.monto_acreditar)
+        FROM partidas_receptoras_rectificacion prr
+        INNER JOIN rectificacion_presupuesto rpr ON (prr.idrectificacion_presupuesto=rpr.idrectificacion_presupuesto)
+        WHERE prr.idmaestro_presupuesto=IdPresupuesto
+        AND rpr.estado='procesado') AS MRectificacion1,
 
-			(SELECT SUM(prec.monto_debitar)
-			FROM partidas_rectificadoras prec
-			INNER JOIN rectificacion_presupuesto rprec ON (prec.idrectificacion_presupuesto=rprec.idrectificacion_presupuesto)
-			WHERE prec.idmaestro_presupuesto=IdPresupuesto
-			AND rprec.estado='procesado') AS MRectificadora1,
+        (SELECT SUM(prec.monto_debitar)
+        FROM partidas_rectificadoras prec
+        INNER JOIN rectificacion_presupuesto rprec ON (prec.idrectificacion_presupuesto=rprec.idrectificacion_presupuesto)
+        WHERE prec.idmaestro_presupuesto=IdPresupuesto
+        AND rprec.estado='procesado') AS MRectificadora1,
 
-			(SELECT SUM(rcp.aumento_periodo)
-			FROM rendicion_cuentas_partidas rcp
-			INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
-			WHERE rcp.idmaestro_presupuesto=IdPresupuesto
-			) AS MRendicionAumento1,
+        (SELECT SUM(rcp.aumento_periodo)
+        FROM rendicion_cuentas_partidas rcp
+        INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
+        WHERE rcp.idmaestro_presupuesto=IdPresupuesto
+        ) AS MRendicionAumento1,
 
-			(SELECT SUM(rcp.disminucion_periodo)
-			FROM rendicion_cuentas_partidas rcp
-			INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
-			WHERE rcp.idmaestro_presupuesto=IdPresupuesto
-			) AS MRendicionDisminucion1,
+        (SELECT SUM(rcp.disminucion_periodo)
+        FROM rendicion_cuentas_partidas rcp
+        INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
+        WHERE rcp.idmaestro_presupuesto=IdPresupuesto
+        ) AS MRendicionDisminucion1,
 
-			(SELECT SUM(rcp.total_compromisos_periodo)
-			FROM rendicion_cuentas_partidas rcp
-			INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
-			WHERE rcp.idmaestro_presupuesto=IdPresupuesto
-			) AS MRendicionCompromiso1,
+        (SELECT SUM(rcp.total_compromisos_periodo)
+        FROM rendicion_cuentas_partidas rcp
+        INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
+        WHERE rcp.idmaestro_presupuesto=IdPresupuesto
+        ) AS MRendicionCompromiso1,
 
-			(SELECT SUM(rcp.total_causados_periodo)
-			FROM rendicion_cuentas_partidas rcp
-			INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
-			WHERE rcp.idmaestro_presupuesto=IdPresupuesto
-			) AS MRendicionCausado1,
+        (SELECT SUM(rcp.total_causados_periodo)
+        FROM rendicion_cuentas_partidas rcp
+        INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
+        WHERE rcp.idmaestro_presupuesto=IdPresupuesto
+        ) AS MRendicionCausado1,
 
-			(SELECT SUM(rcp.total_pagados_periodo)
-			FROM rendicion_cuentas_partidas rcp
-			INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
-			WHERE rcp.idmaestro_presupuesto=IdPresupuesto
-			) AS MRendicionPagados1,
+        (SELECT SUM(rcp.total_pagados_periodo)
+        FROM rendicion_cuentas_partidas rcp
+        INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
+        WHERE rcp.idmaestro_presupuesto=IdPresupuesto
+        ) AS MRendicionPagados1,
 
-			(SELECT SUM(pocs.monto)
-			FROM partidas_orden_compra_servicio pocs
-			INNER JOIN orden_compra_servicio ocs ON (pocs.idorden_compra_servicio=ocs.idorden_compra_servicio)
-			WHERE
-			pocs.idmaestro_presupuesto = IdPresupuesto AND
-			(ocs.estado = 'procesado' OR ocs.estado = 'conformado'
-			OR ocs.estado = 'pagado' OR ocs.estado = 'ordenado' OR ocs.estado = 'parcial')) AS CompraCompromisoI,
+        (SELECT SUM(pocs.monto)
+        FROM partidas_orden_compra_servicio pocs
+        INNER JOIN orden_compra_servicio ocs ON (pocs.idorden_compra_servicio=ocs.idorden_compra_servicio)
+        WHERE
+        pocs.idmaestro_presupuesto = IdPresupuesto AND
+        (ocs.estado = 'procesado' OR ocs.estado = 'conformado'
+        OR ocs.estado = 'pagado' OR ocs.estado = 'ordenado' OR ocs.estado = 'parcial')) AS CompraCompromisoI,
 
-			(SELECT SUM(pop.monto)
-			FROM partidas_orden_pago pop
-			INNER JOIN orden_pago op ON (pop.idorden_pago = op.idorden_pago)
-			INNER JOIN tipos_documentos td ON (op.tipo = td.idtipos_documentos AND td.compromete = 'si')
-			WHERE
-			pop.idmaestro_presupuesto = IdPresupuesto AND
-			(op.estado = 'procesado' or op.estado = 'pagada'
-			or op.estado = 'conformado' or op.estado = 'parcial')) AS PagoCompromisoI,
+        (SELECT SUM(pop.monto)
+        FROM partidas_orden_pago pop
+        INNER JOIN orden_pago op ON (pop.idorden_pago = op.idorden_pago)
+        INNER JOIN tipos_documentos td ON (op.tipo = td.idtipos_documentos AND td.compromete = 'si')
+        WHERE
+        pop.idmaestro_presupuesto = IdPresupuesto AND
+        (op.estado = 'procesado' or op.estado = 'pagada'
+        or op.estado = 'conformado' or op.estado = 'parcial')) AS PagoCompromisoI,
 
-			(SELECT SUM(pop.monto)
-			FROM partidas_orden_pago pop
-			INNER JOIN orden_pago op ON (pop.idorden_pago = op.idorden_pago)
-			INNER JOIN tipos_documentos td ON (op.tipo = td.idtipos_documentos AND td.causa = 'si')
-			WHERE
-			pop.idmaestro_presupuesto = IdPresupuesto AND
-			(op.estado = 'procesado' or op.estado = 'pagada'
-			or op.estado = 'conformado' or op.estado = 'parcial')) AS CausaI,
+        (SELECT SUM(pop.monto)
+        FROM partidas_orden_pago pop
+        INNER JOIN orden_pago op ON (pop.idorden_pago = op.idorden_pago)
+        INNER JOIN tipos_documentos td ON (op.tipo = td.idtipos_documentos AND td.causa = 'si')
+        WHERE
+        pop.idmaestro_presupuesto = IdPresupuesto AND
+        (op.estado = 'procesado' or op.estado = 'pagada'
+        or op.estado = 'conformado' or op.estado = 'parcial')) AS CausaI,
 
-			(SELECT SUM(pop.monto)
-			FROM partidas_orden_pago pop
-			INNER JOIN orden_pago op ON (pop.idorden_pago = op.idorden_pago)
-			INNER JOIN pagos_financieros pf ON (op.idorden_pago = pf.idorden_pago AND pf.estado <> 'anulado')
-			WHERE
-			pop.idmaestro_presupuesto = IdPresupuesto AND
-			(op.estado = 'procesado' or op.estado = 'pagada'
-			or op.estado = 'conformado' or op.estado = 'parcial') ) AS PagadoI,
+        (SELECT SUM(pop.monto)
+        FROM partidas_orden_pago pop
+        INNER JOIN orden_pago op ON (pop.idorden_pago = op.idorden_pago)
+        INNER JOIN pagos_financieros pf ON (op.idorden_pago = pf.idorden_pago AND pf.estado <> 'anulado')
+        WHERE
+        pop.idmaestro_presupuesto = IdPresupuesto AND
+        (op.estado = 'procesado' or op.estado = 'pagada'
+        or op.estado = 'conformado' or op.estado = 'parcial') ) AS PagadoI,
 
-			ordinal.codigo AS codordinal,
-			ordinal.denominacion AS nomordinal
+        ordinal.codigo AS codordinal,
+        ordinal.denominacion AS nomordinal
 
-			FROM
-			maestro_presupuesto
-			INNER JOIN categoria_programatica ON (maestro_presupuesto.idcategoria_programatica=categoria_programatica.idcategoria_programatica)
-			INNER JOIN unidad_ejecutora ON (categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora)
-			INNER JOIN clasificador_presupuestario ON (maestro_presupuesto.idclasificador_presupuestario=clasificador_presupuestario.idclasificador_presupuestario)
-			INNER JOIN ordinal ON (maestro_presupuesto.idordinal = ordinal.idordinal)
-			INNER JOIN fuente_financiamiento ON (maestro_presupuesto.idfuente_financiamiento = fuente_financiamiento.idfuente_financiamiento)
-			INNER JOIN tipo_presupuesto ON (maestro_presupuesto.idtipo_presupuesto = tipo_presupuesto.idtipo_presupuesto)
-			WHERE
-			(clasificador_presupuestario.sub_especifica <> '00') and
-			$filtro
-			GROUP BY (CodCategoria), (Par), (Gen), (Esp), (Sesp), (codordinal))
+        FROM
+        maestro_presupuesto
+        INNER JOIN categoria_programatica ON (maestro_presupuesto.idcategoria_programatica=categoria_programatica.idcategoria_programatica)
+        INNER JOIN unidad_ejecutora ON (categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora)
+        INNER JOIN clasificador_presupuestario ON (maestro_presupuesto.idclasificador_presupuestario=clasificador_presupuestario.idclasificador_presupuestario)
+        INNER JOIN ordinal ON (maestro_presupuesto.idordinal = ordinal.idordinal)
+        INNER JOIN fuente_financiamiento ON (maestro_presupuesto.idfuente_financiamiento = fuente_financiamiento.idfuente_financiamiento)
+        INNER JOIN tipo_presupuesto ON (maestro_presupuesto.idtipo_presupuesto = tipo_presupuesto.idtipo_presupuesto)
+        WHERE
+        (clasificador_presupuestario.sub_especifica <> '00') and
+        $filtro
+        GROUP BY (CodCategoria), (Par), (Gen), (Esp), (Sesp), (codordinal))
 
-			UNION
+        UNION
 
-			(SELECT maestro_presupuesto.idcategoria_programatica AS IdCategoria,
-			maestro_presupuesto.idclasificador_presupuestario AS IdPartida,
-			categoria_programatica.codigo AS CodCategoria,
-			unidad_ejecutora.denominacion AS Unidad,
-			tipo_presupuesto.denominacion AS TipoPresupuesto,
-			fuente_financiamiento.denominacion AS FuenteFinanciamiento,
-			clasificador_presupuestario.partida AS Par,
-			clasificador_presupuestario.generica AS Gen,
-			clasificador_presupuestario.especifica AS Esp,
-			clasificador_presupuestario.sub_especifica AS Sesp,
-			clasificador_presupuestario.denominacion AS NomPartida,
-			clasificador_presupuestario.codigo_cuenta,
-			maestro_presupuesto.idRegistro AS IdPresupuesto,
-			SUM(maestro_presupuesto.monto_original) AS Formulado,
-			SUM(maestro_presupuesto.monto_actual) AS Actual,
-			SUM(maestro_presupuesto.total_causados) AS Causado,
-			SUM(maestro_presupuesto.total_pagados) AS Pagado,
-			SUM(maestro_presupuesto.total_compromisos) AS Compromiso,
-			SUM(maestro_presupuesto.pre_compromiso) AS PreCompromiso,
-			SUM(maestro_presupuesto.reservado_disminuir) AS ReservadoDisminuir,
-			SUM(maestro_presupuesto.total_aumento - maestro_presupuesto.total_disminucion) AS Modificacion,
-			'especifica' AS Tipo,
+        (SELECT maestro_presupuesto.idcategoria_programatica AS IdCategoria,
+        maestro_presupuesto.idclasificador_presupuestario AS IdPartida,
+        categoria_programatica.codigo AS CodCategoria,
+        unidad_ejecutora.denominacion AS Unidad,
+        tipo_presupuesto.denominacion AS TipoPresupuesto,
+        fuente_financiamiento.denominacion AS FuenteFinanciamiento,
+        clasificador_presupuestario.partida AS Par,
+        clasificador_presupuestario.generica AS Gen,
+        clasificador_presupuestario.especifica AS Esp,
+        clasificador_presupuestario.sub_especifica AS Sesp,
+        clasificador_presupuestario.denominacion AS NomPartida,
+        clasificador_presupuestario.codigo_cuenta,
+        maestro_presupuesto.idRegistro AS IdPresupuesto,
+        SUM(maestro_presupuesto.monto_original) AS Formulado,
+        SUM(maestro_presupuesto.monto_actual) AS Actual,
+        SUM(maestro_presupuesto.total_causados) AS Causado,
+        SUM(maestro_presupuesto.total_pagados) AS Pagado,
+        SUM(maestro_presupuesto.total_compromisos) AS Compromiso,
+        SUM(maestro_presupuesto.pre_compromiso) AS PreCompromiso,
+        SUM(maestro_presupuesto.reservado_disminuir) AS ReservadoDisminuir,
+        SUM(maestro_presupuesto.total_aumento - maestro_presupuesto.total_disminucion) AS Modificacion,
+        'especifica' AS Tipo,
 
-			(SELECT SUM(pcad.monto_acreditar)
-			FROM partidas_credito_adicional pcad
-			INNER JOIN creditos_adicionales cad ON (pcad.idcredito_adicional=cad.idcreditos_adicionales)
-			WHERE pcad.idmaestro_presupuesto=IdPresupuesto
-			AND cad.estado='procesado') AS MCredito1,
+        (SELECT SUM(pcad.monto_acreditar)
+        FROM partidas_credito_adicional pcad
+        INNER JOIN creditos_adicionales cad ON (pcad.idcredito_adicional=cad.idcreditos_adicionales)
+        WHERE pcad.idmaestro_presupuesto=IdPresupuesto
+        AND cad.estado='procesado') AS MCredito1,
 
-			(SELECT SUM(pdp.monto_debitar)
-			FROM partidas_disminucion_presupuesto pdp
-			INNER JOIN disminucion_presupuesto dip ON (pdp.iddisminucion_presupuesto=dip.iddisminucion_presupuesto)
-			WHERE pdp.idmaestro_presupuesto=IdPresupuesto
-			AND dip.estado='procesado') AS MDisminucion1,
+        (SELECT SUM(pdp.monto_debitar)
+        FROM partidas_disminucion_presupuesto pdp
+        INNER JOIN disminucion_presupuesto dip ON (pdp.iddisminucion_presupuesto=dip.iddisminucion_presupuesto)
+        WHERE pdp.idmaestro_presupuesto=IdPresupuesto
+        AND dip.estado='procesado') AS MDisminucion1,
 
-			(SELECT SUM(prt.monto_acreditar)
-			FROM partidas_receptoras_traslado prt
-			INNER JOIN traslados_presupuestarios trpa ON (prt.idtraslados_presupuestarios=trpa.idtraslados_presupuestarios)
-			WHERE prt.idmaestro_presupuesto=IdPresupuesto
-			AND trpa.estado='procesado') AS MReceptora1,
+        (SELECT SUM(prt.monto_acreditar)
+        FROM partidas_receptoras_traslado prt
+        INNER JOIN traslados_presupuestarios trpa ON (prt.idtraslados_presupuestarios=trpa.idtraslados_presupuestarios)
+        WHERE prt.idmaestro_presupuesto=IdPresupuesto
+        AND trpa.estado='procesado') AS MReceptora1,
 
-			(SELECT SUM(pct.monto_debitar)
-			FROM partidas_cedentes_traslado pct
-			INNER JOIN traslados_presupuestarios trpd ON (pct.idtraslados_presupuestarios=trpd.idtraslados_presupuestarios)
-			WHERE pct.idmaestro_presupuesto=IdPresupuesto
-			AND trpd.estado='procesado') AS MCedentes1,
-			(SELECT SUM(prr.monto_acreditar)
-			FROM partidas_receptoras_rectificacion prr
-			INNER JOIN rectificacion_presupuesto rpr ON (prr.idrectificacion_presupuesto=rpr.idrectificacion_presupuesto)
-			WHERE prr.idmaestro_presupuesto=IdPresupuesto
-			AND rpr.estado='procesado') AS MRectificacion1,
-			(SELECT SUM(prec.monto_debitar)
-			FROM partidas_rectificadoras prec
-			INNER JOIN rectificacion_presupuesto rprec ON (prec.idrectificacion_presupuesto=rprec.idrectificacion_presupuesto)
-			WHERE prec.idmaestro_presupuesto=IdPresupuesto
-			AND rprec.estado='procesado') AS MRectificadora1,
+        (SELECT SUM(pct.monto_debitar)
+        FROM partidas_cedentes_traslado pct
+        INNER JOIN traslados_presupuestarios trpd ON (pct.idtraslados_presupuestarios=trpd.idtraslados_presupuestarios)
+        WHERE pct.idmaestro_presupuesto=IdPresupuesto
+        AND trpd.estado='procesado') AS MCedentes1,
 
-			(SELECT SUM(rcp.aumento_periodo)
-			FROM rendicion_cuentas_partidas rcp
-			INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
-			WHERE rcp.idmaestro_presupuesto=IdPresupuesto
-			) AS MRendicionAumento1,
+        (SELECT SUM(prr.monto_acreditar)
+        FROM partidas_receptoras_rectificacion prr
+        INNER JOIN rectificacion_presupuesto rpr ON (prr.idrectificacion_presupuesto=rpr.idrectificacion_presupuesto)
+        WHERE prr.idmaestro_presupuesto=IdPresupuesto
+        AND rpr.estado='procesado') AS MRectificacion1,
 
-			(SELECT SUM(rcp.disminucion_periodo)
-			FROM rendicion_cuentas_partidas rcp
-			INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
-			WHERE rcp.idmaestro_presupuesto=IdPresupuesto
-			) AS MRendicionDisminucion1,
+        (SELECT SUM(prec.monto_debitar)
+        FROM partidas_rectificadoras prec
+        INNER JOIN rectificacion_presupuesto rprec ON (prec.idrectificacion_presupuesto=rprec.idrectificacion_presupuesto)
+        WHERE prec.idmaestro_presupuesto=IdPresupuesto
+        AND rprec.estado='procesado') AS MRectificadora1,
 
-			(SELECT SUM(rcp.total_compromisos_periodo)
-			FROM rendicion_cuentas_partidas rcp
-			INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
-			WHERE rcp.idmaestro_presupuesto=IdPresupuesto
-			) AS MRendicionCompromiso1,
+        (SELECT SUM(rcp.aumento_periodo)
+        FROM rendicion_cuentas_partidas rcp
+        INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
+        WHERE rcp.idmaestro_presupuesto=IdPresupuesto
+        ) AS MRendicionAumento1,
 
-			(SELECT SUM(rcp.total_causados_periodo)
-			FROM rendicion_cuentas_partidas rcp
-			INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
-			WHERE rcp.idmaestro_presupuesto=IdPresupuesto
-			) AS MRendicionCausado1,
+        (SELECT SUM(rcp.disminucion_periodo)
+        FROM rendicion_cuentas_partidas rcp
+        INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
+        WHERE rcp.idmaestro_presupuesto=IdPresupuesto
+        ) AS MRendicionDisminucion1,
 
-			(SELECT SUM(rcp.total_pagados_periodo)
-			FROM rendicion_cuentas_partidas rcp
-			INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
-			WHERE rcp.idmaestro_presupuesto=IdPresupuesto
-			) AS MRendicionPagados1,
+        (SELECT SUM(rcp.total_compromisos_periodo)
+        FROM rendicion_cuentas_partidas rcp
+        INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
+        WHERE rcp.idmaestro_presupuesto=IdPresupuesto
+        ) AS MRendicionCompromiso1,
 
-			(SELECT SUM(pocs.monto)
-			FROM partidas_orden_compra_servicio pocs
-			INNER JOIN orden_compra_servicio ocs ON (pocs.idorden_compra_servicio=ocs.idorden_compra_servicio)
-			WHERE
-			pocs.idmaestro_presupuesto = IdPresupuesto AND
-			(ocs.estado = 'procesado' OR ocs.estado = 'conformado'
-			OR ocs.estado = 'pagado' OR ocs.estado = 'ordenado' OR ocs.estado = 'parcial')) AS CompraCompromisoI,
+        (SELECT SUM(rcp.total_causados_periodo)
+        FROM rendicion_cuentas_partidas rcp
+        INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
+        WHERE rcp.idmaestro_presupuesto=IdPresupuesto
+        ) AS MRendicionCausado1,
 
-			(SELECT SUM(pop.monto)
-			FROM partidas_orden_pago pop
-			INNER JOIN orden_pago op ON (pop.idorden_pago = op.idorden_pago)
-			INNER JOIN tipos_documentos td ON (op.tipo = td.idtipos_documentos AND td.compromete = 'si')
-			WHERE
-			pop.idmaestro_presupuesto = IdPresupuesto AND
-			(op.estado = 'procesado' or op.estado = 'pagada'
-			or op.estado = 'conformado' or op.estado = 'parcial')) AS PagoCompromisoI,
+        (SELECT SUM(rcp.total_pagados_periodo)
+        FROM rendicion_cuentas_partidas rcp
+        INNER JOIN rendicion_cuentas rc ON (rcp.idrendicion_cuentas=rc.idrendicion_cuentas)
+        WHERE rcp.idmaestro_presupuesto=IdPresupuesto
+        ) AS MRendicionPagados1,
 
-			(SELECT SUM(pop.monto)
-			FROM partidas_orden_pago pop
-			INNER JOIN orden_pago op ON (pop.idorden_pago = op.idorden_pago)
-			INNER JOIN tipos_documentos td ON (op.tipo = td.idtipos_documentos AND td.causa = 'si')
-			WHERE
-			pop.idmaestro_presupuesto = IdPresupuesto AND
-			(op.estado = 'procesado' or op.estado = 'pagada'
-			or op.estado = 'conformado' or op.estado = 'parcial')) AS CausaI,
+        (SELECT SUM(pocs.monto)
+        FROM partidas_orden_compra_servicio pocs
+        INNER JOIN orden_compra_servicio ocs ON (pocs.idorden_compra_servicio=ocs.idorden_compra_servicio)
+        WHERE
+        pocs.idmaestro_presupuesto = IdPresupuesto AND
+        (ocs.estado = 'procesado' OR ocs.estado = 'conformado'
+        OR ocs.estado = 'pagado' OR ocs.estado = 'ordenado' OR ocs.estado = 'parcial')) AS CompraCompromisoI,
 
-			(SELECT SUM(pop.monto)
-			FROM partidas_orden_pago pop
-			INNER JOIN orden_pago op ON (pop.idorden_pago = op.idorden_pago)
-			INNER JOIN pagos_financieros pf ON (op.idorden_pago = pf.idorden_pago AND pf.estado <> 'anulado')
-			WHERE
-			pop.idmaestro_presupuesto = IdPresupuesto AND
-			(op.estado = 'procesado' or op.estado = 'pagada'
-			or op.estado = 'conformado' or op.estado = 'parcial')) AS PagadoI,
+        (SELECT SUM(pop.monto)
+        FROM partidas_orden_pago pop
+        INNER JOIN orden_pago op ON (pop.idorden_pago = op.idorden_pago)
+        INNER JOIN tipos_documentos td ON (op.tipo = td.idtipos_documentos AND td.compromete = 'si')
+        WHERE
+        pop.idmaestro_presupuesto = IdPresupuesto AND
+        (op.estado = 'procesado' or op.estado = 'pagada'
+        or op.estado = 'conformado' or op.estado = 'parcial')) AS PagoCompromisoI,
 
-			ordinal.codigo AS codordinal,
-			ordinal.denominacion AS nomordinal
+        (SELECT SUM(pop.monto)
+        FROM partidas_orden_pago pop
+        INNER JOIN orden_pago op ON (pop.idorden_pago = op.idorden_pago)
+        INNER JOIN tipos_documentos td ON (op.tipo = td.idtipos_documentos AND td.causa = 'si')
+        WHERE
+        pop.idmaestro_presupuesto = IdPresupuesto AND
+        (op.estado = 'procesado' or op.estado = 'pagada'
+        or op.estado = 'conformado' or op.estado = 'parcial')) AS CausaI,
 
-			FROM
-			maestro_presupuesto
-			INNER JOIN categoria_programatica ON (maestro_presupuesto.idcategoria_programatica=categoria_programatica.idcategoria_programatica)
-			INNER JOIN unidad_ejecutora ON (categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora)
-			INNER JOIN clasificador_presupuestario ON (maestro_presupuesto.idclasificador_presupuestario=clasificador_presupuestario.idclasificador_presupuestario)
-			INNER JOIN ordinal ON (maestro_presupuesto.idordinal = ordinal.idordinal)
-			INNER JOIN fuente_financiamiento ON (maestro_presupuesto.idfuente_financiamiento = fuente_financiamiento.idfuente_financiamiento)
-			INNER JOIN tipo_presupuesto ON (maestro_presupuesto.idtipo_presupuesto = tipo_presupuesto.idtipo_presupuesto)
-			WHERE
-			(clasificador_presupuestario.sub_especifica='00') and
-			$filtro
-			GROUP BY (CodCategoria), (Par), (Gen), (Esp), (Sesp), (codordinal))
+        (SELECT SUM(pop.monto)
+        FROM partidas_orden_pago pop
+        INNER JOIN orden_pago op ON (pop.idorden_pago = op.idorden_pago)
+        INNER JOIN pagos_financieros pf ON (op.idorden_pago = pf.idorden_pago AND pf.estado <> 'anulado')
+        WHERE
+        pop.idmaestro_presupuesto = IdPresupuesto AND
+        (op.estado = 'procesado' or op.estado = 'pagada'
+        or op.estado = 'conformado' or op.estado = 'parcial')) AS PagadoI,
 
-			UNION
+        ordinal.codigo AS codordinal,
+        ordinal.denominacion AS nomordinal
 
-			(SELECT maestro_presupuesto.idcategoria_programatica AS IdCategoria,
-			maestro_presupuesto.idclasificador_presupuestario AS idPartida,
-			categoria_programatica.codigo AS CodCategoria,
-			unidad_ejecutora.denominacion AS Unidad,
-			tipo_presupuesto.denominacion AS TipoPresupuesto,
-			fuente_financiamiento.denominacion AS FuenteFinanciamiento,
-			clasificador_presupuestario.partida AS Par,
-			(SELECT clasificador_presupuestario.generica
-			FROM clasificador_presupuestario
-			WHERE (clasificador_presupuestario.idclasificador_presupuestario=idPartida)) AS Gen,
-			'00' AS Esp,
-			'00' AS Sesp,
-			(SELECT clasificador_presupuestario.denominacion
-			FROM clasificador_presupuestario
-			WHERE
-			(clasificador_presupuestario.partida=Par AND
-			clasificador_presupuestario.generica=Gen AND
-			clasificador_presupuestario.especifica='00' AND
-			clasificador_presupuestario.sub_especifica='00')) AS NomPartida,
-			clasificador_presupuestario.codigo_cuenta,
-			maestro_presupuesto.idRegistro AS IdPresupuesto,
-			SUM(maestro_presupuesto.monto_original) AS Formulado,
-			SUM(maestro_presupuesto.monto_actual) AS Actual,
-			SUM(maestro_presupuesto.total_causados) AS Causado,
-			SUM(maestro_presupuesto.total_pagados) AS Pagado,
-			SUM(maestro_presupuesto.total_compromisos) AS Compromiso,
-			SUM(maestro_presupuesto.pre_compromiso) AS PreCompromiso,
-			SUM(maestro_presupuesto.reservado_disminuir) AS ReservadoDisminuir,
-			SUM(maestro_presupuesto.total_aumento - maestro_presupuesto.total_disminucion) AS Modificacion,
-			'generica' AS Tipo,
-			'' AS MCredito1,
-			'' AS MDisminucion1,
-			'' AS MReceptora1,
-			'' AS MCedentes1,
-			'' as MRectificacion1,
-			'' AS MRectificadora1,
-			'' as MRendicionAumento1,
-			'' as MRendicionDisminucion1,
-			'' as MRendicionCompromiso1,
-			'' as MRendicionCausado1,
-			'' as MRendicionPagados1,
-			'' AS CompraCompromisoI,
-			'' AS PagoCompromisoI,
-			'' AS CausaI,
-			'' AS PagadoI,
-			'0000' AS codordinal,
-			'' AS nomordinal
-			FROM
-			maestro_presupuesto
-			INNER JOIN categoria_programatica ON (maestro_presupuesto.idcategoria_programatica=categoria_programatica.idcategoria_programatica)
-			INNER JOIN unidad_ejecutora ON (categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora)
-			INNER JOIN clasificador_presupuestario ON (maestro_presupuesto.idclasificador_presupuestario=clasificador_presupuestario.idclasificador_presupuestario)
-			INNER JOIN fuente_financiamiento ON (maestro_presupuesto.idfuente_financiamiento = fuente_financiamiento.idfuente_financiamiento)
-			INNER JOIN tipo_presupuesto ON (maestro_presupuesto.idtipo_presupuesto = tipo_presupuesto.idtipo_presupuesto)
-			WHERE
-			(clasificador_presupuestario.sub_especifica='00') and
-			$filtro
-			GROUP BY (CodCategoria), (Par), (Gen), (Esp), (Sesp), (codordinal))
+        FROM
+        maestro_presupuesto
+        INNER JOIN categoria_programatica ON (maestro_presupuesto.idcategoria_programatica=categoria_programatica.idcategoria_programatica)
+        INNER JOIN unidad_ejecutora ON (categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora)
+        INNER JOIN clasificador_presupuestario ON (maestro_presupuesto.idclasificador_presupuestario=clasificador_presupuestario.idclasificador_presupuestario)
+        INNER JOIN ordinal ON (maestro_presupuesto.idordinal = ordinal.idordinal)
+        INNER JOIN fuente_financiamiento ON (maestro_presupuesto.idfuente_financiamiento = fuente_financiamiento.idfuente_financiamiento)
+        INNER JOIN tipo_presupuesto ON (maestro_presupuesto.idtipo_presupuesto = tipo_presupuesto.idtipo_presupuesto)
+        WHERE
+        (clasificador_presupuestario.sub_especifica='00') and
+        $filtro
+        GROUP BY (CodCategoria), (Par), (Gen), (Esp), (Sesp), (codordinal))
 
-			UNION
+        UNION
 
-			(SELECT maestro_presupuesto.idcategoria_programatica AS IdCategoria,
-			maestro_presupuesto.idclasificador_presupuestario AS idPartida,
-			categoria_programatica.codigo AS CodCategoria,
-			unidad_ejecutora.denominacion AS Unidad,
-			tipo_presupuesto.denominacion AS TipoPresupuesto,
-			fuente_financiamiento.denominacion AS FuenteFinanciamiento,
-			clasificador_presupuestario.partida AS Par,
-			'00' AS Gen,
-			'00' AS Esp,
-			'00' AS Sesp,
-			(SELECT clasificador_presupuestario.denominacion
-			FROM clasificador_presupuestario
-			WHERE
-			(clasificador_presupuestario.partida=Par AND
-			clasificador_presupuestario.generica='00' AND
-			clasificador_presupuestario.especifica='00' AND
-			clasificador_presupuestario.sub_especifica='00')) AS NomPartida,
-			clasificador_presupuestario.codigo_cuenta,
-			maestro_presupuesto.idRegistro AS IdPresupuesto,
-			SUM(maestro_presupuesto.monto_original) AS Formulado,
-			SUM(maestro_presupuesto.monto_actual) AS Actual,
-			SUM(maestro_presupuesto.total_causados) AS Causado,
-			SUM(maestro_presupuesto.total_pagados) AS Pagado,
-			SUM(maestro_presupuesto.total_compromisos) AS Compromiso,
-			SUM(maestro_presupuesto.pre_compromiso) AS PreCompromiso,
-			SUM(maestro_presupuesto.reservado_disminuir) AS ReservadoDisminuir,
-			SUM(maestro_presupuesto.total_aumento - maestro_presupuesto.total_disminucion) AS Modificacion,
-			'partida' AS Tipo,
-			'' AS MCredito1,
-			'' AS MDisminucion1,
-			'' AS MReceptora1,
-			'' AS MCedentes1,
-			'' as MRectificacion1,
-			'' AS MRectificadora1,
-			'' as MRendicionAumento1,
-			'' as MRendicionDisminucion1,
-			'' as MRendicionCompromiso1,
-			'' as MRendicionCausado1,
-			'' as MRendicionPagados1,
-			'' AS CompraCompromisoI,
-			'' AS PagoCompromisoI,
-			'' AS CausaI,
-			'' AS PagadoI,
-			'0000' AS codordinal,
-			'' AS nomordinal
-			FROM
-			maestro_presupuesto
-			INNER JOIN categoria_programatica ON (maestro_presupuesto.idcategoria_programatica=categoria_programatica.idcategoria_programatica)
-			INNER JOIN unidad_ejecutora ON (categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora)
-			INNER JOIN clasificador_presupuestario ON (maestro_presupuesto.idclasificador_presupuestario=clasificador_presupuestario.idclasificador_presupuestario)
-			INNER JOIN fuente_financiamiento ON (maestro_presupuesto.idfuente_financiamiento = fuente_financiamiento.idfuente_financiamiento)
-			INNER JOIN tipo_presupuesto ON (maestro_presupuesto.idtipo_presupuesto = tipo_presupuesto.idtipo_presupuesto)
-			WHERE
-			(clasificador_presupuestario.sub_especifica='00') and
-			$filtro
-			GROUP BY (CodCategoria), (Par), (Gen), (Esp), (Sesp), (codordinal))
-			ORDER BY CodCategoria, Par, Gen, Esp, Sesp, codordinal";
+        (SELECT maestro_presupuesto.idcategoria_programatica AS IdCategoria,
+        maestro_presupuesto.idclasificador_presupuestario AS idPartida,
+        categoria_programatica.codigo AS CodCategoria,
+        unidad_ejecutora.denominacion AS Unidad,
+        tipo_presupuesto.denominacion AS TipoPresupuesto,
+        fuente_financiamiento.denominacion AS FuenteFinanciamiento,
+        clasificador_presupuestario.partida AS Par,
+        (SELECT clasificador_presupuestario.generica
+        FROM clasificador_presupuestario
+        WHERE (clasificador_presupuestario.idclasificador_presupuestario=idPartida)) AS Gen,
+        '00' AS Esp,
+        '00' AS Sesp,
+        (SELECT clasificador_presupuestario.denominacion
+        FROM clasificador_presupuestario
+        WHERE
+        (clasificador_presupuestario.partida=Par AND
+        clasificador_presupuestario.generica=Gen AND
+        clasificador_presupuestario.especifica='00' AND
+        clasificador_presupuestario.sub_especifica='00')) AS NomPartida,
+        clasificador_presupuestario.codigo_cuenta,
+        maestro_presupuesto.idRegistro AS IdPresupuesto,
+        SUM(maestro_presupuesto.monto_original) AS Formulado,
+        SUM(maestro_presupuesto.monto_actual) AS Actual,
+        SUM(maestro_presupuesto.total_causados) AS Causado,
+        SUM(maestro_presupuesto.total_pagados) AS Pagado,
+        SUM(maestro_presupuesto.total_compromisos) AS Compromiso,
+        SUM(maestro_presupuesto.pre_compromiso) AS PreCompromiso,
+        SUM(maestro_presupuesto.reservado_disminuir) AS ReservadoDisminuir,
+        SUM(maestro_presupuesto.total_aumento - maestro_presupuesto.total_disminucion) AS Modificacion,
+        'generica' AS Tipo,
+        '' AS MCredito1,
+        '' AS MDisminucion1,
+        '' AS MReceptora1,
+        '' AS MCedentes1,
+        '' as MRectificacion1,
+        '' AS MRectificadora1,
+        '' as MRendicionAumento1,
+        '' as MRendicionDisminucion1,
+        '' as MRendicionCompromiso1,
+        '' as MRendicionCausado1,
+        '' as MRendicionPagados1,
+        '' AS CompraCompromisoI,
+        '' AS PagoCompromisoI,
+        '' AS CausaI,
+        '' AS PagadoI,
+        '0000' AS codordinal,
+        '' AS nomordinal
+        FROM
+        maestro_presupuesto
+        INNER JOIN categoria_programatica ON (maestro_presupuesto.idcategoria_programatica=categoria_programatica.idcategoria_programatica)
+        INNER JOIN unidad_ejecutora ON (categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora)
+        INNER JOIN clasificador_presupuestario ON (maestro_presupuesto.idclasificador_presupuestario=clasificador_presupuestario.idclasificador_presupuestario)
+        INNER JOIN fuente_financiamiento ON (maestro_presupuesto.idfuente_financiamiento = fuente_financiamiento.idfuente_financiamiento)
+        INNER JOIN tipo_presupuesto ON (maestro_presupuesto.idtipo_presupuesto = tipo_presupuesto.idtipo_presupuesto)
+        WHERE
+        (clasificador_presupuestario.sub_especifica='00') and
+        $filtro
+        GROUP BY (CodCategoria), (Par), (Gen), (Esp), (Sesp), (codordinal))
+
+        UNION
+
+        (SELECT maestro_presupuesto.idcategoria_programatica AS IdCategoria,
+        maestro_presupuesto.idclasificador_presupuestario AS idPartida,
+        categoria_programatica.codigo AS CodCategoria,
+        unidad_ejecutora.denominacion AS Unidad,
+        tipo_presupuesto.denominacion AS TipoPresupuesto,
+        fuente_financiamiento.denominacion AS FuenteFinanciamiento,
+        clasificador_presupuestario.partida AS Par,
+        '00' AS Gen,
+        '00' AS Esp,
+        '00' AS Sesp,
+        (SELECT clasificador_presupuestario.denominacion
+        FROM clasificador_presupuestario
+        WHERE
+        (clasificador_presupuestario.partida=Par AND
+        clasificador_presupuestario.generica='00' AND
+        clasificador_presupuestario.especifica='00' AND
+        clasificador_presupuestario.sub_especifica='00')) AS NomPartida,
+        clasificador_presupuestario.codigo_cuenta,
+        maestro_presupuesto.idRegistro AS IdPresupuesto,
+        SUM(maestro_presupuesto.monto_original) AS Formulado,
+        SUM(maestro_presupuesto.monto_actual) AS Actual,
+        SUM(maestro_presupuesto.total_causados) AS Causado,
+        SUM(maestro_presupuesto.total_pagados) AS Pagado,
+        SUM(maestro_presupuesto.total_compromisos) AS Compromiso,
+        SUM(maestro_presupuesto.pre_compromiso) AS PreCompromiso,
+        SUM(maestro_presupuesto.reservado_disminuir) AS ReservadoDisminuir,
+        SUM(maestro_presupuesto.total_aumento - maestro_presupuesto.total_disminucion) AS Modificacion,
+        'partida' AS Tipo,
+        '' AS MCredito1,
+        '' AS MDisminucion1,
+        '' AS MReceptora1,
+        '' AS MCedentes1,
+        '' as MRectificacion1,
+        '' AS MRectificadora1,
+        '' as MRendicionAumento1,
+        '' as MRendicionDisminucion1,
+        '' as MRendicionCompromiso1,
+        '' as MRendicionCausado1,
+        '' as MRendicionPagados1,
+        '' AS CompraCompromisoI,
+        '' AS PagoCompromisoI,
+        '' AS CausaI,
+        '' AS PagadoI,
+        '0000' AS codordinal,
+        '' AS nomordinal
+        FROM
+        maestro_presupuesto
+        INNER JOIN categoria_programatica ON (maestro_presupuesto.idcategoria_programatica=categoria_programatica.idcategoria_programatica)
+        INNER JOIN unidad_ejecutora ON (categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora)
+        INNER JOIN clasificador_presupuestario ON (maestro_presupuesto.idclasificador_presupuestario=clasificador_presupuestario.idclasificador_presupuestario)
+        INNER JOIN fuente_financiamiento ON (maestro_presupuesto.idfuente_financiamiento = fuente_financiamiento.idfuente_financiamiento)
+        INNER JOIN tipo_presupuesto ON (maestro_presupuesto.idtipo_presupuesto = tipo_presupuesto.idtipo_presupuesto)
+        WHERE
+        (clasificador_presupuestario.sub_especifica='00') and
+        $filtro
+        GROUP BY (CodCategoria), (Par), (Gen), (Esp), (Sesp), (codordinal))
+        ORDER BY CodCategoria, Par, Gen, Esp, Sesp, codordinal";
 
         $sql_suma = $sql;
         $par      = 0;
         $gen      = 0;
         $esp      = 0;
         $sub      = 0;
-
-        $db  = new Conexion();
+        //echo $sql;
         $reg = $db->query($sql_suma);
 
         if ($db->rows($reg) > 0) {
@@ -617,6 +619,201 @@ class ListaPresupuesto
             }
 
             //AQUI SE DEBE LLENAR LA TABLA CON EL RESULTADO DE LA BUSQUEDA
+            //
+            ?>
+ 			<table data-page-length='5' align="center" id="lista_presupuesto" class="table table-striped table=hover display" width="98%">
+	          	<thead>
+		            <tr>
+		              	<th style="width: 4%; height: 5px; padding: 0px;">
+		                	<h5 align="center"><small><strong>Tipo</strong></small></h5>
+		              	</th>
+		              	<th style="width: 8%; height: 5px; padding: 0px;">
+		                	<h5 align="center"><small><strong>Fuente de Financiamiento</strong></small></h5>
+		              	</th>
+		              	<th style="width: 8%; height: 5px; padding: 0px;">
+		                	<h5 align="center"><small><strong>Categoría Prog.</strong></small></h5>
+		              	</th>
+		              	<th style="width: 12%; height: 5px; padding: 0px;">
+		                	<h5 align="center"><small><strong>Partida</strong></small></h5>
+		              	</th>
+		              	<th style="width: 43%; height: 5px; padding: 0px;">
+		                	<h5 align="center"><small><strong>Denominación</strong></small></h5>
+		              	</th>
+		              	<th style="width: 15%; height: 5px; padding: 0px;">
+		                	<h5 align="center"><small><strong>Monto Actual Bs.</strong></small></h5>
+		              	</th>
+		              	<th style="width: 15%; height: 5px; padding: 0px;">
+		                	<h5 align="center"><small><strong>Disponible Bs.</strong></small></h5>
+		              	</th>
+		            </tr>
+	          	</thead>
+
+	          	<tbody>
+
+				<?php
+
+            $par = 0;
+            $gen = 0;
+            $esp = 0;
+            $sub = 0;
+            $sql = $db->query($sql);
+
+            while ($llenar_grilla = $db->recorrer($sql)) {
+
+                $cp = $llenar_grilla["IdPresupuesto"];
+                //echo $cp;
+                if ($llenar_grilla["Tipo"] == "partida" and $texto_buscar == '') {
+                    $par++;
+                    $modificado    = $aumentado_partidaI[$par] - $disminuido_partidaI[$par];
+                    $actual0       = $llenar_grilla["Formulado"] + $modificado;
+                    $comprometidoI = $comprometido_partidaI[$par];
+                    $disponible    = $actual0 - $comprometidoI;
+
+                    ?>
+	                <tr>
+
+	                  	<td style="width: 4%; height: 5px; padding: 0px;" align='left'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["TipoPresupuesto"]?></h6></td>
+	                  	<td style="width: 8%; height: 5px; padding: 0px;" align='center'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["FuenteFinanciamiento"]?></h6></td>
+	                  	<td style="width: 8%; height: 5px; padding: 0px;" align='center'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["CodCategoria"]?></h6></td>
+	                  	<td style="width: 12%; height: 5px; padding: 0px;" align='center'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["Par"] . "." .
+                    $llenar_grilla["Gen"] . "." .
+                    $llenar_grilla["Esp"] . "." .
+                    $llenar_grilla["Sesp"] . " (" .
+                    $llenar_grilla["codordinal"] . ")"?></h6></td>
+
+	                  	<td style="width: 43%; height: 5px; padding: 0px;" align='left'>
+	                  		<h6><?=$llenar_grilla["NomPartida"]?></h6></td>
+
+	                  	<td style="width: 15%; height: 5px; padding: 0px; text-align: right;" align='right'>
+	                  		<h6><?=number_format($actual0, 2, ",", ".")?></h6></td>
+	                  	<td style="width: 15%; height: 5px; padding: 0px; text-align: right;" align='right'>
+	                  		<h6><?=number_format($disponible, 2, ",", ".")?></h6></td>
+	                </tr>
+	            	<?php
+
+                }
+
+                if ($llenar_grilla["Tipo"] == "generica" and $texto_buscar == '') {
+                    $gen++;
+                    $modificado    = $aumentado_genericaI[$gen] - $disminuido_genericaI[$gen];
+                    $actual0       = $llenar_grilla["Formulado"] + $modificado;
+                    $comprometidoI = $comprometido_genericaI[$gen];
+                    $disponible    = $actual0 - $comprometidoI;
+
+                    ?>
+	                <tr>
+
+	                  	<td style="width: 4%; height: 5px; padding: 0px;" align='left'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["TipoPresupuesto"]?></h6></td>
+	                  	<td style="width: 8%; height: 5px; padding: 0px;" align='center'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["FuenteFinanciamiento"]?></h6></td>
+	                  	<td style="width: 8%; height: 5px; padding: 0px;" align='center'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["CodCategoria"]?></h6></td>
+	                  	<td style="width: 12%; height: 5px; padding: 0px;" align='center'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["Par"] . "." .
+                    $llenar_grilla["Gen"] . "." .
+                    $llenar_grilla["Esp"] . "." .
+                    $llenar_grilla["Sesp"] . " (" .
+                    $llenar_grilla["codordinal"] . ")"?></h6></td>
+
+	                  	<td style="width: 43%; height: 5px; padding: 0px;" align='left'>
+	                  		<h6><?=$llenar_grilla["NomPartida"]?></h6></td>
+
+	                  	<td style="width: 15%; height: 5px; padding: 0px; text-align: right;" align='right'>
+	                  		<h6><?=number_format($actual0, 2, ",", ".")?></h6></td>
+	                  	<td style="width: 15%; height: 5px; padding: 0px; text-align: right;" align='right'>
+	                  		<h6><?=number_format($disponible, 2, ",", ".")?></h6></td>
+	                </tr>
+	            	<?php
+
+                }
+
+                if ($llenar_grilla["Tipo"] == "especifica") {
+                    $esp++;
+                    $modificado    = $aumentado_especificaI[$esp] - $disminuido_especificaI[$esp];
+                    $actual0       = $llenar_grilla["Formulado"] + $modificado;
+                    $comprometidoI = $comprometido_especificaI[$esp];
+                    $disponible    = $actual0 - $comprometidoI;
+
+                    ?>
+
+	                <tr style="cursor:pointer" onclick="window.onUnload = window.opener.consultarPpto(<?=$cp?>),
+                                                    window.close()">
+
+	                  	<td style="width: 4%; height: 5px; padding: 0px;" align='left'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["TipoPresupuesto"]?></h6></td>
+	                  	<td style="width: 8%; height: 5px; padding: 0px;" align='center'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["FuenteFinanciamiento"]?></h6></td>
+	                  	<td style="width: 8%; height: 5px; padding: 0px;" align='center'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["CodCategoria"]?></h6></td>
+	                  	<td style="width: 12%; height: 5px; padding: 0px;" align='center'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["Par"] . "." .
+                    $llenar_grilla["Gen"] . "." .
+                    $llenar_grilla["Esp"] . "." .
+                    $llenar_grilla["Sesp"] . " (" .
+                    $llenar_grilla["codordinal"] . ")"?></h6></td>
+
+	                  	<td style="width: 43%; height: 5px; padding: 0px;" align='left'>
+	                  		<h6><?=$llenar_grilla["NomPartida"]?></h6></td>
+
+	                  	<td style="width: 15%; height: 5px; padding: 0px; text-align: right;" align='right'>
+	                  		<h6><?=number_format($actual0, 2, ",", ".")?></h6></td>
+	                  	<td style="width: 15%; height: 5px; padding: 0px; text-align: right;" align='right'>
+	                  		<h6><?=number_format($disponible, 2, ",", ".")?></h6></td>
+	                </tr>
+	            	<?php
+
+                }
+
+                if ($llenar_grilla["Tipo"] == "subespecifica") {
+                    $sub++;
+                    $modificado    = $aumentado_subespecificaI[$sub] - $disminuido_subespecificaI[$sub];
+                    $actual0       = $llenar_grilla["Formulado"] + $modificado;
+                    $comprometidoI = $comprometido_subespecificaI[$sub];
+                    $disponible    = $actual0 - $comprometidoI;
+
+                    ?>
+
+	                <tr>
+
+	                  	<td style="width: 4%; height: 5px; padding: 0px;" align='left'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["TipoPresupuesto"]?></h6></td>
+	                  	<td style="width: 8%; height: 5px; padding: 0px;" align='center'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["FuenteFinanciamiento"]?></h6></td>
+	                  	<td style="width: 8%; height: 5px; padding: 0px;" align='center'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["CodCategoria"]?></h6></td>
+	                  	<td style="width: 12%; height: 5px; padding: 0px;" align='center'>
+	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["Par"] . "." .
+                    $llenar_grilla["Gen"] . "." .
+                    $llenar_grilla["Esp"] . "." .
+                    $llenar_grilla["Sesp"] . " (" .
+                    $llenar_grilla["codordinal"] . ")"?></h6></td>
+
+	                  	<td style="width: 43%; height: 5px; padding: 0px;" align='left'>
+	                  		<h6><?=$llenar_grilla["NomPartida"]?></h6></td>
+
+	                  	<td style="width: 15%; height: 5px; padding: 0px; text-align: right;" align='right'>
+	                  		<h6><?=number_format($actual0, 2, ",", ".")?></h6></td>
+	                  	<td style="width: 15%; height: 5px; padding: 0px; text-align: right;" align='right'>
+	                  		<h6><?=number_format($disponible, 2, ",", ".")?></h6></td>
+	                </tr>
+	            	<?php
+
+                }
+
+            }
+
+            ?>
+
+
+	          	</tbody>
+			</table>
+		<?php
+
         } else {
             echo "vacio";
         }

@@ -410,6 +410,9 @@ function actualizarBotones()
 
 }
 
-
+function consultarPpto(idmaestro_presupuesto)
+{
+	
+}
 
 

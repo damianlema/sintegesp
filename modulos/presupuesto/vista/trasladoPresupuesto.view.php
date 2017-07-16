@@ -151,7 +151,7 @@ include 'templates/mensajes.php';
 								<button type="button" class="btn btn-default btn-circle" id="btnBuscarPartidaDisminuir"
 			                    		title="Buscar Partida Presupuestaria a Disminuir"
 			                    		style="display: block;"
-			                    		onClick="window.open('lib/listas/controlador/listaPresupuesto.Controller.php?destino=disminucion_traslado','creditos_adicionales','resisable = no, scrollbars = yes, width=1350 height = 600')">
+			                    		onClick="window.open('lib/listas/controlador/listaPresupuesto.Controller.php?destino=disminucion_traslado','','resisable = no, scrollbars = yes, width=1350 height = 900')">
 										<i class="glyphicon glyphicon-search"></i>
 								</button>
 							</div>
