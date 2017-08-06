@@ -495,8 +495,8 @@ while ($rowtipo_presupuesto = mysql_fetch_array($sql_tipo_presupuesto)) {
             <td align="right" class='viewPropTitleNew'>A&ntilde;o</td>
             <td><select name="anio" id="anio" disabled="disabled">
                         <?
-            anio_fiscal();
-            ?>
+anio_fiscal();
+?>
             </select></td>
             <td align="right"></td>
             <td><table align="left" border="0" cellpadding="0" cellspacing="0">

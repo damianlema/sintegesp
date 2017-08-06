@@ -660,7 +660,7 @@ class ListaPresupuesto
 
             while ($llenar_grilla = $db->recorrer($sql)) {
 
-                $cp = $llenar_grilla["IdPresupuesto"];
+                $idMaestro_Presupuesto = $llenar_grilla["IdPresupuesto"];
                 //echo $cp;
                 if ($llenar_grilla["Tipo"] == "partida" and $texto_buscar == '') {
                     $par++;
@@ -741,7 +741,8 @@ class ListaPresupuesto
 
                     ?>
 
-	                <tr style="cursor:pointer" onclick="window.onUnload = window.opener.consultarPpto(<?=$cp?>),
+	                <tr style="cursor:pointer" onclick="window.onUnload = window.opener.consultarPpto(<?=$idMaestro_Presupuesto?>,
+	                																					$('input#destino').val()),
                                                     window.close()">
 
 	                  	<td style="width: 4%; height: 5px; padding: 0px;" align='left'>
@@ -752,6 +753,7 @@ class ListaPresupuesto
 	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["CodCategoria"]?></h6></td>
 	                  	<td style="width: 12%; height: 5px; padding: 0px;" align='center'>
 	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["Par"] . "." .
+
                     $llenar_grilla["Gen"] . "." .
                     $llenar_grilla["Esp"] . "." .
                     $llenar_grilla["Sesp"] . " (" .
@@ -788,6 +790,7 @@ class ListaPresupuesto
 	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["CodCategoria"]?></h6></td>
 	                  	<td style="width: 12%; height: 5px; padding: 0px;" align='center'>
 	                  		<h6 style="font-size: 9;"><?=$llenar_grilla["Par"] . "." .
+
                     $llenar_grilla["Gen"] . "." .
                     $llenar_grilla["Esp"] . "." .
                     $llenar_grilla["Sesp"] . " (" .

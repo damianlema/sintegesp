@@ -13,6 +13,7 @@ session_start();
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 ini_set('display_errors', '1');
 extract($_POST);
+extract($_GET);
 
 $root_server = $_SERVER['DOCUMENT_ROOT'] . $_SESSION["directorio_root"];
 require $root_server . "/conf/class.Conexion.php";

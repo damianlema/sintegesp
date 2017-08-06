@@ -315,6 +315,7 @@ include 'templates/footer.php';
 ?>
 
 <script src="modulos/presupuesto/js/trasladoPresupuesto.Ajax.js" type="text/javascript" language="javascript"></script>
+<script src="modulos/presupuesto/js/maestro_afectar_partida.js" type="text/javascript" language="javascript"></script>
 
 <script type="text/javascript">
 	TablaPaginada('tabla_disminuir');

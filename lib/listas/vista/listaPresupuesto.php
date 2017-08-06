@@ -25,6 +25,8 @@
 include '../../../templates/mensajes.php';
 ?>
 
+<input type="hidden" id="destino" value="<?php echo $_GET['destino'] ?>">
+
 <div class = "container-fluid">
   <div class="panel panel-primary">
     <div class="panel-heading">
