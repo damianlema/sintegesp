@@ -32,21 +32,34 @@ class MaestroAfectarPartida
 					        clasificador_presupuestario.generica AS Gen,
 					        clasificador_presupuestario.especifica AS Esp,
 					        clasificador_presupuestario.sub_especifica AS Sesp,
-					        clasificador_presupuestario.denominacion AS NomPartida
+					        clasificador_presupuestario.denominacion AS NomPartida,
+					        ordinal.codigo AS codordinal,
+        					ordinal.denominacion AS nomordinal
 					FROM
-						maestro_presupuesto, categoria_programatica, fuente_financiamiento, clasificador_presupuestario
+						maestro_presupuesto, categoria_programatica, fuente_financiamiento, clasificador_presupuestario, ordinal
 					WHERE
 						maestro_presupuesto.idRegistro = '" . $idMaestroPresupuesto . "'
 						AND categoria_programatica.idcategoria_programatica = maestro_presupuesto.idcategoria_programatica
 						AND fuente_financiamiento.idfuente_financiamiento = maestro_presupuesto.idfuente_financiamiento
 						AND clasificador_presupuestario.idclasificador_presupuestario = maestro_presupuesto.idclasificador_presupuestario
+						AND ordinal.idordinal = maestro_presupuesto.idordinal
 				";
 
-        $reg   = $db->query($sql);
-        $field = $db->recorrer($reg);
+        $consulta = $db->query($sql);
+        $registro = $db->recorrer($consulta);
 
         //cargar todos los registros para mostrarlos con js en el formulario
+        //
+        echo $idMaestroPresupuesto . "|.|" .
+            $registro["FuenteFinanciamiento"] . "|.|" .
+            $registro["CodCategoria"] . "|.|" .
+            $registro["Par"] . "|.|" .
+            $registro["Gen"] . "|.|" .
+            $registro["Esp"] . "|.|" .
+            $registro["Sesp"] . "|.|" .
+            $registro["NomPartida"] . "|.|" .
+            $registro["codordinal"] . "|.|" .
+            $registro["nomordinal"];
 
-        echo $idMaestroPresupuesto . " " . $field['NomPartida'];
     }
 }

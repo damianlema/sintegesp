@@ -155,11 +155,11 @@ include 'templates/mensajes.php';
 										<i class="glyphicon glyphicon-search"></i>
 								</button>
 							</div>
-							<div class="form-group" style="width: 15%; margin-right: -2px;">
+							<div class="form-group" style="width: 16%; margin-right: -2px;">
 								<input type="text" class="form-control" placeholder="Fuente Financiamiento"
 										style="width: 100%; height: 30px;" disabled id="fuente_financiamiento_disminuir">
 							</div>
-							<div class="form-group" style="width: 9%; margin-left: -2px; margin-right: -2px;">
+							<div class="form-group" style="width: 8%; margin-left: -2px; margin-right: -2px;">
 								<input type="text" class="form-control" placeholder="Categoria"
 										style="width: 100%; height: 30px;" disabled id="categoria_programatica_disminuir">
 							</div>
@@ -236,11 +236,11 @@ include 'templates/mensajes.php';
 									<i class="glyphicon glyphicon-search"></i>
 								</button>
 							</div>
-							<div class="form-group" style="width: 15%; margin-right: -2px;">
+							<div class="form-group" style="width: 16%; margin-right: -2px;">
 								<input type="text" class="form-control" placeholder="Fuente Financiamiento"
 										style="width: 100%; height: 30px;" disabled id="fuente_financiamiento_aumentar">
 							</div>
-							<div class="form-group" style="width: 9%; margin-left: -2px; margin-right: -2px;">
+							<div class="form-group" style="width: 8%; margin-left: -2px; margin-right: -2px;">
 								<input type="text" class="form-control" placeholder="Categoria"
 										style="width: 100%; height: 30px;" disabled id="categoria_programatica_aumentar">
 							</div>
