@@ -853,6 +853,11 @@ if ($_POST) {
     $busca_credito           = mysql_query("select * from creditos_adicionales where idcreditos_adicionales = '$idcredito_adicional'", $conexion_db);
     $credito                 = mysql_fetch_array($busca_credito);
 
+    $sql        = "SELECT anio_fiscal FROM configuracion";
+    $query_conf = mysql_query($sql) or die($sql . mysql_error());
+    $conf       = mysql_fetch_array($query_conf);
+    $anio       = $conf['anio_fiscal'];
+
     if (isset($_POST["agregar_partida"])) {
 
         $idmaestro_presupuesto = $_POST["idmaestropresupuesto"];
