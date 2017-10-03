@@ -1,50 +1,50 @@
 <?php
 session_start();
-//	---------------------------------------------
-$ls=array(
-"actividad"=>"actividad",
-"familia"=>"familia",
-"grupo"=>"grupo"
+//    ---------------------------------------------
+$ls = array(
+    "actividad" => "actividad",
+    "familia"   => "familia",
+    "grupo"     => "grupo",
 );
-$_SESSION['listadoSNC']=serialize($ls);
+$_SESSION['listadoSNC'] = serialize($ls);
 
-$lm=array(
-"tipo"=>"tipo",
-"movimiento"=>"movimiento"
+$lm = array(
+    "tipo"       => "tipo",
+    "movimiento" => "movimiento",
 );
-$_SESSION['listadoMovimientos']=serialize($lm);
+$_SESSION['listadoMovimientos'] = serialize($lm);
 
-$cta=array(
-"banco"=>"banco",
-"cuenta"=>"cuenta"
+$cta = array(
+    "banco"  => "banco",
+    "cuenta" => "cuenta",
 );
-$_SESSION['listadoCuentas']=serialize($cta);
+$_SESSION['listadoCuentas'] = serialize($cta);
 
-$lc=array(
-"grupo"=>"banco",
-"sub_grupo"=>"sub_grupo",
-"seccion"=>"seccion"
+$lc = array(
+    "grupo"     => "banco",
+    "sub_grupo" => "sub_grupo",
+    "seccion"   => "seccion",
 );
-$_SESSION['listadoCatalogo']=serialize($lc);
+$_SESSION['listadoCatalogo'] = serialize($lc);
 
-$lo=array(
-"organizacion"=>"organizacion",
-"nivel_organizacion"=>"nivel_organizacion"
+$lo = array(
+    "organizacion"       => "organizacion",
+    "nivel_organizacion" => "nivel_organizacion",
 );
-$_SESSION['listadoOrganizacion']=serialize($lo);
-//	---------------------------------------------
-$nom_mes["01"]="Enero";
-$nom_mes["02"]="Febrero";
-$nom_mes["03"]="Marzo";
-$nom_mes["04"]="Abril";
-$nom_mes["05"]="Mayo";
-$nom_mes["06"]="Junio";
-$nom_mes["07"]="Julio";
-$nom_mes["08"]="Agosto";
-$nom_mes["09"]="Septiembre";
-$nom_mes["10"]="Octubre";
-$nom_mes["11"]="Noviembre";
-$nom_mes["12"]="Diciembre";
+$_SESSION['listadoOrganizacion'] = serialize($lo);
+//    ---------------------------------------------
+$nom_mes["01"] = "Enero";
+$nom_mes["02"] = "Febrero";
+$nom_mes["03"] = "Marzo";
+$nom_mes["04"] = "Abril";
+$nom_mes["05"] = "Mayo";
+$nom_mes["06"] = "Junio";
+$nom_mes["07"] = "Julio";
+$nom_mes["08"] = "Agosto";
+$nom_mes["09"] = "Septiembre";
+$nom_mes["10"] = "Octubre";
+$nom_mes["11"] = "Noviembre";
+$nom_mes["12"] = "Diciembre";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -83,7 +83,7 @@ var listadoOrganizacion=new Array();
 listadoOrganizacion[0]="organizacion";
 listadoOrganizacion[1]="nivel_organizacion";
 
-function nuevoAjax() { 
+function nuevoAjax() {
 	var xmlhttp=false;
 	try{
 		xmlhttp=new ActiveXObject("Msxml2.XMLHTTP");
@@ -96,7 +96,7 @@ function nuevoAjax() {
 			if (!xmlhttp && typeof XMLHttpRequest!='undefined') xmlhttp=new XMLHttpRequest();
 		}
 	}
-	return xmlhttp; 
+	return xmlhttp;
 }
 
 function buscarEnArray(array, dato) {
@@ -112,7 +112,7 @@ function buscarEnArray(array, dato) {
 
 function enabledArchivo() {
 	if (document.getElementById('excel').checked) document.getElementById('archivo').disabled=false; else document.getElementById('archivo').disabled=true;
-	
+
 }
 
 function cargaContenido(idSelectOrigen, listado) {
@@ -130,14 +130,14 @@ function cargaContenido(idSelectOrigen, listado) {
 	if(opcionSeleccionada==0)
 	{
 		var x=posicionSelectDestino, selectActual=null;
-		
+
 		if (listado=="listadoSNC") var num = listadoSNC.length;
 		else if (listado=="listadoMovimientos") var num = listadoMovimientos.length;
 		else if (listado=="listadoCuentas") var num = listadoCuentas.length;
 		else if (listado=="listadoCatalogo") var num = listadoCatalogo.length;
 		else if (listado=="listadoOrganizacion") var num = listadoOrganizacion.length;
-		
-		// Busco todos los selects siguientes al que inicio el evento onChange y les cambio el estado y deshabilito		
+
+		// Busco todos los selects siguientes al que inicio el evento onChange y les cambio el estado y deshabilito
 		while(x <= num-1)
 		{
 			if (listado=="listadoSNC") selectActual=document.getElementById(listadoSNC[x]);
@@ -146,11 +146,11 @@ function cargaContenido(idSelectOrigen, listado) {
 			else if (listado=="listadoCatalogo") selectActual=document.getElementById(listadoCatalogo[x]);
 			else if (listado=="listadoOrganizacion") selectActual=document.getElementById(listadoOrganizacion[x]);
 			selectActual.length=0;
-			
-			var nuevaOpcion=document.createElement("option"); 
-			nuevaOpcion.value=0; 
+
+			var nuevaOpcion=document.createElement("option");
+			nuevaOpcion.value=0;
 			nuevaOpcion.innerHTML="Selecciona Opción...";
-			selectActual.appendChild(nuevaOpcion);	
+			selectActual.appendChild(nuevaOpcion);
 			selectActual.disabled=true;
 			x++;
 		}
@@ -168,21 +168,21 @@ function cargaContenido(idSelectOrigen, listado) {
 		// Creo el nuevo objeto AJAX y envio al servidor el ID del select a cargar y la opcion seleccionada del select origen
 		var ajax=nuevoAjax();
 		ajax.open("GET", "http://localhost/gestion/modulos/tablas_comunes/lib/select_dependientes_proceso.php?select="+idSelectDestino+"&opcion="+opcionSeleccionada+"&listado="+listado, true);
-		ajax.onreadystatechange=function() 
-		{ 
+		ajax.onreadystatechange=function()
+		{
 			if (ajax.readyState==1)
 			{
 				// Mientras carga elimino la opcion "Selecciona Opcion..." y pongo una que dice "Cargando..."
 				selectDestino.length=0;
 				var nuevaOpcion=document.createElement("option"); nuevaOpcion.value=0; nuevaOpcion.innerHTML="Cargando...";
-				selectDestino.appendChild(nuevaOpcion); selectDestino.disabled=true;	
+				selectDestino.appendChild(nuevaOpcion); selectDestino.disabled=true;
 			}
 			if (ajax.readyState==4)
 			{
 				selectDestino.parentNode.innerHTML=ajax.responseText;
 				//document.getElementById("selectActividad").innerHTML=ajax.responseText;
 				//selectDestino.disabled = false;
-			} 
+			}
 		}
 		ajax.send(null);
 	}
@@ -190,16 +190,16 @@ function cargaContenido(idSelectOrigen, listado) {
 
 function llamarOrdenar(nombre, ordenar) {
 	var ajax=nuevoAjax();
-	ajax.open("POST", "reportes.php", true);	
-	ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');	
-	ajax.onreadystatechange=function() { 
+	ajax.open("POST", "reportes.php", true);
+	ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=ISO-8859-1');
+	ajax.onreadystatechange=function() {
 		if(ajax.readyState == 1){
 			document.getElementById("divCargando").style.display = "block";
 			}
 		if (ajax.readyState==4){
 			location.href = "reportes.php?nombre="+nombre+"&orden="+ordenar;
 			document.getElementById("divCargando").style.display = "none";
-		} 
+		}
 	}
 	ajax.send("nombre="+nombre);
 }
@@ -317,35 +317,35 @@ function trabajadores_por_tipo_de_nomina(nombre) {
 	document.getElementById("divCargando").style.display = "none";
 }
 
-function trabajadores_por_concepto_constante(nombre) { 
+function trabajadores_por_concepto_constante(nombre) {
 	var idconcepto = document.getElementById("idconcepto").value;
 	var ordenar = document.getElementById("ordenar").value;
 	var tabla = document.getElementById("tabla").value;
-	
+
 	document.getElementById("divCargando").style.display = "block";
 	location.href = "reportes.php?nombre="+nombre+"&tabla="+tabla+"&idconcepto="+idconcepto+"&ordenar="+ordenar;
 	document.getElementById("divCargando").style.display = "none";
 }
 
-function trabajadores_por_unidad_funcional(nombre) { 
+function trabajadores_por_unidad_funcional(nombre) {
 	var idunidad = document.getElementById("idunidad").value;
 	var ordenar = document.getElementById("ordenar").value;
-	
+
 	document.getElementById("divCargando").style.display = "block";
 	location.href = "reportes.php?nombre="+nombre+"&idunidad="+idunidad+"&ordenar="+ordenar;
 	document.getElementById("divCargando").style.display = "none";
 }
 
-function trabajadores_por_centro_costos(nombre) { 
+function trabajadores_por_centro_costos(nombre) {
 	var idcentro = document.getElementById("idcentro").value;
 	var ordenar = document.getElementById("ordenar").value;
-	
+
 	document.getElementById("divCargando").style.display = "block";
 	location.href = "reportes.php?nombre="+nombre+"&idcentro="+idcentro+"&ordenar="+ordenar;
 	document.getElementById("divCargando").style.display = "none";
 }
 
-function trabajadores_carga_familiar(nombre) { 
+function trabajadores_carga_familiar(nombre) {
 	var nomina = document.getElementById("nomina").value;
 	var idunidad = document.getElementById("idunidad").value;
 	var idcentro = document.getElementById("idcentro").value;
@@ -356,13 +356,13 @@ function trabajadores_carga_familiar(nombre) {
 	var rdounidad = document.getElementById("rdounidad").checked;
 	var rdocentro = document.getElementById("rdocentro").checked;
 	var rdotrabajador = document.getElementById("rdotrabajador").checked;
-	
+
 	document.getElementById("divCargando").style.display = "block";
 	location.href = "reportes.php?nombre="+nombre+"&nomina="+nomina+"&idunidad="+idunidad+"&idcentro="+idcentro+"&idtrabajador="+idtrabajador+"&rdonomina="+rdonomina+"&rdounidad="+rdounidad+"&rdocentro="+rdocentro+"&rdotrabajador="+rdotrabajador+"&ordenar="+ordenar+"&parentesco="+parentesco;
 	document.getElementById("divCargando").style.display = "none";
 }
 
-function trabajadores_ficha(nombre) { 
+function trabajadores_ficha(nombre) {
 	var nomina = document.getElementById("nomina").value;
 	var idunidad = document.getElementById("idunidad").value;
 	var idcentro = document.getElementById("idcentro").value;
@@ -372,7 +372,7 @@ function trabajadores_ficha(nombre) {
 	var rdounidad = document.getElementById("rdounidad").checked;
 	var rdocentro = document.getElementById("rdocentro").checked;
 	var rdotrabajador = document.getElementById("rdotrabajador").checked;
-	
+
 	if (nomina == "" && idunidad == "" && idcentro == "" && idtrabajador == "") alert("¡ERROR: Debe seleccionar una opcion para filtrar los empleados!");
 	else {
 		document.getElementById("divCargando").style.display = "block";
@@ -384,7 +384,7 @@ function trabajadores_ficha(nombre) {
 function validar_listatrab(nombre) {
 	var form = document.getElementById("frmentrada");
 	var ordenarPor = document.getElementById("ordenarPor").value;
-	
+
 	var chkcedula = 0;
 	var chknombre = 0;
 	var chkcentro = 0;
@@ -394,9 +394,9 @@ function validar_listatrab(nombre) {
 		else if (form.elements[i].id == "chknombre" && form.elements[i].checked) chknombre = 1;
 		else if (form.elements[i].id == "chkcentro" && form.elements[i].checked) chkcentro = 1;
 		else if (form.elements[i].id == "chkunidad" && form.elements[i].checked) chkunidad = 1;
-	}	
+	}
 	var checks = chkcedula + "|"+ chknombre + "|"+ chkcentro + "|"+ chkunidad;
-	
+
 	location.href = "reportes.php?nombre="+nombre+"&checks="+checks+"&ordenarPor="+ordenarPor;
 }
 
@@ -424,7 +424,7 @@ function trabajadores_constancia(nombre) {
 function imprimirRtf(nombre, carpeta) {
     var idconcepto = document.getElementById("idconcepto").value;
     var tabla = document.getElementById("tabla").value;
-    var idtrabajador = document.getElementById("idtrabajador").value;
+    var idtrabajador = document.getElementById("idtrabajadorc").value;
 	var nota_pie = document.getElementById("pie").value;
     var chkfingreso = document.getElementById("chkfingreso").checked;
     var chkcargo = document.getElementById("chkcargo").checked;
@@ -440,19 +440,19 @@ function imprimirRtf(nombre, carpeta) {
 <div id="divCargando" style="background-color:#CCCCCC; width:250px; height:100px; position: absolute; left: 50%; top: 50%; margin-top: -100px; margin-left: -250px; border: 1px solid black; display:none"></div>
 
 <?php
-include("../../../conf/conex.php");
+include "../../../conf/conex.php";
 conectarse();
 
-$sql="SELECT anio_fiscal, idtipo_presupuesto, idfuente_financiamiento FROM configuracion";
-$query_conf=mysql_query($sql) or die ($sql.mysql_error());
-$conf=mysql_fetch_array($query_conf);
+$sql        = "SELECT anio_fiscal, idtipo_presupuesto, idfuente_financiamiento FROM configuracion";
+$query_conf = mysql_query($sql) or die($sql . mysql_error());
+$conf       = mysql_fetch_array($query_conf);
 
 extract($_GET);
-//	---------------------------------------------
+//    ---------------------------------------------
 switch ($nombre) {
-	//	Grupos...
-	case "grupos":
-		?>
+    //    Grupos...
+    case "grupos":
+        ?>
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione c&oacute;mo quiere ordenar los Grupos de Cargo</div>
         <br /><br />
@@ -467,16 +467,16 @@ switch ($nombre) {
                 </td>
             </tr>
             <tr>
-                <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" onClick="llamarOrdenar('<? echo $_GET['nombre']; ?>', document.getElementById('ordenarPor').value, 'recursos_humanos')" /></td>
+                <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" onClick="llamarOrdenar('<?echo $_GET['nombre']; ?>', document.getElementById('ordenarPor').value, 'recursos_humanos')" /></td>
             </tr>
-        </table>    
+        </table>
         </center>
         <?
-		break;
-		
-	//	Series...
-	case "series":
-		?>
+        break;
+
+    //    Series...
+    case "series":
+        ?>
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione c&oacute;mo quiere ordenar las Series de Cargo</div>
         <br /><br />
@@ -492,16 +492,16 @@ switch ($nombre) {
                 </td>
             </tr>
             <tr>
-                <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" onClick="llamarOrdenar('<? echo $_GET['nombre']; ?>', document.getElementById('ordenarPor').value, 'recursos_humanos')" /></td>
+                <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" onClick="llamarOrdenar('<?echo $_GET['nombre']; ?>', document.getElementById('ordenarPor').value, 'recursos_humanos')" /></td>
             </tr>
-        </table>    
+        </table>
         </center>
         <?
-		break;
-		
-	//	Cargos...
-	case "cargos":
-		?>
+        break;
+
+    //    Cargos...
+    case "cargos":
+        ?>
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione c&oacute;mo quiere ordenar los Cargos</div>
         <br /><br />
@@ -518,16 +518,16 @@ switch ($nombre) {
                 </td>
             </tr>
             <tr>
-                <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" onClick="llamarOrdenar('<? echo $_GET['nombre']; ?>', document.getElementById('ordenarPor').value, 'recursos_humanos')" /></td>
+                <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" onClick="llamarOrdenar('<?echo $_GET['nombre']; ?>', document.getElementById('ordenarPor').value, 'recursos_humanos')" /></td>
             </tr>
-        </table>    
+        </table>
         </center>
         <?
-		break;
-		
-	//	Profesion...
-	case "profesion":
-		?>
+        break;
+
+    //    Profesion...
+    case "profesion":
+        ?>
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione c&oacute;mo quiere ordenar las Profesiones</div>
         <br /><br />
@@ -542,16 +542,16 @@ switch ($nombre) {
                 </td>
             </tr>
             <tr>
-                <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" onClick="llamarOrdenar('<? echo $_GET['nombre']; ?>', document.getElementById('ordenarPor').value, 'recursos_humanos')" /></td>
+                <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" onClick="llamarOrdenar('<?echo $_GET['nombre']; ?>', document.getElementById('ordenarPor').value, 'recursos_humanos')" /></td>
             </tr>
-        </table>    
+        </table>
         </center>
         <?
-		break;
-		
-	//	Lista de Trabajadores...
-	case "listatrab":
-		?>
+        break;
+
+    //    Lista de Trabajadores...
+    case "listatrab":
+        ?>
         <form id="frmentrada" name="frmentrada">
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione c&oacute;mo quiere ordenar la Lista de Trabajadores</div>
@@ -573,7 +573,7 @@ switch ($nombre) {
                 <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" onClick="validar_listatrab('<?=$nombre?>');" /></td>
             </tr>
         </table><br />
-        
+
         <table width="500">
         	<tr><td><hr size="1" width="500" /></td></tr>
             <tr><td><b><em>Seleccione de la lista los campos a mostrar</em></b></td></tr>
@@ -589,11 +589,11 @@ switch ($nombre) {
         </center>
         </form>
         <?
-		break;
-		
-	//	Tipos de Sociedad...
-	case "tiposociedad":
-		?>
+        break;
+
+    //    Tipos de Sociedad...
+    case "tiposociedad":
+        ?>
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione c&oacute;mo quiere ordenar los Tipos de Sociedad</div>
         <br /><br />
@@ -608,16 +608,16 @@ switch ($nombre) {
                 </td>
             </tr>
             <tr>
-                <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" onClick="llamarOrdenar('<? echo $_GET['nombre']; ?>', document.getElementById('ordenarPor').value)" /></td>
+                <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" onClick="llamarOrdenar('<?echo $_GET['nombre']; ?>', document.getElementById('ordenarPor').value)" /></td>
             </tr>
-        </table>    
+        </table>
         </center>
         <?
-		break;
-		
-	//	Trabajadores por Tipo de Nomina...
-	case "trabajadores_por_tipo_de_nomina":
-		?>
+        break;
+
+    //    Trabajadores por Tipo de Nomina...
+    case "trabajadores_por_tipo_de_nomina":
+        ?>
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione el Tipo de Nomina para filtrar a los Trabajadores</div>
         <br /><br />
@@ -628,12 +628,12 @@ switch ($nombre) {
                     <select name="nomina" id="nomina" style="width:250px;">
                     	<option value="">:::. [Todos] .:::</option>
                     	<?
-						$sql = "SELECT * FROM tipo_nomina ORDER BY idtipo_nomina";
-						$query = mysql_query($sql) or die ($sql.mysql_error());
-						while ($field = mysql_fetch_array($query)) {
-							?><option value="<?=$field['idtipo_nomina']?>"><?=htmlentities($field['titulo_nomina'])?></option><?
-						}
-						?>
+        $sql   = "SELECT * FROM tipo_nomina ORDER BY idtipo_nomina";
+        $query = mysql_query($sql) or die($sql . mysql_error());
+        while ($field = mysql_fetch_array($query)) {
+            ?><option value="<?=$field['idtipo_nomina']?>"><?=htmlentities($field['titulo_nomina'])?></option><?
+        }
+        ?>
                     </select>
                 </td>
             </tr>
@@ -651,14 +651,14 @@ switch ($nombre) {
             <tr>
                 <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" onClick="trabajadores_por_tipo_de_nomina('<?=$nombre?>');" /></td>
             </tr>
-        </table>    
+        </table>
         </center>
         <?
-		break;
-		
-	//	Trabajadores por Concepto/Constante...
-	case "trabajadores_por_concepto_constante":
-		?>
+        break;
+
+    //    Trabajadores por Concepto/Constante...
+    case "trabajadores_por_concepto_constante":
+        ?>
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione el Concepto para filtrar a los Trabajadores</div>
         <br /><br />
@@ -669,7 +669,7 @@ switch ($nombre) {
                 <td>
                 	<input type="hidden" name="tabla" id="tabla" value="" />
                 	<input type="hidden" name="idconcepto" id="idconcepto" value="" />
-                    <input type="text" name="nomconcepto" id="nomconcepto" style="width:400px" readonly="readonly" />            
+                    <input type="text" name="nomconcepto" id="nomconcepto" style="width:400px" readonly="readonly" />
                     <img src="../../../imagenes/search0.png" title="Buscar" style="cursor:pointer" onclick="window.open('../../listas/lista.php?lista=conceptos_constantes', 'wLista','dependent=yes, height=400, width=700, scrollbars=yes, top=150, left=200');" />
                 </td>
             </tr>
@@ -691,11 +691,11 @@ switch ($nombre) {
         </form>
         </center>
         <?
-		break;
-		
-	//	Trabajadores por Unidad Funcional...
-	case "trabajadores_por_unidad_funcional":
-		?>
+        break;
+
+    //    Trabajadores por Unidad Funcional...
+    case "trabajadores_por_unidad_funcional":
+        ?>
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione la Unidad Funcional para filtrar a los Trabajadores</div>
         <br /><br />
@@ -728,11 +728,11 @@ switch ($nombre) {
         </form>
         </center>
         <?
-		break;
-		
-	//	Trabajadores por Centro de Costos...
-	case "trabajadores_por_centro_costos":
-		?>
+        break;
+
+    //    Trabajadores por Centro de Costos...
+    case "trabajadores_por_centro_costos":
+        ?>
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione el Centro de Costos para filtrar a los Trabajadores</div>
         <br /><br />
@@ -765,11 +765,11 @@ switch ($nombre) {
         </form>
         </center>
         <?
-		break;
-		
-	//	Carga Familiar de Trabajadores...
-	case "trabajadores_carga_familiar":
-		?>
+        break;
+
+    //    Carga Familiar de Trabajadores...
+    case "trabajadores_carga_familiar":
+        ?>
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione las opciones para filtrar la Carga Familiar de los Trabajadores</div>
         <br /><br />
@@ -782,12 +782,12 @@ switch ($nombre) {
                     <select name="nomina" id="nomina" style="width:250px;">
                     	<option value="">:::. [Todos] .:::</option>
                     	<?
-						$sql = "SELECT * FROM tipo_nomina ORDER BY idtipo_nomina";
-						$query = mysql_query($sql) or die ($sql.mysql_error());
-						while ($field = mysql_fetch_array($query)) {
-							?><option value="<?=$field['idtipo_nomina']?>"><?=htmlentities($field['titulo_nomina'])?></option><?
-						}
-						?>
+        $sql   = "SELECT * FROM tipo_nomina ORDER BY idtipo_nomina";
+        $query = mysql_query($sql) or die($sql . mysql_error());
+        while ($field = mysql_fetch_array($query)) {
+            ?><option value="<?=$field['idtipo_nomina']?>"><?=htmlentities($field['titulo_nomina'])?></option><?
+        }
+        ?>
                     </select>
                 </td>
             </tr>
@@ -816,7 +816,7 @@ switch ($nombre) {
                 <td>
                 	<input name="rdo" id="rdotrabajador" type="radio" onclick="document.getElementById('nomina').disabled=true;  document.getElementById('nomina').value=''; document.getElementById('btUnidad').style.divisibilitysplay='hidden'; document.getElementById('idunidad').value=''; document.getElementById('codunidad').value=''; document.getElementById('nomunidad').value=''; document.getElementById('btCentro').style.visibility='hidden'; document.getElementById('idcentro').value=''; document.getElementById('codcentro').value=''; document.getElementById('nomcentro').value=''; document.getElementById('btTrabajador').style.visibility='visible';" />
                     <input type="hidden" name="idtrabajador" id="idtrabajador" value="" />
-                    <input type="text" name="nomtrabajador" id="nomtrabajador" style="width:275px" readonly="readonly" />            
+                    <input type="text" name="nomtrabajador" id="nomtrabajador" style="width:275px" readonly="readonly" />
                     <img id="btTrabajador" src="../../../imagenes/search0.png" title="Buscar" style="cursor:pointer; visibility:hidden;" onClick="window.open('../../listas/lista_trabajador.php?frm=rep_carga_familiar', 'wLista','dependent=yes, height=600, width=900, scrollbars=yes, top=150, left=200');" />
                 </td>
             </tr>
@@ -826,13 +826,13 @@ switch ($nombre) {
                     <select name="parentesco" id="parentesco" style="width:250px;">
                     	<option value="">:::. Todos .:::</option>
                         <?
-						$query_parentesco = mysql_query("SELECT * FROM parentezco ORDER BY idparentezco") or die (mysql_error());
-						while ($field_parentescos = mysql_fetch_array($query_parentesco)) {
-							?>
+        $query_parentesco = mysql_query("SELECT * FROM parentezco ORDER BY idparentezco") or die(mysql_error());
+        while ($field_parentescos = mysql_fetch_array($query_parentesco)) {
+            ?>
                             <option value="<?=$field_parentescos['idparentezco']?>"><?=htmlentities($field_parentescos['denominacion'])?></option>
                             <?
-						}
-						?>
+        }
+        ?>
                     </select>
                 </td>
 			</tr>
@@ -854,11 +854,11 @@ switch ($nombre) {
         </form>
         </center>
         <?
-		break;
-		
-	//	Ficha del Trabajador...
-	case "trabajadores_ficha":
-		?>
+        break;
+
+    //    Ficha del Trabajador...
+    case "trabajadores_ficha":
+        ?>
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione las opciones para filtrar la Ficha del Trabajador</div>
         <br /><br />
@@ -871,12 +871,12 @@ switch ($nombre) {
                     <select name="nomina" id="nomina" style="width:250px;">
                     	<option value="">:::. [Todos] .:::</option>
                     	<?
-						$sql = "SELECT * FROM tipo_nomina ORDER BY idtipo_nomina";
-						$query = mysql_query($sql) or die ($sql.mysql_error());
-						while ($field = mysql_fetch_array($query)) {
-							?><option value="<?=$field['idtipo_nomina']?>"><?=htmlentities($field['titulo_nomina'])?></option><?
-						}
-						?>
+        $sql   = "SELECT * FROM tipo_nomina ORDER BY idtipo_nomina";
+        $query = mysql_query($sql) or die($sql . mysql_error());
+        while ($field = mysql_fetch_array($query)) {
+            ?><option value="<?=$field['idtipo_nomina']?>"><?=htmlentities($field['titulo_nomina'])?></option><?
+        }
+        ?>
                     </select>
                 </td>
             </tr>
@@ -905,7 +905,7 @@ switch ($nombre) {
                 <td>
                 	<input name="rdo" id="rdotrabajador" type="radio" onclick="document.getElementById('nomina').disabled=true;  document.getElementById('nomina').value=''; document.getElementById('btUnidad').style.divisibilitysplay='hidden'; document.getElementById('idunidad').value=''; document.getElementById('codunidad').value=''; document.getElementById('nomunidad').value=''; document.getElementById('btCentro').style.visibility='hidden'; document.getElementById('idcentro').value=''; document.getElementById('codcentro').value=''; document.getElementById('nomcentro').value=''; document.getElementById('btTrabajador').style.visibility='visible';" />
                     <input type="hidden" name="idtrabajador" id="idtrabajador" value="" />
-                    <input type="text" name="nomtrabajador" id="nomtrabajador" style="width:275px" readonly="readonly" />            
+                    <input type="text" name="nomtrabajador" id="nomtrabajador" style="width:275px" readonly="readonly" />
                     <img id="btTrabajador" src="../../../imagenes/search0.png" title="Buscar" style="cursor:pointer; visibility:hidden;" onClick="window.open('../../listas/lista.php?lista=trabajadores', 'wLista','dependent=yes, height=600, width=900, scrollbars=yes, top=150, left=200');" />
                 </td>
             </tr>
@@ -927,11 +927,11 @@ switch ($nombre) {
         </form>
         </center>
         <?
-		break;
+        break;
 
-	//	Lista de Trabajadores...
-	case "lista_trabajadores":
-		?>
+    //    Lista de Trabajadores...
+    case "lista_trabajadores":
+        ?>
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione las opciones para filtrar la Ficha del Trabajador</div>
         <br /><br />
@@ -944,12 +944,12 @@ switch ($nombre) {
                     <select name="nomina" id="nomina" style="width:250px;">
                     	<option value="">:::. [Todos] .:::</option>
                     	<?
-						$sql = "SELECT * FROM tipo_nomina ORDER BY idtipo_nomina";
-						$query = mysql_query($sql) or die ($sql.mysql_error());
-						while ($field = mysql_fetch_array($query)) {
-							?><option value="<?=$field['idtipo_nomina']?>"><?=htmlentities($field['titulo_nomina'])?></option><?
-						}
-						?>
+        $sql   = "SELECT * FROM tipo_nomina ORDER BY idtipo_nomina";
+        $query = mysql_query($sql) or die($sql . mysql_error());
+        while ($field = mysql_fetch_array($query)) {
+            ?><option value="<?=$field['idtipo_nomina']?>"><?=htmlentities($field['titulo_nomina'])?></option><?
+        }
+        ?>
                     </select>
                 </td>
             </tr>
@@ -978,7 +978,7 @@ switch ($nombre) {
                 <td>
                 	<input name="rdo" id="rdotrabajador" type="radio" onclick="document.getElementById('nomina').disabled=true;  document.getElementById('nomina').value=''; document.getElementById('btUnidad').style.divisibilitysplay='hidden'; document.getElementById('idunidad').value=''; document.getElementById('codunidad').value=''; document.getElementById('nomunidad').value=''; document.getElementById('btCentro').style.visibility='hidden'; document.getElementById('idcentro').value=''; document.getElementById('codcentro').value=''; document.getElementById('nomcentro').value=''; document.getElementById('btTrabajador').style.visibility='visible'; document.getElementById('btConcepto').style.visibility='hidden'; document.getElementById('idconcepto').value=''; document.getElementById('nomconcepto').value=''; document.getElementById('tabla').value=''; document.getElementById('fila_rango').style.display='none';" />
                     <input type="hidden" name="idtrabajador" id="idtrabajador" value="" />
-                    <input type="text" name="nomtrabajador" id="nomtrabajador" style="width:275px" readonly="readonly" />            
+                    <input type="text" name="nomtrabajador" id="nomtrabajador" style="width:275px" readonly="readonly" />
                     <img id="btTrabajador" src="../../../imagenes/search0.png" title="Buscar" style="cursor:pointer; visibility:hidden;" onClick="window.open('../../listas/lista.php?lista=trabajadores', 'wLista','dependent=yes, height=600, width=900, scrollbars=yes, top=150, left=200');" />
                 </td>
             </tr>
@@ -1028,12 +1028,12 @@ switch ($nombre) {
                     	<select name="nomina_concepto" id="nomina_concepto" style="width:250px;">
                             <option value="">:::. [Todos] .:::</option>
                             <?
-                            $sql = "SELECT * FROM tipo_nomina ORDER BY idtipo_nomina";
-                            $query = mysql_query($sql) or die ($sql.mysql_error());
-                            while ($field = mysql_fetch_array($query)) {
-                                ?><option value="<?=$field['idtipo_nomina']?>"><?=htmlentities($field['titulo_nomina'])?></option><?
-                            }
-                            ?>
+        $sql   = "SELECT * FROM tipo_nomina ORDER BY idtipo_nomina";
+        $query = mysql_query($sql) or die($sql . mysql_error());
+        while ($field = mysql_fetch_array($query)) {
+            ?><option value="<?=$field['idtipo_nomina']?>"><?=htmlentities($field['titulo_nomina'])?></option><?
+        }
+        ?>
                     	</select>
                     </td>
                  </tr>
@@ -1067,12 +1067,11 @@ switch ($nombre) {
         </form>
         </center>
         <?
-		break;
+        break;
 
-
-//	Lista de Prestaciones de Trabajadores...
-	case "lista_trabajadores_prestaciones":
-		?>
+//    Lista de Prestaciones de Trabajadores...
+    case "lista_trabajadores_prestaciones":
+        ?>
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione las opciones para filtrar el Listado de Trabajadores con Prestaciones</div>
         <br /><br />
@@ -1084,12 +1083,12 @@ switch ($nombre) {
 	                    <select name="nomina" id="nomina" style="width:350px;">
 	                    	<option value="">:::. [Todos] .:::</option>
 	                    	<?
-							$sql = "SELECT * FROM tipo_nomina ORDER BY idtipo_nomina";
-							$query = mysql_query($sql) or die ($sql.mysql_error());
-							while ($field = mysql_fetch_array($query)) {
-								?><option value="<?=$field['idtipo_nomina']?>"><?=htmlentities($field['titulo_nomina'])?></option><?
-							}
-							?>
+        $sql   = "SELECT * FROM tipo_nomina ORDER BY idtipo_nomina";
+        $query = mysql_query($sql) or die($sql . mysql_error());
+        while ($field = mysql_fetch_array($query)) {
+            ?><option value="<?=$field['idtipo_nomina']?>"><?=htmlentities($field['titulo_nomina'])?></option><?
+        }
+        ?>
 	                    </select>
 	                </td>
 	            </tr>
@@ -1120,11 +1119,15 @@ switch ($nombre) {
 	                    </select>
 	                    <select name="anio_prestaciones" id="anio_prestaciones" style="width:100px;">
 	                        <?
-	                        for ($i=1960; $i<2040; $i++) {
-	                            if ($i==$conf['anio_fiscal']) echo "<option value='$i' selected>$i</option>";
-	                            else  echo "<option value='$i'>$i</option>";
-	                        }
-	                        ?>
+        for ($i = 1960; $i < 2040; $i++) {
+            if ($i == $conf['anio_fiscal']) {
+                echo "<option value='$i' selected>$i</option>";
+            } else {
+                echo "<option value='$i'>$i</option>";
+            }
+
+        }
+        ?>
 	                    </select>
 	                </td>
 	            </tr>
@@ -1160,18 +1163,18 @@ switch ($nombre) {
 	                </td>
             	</tr>
 	            <tr>
-	                <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" 
+	                <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte"
 	                	onClick="validar_lista_trabajadores_prestaciones('lista_trabajadores_prestaciones');" /></td>
 	            </tr>
 	        </table>
         </form>
         </center>
         <?
-		break;
+        break;
 
-	//	Lista de Trabajadores...
-	case "trabajadores_listado":
-		?>
+    //    Lista de Trabajadores...
+    case "trabajadores_listado":
+        ?>
         <form id="frmentrada" name="frmentrada">
         <center>
         <div style="font-size:20px; width:300px;  font-weight:bold; font-style:italic; top:50%; left:50%;">Seleccione c&oacute;mo quiere ordenar la Lista de Trabajadores</div>
@@ -1191,7 +1194,7 @@ switch ($nombre) {
                 <td align="center" colspan="2"><input type="button" class="button" name="botonOrdenar" value="Generar Reporte" onClick="trabajadores_listado('<?=$nombre?>');" /></td>
             </tr>
         </table><br />
-        
+
         <table width="500">
         	<tr><td><hr size="1" width="500" /></td></tr>
             <tr><td><b><em>Seleccione las condiciones para mostrar el listado</em></b></td></tr>
@@ -1200,9 +1203,9 @@ switch ($nombre) {
         </center>
         </form>
         <?
-		break;
+        break;
 
-    //	Lista de Trabajadores...
+    //    Lista de Trabajadores...
     case "trabajadores_constancia":
         ?>
         <form id="frmentrada" name="frmentrada">
@@ -1213,7 +1216,7 @@ switch ($nombre) {
                     <tr>
                         <td>Trabajador: </td>
                         <td>
-                            <input type="hidden" name="idtrabajador" id="idtrabajador" value="" />
+                            <input type="hidden" name="idtrabajadorc" id="idtrabajadorc" value="" />
                             <input type="text" name="nomtrabajador" id="nomtrabajador" style="width:400px" readonly="readonly" />
                             <img id="btTrabajador" src="../../../imagenes/search0.png" title="Buscar" style="cursor:pointer; " onClick="window.open('../../listas/lista_trabajador.php?frm=rep_constancia', 'wLista','dependent=yes, height=600, width=900, scrollbars=yes, top=150, left=200');" />
                         </td>
@@ -1252,7 +1255,7 @@ switch ($nombre) {
         </form>
         <?
         break;
-	
+
 }
 
 ?>
