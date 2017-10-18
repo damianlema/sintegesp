@@ -11013,21 +11013,81 @@ switch ($nombre) {
         $total_compromiso   = 0;
         $total_causado      = 0;
         $total_pagado       = 0;
-
-        $query = mysql_query($sql) or die($sql . mysql_error());
+        $IdCategoria        = 0;
+        $query              = mysql_query($sql) or die($sql . mysql_error());
         while ($field = mysql_fetch_array($query)) {
             $clasificador = $field["Par"] . "." . $field["Gen"] . "." . $field["Esp"] . "." . $field["Sesp"];
 
             //    SI CAMBIA DE CATEGORIA LA IMPRIMO
             if ($field["IdCategoria"] != $IdCategoria) {
-                if ($sum_formulado == 0 and $sum_presupuestaria == 0) {
-                    $IdCategoria = $field["IdCategoria"];
+                if ($IdCategoria == 0) {
                     if ($mes == "01") {
                         echo "<table>
 								<tr><td colspan='10' style='$tr2'>" . $field["CodCategoria"] . " - " . $field["Unidad"] . "</td></tr>
 							</table>";
                     } else {
                         echo "<table>
+								<tr><td colspan='11' style='$tr2'>" . $field["CodCategoria"] . " - " . $field["Unidad"] . "</td></tr>
+							</table>";
+                    }
+                } else {}
+                if ($sum_formulado == 0 and $sum_presupuestaria == 0 and $IdCategoria != 0) {
+                    $IdCategoria = $field["IdCategoria"];
+                    if ($mes == "01") {
+                        echo "
+							<table border='1'>
+							<tr>
+								<td style='$tr2'>&nbsp;</td>
+								<td style='$tr2'>TOTALES CATEGORIA</td>
+								<td style='$tr2' align='right'>" . number_format($sum_formulado, 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format($sum_modificacion, 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format($sum_actual, 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format($sum_compromiso, 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format($sum_causado, 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format(($sum_actual - $sum_compromiso), 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format($sum_pagado, 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format(($sum_actual - $sum_pagado), 2, ',', '.') . "</td>
+							</tr>
+							</table>";
+                    } else {
+                        echo "<table border='1'>
+							<tr>
+								<td style='$tr2'>&nbsp;</td>
+								<td style='$tr2'>TOTALES CATEGORIA</td>
+								<td style='$tr2' align='right'>" . number_format($sum_presupuestaria, 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format($sum_financiera, 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format($sum_modificacion, 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format($sum_actual, 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format($sum_compromiso, 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format($sum_causado, 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format(($sum_actual - $sum_compromiso), 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format($sum_pagado, 2, ',', '.') . "</td>
+								<td style='$tr2' align='right'>" . number_format(($sum_actualf - $sum_pagado), 2, ',', '.') . "</td>
+							</tr>
+							</table>";
+                    }
+                    $sum_formulado      = 0;
+                    $sum_aumento        = 0;
+                    $sum_disminucion    = 0;
+                    $sum_modificado     = 0;
+                    $sum_actual         = 0;
+                    $sum_compromiso     = 0;
+                    $sum_causado        = 0;
+                    $sum_pagado         = 0;
+                    $sum_disponible     = 0;
+                    $sum_modificacion   = 0;
+                    $sum_presupuestaria = 0;
+                    $sum_financiera     = 0;
+                    $sum_actualf        = 0;
+                    $IdCategoria        = $field["IdCategoria"];
+                    if ($mes == "01") {
+                        echo "<table>
+								<tr><td colspan='10' style='$tr2'>&nbsp;</td></tr>
+								<tr><td colspan='10' style='$tr2'>" . $field["CodCategoria"] . " - " . $field["Unidad"] . "</td></tr>
+							</table>";
+                    } else {
+                        echo "<table>
+								<tr><td colspan='11' style='$tr2'>&nbsp;</td></tr>
 								<tr><td colspan='11' style='$tr2'>" . $field["CodCategoria"] . " - " . $field["Unidad"] . "</td></tr>
 							</table>";
                     }

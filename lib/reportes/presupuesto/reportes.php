@@ -4629,14 +4629,16 @@ switch ($nombre) {
                             $disminucion = "";
                             $aumento     = "";
                             if ($detalle['Causa'] == "si") {
-                                $causado = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                    $causado                           = "($causado)";} else {
+                                $causado = $monto;if ($detalle['estado'] == "anulado") {
+                                    $anulado = "(ANULADO)";
+                                    $causado = "($causado)";} else {
                                     $anulado = "";
                                 }
                             }
                             if ($detalle['Compromete'] == "si") {
-                                $compromisos = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                    $compromisos                       = "($compromisos)";} else {
+                                $compromisos = $monto;if ($detalle['estado'] == "anulado") {
+                                    $anulado     = "(ANULADO)";
+                                    $compromisos = "($compromisos)";} else {
                                     $anulado = "";
                                 }
                             }
@@ -6117,14 +6119,16 @@ switch ($nombre) {
                             $aumento     = "";
                             $modificado  = "";
                             if ($detalle['Causa'] == "si") {
-                                $causado = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                    $causado                           = "($causado)";} else {
+                                $causado = $monto;if ($detalle['estado'] == "anulado") {
+                                    $anulado = "(ANULADO)";
+                                    $causado = "($causado)";} else {
                                     $anulado = "";
                                 }
                             }
                             if ($detalle['Compromete'] == "si") {
-                                $compromisos = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                    $compromisos                       = "($compromisos)";} else {
+                                $compromisos = $monto;if ($detalle['estado'] == "anulado") {
+                                    $anulado     = "(ANULADO)";
+                                    $compromisos = "($compromisos)";} else {
                                     $anulado = "";
                                 }
                             }
@@ -8406,16 +8410,18 @@ switch ($nombre) {
                         $disminucion = "";
                         $aumento     = "";
                         if ($detalle['Causa'] == "si") {
-                            $causado = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                $causado                           = "($causado)";
-                                $tr5                               = "font-size:12px; color:#FF0000;";} else {
+                            $causado = $monto;if ($detalle['estado'] == "anulado") {
+                                $anulado = "(ANULADO)";
+                                $causado = "($causado)";
+                                $tr5     = "font-size:12px; color:#FF0000;";} else {
                                 $anulado = "";
                             }
                         }
                         if ($detalle['Compromete'] == "si") {
-                            $compromisos = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                $compromisos                       = "($compromisos)";
-                                $tr5                               = "font-size:12px; color:#FF0000;";} else {
+                            $compromisos = $monto;if ($detalle['estado'] == "anulado") {
+                                $anulado     = "(ANULADO)";
+                                $compromisos = "($compromisos)";
+                                $tr5         = "font-size:12px; color:#FF0000;";} else {
                                 $anulado = "";
                             }
                         }
@@ -9059,16 +9065,18 @@ switch ($nombre) {
                             $disminucion = "";
                             $aumento     = "";
                             if ($detalle['Causa'] == "si") {
-                                $causado = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                    $causado                           = "($causado)";
-                                    $tr5                               = "font-size:12px; color:#FF0000;";} else {
+                                $causado = $monto;if ($detalle['estado'] == "anulado") {
+                                    $anulado = "(ANULADO)";
+                                    $causado = "($causado)";
+                                    $tr5     = "font-size:12px; color:#FF0000;";} else {
                                     $anulado = "";
                                 }
                             }
                             if ($detalle['Compromete'] == "si") {
-                                $compromisos = $monto;if ($detalle['estado'] == "anulado") {$anulado = "(ANULADO)";
-                                    $compromisos                       = "($compromisos)";
-                                    $tr5                               = "font-size:12px; color:#FF0000;";} else {
+                                $compromisos = $monto;if ($detalle['estado'] == "anulado") {
+                                    $anulado     = "(ANULADO)";
+                                    $compromisos = "($compromisos)";
+                                    $tr5         = "font-size:12px; color:#FF0000;";} else {
                                     $anulado = "";
                                 }
                             }
@@ -14110,75 +14118,132 @@ switch ($nombre) {
         $total_compromiso   = 0;
         $total_causado      = 0;
         $total_pagado       = 0;
-
-        $query = mysql_query($sql) or die($sql . mysql_error());
+        $IdCategoria        = 0;
+        $query              = mysql_query($sql) or die($sql . mysql_error());
         while ($field = mysql_fetch_array($query)) {
 
             $clasificador = $field["Par"] . "." . $field["Gen"] . "." . $field["Esp"] . "." . $field["Sesp"];
 
             //    SI CAMBIA DE CATEGORIA LA IMPRIMO
             if ($field["IdCategoria"] != $IdCategoria) {
-                if ($sum_formulado == 0 and $sum_presupuestaria == 0) {
-                    $IdCategoria = $field["IdCategoria"];
-                    $pdf->SetFont('Arial', 'B', 8);
-                    $pdf->Cell(205, 5, utf8_decode($field["CodCategoria"] . " - " . $field["Unidad"]), 1, 1, 'L', 1);
-
-                } else {
-                    //IMPRIMO LOS TOTALES DE LA CATEGORIA ANTERIOR
-                    $y = $pdf->GetY();
-                    $pdf->SetDrawColor(0, 0, 0);
-                    $pdf->SetFillColor(0, 0, 0);
-                    $pdf->SetTextColor(0, 0, 0);
-                    $h = 0.1;
-                    $x = 5;
-                    $w = 345;
-                    $pdf->Rect($x, $y + 2, $w, $h);
-                    $pdf->SetXY($x, $y + 5);
-                    $pdf->SetDrawColor(255, 255, 255);
-                    $pdf->SetFillColor(255, 255, 255);
-                    $pdf->SetTextColor(0, 0, 0);
-                    $pdf->SetFont('Arial', 'B', 8);
-                    if ($mes == "01") {
-                        $pdf->Row(array('', '', number_format($sum_formulado, 2, ',', '.'),
-                            number_format($sum_modificacion, 2, ',', '.'),
-                            number_format($sum_actual, 2, ',', '.'),
-                            number_format($sum_compromiso, 2, ',', '.'),
-                            number_format($sum_causado, 2, ',', '.'),
-                            number_format(($sum_actual - $sum_compromiso), 2, ',', '.'),
-                            number_format($sum_pagado, 2, ',', '.'),
-                            number_format(($sum_actual - $sum_pagado), 2, ',', '.')));
-                    } else {
-                        $pdf->Row(array('', '', number_format($sum_presupuestaria, 2, ',', '.'),
-                            number_format($sum_financiera, 2, ',', '.'),
-                            number_format($sum_modificacion, 2, ',', '.'),
-                            number_format($sum_actual, 2, ',', '.'),
-                            number_format($sum_compromiso, 2, ',', '.'),
-                            number_format($sum_causado, 2, ',', '.'),
-                            number_format(($sum_actual - $sum_compromiso), 2, ',', '.'),
-                            number_format($sum_pagado, 2, ',', '.'),
-                            number_format(($sum_actualf - $sum_pagado), 2, ',', '.')));
-                    }
-                    $sum_formulado      = 0;
-                    $sum_aumento        = 0;
-                    $sum_disminucion    = 0;
-                    $sum_modificado     = 0;
-                    $sum_actual         = 0;
-                    $sum_compromiso     = 0;
-                    $sum_causado        = 0;
-                    $sum_pagado         = 0;
-                    $sum_disponible     = 0;
-                    $sum_modificacion   = 0;
-                    $sum_presupuestaria = 0;
-                    $sum_financiera     = 0;
-                    $sum_actualf        = 0;
-
-                    //IMPRIMO LA CABECERA DE LA NUEVA CATEGORIA
-                    trimestral_onapre($pdf, $anio_fiscal, $nom_fuente_financiamiento, $nom_tipo_presupuesto, $idesde, $ihasta, $mes);
+                if ($IdCategoria == 0) {
                     $pdf->Ln(2);
                     $IdCategoria = $field["IdCategoria"];
                     $pdf->SetFont('Arial', 'B', 8);
                     $pdf->Cell(205, 5, utf8_decode($field["CodCategoria"] . " - " . $field["Unidad"]), 1, 1, 'L', 1);
+                } else {
+                    if ($sum_formulado == 0 and $sum_presupuestaria == 0 and $IdCategoria != 0) {
+                        $y = $pdf->GetY();
+                        $pdf->SetDrawColor(0, 0, 0);
+                        $pdf->SetFillColor(0, 0, 0);
+                        $pdf->SetTextColor(0, 0, 0);
+                        $h = 0.1;
+                        $x = 5;
+                        $w = 345;
+                        $pdf->Rect($x, $y + 2, $w, $h);
+                        $pdf->SetXY($x, $y + 5);
+                        $pdf->SetDrawColor(255, 255, 255);
+                        $pdf->SetFillColor(255, 255, 255);
+                        $pdf->SetTextColor(0, 0, 0);
+                        $pdf->SetFont('Arial', 'B', 8);
+                        if ($mes == "01") {
+                            $pdf->Row(array('', '', number_format($sum_formulado, 2, ',', '.'),
+                                number_format($sum_modificacion, 2, ',', '.'),
+                                number_format($sum_actual, 2, ',', '.'),
+                                number_format($sum_compromiso, 2, ',', '.'),
+                                number_format($sum_causado, 2, ',', '.'),
+                                number_format(($sum_actual - $sum_compromiso), 2, ',', '.'),
+                                number_format($sum_pagado, 2, ',', '.'),
+                                number_format(($sum_actual - $sum_pagado), 2, ',', '.')));
+                        } else {
+                            $pdf->Row(array('', '', number_format($sum_presupuestaria, 2, ',', '.'),
+                                number_format($sum_financiera, 2, ',', '.'),
+                                number_format($sum_modificacion, 2, ',', '.'),
+                                number_format($sum_actual, 2, ',', '.'),
+                                number_format($sum_compromiso, 2, ',', '.'),
+                                number_format($sum_causado, 2, ',', '.'),
+                                number_format(($sum_actual - $sum_compromiso), 2, ',', '.'),
+                                number_format($sum_pagado, 2, ',', '.'),
+                                number_format(($sum_actualf - $sum_pagado), 2, ',', '.')));
+                        }
+                        $sum_formulado      = 0;
+                        $sum_aumento        = 0;
+                        $sum_disminucion    = 0;
+                        $sum_modificado     = 0;
+                        $sum_actual         = 0;
+                        $sum_compromiso     = 0;
+                        $sum_causado        = 0;
+                        $sum_pagado         = 0;
+                        $sum_disponible     = 0;
+                        $sum_modificacion   = 0;
+                        $sum_presupuestaria = 0;
+                        $sum_financiera     = 0;
+                        $sum_actualf        = 0;
 
+                        //IMPRIMO LA CABECERA DE LA NUEVA CATEGORIA
+                        trimestral_onapre($pdf, $anio_fiscal, $nom_fuente_financiamiento, $nom_tipo_presupuesto, $idesde, $ihasta, $mes);
+                        $pdf->Ln(2);
+                        $IdCategoria = $field["IdCategoria"];
+                        $pdf->SetFont('Arial', 'B', 8);
+                        $pdf->Cell(205, 5, utf8_decode($field["CodCategoria"] . " - " . $field["Unidad"]), 1, 1, 'L', 1);
+
+                    } else {
+                        //IMPRIMO LOS TOTALES DE LA CATEGORIA ANTERIOR
+                        $y = $pdf->GetY();
+                        $pdf->SetDrawColor(0, 0, 0);
+                        $pdf->SetFillColor(0, 0, 0);
+                        $pdf->SetTextColor(0, 0, 0);
+                        $h = 0.1;
+                        $x = 5;
+                        $w = 345;
+                        $pdf->Rect($x, $y + 2, $w, $h);
+                        $pdf->SetXY($x, $y + 5);
+                        $pdf->SetDrawColor(255, 255, 255);
+                        $pdf->SetFillColor(255, 255, 255);
+                        $pdf->SetTextColor(0, 0, 0);
+                        $pdf->SetFont('Arial', 'B', 8);
+                        if ($mes == "01") {
+                            $pdf->Row(array('', '', number_format($sum_formulado, 2, ',', '.'),
+                                number_format($sum_modificacion, 2, ',', '.'),
+                                number_format($sum_actual, 2, ',', '.'),
+                                number_format($sum_compromiso, 2, ',', '.'),
+                                number_format($sum_causado, 2, ',', '.'),
+                                number_format(($sum_actual - $sum_compromiso), 2, ',', '.'),
+                                number_format($sum_pagado, 2, ',', '.'),
+                                number_format(($sum_actual - $sum_pagado), 2, ',', '.')));
+                        } else {
+                            $pdf->Row(array('', '', number_format($sum_presupuestaria, 2, ',', '.'),
+                                number_format($sum_financiera, 2, ',', '.'),
+                                number_format($sum_modificacion, 2, ',', '.'),
+                                number_format($sum_actual, 2, ',', '.'),
+                                number_format($sum_compromiso, 2, ',', '.'),
+                                number_format($sum_causado, 2, ',', '.'),
+                                number_format(($sum_actual - $sum_compromiso), 2, ',', '.'),
+                                number_format($sum_pagado, 2, ',', '.'),
+                                number_format(($sum_actualf - $sum_pagado), 2, ',', '.')));
+                        }
+                        $sum_formulado      = 0;
+                        $sum_aumento        = 0;
+                        $sum_disminucion    = 0;
+                        $sum_modificado     = 0;
+                        $sum_actual         = 0;
+                        $sum_compromiso     = 0;
+                        $sum_causado        = 0;
+                        $sum_pagado         = 0;
+                        $sum_disponible     = 0;
+                        $sum_modificacion   = 0;
+                        $sum_presupuestaria = 0;
+                        $sum_financiera     = 0;
+                        $sum_actualf        = 0;
+
+                        //IMPRIMO LA CABECERA DE LA NUEVA CATEGORIA
+                        trimestral_onapre($pdf, $anio_fiscal, $nom_fuente_financiamiento, $nom_tipo_presupuesto, $idesde, $ihasta, $mes);
+                        $pdf->Ln(2);
+                        $IdCategoria = $field["IdCategoria"];
+                        $pdf->SetFont('Arial', 'B', 8);
+                        $pdf->Cell(205, 5, utf8_decode($field["CodCategoria"] . " - " . $field["Unidad"]), 1, 1, 'L', 1);
+
+                    }
                 }
             }
 
