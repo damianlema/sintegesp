@@ -581,89 +581,89 @@ function detalle_por_partida($pdf, $idcategoria, $idpartida, $anio_fiscal, $fina
     $query_rendicion_comprobar = mysql_query($sql) or die($sql . mysql_error());
     if (mysql_num_rows($query_rendicion_comprobar) != 0) {
         $sql = "SELECT
-				 categoria_programatica.codigo,
-				 unidad_ejecutora.denominacion as denounidad,
-				 clasificador_presupuestario.denominacion,
-				 clasificador_presupuestario.partida,
-				 clasificador_presupuestario.generica,
-				 clasificador_presupuestario.especifica,
-				 clasificador_presupuestario.sub_especifica,
-				 ordinal.codigo as codordinal,
-				 ordinal.denominacion AS nomordinal,
-				 maestro_presupuesto.monto_original,
-				 SUM(rendicion_cuentas_partidas.disminucion_periodo) As total_disminucion,
-				 '0' AS reservado_disminuir,
-				 '0' AS pre_compromiso,
-				 '0' AS solicitud_aumento,
-				 SUM(rendicion_cuentas_partidas.aumento_periodo) as total_aumento,
-				 SUM(rendicion_cuentas_partidas.total_compromisos_periodo) as total_compromisos,
-				 SUM(rendicion_cuentas_partidas.total_causados_periodo) as total_causados,
-				 SUM(rendicion_cuentas_partidas.total_pagados_periodo) as total_pagados,
-				 rendicion_cuentas_partidas.idmaestro_presupuesto AS idRegistro
-			FROM
-				 rendicion_cuentas_partidas,
-				 categoria_programatica,
-				 unidad_ejecutora,
-				 clasificador_presupuestario,
-				 ordinal,
-				 maestro_presupuesto
-			WHERE
-				(rendicion_cuentas_partidas.idmaestro_presupuesto = maestro_presupuesto.idRegistro) AND
-				 (categoria_programatica.idcategoria_programatica='" . $idcategoria . "' AND
-				 categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora) AND
-				 (clasificador_presupuestario.idclasificador_presupuestario='" . $idpartida . "') AND
-				 (maestro_presupuesto.idcategoria_programatica='" . $idcategoria . "' AND
-				 maestro_presupuesto.idclasificador_presupuestario='" . $idpartida . "' AND
-					(clasificador_presupuestario.sub_especifica='00') AND
-				 maestro_presupuesto.idordinal=ordinal.idordinal)
-				 $where_ordinal AND
-				 (maestro_presupuesto.anio='" . $anio_fiscal . "' AND
-				 maestro_presupuesto.idfuente_financiamiento='" . $financiamiento . "' AND
-				 maestro_presupuesto.idtipo_presupuesto='" . $tipo_presupuesto . "')
-			GROUP BY (categoria_programatica.codigo), (clasificador_presupuestario.partida), (clasificador_presupuestario.generica), (clasificador_presupuestario.especifica), (clasificador_presupuestario.sub_especifica)
-			";
+                 categoria_programatica.codigo,
+                 unidad_ejecutora.denominacion as denounidad,
+                 clasificador_presupuestario.denominacion,
+                 clasificador_presupuestario.partida,
+                 clasificador_presupuestario.generica,
+                 clasificador_presupuestario.especifica,
+                 clasificador_presupuestario.sub_especifica,
+                 ordinal.codigo as codordinal,
+                 ordinal.denominacion AS nomordinal,
+                 maestro_presupuesto.monto_original,
+                 SUM(rendicion_cuentas_partidas.disminucion_periodo) As total_disminucion,
+                 '0' AS reservado_disminuir,
+                 '0' AS pre_compromiso,
+                 '0' AS solicitud_aumento,
+                 SUM(rendicion_cuentas_partidas.aumento_periodo) as total_aumento,
+                 SUM(rendicion_cuentas_partidas.total_compromisos_periodo) as total_compromisos,
+                 SUM(rendicion_cuentas_partidas.total_causados_periodo) as total_causados,
+                 SUM(rendicion_cuentas_partidas.total_pagados_periodo) as total_pagados,
+                 rendicion_cuentas_partidas.idmaestro_presupuesto AS idRegistro
+            FROM
+                 rendicion_cuentas_partidas,
+                 categoria_programatica,
+                 unidad_ejecutora,
+                 clasificador_presupuestario,
+                 ordinal,
+                 maestro_presupuesto
+            WHERE
+                (rendicion_cuentas_partidas.idmaestro_presupuesto = maestro_presupuesto.idRegistro) AND
+                 (categoria_programatica.idcategoria_programatica='" . $idcategoria . "' AND
+                 categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora) AND
+                 (clasificador_presupuestario.idclasificador_presupuestario='" . $idpartida . "') AND
+                 (maestro_presupuesto.idcategoria_programatica='" . $idcategoria . "' AND
+                 maestro_presupuesto.idclasificador_presupuestario='" . $idpartida . "' AND
+                    (clasificador_presupuestario.sub_especifica='00') AND
+                 maestro_presupuesto.idordinal=ordinal.idordinal)
+                 $where_ordinal AND
+                 (maestro_presupuesto.anio='" . $anio_fiscal . "' AND
+                 maestro_presupuesto.idfuente_financiamiento='" . $financiamiento . "' AND
+                 maestro_presupuesto.idtipo_presupuesto='" . $tipo_presupuesto . "')
+            GROUP BY (categoria_programatica.codigo), (clasificador_presupuestario.partida), (clasificador_presupuestario.generica), (clasificador_presupuestario.especifica), (clasificador_presupuestario.sub_especifica)
+            ";
         $query        = mysql_query($sql) or die($sql . mysql_error());
         $field        = mysql_fetch_array($query);
         $total_actual = $field['monto_original'] + $field['total_aumento'] - $field['total_disminucion'];
         $total_actual = number_format($total_actual, 2, ',', '.');
     } else {
         $sql = "SELECT categoria_programatica.codigo,
-				 unidad_ejecutora.denominacion denounidad,
-				 clasificador_presupuestario.denominacion,
-				 clasificador_presupuestario.partida,
-				 clasificador_presupuestario.generica,
-				 clasificador_presupuestario.especifica,
-				 clasificador_presupuestario.sub_especifica,
-				 ordinal.codigo as codordinal,
-				 ordinal.denominacion AS nomordinal,
-				 maestro_presupuesto.monto_original,
-				 maestro_presupuesto.total_disminucion,
-				 maestro_presupuesto.reservado_disminuir,
-				 maestro_presupuesto.pre_compromiso,
-				 maestro_presupuesto.solicitud_aumento,
-				 maestro_presupuesto.total_aumento,
-				 maestro_presupuesto.monto_actual,
-				 maestro_presupuesto.total_compromisos,
-				 maestro_presupuesto.total_causados,
-				 maestro_presupuesto.total_pagados,
-				 maestro_presupuesto.idRegistro
-			FROM
-				 categoria_programatica,
-				 unidad_ejecutora,
-				 clasificador_presupuestario,
-				 ordinal,
-				 maestro_presupuesto
-			WHERE
-				 (categoria_programatica.idcategoria_programatica='" . $idcategoria . "' AND
-				 categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora) AND
-				 (clasificador_presupuestario.idclasificador_presupuestario='" . $idpartida . "') AND
-				 (maestro_presupuesto.idcategoria_programatica='" . $idcategoria . "' AND
-				 maestro_presupuesto.idclasificador_presupuestario='" . $idpartida . "' AND
-				 maestro_presupuesto.idordinal=ordinal.idordinal)
-				 $where_ordinal AND
-				 (maestro_presupuesto.anio='" . $anio_fiscal . "' AND
-				 maestro_presupuesto.idfuente_financiamiento='" . $financiamiento . "' AND
-				 maestro_presupuesto.idtipo_presupuesto='" . $tipo_presupuesto . "')";
+                 unidad_ejecutora.denominacion denounidad,
+                 clasificador_presupuestario.denominacion,
+                 clasificador_presupuestario.partida,
+                 clasificador_presupuestario.generica,
+                 clasificador_presupuestario.especifica,
+                 clasificador_presupuestario.sub_especifica,
+                 ordinal.codigo as codordinal,
+                 ordinal.denominacion AS nomordinal,
+                 maestro_presupuesto.monto_original,
+                 maestro_presupuesto.total_disminucion,
+                 maestro_presupuesto.reservado_disminuir,
+                 maestro_presupuesto.pre_compromiso,
+                 maestro_presupuesto.solicitud_aumento,
+                 maestro_presupuesto.total_aumento,
+                 maestro_presupuesto.monto_actual,
+                 maestro_presupuesto.total_compromisos,
+                 maestro_presupuesto.total_causados,
+                 maestro_presupuesto.total_pagados,
+                 maestro_presupuesto.idRegistro
+            FROM
+                 categoria_programatica,
+                 unidad_ejecutora,
+                 clasificador_presupuestario,
+                 ordinal,
+                 maestro_presupuesto
+            WHERE
+                 (categoria_programatica.idcategoria_programatica='" . $idcategoria . "' AND
+                 categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora) AND
+                 (clasificador_presupuestario.idclasificador_presupuestario='" . $idpartida . "') AND
+                 (maestro_presupuesto.idcategoria_programatica='" . $idcategoria . "' AND
+                 maestro_presupuesto.idclasificador_presupuestario='" . $idpartida . "' AND
+                 maestro_presupuesto.idordinal=ordinal.idordinal)
+                 $where_ordinal AND
+                 (maestro_presupuesto.anio='" . $anio_fiscal . "' AND
+                 maestro_presupuesto.idfuente_financiamiento='" . $financiamiento . "' AND
+                 maestro_presupuesto.idtipo_presupuesto='" . $tipo_presupuesto . "')";
         $query = mysql_query($sql) or die($sql . mysql_error());
         $field = mysql_fetch_array($query);
 
@@ -1254,42 +1254,42 @@ function movimientos_por_partida($pdf, $idcategoria, $idpartida, $anio_fiscal, $
     }
     //    CONSULTO
     $sql = "SELECT categoria_programatica.codigo,
-				 unidad_ejecutora.denominacion denounidad,
-				 clasificador_presupuestario.denominacion,
-				 clasificador_presupuestario.partida,
-				 clasificador_presupuestario.generica,
-				 clasificador_presupuestario.especifica,
-				 clasificador_presupuestario.sub_especifica,
-				 ordinal.codigo as codordinal,
-				 ordinal.denominacion as nomordinal,
-				 maestro_presupuesto.monto_original,
-				 maestro_presupuesto.total_disminucion,
-				 maestro_presupuesto.reservado_disminuir,
-				 maestro_presupuesto.pre_compromiso,
-				 maestro_presupuesto.solicitud_aumento,
-				 maestro_presupuesto.total_aumento,
-				 maestro_presupuesto.monto_actual,
-				 maestro_presupuesto.total_compromisos,
-				 maestro_presupuesto.total_causados,
-				 maestro_presupuesto.total_pagados,
-				 maestro_presupuesto.idRegistro
-			FROM
-				 categoria_programatica,
-				 unidad_ejecutora,
-				 clasificador_presupuestario,
-				 ordinal,
-				 maestro_presupuesto
-			WHERE
-				 (categoria_programatica.idcategoria_programatica='" . $idcategoria . "' AND
-				 categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora) AND
-				 (clasificador_presupuestario.idclasificador_presupuestario='" . $idpartida . "') AND
-				 (maestro_presupuesto.idcategoria_programatica='" . $idcategoria . "' AND
-				 maestro_presupuesto.idclasificador_presupuestario='" . $idpartida . "' AND
-				 maestro_presupuesto.idordinal=ordinal.idordinal)
-				 $where_ordinal AND
-				 (maestro_presupuesto.anio='" . $anio_fiscal . "' AND
-				 maestro_presupuesto.idfuente_financiamiento='" . $financiamiento . "' AND
-				 maestro_presupuesto.idtipo_presupuesto='" . $tipo_presupuesto . "')";
+                 unidad_ejecutora.denominacion denounidad,
+                 clasificador_presupuestario.denominacion,
+                 clasificador_presupuestario.partida,
+                 clasificador_presupuestario.generica,
+                 clasificador_presupuestario.especifica,
+                 clasificador_presupuestario.sub_especifica,
+                 ordinal.codigo as codordinal,
+                 ordinal.denominacion as nomordinal,
+                 maestro_presupuesto.monto_original,
+                 maestro_presupuesto.total_disminucion,
+                 maestro_presupuesto.reservado_disminuir,
+                 maestro_presupuesto.pre_compromiso,
+                 maestro_presupuesto.solicitud_aumento,
+                 maestro_presupuesto.total_aumento,
+                 maestro_presupuesto.monto_actual,
+                 maestro_presupuesto.total_compromisos,
+                 maestro_presupuesto.total_causados,
+                 maestro_presupuesto.total_pagados,
+                 maestro_presupuesto.idRegistro
+            FROM
+                 categoria_programatica,
+                 unidad_ejecutora,
+                 clasificador_presupuestario,
+                 ordinal,
+                 maestro_presupuesto
+            WHERE
+                 (categoria_programatica.idcategoria_programatica='" . $idcategoria . "' AND
+                 categoria_programatica.idunidad_ejecutora=unidad_ejecutora.idunidad_ejecutora) AND
+                 (clasificador_presupuestario.idclasificador_presupuestario='" . $idpartida . "') AND
+                 (maestro_presupuesto.idcategoria_programatica='" . $idcategoria . "' AND
+                 maestro_presupuesto.idclasificador_presupuestario='" . $idpartida . "' AND
+                 maestro_presupuesto.idordinal=ordinal.idordinal)
+                 $where_ordinal AND
+                 (maestro_presupuesto.anio='" . $anio_fiscal . "' AND
+                 maestro_presupuesto.idfuente_financiamiento='" . $financiamiento . "' AND
+                 maestro_presupuesto.idtipo_presupuesto='" . $tipo_presupuesto . "')";
     $query = mysql_query($sql) or die($sql . mysql_error());
     $field = mysql_fetch_array($query);
 
